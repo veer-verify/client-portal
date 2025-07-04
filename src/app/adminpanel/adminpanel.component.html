@@ -1,0 +1,123 @@
+
+
+
+<div class="page">
+    <div style="width:100vw; overflow:hidden">
+      <div class="searchbar">
+        <div class="row">
+          <div class="col-lg-3 col-sm-12" style="text-align:center;align-self: center;"><div  class="searchbox"><input type="text" placeholder="Search Reports"><img src="assets/icons/search.svg"></div></div>
+          <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1"><div class="title1 topTitle" style="margin:0 0 0 25px;">Admin Panel
+            <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+      <div class="cont">
+          <div class="row">
+              <div class="col-lg-3 col-sm-12 btnvisible">
+                  <!-- <div class="title1">
+                     YOUR REPORTS
+                  </div> -->
+                  <!-- Quarters with multiple reports  -->
+                  <div class="optionlabelparent">
+                    <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)">
+                        <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisSecurity"><div class="label"> User Generation</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                    </div>
+                    <div class="panel" hide="!item.isActive">
+                      <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 1</p>   </div>
+                      <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 2</p>   </div>
+                      <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 3</p>   </div>
+                    </div>
+                  </div>
+
+                  <!-- generate report btn -->
+                  <div style="text-align:center">
+                    <button class="generateBtn">
+                      GENERATE REPORT
+                    </button>
+                  </div>
+              </div>
+              <!-- Left Column Ends -->
+
+              <!-- Right Column Starts -->
+              <div class="col-lg-9 col-sm-12">
+                <!-- Placeholder for reports -->
+                  <!-- <div class="placeholderForReports"><p>Select the timeframe on the left to view and download your reserach report<br>&#8592;</p></div> -->
+                <!-- Reports -->
+                <div class="title1">
+                  User Creation
+                  <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions()">
+
+                </div>
+                <hr id="hr1">
+
+
+
+
+               <div class="tables">
+                <div class="dataTable">
+                    <div class="tableBox" style="display: block; padding: 0;">
+                        <div class="title">Create User</div>
+                        <!-- here form starts -->
+                        <div class="form">
+
+                            <!-- <div class="inpfld"><label>First Name</label><input type="text" placeholder="Enter First Name" [(ngModel)]="model.first_Name"></div>
+                            <div class="inpfld"><label>Last Name</label><input type="text" placeholder="Enter Last Name" [(ngModel)]="model.last_Name"></div>
+                            <div class="inpfld"><label>Email</label><input type="text" placeholder="Enter Email" [(ngModel)]="model.email"></div>
+                            <div class="inpfld"><label>User Name</label><input type="text" placeholder="Enter User Name" [(ngModel)]="model.userName"></div>
+                            <div class="inpfld"><label>Address line 1</label><input type="text" placeholder="Enter Address Line 1" [(ngModel)]="model.addressLine1"></div>
+                            <div class="inpfld"><label>Address line 2</label><input type="text" placeholder="Enter Address Line 2" [(ngModel)]="model.addressLine2"></div>
+                            <div class="inpfld"><label>Country</label><input type="text" placeholder="Enter Country" [(ngModel)]="model.user_Country"></div>
+                            <div class="inpfld"><label>District</label><input type="text" placeholder="Enter District" [(ngModel)]="model.district"></div>
+                            <div class="inpfld"><label>State</label><input type="text" placeholder="Enter State" [(ngModel)]="model.state"></div>
+                            <div class="inpfld"><label>City</label><input type="text" placeholder="Enter City" [(ngModel)]="model.city"></div>
+                            <div class="inpfld"><label>Pincode</label><input type="text" placeholder="Enter Pincode" [(ngModel)]="model.pincode"></div>
+                            <div class="inpfld"><label>Contact Number</label><input type="text" placeholder="Enter Phone" [(ngModel)]="model.contactNumber"></div>
+                            <div class="inpfld"><label>Realm</label><input type="text" placeholder="Enter Phone" [(ngModel)]="model.realm_Id"></div>
+                            <div class="inpfld"><label>Role</label><input type="text" placeholder="Choose Role" [(ngModel)]="model.role"></div> -->
+
+
+
+                            <div class="block">
+                              <div class="blockinput"><input type="text" maxlength="20" (focusout)="onFocusOutEvent($event)" placeholder="Enter First Name" [(ngModel)]="model.first_Name"><label>First Name</label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="20" (focusout)="onFocusOutEvent($event)" placeholder="Enter Last Name" [(ngModel)]="model.last_Name"><label>Last Name </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="15" (focusout)="onFocusOutEvent($event)" placeholder="Enter Username" [(ngModel)]="model.userName"><label>Username </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="30" (focusout)="onFocusOutEvent($event)" placeholder="Enter Email" [(ngModel)]="model.email"><label>Email </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="99" (focusout)="onFocusOutEvent($event)" placeholder="Enter Address" [(ngModel)]="model.addressLine1"><label>House No./ Apartment </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="99" (focusout)="onFocusOutEvent($event)" placeholder="Enter Address" [(ngModel)]="model.addressLine2"><label>Street / Locality </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="25" (focusout)="onFocusOutEvent($event)" placeholder="Enter Country" [(ngModel)]="model.user_Country"><label>Country </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="25" (focusout)="onFocusOutEvent($event)" placeholder="Enter District" [(ngModel)]="model.district"><label>District </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="25" (focusout)="onFocusOutEvent($event)" placeholder="Enter State" [(ngModel)]="model.state"><label>State </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="25" (focusout)="onFocusOutEvent($event)" placeholder="Enter City" [(ngModel)]="model.city"><label>City </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="10" (focusout)="onFocusOutEvent($event)" placeholder="Enter Pincode" [(ngModel)]="model.pincode"><label>Pincode </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="12" (focusout)="onFocusOutEvent($event)" placeholder="Enter Phone" [(ngModel)]="model.contactNumber"><label>Contact Number </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="50" (focusout)="onFocusOutEvent($event)" placeholder="Choose Realm" [(ngModel)]="model.realm_Id"><label>Choose Realm </label><img src="assets/icons/eye-blue.svg"></div>
+                              <div class="blockinput"><input type="text" maxlength="50" (focusout)="onFocusOutEvent($event)" placeholder="Choose Role" [(ngModel)]="model.role"><label>Role </label><img src="assets/icons/eye-blue.svg"></div>
+                          </div>
+
+                            <button (click)="createUser()" style="font-size: 20px; border: 10px solid #104B86;">Create User</button>
+
+                        </div>
+                        <!-- here form ends -->
+                    </div>
+                </div>
+               </div>
+
+
+            </div>
+            <!-- Column with Reports Ends -->
+            </div>
+            <!-- Row Ends -->
+        </div>
+        <!-- <div class="placeholderForEmpty">
+          Coming Soon...
+        </div> -->
+    </div>
+
+
+
+    <div id="modal">
+      <div class="close" (click)="closemodal()"></div>
+      <div id="modalcontent"></div>
+    </div>

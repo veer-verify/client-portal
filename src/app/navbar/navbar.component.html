@@ -1,0 +1,362 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-toaster></app-toaster> -->
+
+<!-- web-menu -->
+<div class="topnav" id="myTopnav" #myTopnav>
+  <a class="mylogo" [routerLink]="['/guard']">
+    <img [src]="storageSer.headerLogo" width="200px" alt="">
+  </a>
+  
+  <!-- <a class="mylogo" [routerLink]="['/guard']" style="top: -8px;">
+    <img [src]="storageSer.headerLogo" width="100px" alt="unv">
+  </a> -->
+
+  <div *ngFor="let item of navItems" class="d-lg-block d-none">
+      <a *ngIf="item.call({key: serviceData[item.id], admin: isAdmin})">
+        <div [routerLinkActive]="['color']" (click)="closeMenu()" [routerLink]="item.routeLink">{{ item.label | titlecase }}</div>
+      </a>
+  </div>
+
+    <div class="d-lg-block d-none">
+      <a >
+        <div [routerLinkActive]="['color']" (click)="closeMenu()" routerLink="/support">{{ 'support' | titlecase }}</div>
+      </a>
+  </div>
+
+    <div class="d-lg-block d-none">
+      <a >
+        <div [routerLinkActive]="['color']" (click)="closeMenu()" routerLink="/user-profile">{{ 'profile' | titlecase }}</div>
+      </a>
+  </div>
+  
+  <!-- <a><div (click)="openprofile = !openprofile" #profilebtn [classList]="openprofile ? 'color':''">Profile</div></a> -->
+  <a style="padding: 0;" (click)="logout()"><div class="logout-btn">Log out</div></a>
+  <a class="icon" (click)="openmenu()"><img src="assets/icons/menu.svg" style="width: 20px;" alt="Menu"></a>
+</div>
+
+<!-- profile -->
+<div class="profilemodal" *ngIf="openprofile" #profile>
+  <div class="modalinside" #profile>
+    <div style="position: relative;margin: 8px 0;">
+      <img [src]="userinfo?.profileImage" onerror="this.src='assets/icons/female.svg'" style="width: 70px;height:70px; border-radius:50%; padding:2px; background: #fff">
+      <!-- <input type="file" name="myImage" accept="image/*" id="profileinput" style="position: absolute; left: 115px;width: 14px;height:14px; padding:2px;opacity: 0;pointer-events: none; " [(ngModel)]="pic" (change)="onFileChange($event)" /> -->
+      <img src="assets/icons/camera.svg" class="camforupdate pointer" alt="" (click)="openupdateModal()">
+    </div>
+    <!-- <p style="font-size: 12px; font-weight: 700; margin: 5px; text-transform: uppercase;text-overflow:ellipsis; overflow-wrap: anywhere;margin-bottom: 18px;">{{data?.First_Name + ' ' + data?.Last_Name}}</p> -->
+    <p style="font-size: 12px; font-weight: 700; margin: 5px; text-transform: uppercase;text-overflow:ellipsis; overflow-wrap: anywhere;margin-bottom: 18px;">
+      {{userData?.User_Name}}
+    </p>
+    <div *ngIf="userinfo == null">
+      <p class="modaldetails" *ngIf="userData?.contact"><img src="assets/phone.svg" style="width: 8px;" alt=""> :{{userData?.contact ? userData?.contact : 'Contact to be updated'}}</p>
+      <p class="modaldetails" *ngIf="userData?.email"><img src="assets/mail.svg" style="width: 10px;" alt=""> :{{userData?.email ? userData?.email : 'Email to be updated'}}</p>
+    </div>
+    <div *ngIf="userinfo != null" style="text-align: center;" class="conntacts">
+      <p class="modaldetails newProfile" *ngIf="userinfo?.contactNo1">
+        <span class="modalgol"> {{userinfo?.contactNo1 ? userinfo?.contactNo1 : 'Contact'}}</span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('contact')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.email">
+        <span class="modalgol">{{userinfo?.email ? userinfo?.email : 'Email'}}</span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('email')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.pin">
+        <span class="modalgol">
+          <span *ngIf="userinfo?.address_line1">{{ userinfo?.address_line1 }}<br></span>
+          <span *ngIf="userinfo?.address_line2">{{ userinfo?.address_line2 }}<br></span>
+          <span *ngIf="userinfo?.district">{{ userinfo?.district }},</span> <span
+            *ngIf="userinfo?.city">{{ userinfo?.city }}<br></span>
+          <span *ngIf="userinfo?.state">{{ userinfo?.state }}</span> <span
+            *ngIf="userinfo?.country">{{ userinfo?.country }}<br></span>
+          <span *ngIf="userinfo?.pin">{{ userinfo?.pin }}</span>
+        </span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('address')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.contactNo2 !='' ">
+        <span class="modalgol">{{userinfo?.contactNo2 ? userinfo?.contactNo2 : ''}}</span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('contact')" style="width: 10px;" alt="">
+      </p>
+    </div>
+  </div>
+
+  <!-- <div class="profilebtn" (click)="editpro=!editpro; openprofile=!openprofile;updatePic()">
+        <img src="assets/pencil.svg" alt="">
+      Update Picture
+    </div> -->
+
+  <div class="editprofile" *ngIf="editpro">
+    <div class="form">
+      <input type="text" placeholder="Enter first name" style="box-shadow: none;" [(ngModel)]="userinfo.firstName">
+      <input type="text" placeholder="Enter last name" style="box-shadow: none;" [(ngModel)]="userinfo.lastName">
+      <input type="text" placeholder="Enter address line 1" style="box-shadow: none;" [(ngModel)]="userinfo.address_line1">
+      <input type="text" placeholder="Enter address line 2" style="box-shadow: none;" [(ngModel)]="userinfo.address_line2">
+      <input type="text" placeholder="Enter city" style="box-shadow: none;" [(ngModel)]="userinfo.city">
+      <input type="text" placeholder="Enter state" style="box-shadow: none;" [(ngModel)]="userinfo.state">
+      <input type="text" placeholder="Enter pincode" style="box-shadow: none;" [(ngModel)]="userinfo.pin">
+      <input type="text" placeholder="Enter country" style="box-shadow: none;" [(ngModel)]="userinfo.country">
+      <input type="text" placeholder="Enter phone number 1" style="box-shadow: none;" [(ngModel)]="userinfo.contactNo1">
+      <input type="text" placeholder="Enter phone number 2" style="box-shadow: none;" [(ngModel)]="userinfo.contactNo2">
+      <div class="d-flex justify-content-end">
+        <div class="button" (click)="editpro = false" style="background-color: brown;">CANCEL</div>
+        <!-- <div class="button" (click)="submitprofile(); getUserInfoForUserId()">SUBMIT</div> -->
+        <div class="button" (click)="updateUser()">SUBMIT</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profilebtn" (click)="resetpassconfirm()">
+    <img src="assets/icons/key.svg" alt="">Change Password
+  </div>
+  <!-- <div class="profilebtn" (click)="tnc()">
+    <img src="assets/icons/tnc.svg" alt="">Terms & Conditions
+  </div> -->
+  <div class="editprofile" style="display: none;">
+    <div class="form">
+      <input type="text" placeholder="Enter username" style="box-shadow: none;" [(ngModel)]="username">
+      <div class="button" (click)="forgotPass()"
+        style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 12px; font-weight: 700;">SUBMIT</div>
+    </div>
+  </div>
+  <div class="profilelogout">
+    <div class="logout-btn" (click)="logout()" style="font-family: ES,sans-serif; font-weight:700;letter-spacing: 2px;border: 7px solid #104B86; width: 112px;">
+      LOG OUT
+    </div>
+  </div>
+</div>
+
+<!-- mobile-menu -->
+<div class="sidenav" #sidenav>
+  <!-- <img src="assets/icons/IVISsecurity_logo.png" style="height: 32px; margin:10px" alt="ivisSecurity"> -->
+  <div class="profile" *ngIf="userinfo == null">
+    <div class="close" (click)="closemenu()"></div>
+    <div style="position: relative;">
+      <img [src]="userinfo?.profileImage" onerror="this.src='assets/icons/female.svg'"
+        style="width: 70px;height:70px; border-radius:50%; padding:2px; background: #fff">
+      <img src="assets/icons/camera.svg" class="camforupdate" alt="" style="left: 63px;top:0px;" (click)="openupdateModal();">
+    </div>
+    <div class="details" style="overflow:hidden;">
+      <p style="font-size: 16px; text-transform: uppercase;text-overflow:ellipsis; overflow-wrap: anywhere;">
+        {{userData?.User_Name}}</p>
+      <p style="font-size: 14px;" *ngIf="userData?.contact"> {{userData?.contact ? userData?.contact : 'Contact to be updated'}}</p>
+      <p style="font-size: 14px;">{{userData?.email ? userData?.email : 'Email to be updated'}}</p>
+      <!-- <div class="sidenavbtn max-center" (click)="resetpassconfirm()">
+        <img src="assets/icons/key.svg" alt="" style="width: 10px;margin-right:8px;">Change Password
+      </div> -->
+    </div>
+  </div>
+
+  <div class="profile" *ngIf="userinfo != null" style="display: block;padding-bottom: 10px;">
+    <div class="close" (click)="closemenu()"></div>
+    <div style="position: relative; padding-top: 20px;">
+      <img [src]="userinfo?.profileImage" onerror="this.src='assets/icons/female.svg'"
+        style="width: 70px;height:70px; border-radius:50%; padding:2px; background: #fff">
+      <img src="assets/icons/camera.svg" class="camforupdate" alt="" style="left: 219px;top:20px;"
+        (click)="openupdateModal();">
+    </div>
+    <p style="font-size: 12px; font-weight: 700; margin-top: 10px;justify-content: center; text-transform: uppercase;text-overflow:ellipsis; overflow-wrap: anywhere;margin-bottom: 20px;">
+      {{userData?.User_Name}}
+    </p>
+
+    <div *ngIf="userinfo == null">
+      <p class="modaldetails" *ngIf="userData?.contact"><img src="assets/phone.svg" style="width: 8px;" alt=""> :
+        {{ userData?.contact ? userData?.contact : 'Contact to be added' }}
+      </p>
+      <p class="modaldetails"><img src="assets/mail.svg" style="width: 10px;" alt=""> : {{ userData?.email ? userData?.email : 'Email to be updated' }}</p>
+    </div>
+
+    <div *ngIf="userinfo != null" style="text-align: center;" class="conntacts">
+      <p class="modaldetails newProfile" *ngIf="userinfo?.contactNo1">
+        <span class="modalgol">
+          {{ userinfo?.contactNo1 ? userinfo?.contactNo1 : '' }}
+        </span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('contact')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.email">
+        <span class="modalgol"> {{userinfo?.email ? userinfo?.email : ''}}</span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('email')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.pin" style="text-align-last: left;">
+        <span class="modalgol">
+          <span *ngIf="userinfo?.address_line1">{{ userinfo?.address_line1 }}<br></span>
+          <span *ngIf="userinfo?.address_line2">{{ userinfo?.address_line2 }}<br></span>
+          <span *ngIf="userinfo?.district">{{ userinfo?.district }}</span> <span
+            *ngIf="userinfo?.city">{{ userinfo?.city }}<br></span>
+          <span *ngIf="userinfo?.state">{{ userinfo?.state }},</span> <span
+            *ngIf="userinfo?.country">{{ userinfo?.country }}<br></span>
+          <span *ngIf="userinfo?.pin">{{ userinfo?.pin }}</span>
+        </span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('address')" style="width: 10px;" alt="">
+      </p>
+      <p class="modaldetails newProfile" *ngIf="userinfo?.contactNo2 !='' ">
+        <span class="modalgol">{{userinfo?.contactNo2 ? userinfo?.contactNo2 : ''}}</span>
+        <img src="assets/icons/edit.svg" (click)="saveProfileEditOption('contact')" style="width: 10px;" alt="">
+      </p>
+    </div>
+
+    <!-- <div class="sidenavbtn max-center" (click)="resetpassconfirm()" style="width: 200px;margin: auto; margin-top: 10px;">
+      <img src="assets/icons/key.svg" alt="" style="width: 10px;margin-right:8px;">Reset Password
+    </div> -->
+  </div>
+
+  <!-- nav-items -->
+  <div class="menus" (click)="closemenu()">
+    <ng-container *ngFor="let item of navItems">
+      <a *ngIf="item.call({key: serviceData[item.id], admin: isAdmin})">
+        <div class="sidenavelements" [routerLinkActive]="['color']" (click)="closeMenu()" [routerLink]="item.routeLink">{{ item.label | titlecase }}</div>
+      </a>
+    </ng-container>
+          <a>
+        <div class="sidenavelements" [routerLinkActive]="['color']" (click)="closeMenu()" routerLink="/support">{{ 'support' | titlecase }}</div>
+      </a>
+            <a>
+        <div class="sidenavelements" [routerLinkActive]="['color']" (click)="closeMenu()" routerLink="/user-profile">{{ 'profile' | titlecase }}</div>
+      </a>
+
+    <!-- <a>
+      <div class="sidenavelements" [routerLinkActive]="['color']" (click)="closeMenu()" [routerLink]="['/services']" style="display: none;">Services</div>
+    </a> -->
+    <!-- <a style="text-decoration: none; color: #2a2a2a;">
+      <div class="sidenavelements" [routerLinkActive]="['color']" (click)="closeMenu(); toQRmodal()">Safety Escort</div>
+    </a> -->
+
+    <a class="sidenavelements" style="padding: 0;">
+      <div class="button" (click)="logout()" style=" margin-top: 15px;">Log out</div>
+    </a>
+  </div>
+</div>
+
+<div class="backdrop" (click)="closemenu()"></div>
+
+<!-- edit model -->
+<div class="modal max-center" id="editmodal1">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">Edit Profile
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeModal();">
+      </div>
+      <div class="grid" *ngIf="userinfo">
+        <input type="text" placeholder="first name" style="box-shadow: none;" [(ngModel)]="userinfo.firstName">
+        <input type="text" placeholder="last name" style="box-shadow: none;" [(ngModel)]="userinfo.lastName">
+        <input type="text" placeholder="address line 1" style="box-shadow: none;" [(ngModel)]="userinfo.address_line1">
+        <input type="text" placeholder="address line 2" style="box-shadow: none;" [(ngModel)]="userinfo.address_line2">
+        <input type="text" placeholder="city" style="box-shadow: none;" [(ngModel)]="userinfo.city">
+        <input type="text" placeholder="state" style="box-shadow: none;" [(ngModel)]="userinfo.state">
+        <input type="text" placeholder="pincode" style="box-shadow: none;" [(ngModel)]="userinfo.pin">
+        <input type="text" placeholder="country" style="box-shadow: none;" [(ngModel)]="userinfo.country">
+        <input type="text" placeholder="phone number 1" style="box-shadow: none;" [(ngModel)]="userinfo.contactNo1">
+        <input type="text" placeholder="phone number 2" style="box-shadow: none;" [(ngModel)]="userinfo.contactNo2">
+
+        <!-- <div>
+          <div class="inputbox greybtn" (click)="inputclicked1($event);" style="position: relative; margin-bottom: 0;">
+            <div class="question" >Hello</div>
+            <img src="assets/icons/forward_arrow.svg" style="width: 15px;" class="downarrow">
+          </div>
+          <div class="selectionbox" *ngIf="visible1">
+            <div class="inputbox1 greybtn">item</div>
+            <div class="inputbox1 greybtn">item</div>
+            <div class="inputbox1 greybtn">item</div>
+          </div>
+        </div> -->
+      </div>
+      <button class="profilemodalbtn">Submit</button>
+      <!-- <button class="profilemodalbtn" (click)="closeModal()">cancel</button> -->
+    </div>
+  </div>
+</div>
+
+<!-- reset password dialog -->
+<div class="modal max-center" id="resetpassmodal" style="padding-top: 35vh;">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">
+        <div><img src="assets/icons/warning.svg" style="width: 16px; margin:0 15px 2px 0; padding:0;">Alert</div>
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeresetModal();">
+      </div>
+      <div class="">
+        <div class="alertMsg p-2" style="font-size:16px; margin-bottom: 10px; font-family: PS,sans-serif;color:#7c7c7c;">
+          <span>Are you sure you wish to change your password?</span>
+        </div>
+        <div class="d-flex justify-content-end">
+          <!-- <div class="button" (click)="forgotPass()"
+            style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 14px; font-weight: 700;margin: 1% 8% 3% 8%;border: 8px solid #104B86 !important ;">
+            Yes</div> -->
+            <div class="rstPwdBtn" style="background-color: brown;" (click)="closeresetModal()">No</div>
+            <div class="rstPwdBtn" (click)="openUpdatePassword()">Yes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change password dialog-->
+<div class="modal max-center" id="updatePasswordModal">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">
+        <div><img src="assets/icons/warning.svg" style="width: 16px; margin:0 15px 2px 0; padding:0;">Change Password</div>
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeUpdatePassword();">
+      </div>
+
+      <form [formGroup]="updatePasswordForm">
+        <div class="row formm">
+          <div class="col-lg-12">
+            <div style="position: relative;">
+              <input [type]="showOldPassword ? 'text' : 'password'" placeholder="Old Password" formControlName="oldPassword">
+              <img [src]="!showOldPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('oldPassword')">
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div style="position: relative;">
+              <input [type]="showNewPassword ? 'text' : 'password'" placeholder="New Password" formControlName="newPassword">
+              <img [src]="!showNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('newPassword')">
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div style="position: relative;">
+              <input [type]="showConfirmNewPassword ? 'text' : 'password'" placeholder="Confirm New Password" formControlName="confirmNewPassword">
+              <img [src]="!showConfirmNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('confirmNewPassword')">
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="d-flex justify-content-end">
+        <button class="rstPwdBtn" style="background-color: brown;" (click)="closeUpdatePassword()">Close</button>
+        <button class="rstPwdBtn" (click)="updatePassword()">SUBMIT</button>
+      </div>
+      <div class="password-rule d-flex flex-column align-items-center p-2" *ngIf="updatePasswordForm?.dirty">
+        <span class="block fw-bold" [ngClass]="{'text-primary': updatePasswordForm.value.newPassword.match('^(?=.*[A-Z])')}">*Atleast one uppercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-primary': updatePasswordForm.value.newPassword.match('(?=.*[a-z])')}">*Atleast one lowercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-primary': updatePasswordForm.value.newPassword.match('(.*[0-9].*)')}">*Atleast one digit.</span>
+        <span class="block fw-bold" [ngClass]="{'text-primary': updatePasswordForm.value.newPassword.match('(?=.*[!@#$%^&*])')}">*Atleast one special character</span>
+        <span class="block fw-bold" [ngClass]="{'text-primary': updatePasswordForm.value.newPassword.match('.{6,}')}">*Atleast 6 characters long</span>
+     </div>
+    </div>
+  </div>
+</div>
+
+<!-- change profile dialog-->
+<div class="modal max-center" id="updateprofile" style="padding-top: 45vh;">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">
+        <div><img src="assets/icons/warning.svg" style="width: 16px; margin:0 15px 2px 0; padding:0;">Alert</div>
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeupdateModal();">
+      </div>
+
+      <div class="" >
+        <div style="display: flex;place-content: center;">
+          <!-- <div class="servicetitle" style="margin-bottom: 10px; font-family: TP,sans-serif;">{{message.text}}</div> -->
+          <div class="alertMsg" style="font-size:16px;margin-bottom: 10px; font-family: PS,sans-serif;color:#7c7c7c;">Do you wish to update your Profile Picture?</div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <div class="rstPwdBtn" style="background-color: brown;" (click)="update('delete')">No</div>
+          <div class="rstPwdBtn" (click)="update('update')">Yes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="file" name="myImage" accept="image/*" id="profileinput" #profileinput style="position: absolute; left: 0px;width: 1px;height:1px; opacity: 0; pointer-events: none;" [(ngModel)]="pic" (change)="onFileChange($event)">

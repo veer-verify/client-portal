@@ -1,0 +1,245 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align: center; align-self: center;">
+          <div class="searchbox">
+            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
+            <input type="text" placeholder="Search for sites" [(ngModel)]="searchText" #searchinput>
+            <img src="assets/icons/search.svg">
+          </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div class="title1 topTitle" style="margin:0 0 0 25px;">
+            <!-- <span>Support Helpdesk</span> -->
+            <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{
+              displaySite?.siteName }}</span>
+            <!-- <div class=" action-icons">
+              <div>&nbsp;</div>
+            </div> -->
+            <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
+        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
+          (click)="footageList(site, i)">
+          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
+
+            <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA"
+              *ngIf="navActive == i">
+            <div class="label">{{ site?.siteName }} </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+
+      <div class="col-lg-9 col-sm-12">
+        <!-- <div class="title">
+          <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+          <div class="row mx-0 mt-1 w-100">
+            <div class="col-md-3 ps-0" *ngIf="currentSite">
+              <span class="filter-label ">Site</span>
+              <select class="form-select mb-3" [(ngModel)]="currentSite.siteId" #sitee (change)="filter(); getDisplySite(sitee.value)">
+                <option value="">All</option>
+                <option *ngFor="let item of siteData; let s = index" [value]="item?.siteId">{{item?.siteName}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 ps-0">
+              <span class="filter-label ">Duration / Age</span>
+              <select class="form-select mb-3" [(ngModel)]="time" (change)="filter()">
+                <option value="">All</option>
+                <option *ngFor="let item of timeSearches" [value]="item?.keyId">{{item?.value}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 ps-0">
+              <span class="filter-label ">Status</span>
+              <select class="form-select mb-3" [(ngModel)]="status" (change)="filter()">
+                <option value="">All</option>
+                <option *ngFor="let item of deviceStatus" [value]="item?.keyId">{{item?.value}}</option>
+              </select>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="table-resp extra w-100">
+          <table class="table table-hover" id="mytable">
+            <thead style="position: sticky; top: 0; z-index: 1;">
+              <tr class="form1">
+                <th *ngFor="let header of columns">
+                    <div class="d-inline-flex">
+                      <p class="text-nowrap">{{ header.label | titlecase}}</p>
+                      <img (click)="sort(header.id)" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px" alt="" *ngIf="header.sort">
+                    </div>
+                  </th>
+                  <th>Info</th>
+              </tr>
+            </thead>
+
+            <tbody>
+                <ng-container  *ngFor="let item of newEventData; let i = index">
+                    <ng-container *ngFor="let el of item.devicesData; let first = first">
+                      <tr >
+
+                        <!-- <td *ngIf="first" [attr.rowspan]="item.devicesData.length">
+                          <p>{{ item.siteId }}</p>
+                        </td> -->
+                        <td *ngIf="first" [attr.rowspan]="item.devicesData.length">
+                          <p>{{ item.siteName }}</p>
+                        </td>
+          
+                        <td>
+                          <p>{{ el.deviceId }}</p>
+                        </td>
+                        <td>
+                          <p>{{ el.installationDate | date: 'mediumDate' }}</p>
+                        </td>
+                        <td>
+                          <p>{{ el.siteLocalTime | date: 'medium' }}</p>
+                        </td>
+                        <!-- <td>
+                          <p>{{ el.latestReconnectedTime | date: 'medium' }}</p>
+                        </td> -->
+                        <!-- <td>
+                          <p>{{ el.latestUpOrDowntime }}
+                            <img *ngIf="el.latestUpOrDowntime" [src]="el.status === 'ONLINE' ? 'assets/icons/up-arrow.png' : 'assets/icons/down-arrow.png'" width="16" alt="">
+                          </p>
+                        </td> -->
+                        <td>
+                          <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
+                        </td>
+                        <td>
+                          <p [style.color]="el.status === 'ONLINE' ? 'green' : 'red'">{{ el.totalUptime }}</p>
+                        </td>
+                        <td>
+                          <p>{{ el.totalDowntime }}</p>
+                        </td>
+                        <td><p class="text-primary pointer" (click)="openPlayModel(el, i)">View</p></td>
+                        <td>
+                          <img src="assets/icons/info-outline.svg" class="pointer" [title]="
+                        'Latest re-connected time: ' + el.latestReconnectedTime + '\n' +
+                        'Latest up / down time: ' + el.latestUpOrDowntime"
+                        alt="">
+                      </td>
+
+                        <!-- <td >
+                          <p>{{ el.downTime }}</p>
+                        </td> -->
+                        <!-- <td >
+                           <img [src]="getLiveStatus(el)[0]?.Status ? 'assets/icons/green-dot.png' : 'assets/icons/red-dot.png'" width="16" alt="">
+                        </td> -->
+            
+                        <!-- <td [attr.rowspan]="item.devicesData.length" (click)="openRebootDevice(el)">
+                          <img class="pointer" style="opacity: 0.7;" src="assets/icons/restart.svg" width="25" height="25">
+                        </td> -->
+                        
+                        <!-- <td>
+                          <a class="pointer mx-1" matTooltip="view" (click)="openViewPopup(el)">
+                            <img src="assets/icons/view.svg" alt="">
+                          </a>
+                          <a class="pointer mx-1" matTooltip="Edit" (click)="openEditPopup(el)">
+                            <img src="assets/icons/edit.svg" alt="">
+                          </a>
+                          <a class="pointer mx-1" matTooltip="Delete">
+                            <img src="assets/icons/delete.svg" alt="">
+                          </a>
+                        </td> -->
+                      </tr>
+                    </ng-container>
+                  </ng-container>
+            </tbody>
+          </table>
+          
+          <div class="d-flex align-items-center justify-content-center" style="height: 70%;"
+            *ngIf="newEventData.length == 0">
+            <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div> -->
+
+<div class="new-dialog" id="playModel">
+  <div class="dialog-header">
+    <p>{{currentItem?.deviceId}}</p>
+
+    <div class="d-flex align-items-center">
+      <p><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel('playModel')" title="Download" alt=""></p>
+    </div>
+  </div>
+
+  <!-- <div class="row ">
+    <div class="col-lg-4">
+      <span class="filter-label ">Age/Duration</span>
+      <select class="form-select mb-3" [(ngModel)]="downParams.days" (change)="downtimesForDeviceId()">
+        <option value="All">All</option>
+        <option *ngFor="let item of timeSearches" [value]="item?.keyId">{{item?.value}}</option>
+      </select>
+    </div>
+  </div> -->
+  
+  <div class="dialog-content p-0 mt-2" style="position: relative; width: 55vw; height: 55vh;">
+    <div class="table-res">
+      <table class="table table-hover">
+        <thead style="position: sticky; top: 0; z-index: 1;">
+          <tr class="form1">
+            <th scope="col">
+              <span>First Connected</span>
+              <img (click)="sort1('first_connected')" class="pointer ms-1" src="assets/icons/sorticon.svg"
+                width="15px">
+            </th>
+            <th scope="col">
+              <span>Last Connected</span>
+              <img (click)="sort1('lasttime_last_connected')" class="pointer ms-1" src="assets/icons/sorticon.svg"
+                width="15px">
+            </th>
+            <th scope="col">
+              <span>Down Time</span>
+              <img (click)="sort1('down_time')" class="pointer ms-1" src="assets/icons/sorticon.svg"
+                width="15px">
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let cam of downTimes; let i = index">
+            <td>
+              <p>{{cam.first_connected}}</p>
+            </td>
+            <td>
+              <p>{{cam.lasttime_last_connected}}</p>
+            </td>
+            <td>
+              <p>{{cam.down_time}}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-container *ngIf="downTimes.length === 0">
+        <p class="text-center" style="height: 20vh;">No DATA!</p>
+      </ng-container>
+    </div>
+  </div>
+</div>

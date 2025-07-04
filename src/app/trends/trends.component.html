@@ -1,0 +1,304 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar [serviceDataFromParent]="serviceData"></app-navbar>
+<div class="page">
+
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12"
+          style="text-align:center;align-self: center;overflow:visible; padding-left: 20px">
+
+
+          <div class="searchbox">
+            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
+            <input type="text" (keyup)="onInput($event)"
+              placeholder="Search {{sites?.length ? sites?.length : ''}} Locations or {{rsdata?.length ? rsdata?.length : '0'}} Fields"
+              [(ngModel)]="searchText" #searchinput>
+            <!-- {{'Search from '+sites?.siteList?.length+' Locations'}} -->
+            <img src="assets/icons/search.svg">
+          </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div class="title1">
+            <div class="info">Day / Week / Month / Quarter - stats</div>
+          </div>
+          <!-- <hr id="hr1"> -->
+          <!-- <div class="title1 topTitle" style="margin:0 0 0 25px;">{{reportsite}}<span
+              *ngIf="currentfield">-{{currentfield ? currentfield : ''}}</span>
+            <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple style="min-height: 60vh;">
+
+        <!-- sites -->
+        <div class="optionlabelparent" *ngIf="sites.length > 1">
+          <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel>
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> {{currentsite}} </div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop">
+            </div>
+          </div>
+          <div class="panel" hide="!item.isActive">
+            <!-- <div  *ngIf="sites.length > 1" >
+                        <div class="accordionElements"><p style="margin: 0 0 0 10px; display:flex"> <img src="assets/icons/search.svg" style="float:right;width: 10px; margin-right:15px;"> <input type="text" placeholder="Search Location"  [(ngModel)]="searchText"> </p></div>
+                      </div> -->
+            <div class="accordionElements" *ngFor="let site of sites  | SiteName: searchText"
+              (click)="siteClicked($event,site)">
+              <div><span class="dot"></span></div>
+              <p style="margin: 0 0 0 20px; font-size: 12px !important;">{{site.siteName}}</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Start Date -->
+        <div class="optionlabel"
+          style="display: flex; position:relative; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px">
+          <div (click)="start.toggle()" style="width:-webkit-fill-available; display:flex;align-items: center;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><span *ngIf="startDate != 'null'"
+              style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: calc(100% - (50px))">
+              Date : {{displayDate ? displayDate : 'Select Date'}}</span><img src="assets/icons/calender.svg"
+              class="calendericon"><br>
+          </div>
+          <form class="dateinputform">
+            <input type="text" ngbDatepicker #start="ngbDatepicker" class="dateinput"
+              (dateSelect)="onDateSelect($event, 'start')" [minDate]="{year: 2014, month: 1, day: 1}"
+              [maxDate]="maxDate" [minDate]="{year: 2014, month: 1, day: 1}" [markDisabled]="disabledays">
+          </form>
+        </div>
+
+        <div style="text-align:center">
+          <button class="generateBtn" (click)="getResearchonClick()">
+            GENERATE REPORT
+          </button>
+        </div>
+        <br>
+
+        <!-- fields / customer services -->
+        <div class="optionlabelparent" *ngIf="rsdata">
+          <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel1>
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> {{currentfield ? currentfield : 'Select Field'}}</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop">
+            </div>
+          </div>
+          <div class="panel" hide="!item.isActive" *ngIf="rsdata">
+            <div *ngIf="rsdata?.length > 1">
+              <div class="accordionElements" style="margin-bottom: 0px;">
+                <p style="margin: 0 0 0px 10px; display:flex"> <img src="assets/icons/search.svg"
+                    style="float:right;width: 10px; margin-right:15px;"> <input type="text" placeholder="Search Service"
+                    [(ngModel)]="searchField"> </p>
+              </div>
+            </div>
+            <div class="accordionElements" *ngFor="let field of rsdata  | FieldName: searchField"
+              (click)="fieldClicked(field)">
+              <div><span class="dot"></span></div>
+              <p style="margin: 0 0 0 20px; font-size: 12px !important;">{{field.service}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center" *ngIf="rsdata">
+          <button class="generateBtn" (click)="getResearchonClick()">
+            GENERATE TRENDS
+          </button>
+        </div>
+        <!--
+                <div class="optionlabel" *ngFor="let research of rsdata" style="padding:5px;margin-bottom: 10px;display: block;">
+                  <div>
+                    <div style="font-family: PS,sans-serif; margin-left: 5px;">{{research.service}}</div>
+                    <div style="display: flex;">
+                      <div *ngFor="let item of research.analytics">
+                        <div class="blck" [style.background-color]="
+                        (item.status == 'Raise')? '#143D6D' :
+                        (item.status == 'Fall' && (calcperc(item) >= 5))? '#e52d48' :
+                        (item.status == 'Fall' && (calcperc(item) < 5))? '#FFA500' : '#767676' ">
+                          <div>{{item?.type}}</div>
+                          <div>({{calcperc(item)}}%)</div>
+                          <div>{{item?.count}}</div>
+                        </div>
+                        </div>
+                      <div class="blck" style="background-color: #FFA500;">Quarter (31%) 1828</div>
+                    </div>
+                  </div>
+               </div> -->
+
+
+
+
+      </div>
+      <!-- Left Column Ends -->
+
+      <!-- Right Column Starts -->
+      <div class="col-lg-9 col-sm-12">
+        <!-- <div class="title1">
+          <div class="info">Day / Week / Month / Quarter - stats&nbsp;<div class="infocircle"> <span style="margin-left: 5px;">&#8505;</span></div>
+          </div>
+          <div class="tooltiptext1">
+            For eg. : <br>
+            <b>Input date</b> = 12-09-2021 (mm-dd-yyyy) <br><br>
+            <b>DAY</b>: If "DAY = Thursday, diff between "Thursday" and and same day( last week) <br>
+            &nbsp;&nbsp;i.e. diff b/w 09-Dec(THURSDAY) & last week (THURSDAY,02-Dec) <br>
+            <b>WEEK</b> : Current Week (3-Dec - 09-Dec) - before Last week: 3-Nov - 9-Nov<br>
+            <b>MONTH</b>: LAST Month= November & Prev Month: October <br>
+            <b>QUARTER</b>: LAST four Quarters <br>
+          </div>
+          <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+        </div>
+        <hr id="hr1"> -->
+
+
+        <!-- <div class="grid-container">
+                    <div class="advertisementBox" *ngFor="let research of rsdata">
+                      <div class="adsContent">
+                          <div class="head">{{research.service}}<span> </span></div>
+                              <div style="display: flex; justify-content: space-around;">
+
+                                <div *ngFor="let item of research.analytics">
+                                  <div class="clrblok" [style.background-color]="
+                                  (item.status == 'Raise')? '#143D6D' :
+                                  (item.status == 'Fall' && (calcperc(item) >= 5))? '#e52d48' :
+                                  (item.status == 'Fall' && (calcperc(item) < 5))? '#FFA500' : '#767676' "
+                                  >
+                                    <div>
+                                      <div style="margin-bottom: 5px; font-size: 11px;">{{item?.type}} <span>({{calcperc(item)}}%) </span></div>
+                                        <div>{{item?.count}}</div>
+                                      </div>
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <div class="clrblok" [style.background-color]="
+                                  (research.analytics[0].status == 'Raise')? '#143D6D' :
+                                  (research.analytics[0].status == 'Fall' && (calcperc(research.analytics[0]) >= 5))? '#e52d48' :
+                                  (research.analytics[0].status == 'Fall' && (calcperc(research.analytics[0]) < 5))? '#FFA500' : '#767676' "
+                                  >
+                                    <div>
+                                      <div style="margin-bottom: 5px; font-size: 11px;">{{research.analytics[0].type}} <span>({{calcperc(research.analytics[0])}}%) </span></div>
+                                      <div>{{research.analytics[0].count}}</div>
+                                     </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                      </div>
+                    </div>
+
+                </div> -->
+
+
+        <div class="tables">
+
+          <div *ngIf="this.rsdata == null">
+            <div class="placeholderForReports">
+              <!-- Please Select Start Date and End Date to generate reports<br>&#8592; -->
+              <!-- Please choose different dates to view the reports -->
+              {{placeholderhere}}
+            </div>
+          </div>
+
+          <!-- '#143D6D  2E8B57' -->
+          <div class="grid-container1" style="color: #fff;" *ngIf="rsdata">
+            <div class="box" *ngFor="let item of seletedresearch?.analytics">
+              <div class="setbox">{{item.type}}</div>
+              <div class="inbox" [style.background-color]="
+                    (item.status == 'Raise')? '#2E8B57' :
+                    (item.status == 'Fall' && (item.percentage >= 5))? '#e52d48' :
+                    (item.status == 'Fall' && (item.percentage < 5))? '#FFA500' : '#767676' ">{{item.percentage ?
+                item.percentage : '00'}}% </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 5px;" id="graphholder" [style.opacity]="graphsdata ? 1 : 0">
+            <!-- <div class="card" *ngFor="let data of graphsdata;let i=index" style="margin: 10px;">
+                    <div>
+                      <div id="container{{i}}"></div>
+                    </div>
+                  </div> -->
+          </div>
+
+          <div class="chartcont" style="display: none;">
+            <div class="linechart">
+              <!-- <canvas id="chart" baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+                [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                [chartType]="lineChartType" [plugins]="lineChartPlugins">
+              </canvas> -->
+
+              <canvas id="chart" baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [type]="lineChartType"
+                [plugins]="lineChartPlugins">
+              </canvas>
+            </div>
+
+
+            <div class="linechart">
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+              </canvas> -->
+              <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div>
+
+
+
+<div class="modal max-center" id="toSupportmodal1" style="padding-top: 40vh; display: none;">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">
+        <div><img src="assets/icons/warning.svg" style="width: 16px; margin:0 15px 2px 0; padding:0;">Alert</div>
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeWarnModal();">
+      </div>
+
+      <div class="" style="padding:15px 30px 0 30px;">
+        <div style="display: flex;place-content: center;">
+          <!-- <div class="servicetitle" style="margin-bottom: 10px; font-family: TP,sans-serif;">{{message.text}}</div> -->
+          <div class="alertMsg" style="font-size:16px;margin-bottom: 10px; font-family: PS,sans-serif;color:#7c7c7c;">
+            You have not availed this service. Please contact support to subscribe.</div>
+        </div>
+
+        <div style="display: flex; text-align: center; width: 100%;">
+          <div class="button" (click)="toSupport()" style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 15px; background: #104B86; color: #fff; font-weight: 700;margin: 1% 8% 3% 8%;
+            border: 8px solid #104B86 !important; border-radius: 20px; width: -webkit-fill-available;">Contact</div>
+          <div class="button" (click)="closeWarnModal()" style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 15px; background: #104B86; color: #fff; font-weight: 700;margin: 1% 8% 3% 8%;
+            border: 8px solid #104B86 !important; border-radius: 20px; width: -webkit-fill-available;">Cancel</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

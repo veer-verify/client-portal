@@ -1,0 +1,10 @@
+<div class="page">
+  <div class="box">
+    <img src="assets/icons/IVISsecurity_logo.png" class="logo">
+    <img src="assets/icons/error.svg">
+    <div class="oops">Error : {{httpError?.status ? httpError?.status : 'Something went wrong'}}</div>
+    <div class="errormsg" *ngIf="(httpError.status >= 500) ;else e400"> Something went wrong at our end. Dont worry it's not you - it's us. <br>We will be up and running shortly</div>
+    <ng-template class="errormsg" #e400> <div class="errormsg">Oops.. Something went wrong, please try again.</div> </ng-template>
+    <button class="generateBtn btn" (click)="loginpage()">Login</button>
+  </div>
+</div>

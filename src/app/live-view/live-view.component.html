@@ -1,0 +1,300 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center w-50">
+          <a class="pointer" (click)="toggleSideNav()">
+            <img src="assets/icons/menu_white.svg" alt="">
+          </a>
+          <!-- <div class="pointer">
+            <img src="assets/icons/expand_circle_down.svg" alt="" (click)="toggleSideNav()" style="rotate: 90deg;"
+              *ngIf="!closeSideNav">
+            <img src="assets/icons/expand_circle_down.svg" alt="" (click)="toggleSideNav()" style="rotate: 270deg;"
+              *ngIf="closeSideNav">
+          </div> -->
+
+          <div class="d-none d-lg-block" *ngIf="!closeSideNav">
+            <div class="searchbox mx-3 my-2" style="width: 250px;">
+              <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = '';" style="position: absolute;">
+              <input type="text" placeholder="Search Locations" [(ngModel)]="searchText" #searchinput>
+              <img src="assets/icons/search.svg">
+            </div>
+          </div>
+
+          <div class="title1" *ngIf="viewPanelData">
+            {{viewPanelData.siteName}}
+          </div>
+        </div>
+
+        <div>
+          <!-- <div class="pagination" (click)="pagination()" *ngIf="sites?.siteList?.length != 0"> -->
+          <div class="pagination my-2" (click)="pagination()">
+            <!-- pagination -->
+            <div class="d-flex mx-3" *ngIf="cameras?.length > 0">
+              <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" (click)="previousPage()" alt="prev"
+                [className]="pagenumber == 1 ? 'fade': ''">
+              <div class="searchbox" style=" margin: 0px 10px !important; padding: 4px !important;">
+                <select name="my-dropdown" (change)="pagination()" [(ngModel)]="pagenumber" class="dropdown">
+                  <option *ngFor="let number of selectNumbers" [value]="number" style="border: none;outline:none">
+                    <div style="padding: 15px; margin:10px; margin-right:15px">&nbsp;{{number + ' of ' +
+                      (selectNumbers?.length)}}&nbsp;</div>
+                  </option>
+                </select>
+                <!-- <img src="assets/icons/forward_arrow.svg" style="margin-left: -30px; transform:rotate(90deg); pointer-events:none; width: 20px" alt="drop"> -->
+              </div>
+              <img src="assets/icons/arrow.svg" (click)="nextPage()" alt="next"
+                [className]="pagenumber == selectNumbers?.length ? 'fade': ''">
+            </div>
+
+            <div (click)="cameraGridSettings(1)">
+              <img src="assets/icons/1x1grid.svg" class="gridicon" *ngIf="gridClicked != 1" alt="grid1">
+              <img src="assets/icons/1x1grid_selected.svg" class="gridicon" *ngIf="gridClicked == 1" alt="grid1">
+            </div>
+            <div (click)="cameraGridSettings(2)">
+              <img src="assets/icons/2x2grid.svg" class="gridicon" *ngIf="gridClicked != 2" alt="grid2">
+              <img src="assets/icons/2x2grid_selected.svg" class="gridicon" *ngIf="gridClicked == 2" alt="grid2">
+            </div>
+            <div (click)="cameraGridSettings(3)" class="grid3">
+              <img src="assets/icons/3x3grid.svg" class="gridicon" *ngIf="gridClicked != 3" alt="grid3">
+              <img src="assets/icons/3x3grid_selected.svg" class="gridicon" *ngIf="gridClicked == 3" alt="grid3">
+            </div>
+            <div (click)="cameraGridSettings(4)" class="grid4">
+              <img src="assets/icons/4x4dl.svg" class="gridicon" *ngIf="gridClicked != 4" alt="grid4">
+              <img src="assets/icons/4x4grid_selected.svg" class="gridicon" *ngIf="gridClicked == 4" alt="grid4">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="cont" oncontextmenu="return false;" *ngIf="sitedata">
+    <div class="">
+
+      <!-- main cameras side nav -->
+      <div [ngClass]="closeSideNav ? 'side-nav' : 'side-nav-active'" class="" id="topple" #topple>
+        <div class="optionlabelparent" *ngFor="let site of sites  | SearchPipe: searchText ; let j = index"
+          #optionlabelparent>
+          <div [className]="site.siteId == currentsite  ? 'optionlabel active' : 'optionlabel'"
+            [style.background]="site.siteId == currentsite ? '#fff': '#ffffff'" style="position:relative;"
+            #optionlabel (click)="getCameras($event, site, j)">
+            
+            <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="site"> -->
+            <img [src]="storageService.accordianLogo" style="width: 20px;" alt="site">
+            <div class="label">{{site.siteName}}</div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg"></div>
+          </div>
+
+          <div [className]="(site.siteId == currentsite && showcams)  ? 'panel-active' : 'panel-inactive'" *ngIf="site.siteId == currentsite" #panel>
+            <span style="position: relative;">
+              <div class="accordionElements camname" *ngFor="let item of cameras; let c = index" >
+                <!-- <span *ngIf="!camera?.videoUrl" [className]="camera?.videoUrl ? 'dot' : 'dot-red'"></span> -->
+
+                <img [src]="item?.camMonitor === 'T' ? storageService.activeLogo : storageService.inActiveLogo" alt="" width="15">
+                <!-- <img src="assets/themes/Uneeviu Logo Blue png.png" style="width: 20px;" alt="site"> -->
+
+                <p style="margin: 0 0 0 20px"></p>
+                <!-- <span *ngIf="camIndex == c"><input type="text" [(ngModel)]="currentCam.name"></span> -->
+                <span class="wrap" (click)="cameraIdClicked(item)">{{ item?.name }}</span>
+                <!-- <span *ngIf="camIndex != c" style="position: absolute; right: 35px;" (click)="openRename(camera)"><img src="assets/icons/edit.svg" width="16" alt="" title="edit"></span> -->
+                <!-- <span *ngIf="camIndex == c" style="position: absolute; right: 25px;" (click)="updateCameraName()"><img src="assets/icons/save_icon.svg" width="16" alt="" title="save"></span> -->
+                <!-- <span *ngIf="camIndex == c" style="position: absolute; right: 5px;" (click)="camIndex = -1"><img src="assets/icons/close-black.svg" width="16" alt="" title="cancel"></span> -->
+
+                <span class="pointer" style="position: absolute; right: 25px;" (click)="playSiren(item)" *ngIf="item.audioUrl != '' && item.audioUrl != null">
+                  <img [ngClass]="btnIndex == c ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18" title="siren" alt="">
+                </span>
+                <span style="position: absolute; right: 25px;" *ngIf="item.audioUrl == '' || item.audioUrl == null">
+                  <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
+                </span>
+
+                <span (click)="cameraIdClicked(item)" style="position: absolute; right: 10px;">
+                  <img src="assets/icons/settings.svg" width="16" alt="" *ngIf="serviceData?.cameraConfig === 'T' && camIndex != c">
+                </span>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- main cameras -->
+      <div [ngClass]="closeSideNav ? 'main-container-active' : 'main-container'" *ngIf="sites?.length != 0">
+        <div class="grid-container" #grids [className]="showcams ? 'grid-container': 'grid-container hide' " style="position: relative;">
+          <div class="camerabox" #camerabox *ngFor="let camera of paginatedCameraList; let j=index">
+            <div class="tile-detail px-2">
+              <div class="title" #title>
+                <img [src]="camera?.videoUrl ? 'assets/icons/green-dot.png' : 'assets/icons/red-dot.png'" width="16px" alt="" class="me-1">
+                <span class="me-2"  *ngIf="camIndex != j">{{camera?.name}}</span>
+                
+                <!-- input -->
+                <span class="pointer me-2" *ngIf="camIndex == j">
+                  <input type="text" style="border: 1px solid #ababab;" class="w-100" [(ngModel)]="currentCam.name" (ngModelChange)="valueChange($event)">
+                </span>
+                <span class="pointer" *ngIf="camIndex != j" (click)="openRename(camera)">
+                  <img src="assets/icons/icons-edit.png" width="18" alt="" title="edit">
+                </span>
+                <span class="pointer me-1" *ngIf="camIndex == j && !showSave">
+                  <img src="assets/icons/icons-save-dummy.png" width="18" alt="" title="save">
+                </span>
+                <span class="pointer me-1" *ngIf="camIndex == j && showSave" (click)="confirmRename()">
+                  <img src="assets/icons/icons-save.png" width="18" alt="" title="save">
+                </span>
+                <span class="pointer" *ngIf="camIndex == j" (click)="camIndex = -1">
+                  <img src="assets/icons/icons-cancel.png" width="18" alt="" title="cancel">
+                </span>
+              </div>
+
+              <div>
+                <!-- <span class="title me-1">{{camera?.videoUrl ? 'CONNECTED' : 'DISCONNECTED'}}</span> -->
+
+                <!-- screenshot -->
+                <span class="pointer" (click)="normalCapture(camera, j)">
+                  <img src="assets/icons/screenshot.svg" width="18" alt="" title="Screenshot">
+                </span>
+
+                <!-- siren -->
+                <span class="pointer" (click)="playSiren1(camera)" *ngIf="camera.audioUrl != '' && camera.audioUrl != null">
+                  <img [ngClass]="btnIndex == j ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18" title="siren" alt="">
+                </span>
+                <span class="pointer" *ngIf="camera.audioUrl == '' || camera.audioUrl == null">
+                  <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
+                </span>
+              </div>
+            </div>
+
+
+            <div>
+              <ng-container>
+                <app-video-player [videoData]="camera?.httpUrl + '/'" [gridClicked]="gridClicked" #videos></app-video-player>
+              </ng-container>
+              <!-- <ng-container *ngIf="camera.indexNo != 1 && !camera.videoUrl">
+                <app-dummy-video [videoData]="camera?.videoUrl" [gridClicked]="gridClicked" #videos></app-dummy-video>
+              </ng-container> -->
+
+              <!-- <ng-container *ngIf="camera.indexNo == 1">
+                <iframe [src]="sanitizeUrl(camera?.httpUrl)"
+                  [ngClass]="gridClicked == 1 ? 'iframe-1': gridClicked == 2 ? 'iframe-2' : gridClicked == 3 ? 'iframe-3' : 'iframe-all'" #videos></iframe>
+              </ng-container> -->
+            </div>
+
+            <!-- <div class="placeholderforcam" *ngIf="camera.cameraStatus != 'Connected' && !camera?.httpUrl"
+                style="background-color:#010101;">
+                <div class="placeholdercard">
+                  <img src="assets/icons/eyedisabled.svg" alt="" style="width: 80px;">
+                </div>
+              </div> -->
+          </div>
+
+          <div class="config m-1" *ngIf="gridClicked == 1 && serviceData?.cameraConfig === 'T' && currentCam?.camera_config_url !== null">
+            <!-- <img class="ptz-loader" src="assets/gif/loading-gif.gif" alt=""> -->
+            <p class="config-title mx-2">Configuration</p>
+
+            <!-- <div class="container"> -->
+              <!-- <p cl>PTZ Camera Control</p> -->
+              <div class="controls mt-2">
+                <div class="ptz-control">
+                  <div class="bor"></div>
+                  <button class="reset-button" (click)="move('N' , 'N')">HOME</button>
+
+                  <a class="control-button" (click)="move('L' , 'N')" style="position: absolute; left: 0; top: 50%; transform: translate(0, -50%);">
+                    <img src="assets/icons/arrow_left.svg" style="rotate: 0deg;" width="30" alt="" title="Move Left">
+                  </a>
+                  <a class="control-button" (click)="move('N', 'U')" style="position: absolute; top: 0; transform: translate(-50%, 0);">
+                    <img src="assets/icons/arrow_left.svg" style="rotate: 90deg;" width="30" alt="" title="Move Up">
+                  </a>
+                  <a class="control-button" (click)="move('R', 'N')" style="position: absolute; right: 0; top: 50%; transform: translate(0, -50%);">
+                    <img src="assets/icons/arrow_left.svg" style="rotate: 180deg;" width="30" alt="" title="Move Right">
+                  </a>
+                  <a class="control-button" (click)="move('N', 'D')" style="position: absolute; bottom: 0; transform: translate(-50%, 0);">
+                    <img src="assets/icons/arrow_left.svg" style="rotate: 270deg;" width="30" alt="" title="Move Down">
+                  </a>
+                </div>
+
+                <div class="range-bar">
+                  <input type="range" [min]="0" [max]="20" [step]="2" [(ngModel)]="range" [title]="range">
+                </div>
+
+
+                <div class="d-flex flex-wrap justify-content-around mt-3">
+                  <div class="zoom-controls d-flex">
+                    <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="zoom('+')">
+                      <img src="assets/icons/zoom_in.svg" width="22" alt="" title="Zoom In">
+                    </a>
+                    <a class="zoom-button" (click)="zoom('-')">
+                      <img src="assets/icons/zoom_out.svg" width="22" alt="" title="Zoom Out">
+                    </a>
+                  </div>
+  
+                  <div class="zoom-controls d-flex">
+                    <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="focus('+')">
+                      <img src="assets/icons/center_focus_strong.svg" width="22" alt="" title="Focus In">
+                    </a>
+                    <a class="zoom-button" (click)="focus('-')">
+                      <img src="assets/icons/center_focus_weak.svg" width="22" alt="" title="Focus Out">
+                    </a>
+                  </div>
+                </div>
+
+                <button class="home-button w-50 my-3 p-1" (click)="home()">SET AS HOME</button>
+
+                <p class="update-msg" *ngIf="updateMsg">{{ updateMsg | titlecase }}!</p>
+              </div>
+            <!-- </div> -->
+
+            <!-- <div class="row mt-3 mx-2">
+                <div class="col-lg-12 mb-2">
+                  <label class="labell">Resolution</label>
+                  <select class="form-select">
+                    <option value="" disabled selected>Resolution</option>
+                  </select>
+                </div>
+
+                <div class="col-lg-12 mb-2">
+                  <label class="labell">FPS</label>
+                  <input type="text" placeholder="FPS"  class="form-control"
+                  >
+                </div>
+              </div> -->
+          </div>
+        </div>
+        <ng-container *ngIf="loadingTxt">
+          <p class="placeholderForEmpty">{{loadingTxt}}</p>
+        </ng-container>
+        <!-- <div *ngIf="cameras && cameras.length == 0" class="placeholderForEmpty">Sorry You dont have camera feeds at this location</div> -->
+      </div>
+    </div>
+    <!-- <div *ngIf="sites && sites?.length == 0" class="placeholderForEmpty">No sites mapped to user id</div> -->
+  </div>
+
+  <!-- err info-->
+  <!-- <div *ngIf="otherCameras.length == 0" class="placeholderForEmpty" style="position: absolute; top: 100px; left: 50%;">{{ errInfo }}</div> -->
+</div>
+
+<div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div>
+
+<div class="new-dialog" id="editCamModel">
+  <div class="dialog-header">
+    <span class="new-dialog-title">Edit Camera Name</span>
+    <span><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel()" title="close" alt=""></span>
+  </div>
+
+  <div class="dialog-content" *ngIf="currentCam">
+    <p class="new-dialog-text">Do you want to change the camera name from<br>
+      <span class="text-primary">{{newCamName}}</span> to <span class="text-danger">{{currentCam.name}}</span>?
+    </p>
+    <!-- <input type="text" [(ngModel)]="currentCam.name" class="w-100"> -->
+  </div>
+
+  <div class="text-center">
+    <button class="w-50 my-2 py-2" style="font-size: 16px; text-transform: uppercase;" (click)="updateCameraName()">Submit</button>
+  </div>
+</div>

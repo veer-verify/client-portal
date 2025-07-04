@@ -1,0 +1,25 @@
+<svg width="8px" height="8px" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
+
+ <linearGradient id="MyGradient1">
+          <stop offset="5%" stop-color="#0756ce" />
+          <stop offset="95%" stop-color="#d04329" />
+</linearGradient>
+
+ <linearGradient id="MyGradient2">
+          <stop offset="5%" stop-color="#674d80" />
+          <stop offset="95%" stop-color="#d04329" />
+</linearGradient>
+  <path fill="url(#MyGradient1)" d="M0 
+  0v2h2v-2h-2zm3 
+  0v2h2v-2h-2zm3 
+  0v2h2v-2h-2zm-6 
+  3v2h2v-2h-2zm3 
+  0v2h2v-2h-2zm3 
+  0v2h2v-2h-2zm-6 
+  3v2h2v-2h-2zm3 
+  0v2h2v-2h-2zm3 
+  0v2h2v-2h-2z" />
+
+
+
+</svg>

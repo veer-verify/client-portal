@@ -1,0 +1,232 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12"
+          style="text-align:center;align-self: center;overflow:visible; padding-left: 20px">
+          <div class="searchbox">
+            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
+            <input type="text" (keyup)="onInput($event)"
+              placeholder="Search {{sites?.length ? sites?.length : ''}} Locations"
+              [(ngModel)]="searchText" #searchinput>
+            <!-- {{'Search from '+sites?.length+' Locations'}} -->
+            <img src="assets/icons/search.svg">
+          </div>
+        </div>
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div class="title1 topTitle" style="margin:0 0 0 25px;"><span *ngIf="reportsite">{{reportsite}} - {{selectedSpan}}</span>
+            <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 judge btnvisible" id="topple" #topple>
+        <!-- Accordion for Location -->
+        <div class="optionlabelparent" *ngIf="sites.length !== 0">
+          <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel>
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <div class="label">{{currentsite}}</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop">
+            </div>
+          </div>
+          <div class="panel" hide="!item.isActive">
+            <div class="accordionElements" *ngFor="let site of sites  | SiteName: searchText"
+              (click)="siteClicked(site)">
+              <div><span class="dot"></span></div>
+              <p style="margin: 0 0 0 20px; font-size: 12px !important;">{{site.siteName}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Month -->
+        <div class="optionlabel"
+          style="display: flex; position:relative; margin:6px 5px; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px"
+          *ngIf="user?.UserName != 'sales@ivisecurity.com'">
+          <div (click)="visible=!visible" style="width: -webkit-fill-available; display:flex;    align-items: center;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><span *ngIf="startDate != 'null'"
+              style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: calc(100% - (35px))">
+              {{selectedMonth ? selectedMonth : 'Select Month'}}</span><img src="assets/icons/calender.svg"
+              class="calendericon"><br>
+          </div>
+
+          <div class="calender" *ngIf="visible" #month>
+            <div class="title" style="margin: 5px 0 12px; text-align: center;">
+              <i (click)="prevYear()" [className]="years[0]==2014 ? 'arrow left fade': 'arrow left'"></i>
+              <span style="font-family: PS,sans-serif; font-size:18px;color:#fff; margin:0 30%;"><a
+                  style="width: 200px;">{{years[0]}}</a></span>
+              <i (click)="nextYear()" [className]="years[0]==currentyear ? 'arrow right fade': 'arrow right' "></i>
+            </div>
+            <div class="months">
+              <div class="grid-cont">
+                <div [className]="years[0]==currentyear && i>currentMonthIndex ? 'gridElements fadeout':'gridElements'"
+                  *ngFor="let month of months; let i=index" (click)="selectedmonth(i)">
+                  <span style="font-family: PS,sans-serif;">{{month}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="optionlabel"
+          style="display: flex; position:relative; margin:6px 5px; font-size: 11.5px; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px">
+          <div (click)="start.toggle()" style="width: -webkit-fill-available; display:flex;    align-items: center;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><span *ngIf="startDate != 'null'"
+              style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: calc(100% - (35px))">
+              <span *ngIf="user?.UserName == 'sales@ivisecurity.com'">Select Date</span> <span
+                *ngIf="user?.UserName != 'sales@ivisecurity.com'">Start Date</span> {{": "+displaYstartDate}}</span><img
+              src="assets/icons/calender.svg" class="calendericon"><br>
+          </div>
+          <form class="dateinputform">
+            <input type="text" ngbDatepicker #start="ngbDatepicker" class="dateinput"
+              (dateSelect)="onDateSelect($event, 'start')" [minDate]="{year: 2014, month: 1, day: 1}"
+              [maxDate]="maxDate" [markDisabled]="disabledays">
+          </form>
+        </div>
+
+        <!-- End Date -->
+        <div class="optionlabel"
+          style="display: flex; position:relative; margin:6px 5px; font-size: 11.5px; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px"
+          *ngIf="user?.UserName != 'sales@ivisecurity.com'">
+          <div (click)="end.toggle()" style="width: -webkit-fill-available; display:flex;    align-items: center;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><span *ngIf="startDate != 'null'"
+              style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: calc(100% - (35px))">
+              End Date &nbsp;&nbsp; {{": "+displaYendDate}}</span><img src="assets/icons/calender.svg"
+              class="calendericon"><br>
+          </div>
+          <form class="dateinputform">
+            <input type="text" ngbDatepicker #end="ngbDatepicker" class="dateinput"
+              (dateSelect)="onDateSelect($event, 'end')" [minDate]="minenddate" [maxDate]="maxDate"
+              [markDisabled]="disabledays">
+          </form>
+        </div>
+
+        <!-- Generate Button -->
+        <div style="text-align:center">
+          <button class="generateBtn" (click)="generateReport()">
+            GENERATE REPORT
+          </button>
+        </div>
+
+        <!-- <div style="text-align:center" *ngIf="reports != null">
+          <button class="generateBtn" style="letter-spacing:3px;" (click)="downloadReport()">
+            DOWNLOAD REPORT
+          </button>
+        </div> -->
+      </div>
+
+
+      <!-- Right Column Starts -->
+      <div class="col-lg-8 col-sm-12">
+        <!-- <div class="title1">
+          {{selectedSpan}}
+          <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+        </div>
+        <hr id="hr1"> -->
+
+        <!-- Data Tables starts here -->
+        <div *ngIf="reports != null" class="tables">
+          <div class="dataTable" *ngFor="let report of reports;">
+            <div class="tableBox" *ngIf="cols;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="tabletitlejustify">
+                      <p>{{makeTitleForTable(report.name)}}</p>
+                    </th>
+                    <th *ngFor="let col of getcols(report);">
+                      <p>{{col?.header}}</p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let data of report.data">
+                  <tr class="tableElements">
+                    <!-- <th scope="row"><p><img class="icon" height="30" width="42" [src]="'http://ec2-34-201-14-199.compute-1.amazonaws.com/reports/assets/img/icons/'+data.icon" onerror="this.src='assets/icons/eye.svg';">{{data.type}}</p></th> -->
+                    <th scope="row">
+                      <p>
+                        <span class="icon" style="display: inline-block;">
+                          <img [src]="'http://ec2-34-201-14-199.compute-1.amazonaws.com/reports/assets/img/icons/'+ data.icon" onerror="this.src='assets/icons/eye.svg'">
+                        </span>{{data.type}}
+                      </p>
+                    </th>
+                    <td *ngFor="let col of getcols(report);">
+                      <span *ngIf="data[col.field]">{{data[col.field]}}</span>
+                      <span *ngIf="!data[col.field]" style="color: #c6c6c6; font-size:10px;">N/A</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="this.reports == null">
+          <div class="placeholderForReports">
+            {{placeholderhere}}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1" style="overflow-y: auto; overflow-x: hidden; height: 60vh;">
+        <div *ngFor="let img of images?.Images">
+          <img [src]="images.baseUrl + img.imageName"
+            [className]="zoomIn ? 'insight-image-active' : 'insight-image'"
+            (click)="openZoomModel(images.baseUrl + img.imageName)"
+            alt="img">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div>
+
+<div class="modal max-center" id="toSupportmodal" style="padding-top: 40vh; display: none;">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">
+        <div><img src="assets/icons/warning.svg" style="width: 16px; margin:0 15px 2px 0; padding:0;">Alert</div>
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeWarnModal();">
+      </div>
+
+      <div class="" style="padding:15px 30px 0 30px;">
+        <div style="display: flex;place-content: center;">
+          <!-- <div class="servicetitle" style="margin-bottom: 10px; font-family: TP,sans-serif;">{{message.text}}</div> -->
+          <div class="alertMsg" style="font-size:16px;margin-bottom: 10px; font-family: PS,sans-serif;color:#7c7c7c;">
+            You have not availed this service. Please contact support to subscribe.</div>
+        </div>
+
+        <div style="display: flex; text-align: center; width: 100%;">
+          <div class="button" (click)="toSupport()" style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 15px; background: #104B86; color: #fff; font-weight: 700;margin: 1% 8% 3% 8%;
+          border: 8px solid #104B86 !important; border-radius: 20px; width: -webkit-fill-available;">Contact</div>
+          <div class="button" (click)="closeWarnModal()" style="font-family: ES,sans-serif; letter-spacing: 2px;font-size: 15px; background: #104B86; color: #fff; font-weight: 700;margin: 1% 8% 3% 8%;
+          border: 8px solid #104B86 !important; border-radius: 20px; width: -webkit-fill-available;">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal max-center" id="imgModel" style="display: none;" >
+  <div style="cursor: move;" drag>
+
+    <div class="formcont max-center" style="max-width: 800px;" >
+      <div class="modalform">
+        <img [src]="currentImg" width="100%" height="500px" style="cursor: zoom-out;" alt="" (click)="closeZoomModal()">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{
+  "Status": "Success",
+  "Message": "List generated successfully",
+  "Sun": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Mon": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Tue": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Wed": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Thu": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Fri": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ],
+  "Sat": [
+    {
+      "data": [
+        {
+          "total": "11",
+          "type": "Gas Pump Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    }
+  ]
+}

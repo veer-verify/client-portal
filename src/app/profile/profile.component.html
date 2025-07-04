@@ -1,0 +1,84 @@
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align:center;align-self: center;"><div  class="searchbox"><input type="text" placeholder="Search Reports"><img src="assets/icons/search.svg"></div></div>
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1"><div class="title1 topTitle" style="margin:0 0 0 25px;">Profile
+          <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+          <div class="tooltiptext">Do you need Safety Escort?</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+    <div class="cont" style="display: none;">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 btnvisible">
+                <!-- <div class="title1">
+                   YOUR REPORTS
+                </div> -->
+                <!-- Quarters with multiple reports  -->
+                <div class="optionlabelparent">
+                  <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)">
+                      <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisSecurity"><div class="label"> Quarter 2</div><div class="download"><img src="assets/download_.svg" alt="download"></div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                  </div>
+                  <div class="panel" hide="!item.isActive">
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 1</p>   </div>
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 2</p>   </div>
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 3</p>   </div>
+                  </div>
+                </div>
+                <!-- Quarters with multiple reports  -->
+                <div class="optionlabelparent">
+                  <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)">
+                      <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><div class="label"> Quarter 2</div><div class="download"><img src="assets/download_.svg" alt="download"></div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                  </div>
+                  <div class="panel" hide="!item.isActive">
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 1</p>   </div>
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 2</p>   </div>
+                    <div class="accordionElements"> <span class="dot"></span><p style="margin: 0 0 0 20px">Sub-location 3</p>   </div>
+                  </div>
+                </div>
+                <!-- Quarters without multiple types of reports -->
+                <div class="optionlabelparent">
+                  <div class="optionlabel" Style="position:relative;" >
+                      <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><div class="label"> Quarter 2</div><div class="download"><img src="assets/download_.svg" alt="download"></div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                  </div>
+                </div>
+                <br>
+                <!-- generate report btn -->
+                <div style="text-align:center">
+                  <button class="generateBtn">
+                    GENERATE REPORT
+                  </button>
+                </div>
+            </div>
+            <!-- Left Column Ends -->
+
+            <!-- Right Column Starts -->
+            <div class="col-lg-9 col-sm-12">
+              <!-- Placeholder for reports -->
+                <!-- <div class="placeholderForReports"><p>Select the timeframe on the left to view and download your reserach report<br>&#8592;</p></div> -->
+              <!-- Reports -->
+              <div class="title1">
+                Q3 2021
+                <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions()">
+
+              </div>
+              <hr id="hr1">
+              <!-- write report code here -->
+            </div>
+          <!-- Column with Reports Ends -->
+          </div>
+          <!-- Row Ends -->
+      </div>
+      <div class="placeholderForEmpty">
+        Coming Soon...
+      </div>
+  </div>
+
+
+
+  <div id="modal">
+    <div class="close" (click)="closemodal()"></div>
+    <div id="modalcontent"></div>
+  </div>

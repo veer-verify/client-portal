@@ -1,0 +1,42 @@
+<!-- <div  id="google-signin-btn" #googleSignInButton></div> -->
+
+<!-- <button class="btn btn-primary btn-google mx-1" (click)="signWithGoogle()">Signin with Google</button> -->
+<!-- <div class="d-flex align-items-center">
+     <button (click)="renderGoogleSignIn();" #googleSignInButton>Signin with Google</button>
+     <button (click)="signInWithFB()">Signin with Facebook</button>
+</div> -->
+
+<!-- <button type="button" (click)="signOut()" class="btn btn-primary">Sign Out</button> -->
+<!-- <div id="g_id_onload"
+     data-client_id="948197311612-ijntk6d8patg7bvot4sengcvqt63of39.apps.googleusercontent.com"
+     data-context="signin"
+     data-ux_mode="redirect"
+     data-login_uri="http://localhost:4200"
+     data-nonce=""
+     data-auto_select="true"
+     data-itp_support="true">
+</div>
+
+<div class="g_id_signin"
+     data-type="icon"
+     data-shape="circle"
+     data-theme="outline"
+     data-text="signin_with"
+     data-size="medium">
+</div> -->
+
+<!-- From Uiverse.io by micaelgomestavares --> 
+<form class="form">
+     
+    <p class="p line">Or Continue With</p>
+ 
+     <div class="flex-row">
+          <button class="btn google" (click)="renderGoogleSignIn();" #googleSignInButton>
+               <img src="assets/icons/google-logo.png" alt="" width="16px">Google 
+          </button>
+
+          <button class="btn apple" (click)="signInWithFB()">
+               <img src="assets/icons/facebook-logo.png" alt="" width="18px">Facebook    
+          </button>
+     </div>
+</form>

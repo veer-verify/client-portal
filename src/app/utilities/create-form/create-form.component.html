@@ -1,0 +1,32 @@
+<section class="create-form">
+    <section class="title">
+        <span>form</span>
+        <a><img src="assets/icons/close.svg" class="mb-1" width="24px" title="close" alt="close"></a>
+    </section>
+    
+    <section class="content">
+        <ng-container *ngFor="let item of fields">
+            <ng-container [ngSwitch]="item.type">
+                <ng-container *ngSwitchCase="'select'">
+                    <label class="form-label">{{item.label}}</label>
+                    <select class="form-select">
+                        <option selected>select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <div class="mb-3">
+                        <label class="form-label">{{item.label}}</label>
+                        <input [type]="item.type" class="form-control" placeholder="enter">
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </section>
+
+    <section class="submit">
+        <button>submit</button>
+    </section>
+</section>

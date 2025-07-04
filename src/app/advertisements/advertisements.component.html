@@ -1,0 +1,309 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar [serviceDataFromParent]="serviceData"></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align: center; align-self: center;">
+          <div class="searchbox">
+            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
+            <input type="text" (keyup)="onInput($event)" placeholder="Search for sites" [(ngModel)]="searchText" #searchinput>
+            <img src="assets/icons/search.svg">
+          </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div class="title1 topTitle" style="margin:0 0 0 25px;">
+            <span>{{ currentSite?.siteName }} - ADS</span>
+            <!-- <span>Support Helpdesk</span> -->
+            <!-- <div class=" action-icons">
+              <div>&nbsp;</div>
+            </div> -->
+            <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
+        <!-- <div class="optionlabelparent" [style.border]="sites == false? '1px solid #fff' : ''" [style.backgroundColor]="sites==false ? '#00000000' : '#fff'"
+          *ngFor="let site of siteData | SearchPipe : searchText; let i = index " (click)="openSites()">
+
+          <div [className]="(site.siteId == currentSite?.siteId)  ? 'optionlabel active' : 'optionlabel'" style="position: relative;" [style.backgroundColor]="sites==false ? 'rgb(0 0 0 / 0%)' : '#fff'"
+            [style.color]="sites==false ? '#fff' : '#000'" (click)="getDevices(site, i)">
+            <img src="assets/icons/eye.svg" *ngIf="sites" style="width: 20px;" alt="ivisUSA">
+            <img src="assets/icons/eye-white.svg" *ngIf="!sites" style="width: 20px;" alt="ivisUSA">
+            <div class="label">{{ site?.siteName}}</div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div>
+
+          <div class="pane" #panel *ngIf="site.siteId == currentSite?.siteId">
+            <span>
+              <a class="accordionElements camname" *ngFor="let device of deviceData">
+                <span class="dot"></span>
+                <p style="margin: 0 0 0 20px"></p>
+                <span class="wrap"><span class="name" #name (click)="getAssets(device)">{{ device?.deviceId }}-</span>{{device?.deviceDescription}}</span>
+                <a class="mx-2 pointer" (click)="openDeviceModel(device)">
+                  <img src="assets/icons/my-edit.svg" width="12">
+                </a>
+              </a>
+            </span>
+          </div>
+        </div> -->
+        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index" (click)="listAdsBySite(site, i)">
+        <div [ngClass]="currentNav == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
+          <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="currentNav != i">
+          <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA" *ngIf="currentNav == i">
+          <div class="label">{{ site?.siteName }} </div>
+          <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
+        </div>
+      </div>
+      <br>
+      </div>
+
+
+
+      <div class="col-lg-9 col-sm-12">
+        <!-- <div> -->
+          <div class="title1 d-flex justify-content-between">
+            <div class="row mx-0 mt-1 w-100">
+              <div class="col-md-3 ps-0">
+                <span class="label">Device</span>
+                <select class="form-select mb-3" [(ngModel)]="device" (ngModelChange)="listAdsByDevice(device)">
+                  <option value="">All</option>
+                  <!-- <option value="ADVIN3630501">ADVIN3630501</option> -->
+                  <option *ngFor="let item of deviceData" [value]="item?.deviceId">{{item?.name}}</option>
+                </select>
+              </div>
+              <!-- <div class="col-lg-2 ps-0">
+                <span class="label">Event Start Date</span>
+                <div class="input-group">
+                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="fromDate" ngbDatepicker
+                    #d1="ngbDatepicker" (ngModelChange)="filter()">
+                  <button class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img
+                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                </div>
+              </div>
+              <div class="col-lg-2 ps-0">
+                <span class="label">Event End Date</span>
+                <div class="input-group">
+                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="toDate" ngbDatepicker
+                    #d2="ngbDatepicker" (ngModelChange)="filter()">
+                  <button class="btn btn-outline-light py-0" (click)="d2.toggle()" type="button"><img
+                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                </div>
+              </div> -->
+              <!-- <div class="col-lg-1 ps-0" *ngIf="fromDate != '' || toDate != ''">
+                <button class="btn btn-sm btn-outline-danger mt-4"
+                  (click)="fromDate = ''; toDate = ''; filter()">Clear</button>
+              </div> -->
+            </div>
+            <div class="me-3">
+              <button class="py-2 px-3 add-form-button" (click)="open(currentSite)">Create Ad</button>
+            </div>
+          </div>
+
+
+          <div class="table-resp extra w-100">
+            <table class="table table-hover" id="mytable">
+              <thead style="position: sticky; top: 0; z-index: 1;">
+                <tr class="form1">
+                  <!-- <th>
+                    <span>Id</span>
+                    <img (click)="sort('id')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th> -->
+                  <!-- <th>
+                    <span>Ad Device</span>
+                    <img (click)="sort('deviceId')" class="pointer ms-1" src="assets/sort.svg" style="opacity: 0.5;" width="20px">
+                  </th> -->
+                  <th>
+                    <span>Ad Name</span>
+                    <img (click)="sort('name')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>
+                    <span>Device mode</span>
+                    <img (click)="sort('deviceModeId')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>
+                    <span>Duration</span>
+                    <img (click)="sort('duration')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>
+                    <span>Start date</span>
+                    <img (click)="sort('fromDate')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>
+                    <span>End date</span>
+                    <img (click)="sort('toDate')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th class="text-center">Play</th>
+                  <th>
+                    <span>Status</span>
+                    <img (click)="sort('status')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th class="text-center"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of assetData; let i=index">
+                  <!-- <td>
+                    <p>{{ item.id }}</p>
+                  </td> -->
+                  <!-- <td>
+                    <img *ngIf="item?.mimeType == 'audio/mp3'" class="me-1" src="assets/images/audio.png" alt="" width="25">
+                    <img *ngIf="item?.mimeType == 'video/mp4'"  class="me-1" src="assets/images/video.png" alt="" width="25">
+                    <img *ngIf="item?.mimeType == ''" class="me-1" src="assets/images/qr.png" alt="" width="25">
+                    <span>{{ item.deviceId }}</span>
+                  </td> -->
+                  <td>
+                    <p>{{ item.name.slice(0, -4) }}</p>
+                  </td>
+                  <td>
+                    <!-- <img *ngIf="item.deviceModeId == 1" src="assets/images/video.png" alt="" width="25" class="me-1">
+                    <img *ngIf="item.deviceModeId == 2" src="assets/images/bsr.png" alt="" width="25" class="me-1">
+                    <img *ngIf="item.deviceModeId == 3" src="assets/images/odr.png" alt="" width="25" class="me-1"> -->
+                    <span *ngIf="item.deviceModeId == 1">Continous</span>
+                    <span *ngIf="item.deviceModeId == 2">Weather</span>
+                    <span *ngIf="item.deviceModeId == 3">Object</span>
+                  </td>
+                  <td>
+                    <p>{{item.duration + 's'}}</p>
+                  </td>
+                  <td>
+                    <p>{{ item.fromDate | date: 'mediumDate' }}</p>
+                  </td>
+                  <td>
+                    <p>{{ item.toDate | date: 'mediumDate' }}</p>
+                  </td>
+                  <td class="text-center">
+                    <a class="pointer" [href]="item.url" target="_blank">
+                      <img style="color: #bdb8b8;" src="assets/icons/play_circle.png" width="25" >
+                    </a>
+                  </td>
+                  <td style="width: 100px;">
+                    <p [style.color]="item.status == 1 ? 'blue' : (item.status == 2 || item.status == 3) ? 'violet' : item.status == 4 ? 'green' : 'red'">
+                      <span>
+                        <span style="width: 65px;">
+                          {{ item.status == 1 ? "Pending": item.status == 2 ? "In progress" : item.status == 3 ? 'In progress' : item.status == 4 ? "Activated" : item.status == 5 ? "Deactivated" : '--'}}
+                        </span>
+                        <!-- <a (click)="openEditStatus(item.id)" class="ms-2 pointer">
+                          <img src="assets/icons/edit.svg"  width="13">
+                        </a> -->
+                      </span>
+                    </p>
+                  </td>
+                  <td class="table-icons text-center px-0">
+                    <a class="pointer" (click)="openEditAdd(item)">
+                      <img src="assets/icons/editicon2White_selected.svg" width="22">
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- table -->
+            <div class="d-flex align-items-center justify-content-center" style="height: 70%;" *ngIf="assetData?.length == 0 || assetData == undefined">
+              <h2 class="text-secondary">No Advertisements</h2>
+            </div>
+          </div>
+
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div>
+
+<div class="modal max-center" id="editAddDialog">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">modify add
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeviewModal()">
+      </div>
+      <div style="padding:15px 30px 0 30px;" *ngIf="currentItem">
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="d-label">Device Mode</p>
+            <select class="form-select" name="deviceMode" [(ngModel)]="currentItem.deviceModeId" (change)="myFun($event)">
+              <option value="" disabled selected>Device Mode</option>
+              <option *ngFor="let item of deviceMode" [value]="item.keyId">{{item.value}}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-12">
+            <p class="d-label">From Date</p>
+            <input type="date" name="fromDate" class="form-control" [(ngModel)]="currentItem.fromDate" (change)="myFun($event)">
+          </div>
+
+          <div class="col-lg-12">
+            <p class="d-label">To Date</p>
+            <input type="date" name="toDate" class="form-control" [(ngModel)]="currentItem.toDate" (change)="myFun($event)">
+          </div>
+
+          <div class="col-lg-12">
+            <p class="d-label">Playorder</p>
+            <input type="number" name="playOrder" placeholder="Playorder" class="form-control" [(ngModel)]="currentItem.playOrder" (change)="myFun($event)">
+          </div>
+
+          <div class="col-lg-12">
+            <p class="d-label">Status</p>
+            <select  name="status" [(ngModel)]="currentItem.status" class="form-select" (change)="myFun($event)">
+              <option value="" disabled selected>Status</option>
+              <option *ngFor="let item of addStatus" [value]="item.keyId">{{item.value}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="w-50 my-2 py-2" (click)="modifyAssetForDevice()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal max-center" id="deviceModel">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">modify device mode
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeDeviceModel()">
+      </div>
+
+      <!-- <div style="background-color: #084982;">
+        <p class="dialog-title text-white">modify status</p>
+      </div> -->
+
+      <div style="padding:15px 30px 0 30px;">
+        <div>
+          <select name="deviceModeId" [(ngModel)]="deviceBody.deviceModeId" class="w-100 my-2" (change)="myFun($event)">
+            <option value="" disabled>Device mode</option>
+            <option [value]="1">Continous</option>
+            <option [value]="2">Weather</option>
+            <option [value]="3">Object</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="w-50 my-2 py-2" (click)="changeDeviceMode()">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showCreateAdd" style="position: fixed; top: 65px; right: 0; z-index: 99; width: 100%;">
+  <app-add-advertisement (newItemEvent)="closeCreateAdd(); getDevices(currentSite)"></app-add-advertisement>
+</div>
+
+
+
+
+

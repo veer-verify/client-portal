@@ -1,0 +1,794 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<app-navbar [serviceDataFromParent]="serviceData"></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align:center; align-self: center;">
+          <!-- <div class="searchbox" style="opacity: 0.1; pointer-events:none">
+            <input type="text" placeholder="Search"><img src="assets/icons/search.svg">
+          </div> -->
+        </div>
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div  class="title1 topTitle" style="margin:0 0 0 25px;">
+            <!-- <span *ngIf="site">{{site.siteName}}</span> -->
+            <!-- <span *ngIf="support" class="py-2">Support Helpdesk</span> -->
+            <!-- <div class=" action-icons">
+            <div>&nbsp;</div>
+          </div> -->
+            <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
+        <div class="optionlabelparent" (click)="openServiceHelpdesk()"
+        [style.border]="support == false? '1px solid #fff' : ''"
+        [style.backgroundColor]="support==false ? '#00000000' : '#fff'">
+          <!-- <div class="optionlabel" Style="position:relative;" [style.backgroundColor]="support==false ? '#e7e7e7' : '#fff'">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> Support Helpdesk </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div> -->
+          <div class="optionlabel" Style="position:relative;"
+            [style.backgroundColor]="support==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="support==false ? '#fff' : '#000'">
+            <img src="assets/icons/eye.svg" *ngIf="support" style="width: 20px;" alt="ivisUSA">
+            <img src="assets/icons/eye-white.svg" *ngIf="!support" style="width: 20px;" alt="ivisUSA">
+            <div class="label">Submit Request</div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div>
+        </div>
+
+        <div class="optionlabelparent" (click)="openfaq()"
+        [style.border]="faq == false? '1px solid #fff' : ''"
+        [style.backgroundColor]="faq==false ? '#00000000' : '#fff'">
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="faq==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="faq==false ? '#fff' : '#000'">
+            <img src="assets/icons/eye.svg" *ngIf="faq" style="width: 20px;" alt="ivisUSA">
+            <img src="assets/icons/eye-white.svg" *ngIf="!faq" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> Frequently Asked Questions </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div>
+        </div>
+
+        <div class="optionlabelparent" (click)="openContactUs()"
+        [style.border]="contactUs == false? '1px solid #fff' : ''"
+        [style.backgroundColor]="contactUs==false ? '#00000000' : '#fff'">
+          <!-- <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? '#e7e7e7' : '#fff'">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> Contact Us </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div> -->
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="contactUs==false ? '#fff' : '#000'">
+            <img src="assets/icons/eye.svg" *ngIf="contactUs" style="width: 20px;" alt="ivisUSA">
+            <img src="assets/icons/eye-white.svg" *ngIf="!contactUs" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> Contact Us </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div>
+        </div>
+
+        <div class="optionlabelparent" (click)="opentnc()"
+        [style.border]="tnc == false? '1px solid #fff' : ''"
+        [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="tnc==false ? '#fff' : '#000'">
+            <img src="assets/icons/eye.svg" *ngIf="tnc" style="width: 20px;" alt="ivisUSA">
+            <img src="assets/icons/eye-white.svg" *ngIf="!tnc" style="width: 20px;" alt="ivisUSA">
+            <div class="label"> Terms & Conditions </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <!-- Right Column Starts -->
+      <div class="col-lg-9 col-sm-12">
+        <div *ngIf="faq">
+          <div class="title1">
+            frequently asked questions
+            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+          </div>
+          <hr id="hr1">
+
+          <div class="tables">
+            <!-- <div class="optionlabel2" id="optionlabel2" Style="position:relative;" (click)="toggleAccordian($event)">
+              <span>Guard</span>
+              <div class="accordionArrowBig"><img src="assets/icons/forward_arrow.svg" alt="expand"></div>
+            </div>
+            <div class="panel" hide="!item.isActive"> -->
+              <div class="childBox" style="text-align: center;">
+                <span style="font-size: 20px;font-weight:700;">Coming soon...</span>
+                <div class="optionlabel3" Style="position:relative; display: none;" (click)="toggleAccordian1($event)">
+                  <span>INSIGHT</span>
+                  <div class="accordionArrow1"><img src="assets/icons/forward_arrow.svg" alt="expand"></div>
+                </div>
+                <div class="panel" hide="!item.isActive" style="display: none;">
+                  <div class="accordionElements1" (click)="toggleAccordian2($event)">
+                    <div style="display:block">
+                      <div style="display:flex; position:relative;">
+                        <span class="faqTitle">Lorem ipsum dolor sit amet?<img src="assets/icons/minus.svg" class="minus"
+                            alt="close"><img src="assets/icons/plus.svg" class="plus" alt="expand"></span>
+                      </div>
+                      <div class="panel2">
+                        <span class="faqContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                          laborum.
+                        </span>
+                      </div>
+                      <div style="height: 30px;">&nbsp;</div>
+                      <hr #hr2 style="margin:0">
+                    </div>
+                  </div>
+                  <div class="accordionElements1" (click)="toggleAccordian2($event)">
+                    <div style="display:block">
+                      <div style="display:flex; position:relative;">
+                        <span class="faqTitle">Lorem ipsum dolor sit amet?<img src="assets/icons/minus.svg" class="minus"><img
+                            src="assets/icons/plus.svg" class="plus" alt="expand"></span>
+                      </div>
+                      <div class="panel2">
+                        <span class="faqContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                          laborum.</span>
+                      </div>
+                      <div style="height: 30px;">&nbsp;</div>
+                      <hr #hr2 style="margin:0">
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- code for FAQ ends here -->
+        </div>
+
+        <!-- Code for contact us starts here -->
+        <div *ngIf="contactUs">
+          <div class="title1">
+            Contact Us
+            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+          </div>
+          <hr id="hr1">
+          <div class="tables">
+            <div class="childBox" style="padding: 5%; border-radius: 6px; margin-top: 0;">
+              <div style="justify-content: space-around; display: flex;">
+                <div style="text-align: left; width: 48%;">
+                  <div style="display: flex;align-items: center;"><img src="assets/icons/location.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">ADDRESS</span></div>
+                  <div style="margin-top: 15px; font-size:14px;">
+                    <b>IVIS Security, Inc. &#169;</b><br>
+                    10863 Macomer Walk Avenue,<br>
+                    Las Vegas,<br>
+                    NV 89166.
+                  </div>
+                </div>
+                <div style="text-align: left; width: 48%;">
+                  <div style="display: flex;align-items: center;"><img src="assets/icons/call.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">CALL</span></div>
+                  <div style="margin-top: 15px; font-size:14px;"><b>{{ '(844 GET-IVIS)' }}</b><br></div>
+                  <div style="margin-top: 5px; font-size:14px;"><b>{{ 'support@ivisecurity.com' }}</b><br></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="tnc">
+          <div class="title1">
+            Terms and Conditions
+            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+          </div>
+          <hr id="hr1">
+          <div class="tables">
+            <!-- <div class="childBox" style="padding: 5%; border-radius: 6px; margin-top: 0;"> -->
+              <div>
+              <!-- <div *ngIf="sanitizedURL" style="border-top: 3px solid #4C4F52;border-bottom: 3px solid #4C4F52;"> -->
+                <!-- <h5>iframe whit local url</h5> -->
+                <!-- <iframe width="500" height="600" [attr.src]="sanitizedURL" type="application/pdf"></iframe> -->
+                <!-- <h5>object whit local url</h5> -->
+                <!-- <object [attr.data]="sanitizedURL" type="application/pdf" width="100%" height="500px"></object> -->
+                <!-- <h5>embed whit local url</h5> -->
+                <!-- <embed [attr.src]="sanitizedURL" type="application/pdf" width="100%" height="500px"> -->
+                  <!-- <iframe src="http://usmgmt.iviscloud.net:444/ivis-us-allsiteimages/Terms&Conditions/Terms-and-Conditions.pdf#zoom=120&toolbar=0"  class="tncblock" id="embed"></iframe> -->
+                  <iframe [src]="sanitizeUrl('http://usstaging.ivisecurity.com:8080/common/downloadFile_1_0?assetName=Terms-and-Conditions.pdf&requestName=Terms%26Conditions')"  class="tncblock" id="embed"></iframe>
+                  <!-- <embed src="http://usstaging.ivisecurity.com:8080/common/downloadFile_1_0?assetName=Terms-and-Conditions.pdf&requestName=Terms%26Conditions" type=""> -->
+                </div>
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div *ngIf="support">
+          <div class="title1 d-flex align-items-center" style="position: relative;">
+            Requests
+            <div class="title1" *ngIf="this.currentInfo?.site">
+              - {{searched ? this.selectedsite?.siteName : 'All Sites'}}
+            </div>
+            <!-- <span *ngIf="filtereddata.length > 0"> - {{filtereddata.length}}</span> -->
+            <div class="cluster">
+              <div style="display: flex; margin-left: 40px" class="paginate" *ngIf="paginatedRequestList.length !== 0">
+                <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" (click)="previousPage()" alt="prev" [className]="pagenumber == 1 ? 'fade': '' " >
+                <div  class="searchbox" style=" margin: -4px 10px !important; padding: 4px !important;">
+                  <select name="my-dropdown" (change)="pagination()" [(ngModel)]="pagenumber" class="dropdown">
+                    <option *ngFor="let number of selectNumbers" [value]="number"  style="border: none;outline:none"><div style="padding: 15px; margin:15px; margin-right:15px">&nbsp;&nbsp;{{number + ' of ' + (selectNumbers.length)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></option>
+                  </select>
+                  <!-- <img src="assets/icons/forward_arrow.svg" style="margin-left: -30px; transform:rotate(90deg); pointer-events:none; width: 20px" alt="drop"> -->
+                </div>
+                <img src="assets/icons/arrow.svg" (click)="nextPage()" alt="next" [className]="pagenumber == selectNumbers?.length ? 'fade': '' ">
+              </div>
+
+              <button class="req-btn me-1" (click)="filters()"><img src="assets/icons/filter-white.svg" width="18" alt="" title="Filter"></button>
+              <button class="req-btn" (click)="openaddmodal()">Add Request</button>
+              <!-- <img src="assets/icons/filter.svg" *ngIf="!show && (totalsites.length>1  || categories.length >1 || subcategories.length >1 || status.length > 1)" style="padding:5px;" class="titleimages" (click)="filters()" style="margin: auto;margin-right: 25px;margin-top: -15px; margin-bottom: -15px;">
+              <img src="assets/icons/filter_selected.svg" *ngIf="show && (totalsites.length>1  || categories.length >1 || subcategories.length >1 || status.length > 1)" style="padding:5px;" class="titleimages" (click)="filters()" style="margin: auto;margin-right: 25px;margin-top: -15px; margin-bottom: -15px;">
+              <img src="assets/icons/addnewreq.svg" *ngIf="!addopen" (click)="openaddmodal()" style="padding:5px;" class="titleimages" style="margin-right: 35px;margin-top: -15px; margin-bottom: -15px;" >
+              <img src="assets/icons/addnewreq_selected.svg" *ngIf="addopen" (click)="openaddmodal()" style="padding:5px;" class="titleimages" style="margin-right: 35px;margin-top: -15px; margin-bottom: -15px;" > -->
+
+            </div>
+            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <!-- <button (click)="showOptions()" class="visibilitybtn"></button> -->
+          </div>
+
+
+
+          <div *ngIf="show" #filter>
+            <div class="filtertypes" >
+              <span></span>
+              <span style="font-family: PS,sans-serif;text-transform: uppercase;color: #104B86;letter-spacing: 0; padding:0; padding-left: 10px;">Filter Requests</span>
+
+
+              <div class="optionlabelparent"   style="z-index: 5; border: 1px solid #e8e6e6;">
+                <div class="optionlabel" style="position: relative; background: #f8f8f8" (click)="togglePanel($event)" #sitelabel>
+                  <div class="label"> {{selectedsite?.siteName ? selectedsite?.siteName : 'Select Site'}}</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                </div>
+                <div class="panel" hide="!item.isActive">
+                  <div class="accordionElements" style="padding:8px 12px 6px 0px;" *ngFor="let item of totalsites" (click)="selectedsite = item; netfilter('site')">
+                    <p style="margin: 0 0 0 20px;" #selectedSiteEl>{{item.siteName}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="optionlabelparent" style="z-index: 5; border: 1px solid #e8e6e6;">
+                <div class="optionlabel" style="position: relative; background: #f8f8f8" (click)="togglePanel($event)"  #catlabel>
+                  <div class="label">{{selectedCategory ? selectedCategory : 'Select Category'}}</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                </div>
+                <div class="panel" hide="!item.isActive">
+                  <div class="accordionElements" style="padding:8px 12px 6px 0px;" *ngFor="let item of categories | unique" (click)="selectedCategory = item; netfilter('category')"><p style="margin: 0 0 0 20px">{{item}}</p>   </div>
+                </div>
+              </div>
+
+              <div class="optionlabelparent" style="z-index: 5; border: 1px solid #e8e6e6;" >
+                <div class="optionlabel" Style="position: relative; background: #f8f8f8" (click)="togglePanel($event)" #subcatlabel>
+                  <div class="label">{{selectedSubcategory ? selectedSubcategory : 'Select Sub-Category'}}</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                </div>
+                <div class="panel" hide="!item.isActive">
+                  <div class="accordionElements" style="padding:8px 12px 6px 0px;" *ngFor="let item of subcategories | unique" (click)="selectedSubcategory = item; netfilter('subcategory')"><p style="margin: 0 0 0 20px">{{item}}</p>   </div>
+                </div>
+              </div>
+
+              <!-- <div class="optionlabelparent"   style="z-index: 5; border: 1px solid #e8e6e6;" *ngIf="status.length>1">
+                <div class="optionlabel" Style="position:relative;background: #f8f8f8" (click)="togglePanel($event)" #statuslabel>
+                  <div class="label">{{selectedStatus? selectedStatus : 'Select Status'}}</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                </div>
+                <div class="panel" hide="!item.isActive" *ngFor="let item of status">
+                  <div class="accordionElements" style="padding:8px 12px 6px 0px;" *ngFor="let item of status" (click)="selectedStatus = item; netfilter('status')"><p style="margin: 0 0 0 20px">{{item}}</p>   </div>
+                </div>
+              </div> -->
+
+              <div class="optionlabelparent"style="overflow:visible;z-index: 5; border: 1px solid #e8e6e6; font-family:TP,sans-serif" >
+              <div class="optionlabel" Style="position:relative;background: #f8f8f8"  #statuslabel>
+                <div (click)="start.toggle()" style="width: -webkit-fill-available; display:flex;    align-items: center;">
+                  <span *ngIf="startDate != 'null'" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;width: auto;margin: auto; margin-left: 0;">
+                      From Date : {{displaYstartDate ? displaYstartDate : 'Select'}}</span><img src="assets/icons/calender.svg" class="calendericon"><br>
+                </div>
+                <form class="dateinputform">
+                  <input type="text" ngbDatepicker #start="ngbDatepicker" class="dateinput" (dateSelect)="onDateSelect($event, 'start')" [minDate]="minstartdate" [maxDate]="maxDate" >
+                </form>
+              </div>
+              </div>
+
+              <div class="optionlabelparent"style="overflow:visible;z-index: 5; border: 1px solid #e8e6e6; font-family:TP,sans-serif">
+                <div class="optionlabel" Style="position:relative;background: #f8f8f8"  #statuslabel>
+                  <div (click)="start1.toggle()" style="width: -webkit-fill-available; display:flex;    align-items: center;">
+                    <span *ngIf="startDate != 'null'" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;width: auto;margin: auto; margin-left: 0;">
+                        To Date &nbsp; : {{displaYendDate ? displaYendDate : 'Select'}}</span><img src="assets/icons/calender.svg" class="calendericon"><br>
+                  </div>
+                  <form class="dateinputform" >
+                    <input type="text" ngbDatepicker #start1="ngbDatepicker" class="dateinput" (dateSelect)="onDateSelect($event, 'end')" [minDate]="minenddate" [maxDate]="maxDate" >
+                  </form>
+                </div>
+                </div>
+
+              <div>
+                <button class="generateBtn" (click)="applysearchfilters()">Search</button>
+                <button class="cancel-btn" (click)="clearsearchfilters()">Clear</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <hr id="hr1">
+          <div class="tables">
+            <!-- <div class="childBox shadow" style="padding: 0px; overflow: hidden;  font-family: TP,sans-serif; border-radius: 8px;" *ngFor="let item of paginatedRequestList" >
+              <div class="optionlabel3 font" Style="position:relative; margin-bottom: 0; ">
+                  <div class="helpid">{{item.serviceId ? item.serviceId : ''}}</div>
+                  <span class="">
+                     <span style="color: #104b86; margin:0;" *ngIf="item.accountShortName">{{item.accountShortName}} - </span>{{item.serviceCategoryName ? item.serviceCategoryName : ''}} - {{item.serviceSubCategoryName ? item.serviceSubCategoryName : ''}}
+                  </span>
+
+                  <div class="actions max-center">
+                    <div class="">
+                      <button class="outline" style="cursor: default;">{{item.status ? item.status : 'In Process'}}</button>
+                     </div>
+                    <img src="assets/view.svg" alt="view" (click)="openviewmodal(item)">
+                    <img src="assets/editicon2.svg" alt="edit" (click)="openeditmodal(item)">
+                    <img src="assets/delete.svg" alt="delete" (click)="opendeletemodal(item)" >
+                  </div>
+              </div>
+              <div class="shadowbox">
+                 <div class="dateinbar">{{item.createdTime | date: 'dd MMM, yyyy'}}</div>
+                 <div class="reqdescr wrap" style="width: 100%; text-align:left;" *ngIf="item.description">{{item.description}}</div>
+              </div>
+          </div> -->
+
+          <div class="parentbox" *ngFor="let item of paginatedRequestList" style="justify-content: space-between;">
+
+               <div class="childBox shadow" style="padding: 0px; overflow: hidden;  font-family: TP,sans-serif; border-radius: 8px; width: -webkit-fill-available;">
+                 <div class="optionlabel3 font" Style="position:relative; margin-bottom: 0; ">
+                     <div class="helpid">{{item.serviceReqId}}</div>
+                     <span>
+                      <span style="color: #104b86; margin:0;" *ngIf="item.siteName && !searched">{{item.siteName}}</span>
+                      <span>{{item.service_cat_name}} - {{item.service_subcat_name}}</span>
+                     </span>
+
+                    <div class="actions max-center">
+                      <div class="">
+                        <button class="outline" style="cursor: default;"
+                          [style.color]="
+                          item.status == 'New' ? '#104b86':
+                          item.status == 'In Progress' ? '#FFA500':
+                          item.status == 'Completed' ? '#00A44C':
+                          item.status == 'Deleted' ? '#CC4E57':
+                          '#00A44C' "
+                        >{{item.status}}</button>
+                      </div>
+                    </div>
+                 </div>
+                  <div class="shadowbox">
+                     <div class="dateinbar">{{item.createdTime | date: 'dd MMM, yyyy'}}</div>
+                     <div class="reqdescr wrap" style="width: 100%; text-align:left;" *ngIf="item.description">{{item.description}}</div>
+                  </div>
+               </div>
+
+            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+                <img src="assets/icons/viewWhite.svg" style="padding: 2px;" alt="view" (click)="openviewmodal($event,item)">
+                <img src="assets/icons/editicon2White.svg" style="padding: 2px;" alt="edit" (click)="openeditmodal($event,item)">
+                <img src="assets/icons/deleteWhite.svg" style="padding: 2px;" alt="delete" (click)="opendeletemodal($event,item)" >
+            </div>
+          </div>
+        </div>
+      </div>
+        <div *ngIf="support && filtereddata.length == 0">
+          <div class="placeholderForReports">
+            {{placeholder}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="close" (click)="closemodal()"></div>
+  <div id="modalcontent"></div>
+</div>
+
+<div class="modal max-center" id="editmodal">
+  <div class="formcont max-center" *ngIf="currentItem">
+    <div class="modalform">
+      <div class="formtitle">Edit Request - #{{currentItem.serviceReqId}}
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeEditModal()">
+      </div>
+      <div class="" style="padding:15px 30px 0 30px;">
+        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
+        <div style="display: flex;">
+          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
+          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        </div>
+        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+        <!-- <div class="servicesubtitle" [style.color]="
+        currentItem.status == 'New' ? '#104B86':
+        currentItem.status == 'In Progress' ? '#FFA500':
+        currentItem.status == 'Completed' ? '#00A44C':
+        currentItem.status == 'Deleted' ? '#CC4E57':
+        '#00A44C' ">{{currentItem.status}}</div> -->
+
+<div class="d-flex justify-content-between align-items-center" style="font-size: 12px;">
+  <!-- <p class="m-0">Priority</p> -->
+          <div style="display: flex;" class="radiobox" >
+            <div class="servicestatus" style="align-self: center; width:85px;">Priority  &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp; </div>
+            <!-- <fieldset id="group3" class="priorityradios max-center" (select)="priorityclicked($event, 'radio')">
+              <div class="max-center radios">
+                <input type="radio" value="High" [(ngModel)]="currentItem.priority" name="priority" (click)="priorityradio()">
+                <label>High</label>
+              </div>
+              <div class="max-center radios">
+                <input type="radio" value="Medium" [(ngModel)]="currentItem.priority" name="priority" (click)="priorityradio()">
+                <label>Medium</label>
+              </div>
+              <div class="max-center radios">
+                  <input type="radio" checked value="Low"  [(ngModel)]="currentItem.priority" name="priority" (click)="priorityradio()">
+                  <label style="margin-right: 0;">Low</label>
+              </div>
+          </fieldset> -->
+          </div>
+          <div *ngFor="let fruit of fruits" class="d-flex align-items-center">
+            <input type="radio" class="me-1" [value]="fruit" name="addpriorityy" [(ngModel)]="currentItem.priority">
+            <label class="me-2">{{fruit}}</label>
+          </div>
+        </div>
+
+      <div  style="display: flex;" class="radiobox">
+        <div class="servicestatus" style="width:112px;">Description  </div>
+        <textarea type="text" placeholder="Description*" [value]="currentItem.description" [(ngModel)]="currentItem.description" style="width: -webkit-fill-available;height: 50px;"
+        [className]="[error && (currentItem.description =='' || currentItem.description == null) ? 'errorshadow':'']"
+        ></textarea>
+      </div>
+      <div  style="display: flex;" class="radiobox">
+        <div class="servicestatus" style="width:112px;">Remarks   &nbsp;  &nbsp;  &nbsp;    </div>
+        <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea>
+      </div>
+      <div>
+        <!-- <div class="max-center" style="font-size: 12px; text-align: left; margin-bottom: 5px; margin-left: 16px; justify-content: left;">
+          <input type="checkbox" id="call" #call  (click)="checkbox($event)" style="height: auto;">
+          <label for="vehicle1" style="color:#767676;">&nbsp; Preferred time to call
+            <span *ngIf="currentItem.PrefTimeToCall" style="color: #767676; font-size:10px;">({{currentItem.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a' }})</span>
+          </label><br>
+        </div> -->
+        <div>
+          <div style="display: flex;" class="radiobox" >
+            <div class="servicestatus" style="align-self: center; ">Prefer to call back? </div>
+            <fieldset id="group4" class="priorityradios max-center">
+              <div class="max-center radios">
+                <input type="radio"  name="time" value="yes"  (click)="prefcall('yes')" [checked]="currentItem.PrefTimeToCall != null">
+                <label>Yes</label>
+              </div>
+              <div class="max-center radios">
+                <input type="radio" name="time" value="no" (click)="prefcall('no')" [checked]="currentItem.PrefTimeToCall == null">
+                <label>No</label>
+              </div>
+          </fieldset>
+        </div>
+        </div>
+        <div class="timer" style="position: relative; margin-bottom: 0;" *ngIf="!calldisabled">
+          <div class="setclock" (click)="opentimer()">
+              <span *ngIf="!requestbean.PrefTimeToCall"><img src="assets/icons/clock.svg" alt="clock" style="height: 12px;">&nbsp;Set Date & Time</span>
+              <span *ngIf="requestbean.PrefTimeToCall">{{requestbean.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a' }}</span>
+          </div>
+          <input type="datetime-local" [min]="mindate()" [(ngModel)]="requestbean.PrefTimeToCall" id="date" #date placeholder="Select Preferred Time" data-date-format="YYYY-MM-DD HH:mm:ss" style="border: none !important; margin-top: -27px;">
+      </div>
+     </div>
+    </div>
+      <button class="generateBtn" (click)="submitedit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal max-center" id="viewmodal">
+  <div class="formcont max-center" *ngIf="currentItem">
+    <div class="modalform">
+      <div class="formtitle">View Request - #{{currentItem.serviceReqId}}
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeviewModal()">
+      </div>
+      <div class="" style="padding:15px 30px 0 30px;">
+        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
+
+        <div style="display: flex;">
+          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
+          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        </div>
+        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+        <!-- <div style="display: flex;"> -->
+          <!-- <div class="servicesubtitle" [style.color]="
+          currentItem.status == 'New' ? '#104B86':
+          currentItem.status == 'In Progress' ? '#FFA500':
+          currentItem.status == 'Completed' ? '#00A44C':
+          currentItem.status == 'Deleted' ? '#CC4E57':
+          '#00A44C' ">{{currentItem.status}}</div> -->
+        <!-- </div> -->
+        <!-- <div style="display: grid; grid-template-columns: repeat(2,1fr);">
+          <div class="servicestatus">Created Date :</div>
+          <div class="servicestatus" style="text-align: right;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        </div> -->
+        <div>
+          <div style="display: flex;" class="" >
+            <div class="servicestatus" style="align-self: center; width:85px;">Priority   &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;:</div>
+            <div class="servicestatus">{{currentItem.priority}}</div>
+          </div>
+        </div>
+      <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" style="align-self: flex-start; width:85px;">Description :</div>
+          <div class="servicestatus" style="width: 70%; word-wrap:break-word">{{currentItem.description ? currentItem.description : 'N/A'}}</div>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" style="align-self: flex-start; width:85px;">Remarks &nbsp; &nbsp;  &nbsp; : </div>
+          <div class="servicestatus" style="width: 70%; word-wrap:break-word">{{currentItem.remarks ? currentItem.remarks : 'N/A'}}</div>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" >Preferred time to call : </div>
+          <div class="servicestatus">
+            <span *ngIf="currentItem.PrefTimeToCall">{{currentItem.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a'}}</span>
+            <span *ngIf="!currentItem.PrefTimeToCall">N/A</span>
+          </div>
+        </div>
+      </div>
+     <!-- <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea> -->
+    </div>
+    <div class="servicestatus" >&nbsp;</div>
+      <!-- <button class="generateBtn" (click)="closeviewModal()">Close</button> -->
+      <!-- <button class="generateBtn" (click)="closeModal()">cancel</button> -->
+    </div>
+  </div>
+</div>
+
+
+<div class="modal max-center" id="addmodal">
+  <div class="formcont max-center">
+    <div class="modalform">
+      <div class="formtitle">Add Request
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeAddModal()">
+      </div>
+      <div class="" style="padding:15px 30px 0 30px; font-size: 12px;">
+        <div class="mb-3">
+          <select class="form-select" [(ngModel)]="currentsite">
+            <!-- <option [value]="null" disabled>Site</option> -->
+            <option *ngFor="let site of siteData; let c = index" [value]="site.siteId" >{{site?.siteName}}</option>
+          </select>
+          <p class="text-start text-danger" *ngIf="error && (currentsite =='' || currentsite == null) ? 'errorshadow' : ''">*required</p>
+        </div>
+
+        <div class="mb-3">
+          <!-- <div style="display: flex;" class="" >
+            <div class="servicestatus" style="align-self: center; width:145px;">Category&nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; </div>
+            <div style="width:-webkit-fill-available;">
+              <div class="inputbox greybtn" (click)="inputclicked1($event);" style="position: relative; margin-bottom: 0; width: -webkit-fill-available;">
+                <div class="question">{{ currentaddcat.catName }}</div>
+                <img src="assets/icons/forward_arrow.svg" style="width: 15px;" class="downarrow">
+              </div>
+              <div class="selectionbox" *ngIf="visible1">
+                <div class="inputbox1 greybtn" style="width: 209px !important;" (click)="issueclicked($event, item)" *ngFor="let item of showcategories">{{item.catName}}</div>
+              </div>
+            </div>
+          </div> -->
+          <select class="form-select" [(ngModel)]="currentaddcat" (change)="issueclicked(currentaddcat)">
+            <option [value]="null" disabled>Category</option>
+            <option *ngFor="let category of showcategories; let c = index" [value]="category?.catId" >{{category?.catName}}</option>
+          </select>
+          <p class="text-start text-danger" *ngIf="error && (currentaddcat =='' || currentaddcat == null) ? 'errorshadow' : ''">*required</p>
+        </div>
+
+        <div class="mb-3">
+          <!-- <div style="display: flex;" class="" >
+            <div class="servicestatus" style="align-self: center; width:145px;">Sub-Category</div>
+            <div style="width:-webkit-fill-available;">
+              <div class="inputbox greybtn" (click)="inputclicked2($event);" style="position: relative; margin-bottom: 0; width: -webkit-fill-available;">
+                <div class="question">{{ currentaddsubcat?.serviceSubcatName }}</div>
+                <img src="assets/icons/forward_arrow.svg" style="width: 15px;" class="downarrow">
+              </div>
+              <div class="selectionbox" *ngIf="visible2">
+                <div class="inputbox1 greybtn" style="width: 209px !important;" (click)="subcatclicked($event, item)" *ngFor="let item of showsubcats">{{item.serviceSubcatName}}</div>
+              </div>
+            </div>
+          </div> -->
+          <select class="form-select" [(ngModel)]="currentaddsubcat">
+            <option [value]="null" disabled>Sub Category</option>
+            <option *ngFor="let item of showsubcats" [value]="item?.serviceSubcatId">{{item?.serviceSubcatName}}</option>
+          </select>
+          <p class="text-start text-danger" *ngIf="error && (currentaddsubcat =='' || currentaddsubcat == null) ? 'errorshadow' : ''">*required</p>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="text-start">Priority</div>
+          <div class=" d-flex">
+
+            <!-- <fieldset id="group5" class="priorityradios max-center" (change)="priorityclicked($event, 'radio')">
+              <div class="max-center radios">
+                <input type="radio" value="High" name="addpriority" [(ngModel)]="currentaddpriority">
+                <label>High</label>
+              </div>
+              <div class="max-center radios">
+                <input type="radio" value="Medium" name="addpriority" [(ngModel)]="currentaddpriority">
+                <label>Medium</label>
+              </div>
+              <div class="max-center radios">
+                <input type="radio" value="Low" name="addpriority" [(ngModel)]="currentaddpriority">
+                <label>Low</label>
+              </div>
+            </fieldset> -->
+            <div *ngFor="let fruit of fruits" class="d-flex align-items-center">
+              <input type="radio" class="me-1" [value]="fruit" name="addpriority" [(ngModel)]="currentaddpriority" >
+              <label class="me-2">{{fruit}}</label>
+            </div>
+          </div>
+        </div>
+
+      <div class="radiobox mb-3">
+        <textarea type="text" placeholder="Description*" [(ngModel)]="adddescription" id="textareadescr" style="width: -webkit-fill-available;height: 50px;"></textarea>
+        <p class="text-start text-danger" *ngIf="error && (adddescription =='' || adddescription == null) ? 'errorshadow' : ''">*required</p>
+      </div>
+
+      <div style="display: flex;" class="radiobox">
+        <textarea type="text" placeholder="Remarks" [value]="addremark" [(ngModel)]="addremark" style="width: -webkit-fill-available;height: 50px;" id="textareareq"></textarea>
+      </div>
+
+      <div>
+          <div style="display: flex;" class="radiobox" >
+            <div class="servicestatus" style="align-self: center; ">Prefer to call back? </div>
+            <fieldset id="group6" class="priorityradios max-center">
+              <div class="max-center radios">
+                <input type="radio"  name="time1" value="yes"  [(ngModel)]="currentCall">
+                <label>Yes</label>
+              </div>
+              <div class="max-center radios">
+                <input type="radio" name="time1" value="no" [(ngModel)]="currentCall">
+                <label>No</label>
+              </div>
+          </fieldset>
+        </div>
+
+        <!-- </div> -->
+        <div class="timer" style="position: relative; margin-bottom: 0;" *ngIf="currentCall === 'yes'">
+          <div class="setclock" (click)="opentimer()">
+            <span *ngIf="!addtime"><img src="assets/icons/clock.svg" alt="clock" style="height: 12px;">&nbsp;Set Date & Time</span>
+            <span *ngIf="addtime">{{addtime | date: 'dd MMM, yyyy - HH:mm a' }}</span>
+          </div>
+          <input type="datetime-local" [min]="mindate()" [(ngModel)]="addtime" id="date" #date placeholder="Select Preferred Time" data-date-format="YYYY-MM-DD HH:mm:ss" style="border: none !important; margin-top: -27px;">
+      </div>
+     </div>
+     
+    </div>
+      <button class="generateBtn" (click)="addreq()">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal max-center" id="deletemodal">
+  <div class="formcont max-center" *ngIf="currentItem">
+    <div class="modalform">
+      <div class="formtitle">Delete Request - #{{currentItem.serviceReqId}}
+        <img src="assets/icons/close.svg" alt="edit" #close (click)="closedeleteModal()">
+      </div>
+      <div class="" style="padding:15px 30px 0 30px;">
+        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
+
+        <div style="display: flex;">
+          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
+          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        </div>
+        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+
+        <!-- <div style="display: flex;"> -->
+
+          <!-- <div class="servicesubtitle" [style.color]="
+          currentItem.status == 'New' ? '#104b86':
+          currentItem.status == 'In Progress' ? '#FFA500':
+          currentItem.status == 'Completed' ? '#00A44C':
+          currentItem.status == 'Deleted' ? '#CC4E57':
+          '#00A44C' ">{{currentItem.status}}</div> -->
+        <!-- </div> -->
+        <!-- <div style="display: grid; grid-template-columns: repeat(2,1fr);">
+          <div class="servicestatus">Created Date :</div>
+          <div class="servicestatus" style="text-align: right;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        </div> -->
+
+        <div>
+          <div style="display: flex;" class="" >
+            <div class="servicestatus" style="align-self: center; width:85px;">Priority   &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;:</div>
+            <div class="servicestatus">{{currentItem.priority}}</div>
+          </div>
+        </div>
+      <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" style="align-self: center; width:85px;">Description :</div>
+          <div class="servicestatus">{{currentItem.description ? currentItem.description : 'N/A'}}</div>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" style="width:85px;">Remarks &nbsp; &nbsp;  &nbsp; : </div>
+          <div class="servicestatus">{{currentItem.remarks ? currentItem.remarks : 'N/A'}}</div>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex;" class="" >
+          <div class="servicestatus" >Preferred time to call : </div>
+          <div class="servicestatus">
+            <span *ngIf="currentItem.PrefTimeToCall">{{currentItem.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a'}}</span>
+            <span *ngIf="!currentItem.PrefTimeToCall">N/A</span>
+          </div>
+        </div>
+      </div>
+     <!-- <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea> -->
+    </div>
+    <!-- <div class="servicestatus" >&nbsp;</div> -->
+      <div class="error">Are you sure you wish to delete this record?</div>
+      <button class="generateBtn" (click)="deleteRequest(currentItem)">Confirm</button>
+      <button class="cancel-btn" (click)="closedeleteModal()">Cancel</button>
+      <div class="servicestatus" style="height: 5px;">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="new-dialog" id="addRequestDialog">
+  <div class="dialog-header">
+    <p>add request</p>
+    <p><img src="assets/icons/close.svg" width="20" class="pointer" alt="edit" #close (click)="closeModel('addRequestDialog')"></p>
+  </div>
+
+  <div class="dialog-content py-2">
+    <form [formGroup]="addRequestForm">
+      <div class="row m-0">
+        <div class="col-lg-12">
+          <select class="form-select mb-3" formControlName="category">
+            <option [value]="null" disabled>Category</option>
+            <option [value]="1">One</option>
+          </select>
+        </div>
+        <div class="col-lg-12">
+          <select class="form-select mb-3" formControlName="subCategory">
+            <option [value]="null" disabled>Sub Category</option>
+            <option [value]="1">One</option>
+          </select>
+        </div>
+        <div class="col-lg-12">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Description" formControlName="subCategory">
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <section class="d-flex justify-content-between mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" formControlName="priority">
+              <label class="form-check-label" for="flexRadioDefault1">Low</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" formControlName="priority">
+              <label class="form-check-label" for="flexRadioDefault1">Medium</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" formControlName="priority">
+              <label class="form-check-label" for="flexRadioDefault1">High</label>
+            </div>
+          </section>
+        </div>
+        <div class="col-lg-12">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Description" formControlName="remarks">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary my-2">Submit</button>
+  </div>
+</div> -->

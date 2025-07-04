@@ -1,0 +1,24 @@
+<div *ngIf="message">
+  <div class="my-toaster p-1" id="warningmodal">
+    <!-- <div class=""> -->
+      <!-- <div class=""> -->
+        <!-- <div class="formtitle" style="padding: 4px 12px;align-items: center;font-size: 14px;">
+            <span>
+              <img *ngIf="message.title == 'Warning' || message.title == 'Failed' || message.title == 'Error' " src="assets/icons/warning.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+              <img *ngIf="message.title == 'Success'" src="assets/icons/ok.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+              <img *ngIf="message.title == 'Information'" src="assets/icons/info.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+              {{message.title}}
+            </span>
+          </div> -->
+        <div class="d-flex justify-content-between align-items-center px-2">
+          <div style="display: flex;place-content: center;">
+            <div class="alertMsg" [style.color]="message.title == 'success' ? 'green' : 'red'">{{ message?.text }}</div>
+          </div>
+          <div>
+            <img src="assets/icons/close.svg" class="closebtn" alt="edit" #close (click)="closeAlertModal()">
+          </div>
+        </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<!-- <app-loader *ngIf="showLoader"></app-loader>
+
+<div class="row formModal">
+    <div class="col-lg-6 col-4"></div>
+
+    <div class="col-lg-6 col-8 add-form" id="user" @inOutPaneAnimation>
+        <div class="mt-2">
+            <a class="close-main pointer" (click)="closeAddUser()"><img src="assets/icons/close.svg" width="35"
+                    class="me-2" /></a>
+            <span class="form-heading">add incident</span>
+        </div>
+
+        <div>
+            <form autocomplete="off" [formGroup]="UserForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <span class="label">Site</span>
+                        <select class="form-select" formControlName="siteId" (change)="camerasListForSites()">
+                            <option value disabled>Select Site</option>
+                            <option *ngFor="let site of siteIdToNav" [value]="site?.siteId">
+                                {{ site?.siteName }}
+                            </option>
+                        </select>
+                        <span class="error-msg" *ngIf="UserForm.controls['siteId'].invalid && submitted">Siteid
+                            is
+                            required</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">Camera</span>
+                        <select class="form-select" formControlName="cameraId">
+                            <option value disabled>Select Camera</option>
+                            <option *ngFor="let cam of camData" [value]="cam?.cameraId">
+                                {{ cam?.cameraId }}
+                            </option>
+                        </select>
+                        <span class="error-msg" *ngIf="UserForm.controls['cameraId'].invalid && submitted">Cameraid
+                            is
+                            required</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">Object Name</span>
+                        <select class="form-select" formControlName="objectName">
+                            <option value disabled>Object Name</option>
+                            <option *ngFor="let type of objectNames" [value]="type">
+                                {{ type }}
+                            </option>
+                        </select>
+                        <span class="error-msg" *ngIf="UserForm.controls['objectName'].invalid && submitted">Object
+                            Name
+                            is required</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">Action Tag</span>
+                        <select class="form-select" formControlName="actionTag">
+                            <option value>Action Tag</option>
+                            <option *ngFor="let item of actionTags" [value]="item?.keyId">
+                                {{ item?.value }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">From Date</span>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="mm-dd-yyyy" formControlName="eventFromTime" ngbDatepicker #d1="ngbDatepicker">
+                            <button class="btn btn-outline-secondary py-0" (click)="d1.toggle()" type="button">
+                                <img src="assets/icons/calender.svg" alt width="15" />
+                            </button>
+                        </div>
+                        <span class="error-msg" *ngIf="UserForm.controls['eventFromTime'].invalid && submitted">From Time is required</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">To Date</span>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="mm-dd-yyyy" formControlName="eventToTime" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="onDateChange($event)">
+                            <button class="btn btn-outline-secondary py-0" (click)="d2.toggle()" type="button">
+                                <img src="assets/icons/calender.svg" alt width="15" />
+                            </button>
+                        </div>
+                        <span class="error-msg" *ngIf="UserForm.controls['eventToTime'].invalid && submitted">To Time is required</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">From Time</span>
+                        <div class="input-group">
+                            <input type="time" class="form-control" formControlName="fromTime" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <span class="label">To Time</span>
+                        <input type="time" class="form-control" formControlName="toTime" />
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <span class="label">Upload File</span>
+                            <input type="file" class="form-control" (change)="onFileSelected($event)" accept="video/*"
+                                formControlName="assetFile" />
+                            <span class="error-msg" *ngIf="UserForm.controls['assetFile'].invalid && submitted">File
+                                is
+                                required</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <span class="label">Remarks</span>
+                        <input type="email" class="form-control" placeholder="Remarks" formControlName="remarks" />
+                    </div>
+                </div>
+
+                <div class="text-center my-3">
+                    <button type="submit" class="btn add-btn w-25" (click)="addFootageRequest()">
+                        ADD
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<div class="row">
+    <!-- <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="resetForm()"></p> -->
+
+    <form [formGroup]="form" *ngIf="questions.length !== 0" class="col-lg-12">
+        <div class="client-form row m-0">
+            <!-- <p class="heading">APPLICATION</p> -->
+            <div *ngFor="let question of questions; let i=index" class="col-lg-6">
+                <div class="" *ngIf="question.questionType === 'text'">
+                    <label class="label">{{ question.templateOptions.Label }}</label>
+                    <input type="text" class="form-control" [formControlName]="question.key" [name]="question.key"
+                        placeholder="Enter">
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'number'">
+                    <label class="label">{{ question.templateOptions.Label }}</label>
+                    <input type="number" class="form-control" [formControlName]="question.key" placeholder="Enter">
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'textarea'">
+                    <label class="label">{{ question.templateOptions.Label }}</label>
+                    <textarea type="text" class="form-control" [formControlName]="question.key"
+                        placeholder="Enter"></textarea>
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'select'">
+                    <label class="label" [title]="question.title">{{ question.templateOptions.Label }} <img [src]="question.image" alt=""  width="16px"></label><br>
+                    <select class="form-control" [formControlName]="question.key" [multiple]="question.multiple">
+                        <option value="" disabled>Select</option>
+                        <ng-container *ngFor="let option of question.questionOptions">
+                            <option [value]="option.roleId" >
+                                {{ option.name }}
+                            </option>
+                        </ng-container>
+                    </select>
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'date'">
+                    <label class="label">{{ question.templateOptions.Label }}</label><br>
+                    <input type="date" class="form-control" [formControlName]="question.key">
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'radio'">
+                    <label class="label">{{ question.templateOptions.Label }}</label><br>
+                    <div class="form-check form-check-inline" *ngFor="let option of question.questionOptions">
+                        <input class="form-check-input" type="radio" [formControlName]="question.key" [value]="option">
+                        <label class="form-check-label">{{ option | titlecase }}</label>
+                    </div>
+                </div>
+
+                <div class="" *ngIf="question.questionType === 'file'">
+                    <input class="form-control" type="file" [formControlName]="question.key"
+                        (change)="uploadFile($event)">
+                </div>
+
+                <!-- <ng-container *ngIf="question.hasDependent">
+                    <div *ngFor="let dependent of question.dependentQuestions">
+                        <div class="" *ngIf="dependent.questionType === 'text'">
+                            <label class="label">{{ dependent.templateOptions.Label }}</label>
+                            <input type="text" class="form-control" [formControlName]="dependent.key" [name]="dependent.key"
+                                placeholder="Enter">
+                        </div>
+                    </div>
+
+                </ng-container> -->
+            </div>
+        </div>
+
+        <!-- <button type="submit" (click)="submit()">Submit</button> -->
+        <div class="d-flex justify-content-center mt-2">
+            <button class="req-btn" (click)="submit()">Submit</button>
+        </div>
+    </form>
+</div>

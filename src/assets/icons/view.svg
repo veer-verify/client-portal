@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="20px" height="20px" viewBox="-10.046 -10.111 40.57 40.153" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="Rectangle_116" x="0" y="0" width="85" height="85" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path fill="#104b86" d="M 1.186 10.302 C 4.838 3.137 14.877 2.613 19.256 9.359 C 19.453 9.664 19.635 9.978 19.8 10.302 C 16.148 17.467 6.109 17.991 1.73 11.245 C 1.533 10.94 1.351 10.626 1.186 10.302 Z M 10.493 14.101 C 13.417 14.101 15.245 10.935 13.783 8.403 C 13.104 7.227 11.85 6.503 10.493 6.503 C 7.569 6.503 5.741 9.669 7.203 12.201 C 7.882 13.377 9.136 14.101 10.493 14.101 Z M 10.493 12.201 C 9.031 12.201 8.117 10.619 8.848 9.352 C 9.187 8.765 9.814 8.403 10.493 8.403 C 11.955 8.403 12.869 9.985 12.138 11.252 C 11.799 11.839 11.172 12.201 10.493 12.201 Z" style=""/>
+  <linearGradient id="MyGradient">
+    <stop offset="0.05" stop-color="#0756ce"/>
+    <stop offset="0.95" stop-color="#d04329"/>
+  </linearGradient>
+  <g id="Group_146" data-name="Group 146" transform="matrix(1, 0, 0, 1, -1124.779053, -264.961182)">
+    <g transform="matrix(1, 0, 0, 1, 1092.5, 237.5)" filter="url(#Rectangle_116)">
+      <g id="Rectangle_116-2" data-name="Rectangle 116" transform="translate(22.5 17.5)" fill="none" stroke="#104b86" stroke-width="1">
+        <rect width="40" height="40" rx="20" stroke="none"/>
+        <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="none"/>
+      </g>
+    </g>
+    <path fill="#104b86" d="M.2 10a11 11 0 0 1 19.6 0A11 11 0 0 1 .2 10zm9.8 4a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+  </g>
+</svg>

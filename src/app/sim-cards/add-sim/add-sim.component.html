@@ -1,0 +1,85 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+
+<div class="row formModal">
+  <div class="col-lg-6 col-4"></div>
+  <div class="col-lg-6 col-8 add-form" id="camera" @inOutPaneAnimation>
+
+    <!-- title -->
+    <div class="d-flex justify-content-start py-2">
+      <a class="pointer" (click)="closeForm()" style="position: relative; left: -27px;">
+        <img src="assets/icons/close.svg" width="35" class="me-2">
+      </a>
+      <span class="form-heading">create Sim-cards</span>
+    </div>
+    <!-- /title -->
+
+    <!-- form -->
+    <div>
+      <form autocomplete="off" [formGroup]="create">
+        <div class="row">
+          <!-- <div class="col-lg-6 col-md-6">
+            <label class="label">siteId</label>
+            <input type="number" placeholder="Enter siteId" class="form-control" formControlName="siteId">
+          </div> -->
+          <div class="col-lg-6 col-md-6 mb-2">
+            <label class="label">Device</label>
+            <select class="form-select" formControlName="deviceId">
+              <option value="" disabled selected>Select Device</option>
+              <option *ngFor="let item of deviceIds" [value]="item?.unitId">{{ item?.unitName }}</option>
+            </select>
+            <span class="error-msg" *ngIf="create.controls['deviceId'].invalid && submit">*Required</span>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">simType</label>
+            <input type="text" placeholder="Enter simType" class="form-control" formControlName="simType">
+            <span class="error-msg" *ngIf="create.controls['simType'].invalid && submit">*Required</span>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">planName</label>
+            <input type="text" placeholder="Enter planName" class="form-control" formControlName="planName">
+            <span class="error-msg" *ngIf="create.controls['planName'].invalid && submit">*Required</span>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">simIMEno</label>
+            <input type="string" placeholder="Enter simIMEno" class="form-control" formControlName="simIMEno" >
+            <span class="error-msg" *ngIf="create.controls['simIMEno'].invalid && submit">*Required</span>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">uploadSpeed</label>
+            <input type="number" placeholder="Enter uploadSpeed" class="form-control" formControlName="uploadSpeed">
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">downloadSpeed</label>
+            <input type="number" placeholder="Enter downloadSpeed" class="form-control" formControlName="downloadSpeed">
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">simAC</label>
+            <input type="text" placeholder="Enter simAC" class="form-control" formControlName="simAc">
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">siGatewayNamemAC</label>
+            <input type="text" placeholder="Enter GatewayName" class="form-control" formControlName="GatewayName">
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">SerialNumber</label>
+            <input type="text" placeholder="Enter SerialNumber" class="form-control" formControlName="SerialNumber">
+            <span class="error-msg" *ngIf="create.controls['SerialNumber'].invalid && submit">*Required</span>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="label">remarks</label>
+            <input type="text" placeholder="Enter remarks" class="form-control" formControlName="remarks">
+          </div>
+
+
+          <div class="text-center my-3">
+            <button class="btn add-btn" (click)="createForm()">ADD</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <!-- /form -->
+  </div>
+</div>
+

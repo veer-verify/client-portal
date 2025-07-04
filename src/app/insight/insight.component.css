@@ -1,0 +1,344 @@
+.insight-image {
+  cursor: zoom-in;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.insight-image-active {
+  cursor: zoom-out;
+  position: absolute;
+  width: 65%;
+  height: 70vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 100ms ease-in-out;
+  border: 3px solid #ababab;
+}
+
+button {
+  border-radius: 30px;
+  background: #104b86;
+  color: #fff;
+  font-size: 12px;
+  width: -webkit-fill-available;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+}
+@media screen and (min-width: 991px) {
+  .judge {
+    min-height: 75vh;
+  }
+}
+
+.dataTable {
+  background-color: #fff;
+  border: 2px solid;
+  border-radius: 10px;
+  text-transform: uppercase;
+  /* margin: 0px 9% 15px 0px; */
+  font-family: TP, sans-serif;
+  letter-spacing: 2px;
+}
+.dataTable .tableBox {
+  margin: 2%;
+  overflow: hidden !important;
+  display: flex;
+}
+
+@media screen and (max-width: 1450px) {
+
+  .table > :not(caption) > * > *{
+    padding: 0.5rem 0;
+  }
+  .icon{width: 33px;}
+  .optionlabel img{
+    margin-right: 2px;
+  }
+}
+@media screen and (min-width: 1451px) {
+  .icon{width: 42px;}
+}
+
+@media screen and (max-width: 600px) {
+  .dataTable {
+    margin: 30px 0px 20px 2px;
+    letter-spacing: 0px;
+  }
+  .dataTable .tableBox {
+    margin: 7px;
+    padding: 11px;
+  }
+  p {
+    display: flex;
+    font-size: 10px !important;
+  }
+  .optionlabel img{
+    margin-right: 10px;
+  }
+}
+.icon {
+  padding: 3px;
+  margin: 0 25px 0 10px;
+  text-align: center;
+}
+
+.table > :not(caption) > * > *{
+  /* padding: 1.5%; */
+  border-bottom: 2px solid #dee2e6;
+}
+
+td {
+  vertical-align: middle;
+  word-break: break-all;
+  border: 1.5px solid #dee2e6;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+td,
+.tableElements {
+  color: #645b5b;
+  font-size: 13px;
+}
+table thead {
+  border-bottom:3px solid #bdc1c5 !important;
+  color: #010101;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 3px;
+}
+thead p {
+  margin-bottom: 8px;
+}
+p {
+  margin: 0;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  align-items: center;
+}
+.accordionElements p{
+  width: 100%;
+  overflow: hidden;
+}
+.lastColumn {
+  border-right: #000000;
+}
+
+
+td:last-child{
+  border-right: #000000;
+}
+input::placeholder{
+  font-size: 12px !important;
+}
+
+.placeholderForReports {
+  letter-spacing: 5px;
+  margin: 18px;
+  font-size: 20px;
+  color: #fff;
+  font-family: PS, sans-serif;
+  text-transform: uppercase;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 15vh;
+  justify-content: center;
+  text-align: center;
+  font-weight: 200;
+}
+.col-lg-9 {
+  overflow: hidden;
+  /* border-left: 2px solid #ffffff; */
+}
+.col-lg-3 {
+  opacity: 1;
+}
+
+/* responsive designs */
+@media screen and (max-width: 991px) {
+  .col-lg-3 {border-right: none;  }
+  .col-lg-9 {border-left: none;  }
+  .icon {margin: 0 5px 0 10px;}
+  .generateBtn {margin: 10px 10%;  }
+  .tabletitlejustify{text-align-last: left;}
+}
+
+@media screen and (min-width: 991px) { 
+  p{white-space: nowrap;}
+  .tabletitlejustify{text-align-last: left;}
+}
+
+.sqr {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 20px;
+  border: none;
+  outline: 2px solid #7f7f7f;
+  border-radius: 1px;
+}
+.calendericon {
+  height: 25px;
+  position: absolute;
+  right: 5px;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  height: 40px;
+  width: 900px;
+  background-color: #00000000 !important;
+  z-index: 99;
+}
+
+/* CSS for Datepicker */
+.dateinputform {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  pointer-events: all;
+  outline: none;
+  border: none;
+  background-color: #00000000;
+  width: 100%;
+}
+.dateinput {
+  pointer-events: none;
+  visibility: none;
+  border: #00000000;
+  outline: none;
+  background-color: #00000000;
+  color: #00000000;
+  display: none;
+  width: 100%;
+}
+:host ::ng-deep .ngb-dp-months {
+  background: rgb(180, 180, 230);
+  font-family: PS, sans-serif;
+  color: #ffffff !important;
+  font-size: 12px;
+}
+:host ::ng-deep .ngb-dp-month {
+  background: #104b86;
+  pointer-events: all;
+}
+:host ::ng-deep .the-ngb-dp-class {
+  background: rgb(248, 209, 209);
+  pointer-events: all;
+}
+::ng-deep div.ngb-dp-arrow > button {
+  color: #ffffff;
+  z-index: 99;
+  pointer-events: all;
+}
+:host ::ng-deep .ngb-dp {
+  font-family: PS, sans-serif;
+}
+:host ::ng-deep ngb-datepicker {
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #ffffff;
+  font-family: PS, sans-serif;
+  font-size: 12px;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+}
+:host::ng-deep .ngb-dp-header {
+  color: #ffffff !important;
+  background: #104b86;
+}
+:host ::ng-deep .ngb-dp-day > .btn-light {
+  border: red;
+  background-color: #ffffff !important;
+  color: #7f7f7f !important;
+  margin: auto;
+}
+:host
+  ::ng-deep
+  ngb-datepicker-navigation-select.ngb-dp-navigation-select
+  > .custom-select {
+  border-radius: 10px !important;
+  background-color: #00000000;
+  color: #ffffff !important;
+  border: none;
+  text-align: center;
+}
+:host
+  ::ng-deep
+  ngb-datepicker-navigation-select.ngb-dp-navigation-select
+  > .custom-select
+  > option {
+  background-color: rgba(16, 75, 134, 0.6);
+  border-radius: 15px;
+  outline: none;
+}
+
+:host ::ng-deep .ngb-dp-day {width: 100%;}
+:host ::ng-deep .ngb-dp-weekday {width: 100%;}
+:host ::ng-deep [ngbDatepickerDayView] {width: 100%;}
+:host ::ng-deep ngb-datepicker {width: 100%;}
+:host ::ng-deep .ngb-dp-month {width: 100%;}
+
+/**/
+
+:host ::ng-deep #months > .ngb-dp-months {display: none;}
+:host ::ng-deep #months > .ngb-dp-header {padding: 4px; }
+#searchinput:active > :host ::ng-deep #months {display: visible;}
+.padd{padding: 2.5px !important; height: 49px !important;}
+#months{position: inherit;top: 0;}
+:host ::ng-deep #monthpicker > ngb-datepicker {width: 100%; top:33px }
+
+
+.calender{
+  position:absolute; 
+  z-index:3;
+  background: #104b86; 
+  color:black; 
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 5px; 
+  direction: ltr;    
+  width: 100%; 
+  top: 51px; 
+  left:0;
+    -webkit-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96); 
+    -moz-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+}
+.calender .grid-cont{display: grid; grid-template-columns: repeat(3, 1fr);font-size:11px;}
+@media screen and (max-width: 1024px) {.calender .grid-cont{display: grid; grid-template-columns: repeat(3, 1fr);font-size:7px !important;}}
+@media screen and (max-width: 768px) {.calender .grid-cont{display: grid; grid-template-columns: repeat(3, 1fr);font-size:11px !important;}}
+.calender .grid-cont .gridElements{border:1px solid #dddddd;border-radius:4px;color:#4a4a4a;background:#fff;padding:10px 0;cursor: pointer;}
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.fadeout{background-color: #87A5C2 !important;}
+.fade{opacity:0.6}
+
+@media screen and (min-width: 1400px){thead p{font-size: 17px;} }
+@media screen and (max-width: 1400px){
+  thead p{font-size: 14px;} 
+  p{font-size: 10px;}        
+
+}
+
+
+@media screen and (max-width: 993px){.tables{ margin-bottom: 100px;}} 
+
+

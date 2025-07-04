@@ -1,0 +1,618 @@
+/* for page */
+
+.simple-btn {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.filter-label {
+  font-size: 12px;
+  color: #535151;
+  font-weight: 600;
+}
+
+.form-control {
+  color: #535151 !important;
+}
+
+
+.lastColumn{
+  border-right: #000000
+}
+
+.generateBtn {
+font-family: PS,sans-serif;
+text-transform: uppercase;
+font-size: 12px;
+border: 1px solid #104B86 !important;
+border-radius: 30px;
+background:#104B86;
+color: #fff;
+padding: 7px 12px;
+}
+
+.cancel-btn {
+font-family: PS,sans-serif;
+text-transform: uppercase;
+font-size: 12px;
+border: 1px solid #104B86 !important;
+border-radius: 30px;
+background: transparent;
+color: #104B86;
+padding: 7px 12px;
+}
+
+/* button{
+  border-radius: 30px;
+  background:#104B86;
+  color: #fff;
+  font-size: 12px;
+  width: -webkit-fill-available;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+  box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+} */
+
+p{margin: 0;}
+
+
+
+
+/* other accordion css starts here */
+
+.optionlabel2 {
+  background:#fff;
+  padding: 30px;
+  border: 1px solid #666666;
+  border-radius: 15px;
+  margin: 10px 25px 10px 25px;
+  font-size: 20px;
+  font-family: PS,sans-serif ;
+  letter-spacing: 1px;
+  align-items: center;
+  display: flex;
+}
+.accordionArrowBig{
+  position: absolute;
+  right: 45px;
+  font-size: 12px;
+  color: #c7c7c7;
+  pointer-events:none;
+}
+.active .accordionArrowBig{
+  transform: rotate(90deg);
+  color: #fff;
+  font-size:15px
+}
+.active .accordionArrowBig{
+  transform: rotate(90deg);
+  transition: ease-in-out 0.3s;
+  /* color: #fff;     */
+  font-size:15px;
+}
+.accordionArrowBig img{
+  margin: 0;
+}
+.optionlabel3{
+  font-size: 20px;
+  font-family: PS,sans-serif ;
+  letter-spacing: 1px;
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+}
+.childBox{
+  background:#fff;
+  padding: 30px;
+  border: 1px solid #666666;
+  border-radius: 15px;
+  margin: 10px 10px 10px 5px;
+}
+.optionlabel2 span, .optionlabel3 span{
+  margin-left: 15px;
+}
+.panel1 {
+  padding: 0 0px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+      margin-top: -10px;
+      display: flex;
+      flex-direction: column;
+      background-color: transparent
+}
+.accordionArrow1{
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #c7c7c7;
+  pointer-events:none;
+}
+.active .accordionArrow1{
+  transform: rotate(90deg);
+  transition: ease-in-out 0.3s;
+  color: #fff;
+  font-size:15px
+}
+.active .accordionArrow1{
+  transform: rotate(90deg);
+  transition: ease-in-out 0.3s;
+  /* color: #fff;     */
+  font-size:15px;
+}
+.accordionArrow1 img{
+  margin: 0;
+}
+.accordionElements1{
+  display:flex;
+  background:#fff;
+  padding: 12px;
+  font-size: 15px;
+  font-family: Verdana,sans-serif ;
+  align-items: center;
+  margin: 0px 5px 0px 25px;
+  outline: none;
+  padding-bottom: 20  px;
+  /* border-bottom: 2px solid #e0e0e0; */
+  pointer-events:all;
+}
+.accordionElements1:last-child{
+  border-bottom: none;
+}
+.faqTitle{
+  color: #7f7f7f;
+  padding: 5px 15px 2px 15px;
+  pointer-events:none;
+}
+.faqContent{
+  text-indent: 50px;
+  padding:10px
+}
+.panel2 {
+   padding: 0 0px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+      margin-top: -10px;
+      display: flex;
+      flex-direction: column;
+      background-color: transparent;
+}
+#hr2{
+ margin-bottom: 0px;
+}
+.plus, .minus{
+  height: 15px;
+  pointer-events: none;
+  position: absolute;
+  right: 0px;
+}
+.active .plus{
+  transition:ease-in-out 0.3s;
+  display:none;
+}
+
+
+.outline {
+  padding: 5px;
+  background-color: transparent;
+  width: auto;
+  float: right;
+  color:#00A44C;
+  /* border: 1px solid #00A44C; */
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.actions{
+  text-align: -webkit-right;
+  display: flex;
+  margin: auto;
+  margin-right: 0px;
+}
+.action-icons{
+  display: flex;
+  justify-content: flex-end;
+}
+.shadowbox {
+background-color: #c9b0b4;
+opacity: 0.8;
+color: #000;
+display: flex;
+}
+.filtertypes{
+background-color: #fff;
+position: absolute;
+top: 10;
+right: 52px;
+margin-top: 5px;
+width: 300px;
+z-index: 15;
+padding: 10px;
+border-radius: 5px;
+border: 2px solid #b7b7b7;
+/* max-height: 450px; */
+max-height: 70vh;
+overflow-y: auto;
+}
+.helpid{
+  background-color: #cfafb2;
+  padding: 10px;
+  /* padding: 5px; */
+  width: 150px;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+}
+.actions>img{
+  width: 35px;
+  margin: 2px;
+}
+.shadowbox .timing{
+  margin: auto;
+  margin-right: 30px;
+  color: #000;
+  font-family: TP,sans-serif;
+  font-size: 12px;
+}
+.shadowbox .reqdescr{
+  margin: auto;
+  margin-right: 30px;
+  color: #000;
+  font-family: TP,sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+.shadow{
+  -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
+}
+.titleimages{
+  width: 33px;
+}
+.font{
+  font-size: 13px;
+}
+.dateinbar{
+  padding: 0px 5px 0px 15px;
+  font-size: 12px;
+  color: #000;
+  width: 200px;
+  font-weight: 600;
+}
+.error{color: #f54;font-size: 12px; font-weight: 600; margin:5px}
+
+@media screen and (max-width:660px) {
+  .optionlabel3{
+      font-size: 10px;
+  }
+  .outline{
+      margin: 2px;
+      padding: 5px;
+      margin-right: 10px;
+  }
+  .helpid{
+      width: auto;
+      padding: auto;
+  }
+  .parentbox {
+      display: block;
+      margin-bottom: 10px;
+  }
+  .parentbox img{
+      width: 32px;
+  }
+  .childBox{margin-bottom: 5px;}
+}
+@media screen and (min-width:660px) {
+  .parentbox {
+      display: flex;
+  }
+  .parentbox img{
+      margin-bottom: 5px;
+      width: 34px;
+      cursor: pointer;
+  }
+}
+@media screen and (max-width:992px) {
+  .visibilitybtn{
+      margin-left: 0;
+  }
+  .titleimages{
+      width: 30px;
+      margin-right: 5px !important;
+      margin-bottom: -17px !important;
+  }
+}
+@media screen and (max-width:1450px) {
+  .titleimages{
+      width: 25px;
+  }
+  .actions img{
+      width: 27px;
+      margin: 2px;
+  }
+  .helpid{
+      padding: 5px !important;
+  }
+  .col-lg-9{
+      overflow: visible;
+  }
+}
+@media screen and (min-width:1450px) {
+  .tables, .cluster{
+      margin-right: 7% !important;
+  }
+  .col-lg-9{
+      overflow: visible;
+  }
+}
+#hr1{
+  width: calc(100% - (14px));
+  margin-left: -14px;
+}
+
+
+.placeholderForReports {
+  letter-spacing: 5px;
+  margin: 18px;
+  font-size: 20px;
+  color: #fff;
+  font-family: PS, sans-serif;
+  text-transform: uppercase;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 15vh;
+  justify-content: center;
+  text-align: center;
+  font-weight: 200;
+}
+.shadow:first-child { margin-top: 0 !important;}
+.fade {
+  opacity: 0.5;
+}
+.dropdown {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: #7f7f7f;
+  font-family: PS, sans-serif;
+  /* letter-spacing: 15px; */
+  font-size: 14px;
+  margin: 0 12px;
+}
+
+.dropdown .select-items {
+  background-color: red;
+}
+
+/* select > option {
+  background: white;
+  border: transparent;
+  outline: none;
+  width: 120%;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+select {
+  width: 70px;
+  height: 15px;
+  line-height: 1;
+  border: 0;
+  border-radius: 5px;
+  background: url("../../assets/icons/down-arrow.svg") no-repeat right #ddd;
+  background-position-x: 20px;
+} */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  /* margin-left: 40px; */
+  margin-left: -6px;
+}
+
+.pagination img {
+  width: 20px;
+  fill: #ffffff
+}
+.paginate img{
+  width: 20px;
+}
+.paginate{
+  margin: auto;
+  margin-right: 15px;
+}
+.cluster{
+  display: flex;
+  margin: auto;
+  margin-right: 0px;
+}
+.filtertypes .accordionElements{
+  font-size: 12px;
+}
+
+
+.dateinputform {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  pointer-events: all;
+  outline: none;
+  border: none;
+  background-color: #00000000;
+  width: 100%;
+}
+.dateinput {
+  pointer-events: none;
+  visibility: none;
+  border: #00000000;
+  outline: none;
+  background-color: #00000000;
+  color: #00000000;
+  display: none;
+  width: 100%;
+}
+
+.form-select {
+  font-size: 12px ;
+}
+
+.req-btn {
+  border: none;
+  background-color: #104B86;
+  color: #ffffff;
+  border-radius: 50px;
+  padding: 8px;
+  width: 100px;
+  font-size: 12px;
+}
+
+
+/* .table-resp {
+  height: calc(100vh - 215px);
+  overflow-y: auto;
+  background-color: #e6e8e8;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.table-resp thead tr {
+  background-image: linear-gradient(to right, #084982, #D34124);
+  color: #fff;
+}
+
+.table-resp thead tr th {
+  font-family: PS, sans-serif;
+  padding: 8px;
+}
+
+.table-resp tbody tr td {
+  font-family: TP, sans-serif;
+  padding: 8px;
+  font-size: 12px;
+} */
+
+.assign-table thead tr {
+  background-color: #fff !important;
+  color: #000;
+  font-size: 12px;
+}
+
+.assign-table .table {
+  max-height: 50px;
+  overflow-y: auto;
+}
+
+.assign-table tbody tr td {
+  font-family: TP, sans-serif;
+  padding: 8px;
+  font-size: 12px;
+}
+
+
+
+:host ::ng-deep .ngb-dp-months {
+  background: rgb(180, 180, 230);
+  font-family: PS, sans-serif;
+  color: #ffffff !important;
+  font-size: 12px;
+}
+:host ::ng-deep .ngb-dp-month {
+  background: #104b86;
+  pointer-events: all;
+}
+:host ::ng-deep .the-ngb-dp-class {
+  background: rgb(248, 209, 209);
+  pointer-events: all;
+}
+::ng-deep div.ngb-dp-arrow > button {
+  color: #ffffff;
+  z-index: 99;
+  pointer-events: all;
+}
+:host ::ng-deep .ngb-dp {
+  font-family: PS, sans-serif;
+}
+:host ::ng-deep ngb-datepicker {
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #ffffff;
+  font-family: PS, sans-serif;
+  font-size: 12px;
+
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+}
+:host::ng-deep .ngb-dp-header {
+  color: #ffffff !important;
+  background: #104b86;
+}
+:host ::ng-deep .ngb-dp-day > .btn-light {
+  border: red;
+  background-color: #ffffff !important;
+  color: #7f7f7f !important;
+  margin: auto;
+}
+:host
+  ::ng-deep
+  ngb-datepicker-navigation-select.ngb-dp-navigation-select
+  > .custom-select {
+  border-radius: 10px !important;
+  background-color: #00000000;
+  color: #ffffff !important;
+  border: none;
+  text-align: center;
+}
+:host
+  ::ng-deep
+  ngb-datepicker-navigation-select.ngb-dp-navigation-select
+  > .custom-select
+  > option {
+  background-color: rgba(16, 75, 134, 0.6);
+  border-radius: 15px;
+  outline: none;
+}
+
+:host ::ng-deep .ngb-dp-day {width: 100%;}
+:host ::ng-deep .ngb-dp-weekday {width: 100%;}
+:host ::ng-deep [ngbDatepickerDayView] {width: 100%;}
+:host ::ng-deep ngb-datepicker {width: 100%;}
+:host ::ng-deep .ngb-dp-month {width: 100%;}
+
+/**/
+
+:host ::ng-deep #months > .ngb-dp-months {display: none;}
+:host ::ng-deep #months > .ngb-dp-header {padding: 4px; }
+#searchinput:active > :host ::ng-deep #months {display: visible;}
+.padd{padding: 2.5px !important; height: 49px !important;}
+#months{position: inherit;top: 0;}
+:host ::ng-deep #monthpicker > ngb-datepicker {width: 100%; top:33px }
+
+.modalform{font-family: PS,sans-serif}
+.servicetitle, .servicesubtitle, .servicestatus{
+  text-align: left;
+  font-size: 12px;
+  margin-left: 8px;
+}
+.servicetitle{color: #104B86;font-size: 13px;}
+.servicesubtitle{color: #010101;}
+.servicestatus{color: #7c7c7c; outline: none !important; box-shadow: none !important;}
+.modalform .inputbox1{width: 314px !important;}
+.radios input{height: auto;}
+.radios label{margin: 10px; color: #767676;}
+/* .radios label:last-child{margin-right: 0;} */
+.radios{font-size: 12px;}
+.radiobox{justify-content: space-between;margin: 5px 0;}
+p.form_text1>span {display: inline-block;min-width: 120px;}
+
+.setclock span{margin: 0;padding: 0;}
+.errorshadow{box-shadow: 0px 0px 0.5px 2px rgb(253, 107, 97,0.8);}
+textarea{caret-color: #767676 !important;}
+.modal .generateBtn{margin-bottom: 15px !important;}
+.tncblock{width: 100%;height: 80vh;border-radius: 3px;}
+.title1{justify-content: space-between;}

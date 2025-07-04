@@ -1,0 +1,104 @@
+/* for page */
+
+
+button{
+    /* width: 100%; */
+    border-radius: 30px;
+    background:#104B86;
+    color: #fff;
+    font-size: 12px;
+    width: -webkit-fill-available;
+    -webkit-box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+    -moz-box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+    box-shadow: 2px 2px 0px 0px rgba(255,255,255,0.96);
+}
+p{margin: 0;}
+
+.download{
+    position: absolute;
+    right: 30px;
+    font-weight: bold;  
+}
+.download img{
+    height: 25px;
+}
+/* accordion css ends */
+
+
+
+
+  .placeholderForReports{
+    letter-spacing: 5px;
+    margin: 25px;
+    font-size: 20px;
+    color: #fff;
+    font-family: PS,sans-serif;
+    text-transform: uppercase;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 15vh;
+    justify-content: center;
+    text-align: -webkit-center;
+}
+.placeholderForReports p{
+    width: 60%;
+}
+
+
+
+
+.dataTable {
+    background-color: #fff;
+    border-radius: 2px;
+    margin: 5px 10px;
+    font-family: TP, sans-serif;
+    letter-spacing: 0.2px;
+
+    border-top: 15px solid red;
+    border-image: linear-gradient(280deg, rgba(199,55,26, 0.9) 38%, rgba(12,86,164, 0.9) 86%) 1 stretch;
+
+  }
+  .dataTable .tableBox {
+    margin: 2%;
+    overflow: hidden !important;
+    display: flex;
+  }
+  .researchcontent{
+      margin: 2%;
+  }
+  .title{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5%;
+  }
+  .title img{
+      height: 50px;
+  }
+  .pagetitle{
+    font-family: SG,'sans-serif';
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .pagesubtitle{
+    font-family: ES,'sans-serif';
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+  .contents{
+      margin-bottom: 70px;
+  }
+  .conttitle{
+    font-family: SG,'sans-serif';
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px; 
+    margin-bottom: 20px;  
+  }
+  .contcontent{
+    font-family: TP,'sans-serif';
+    line-height: 1.8;
+  }

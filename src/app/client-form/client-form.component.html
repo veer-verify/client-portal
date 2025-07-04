@@ -1,0 +1,284 @@
+<div class="btn-group mb-2" role="group">
+
+    
+    <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+    (change)="questionnaireList(2)">
+    <label class="btn btn-outline-light r-label" for="btnradio2">Defender Client Form</label> -->
+    
+    <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" 
+    (change)="questionnaireList(1)">
+    <label class="btn btn-outline-light r-label" for="btnradio1">Customer Information Form</label> -->
+    
+    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked
+        (change)="questionnaireList(3)">
+    <label class="btn btn-outline-light r-label" for="btnradio3">+ New Form</label>
+    <!-- <div >
+        <div *ngFor="let site of sites" >
+            <input type="radio" class="btn-check" [name]="site.siteId" [id]="site.siteId" autocomplete="off" (change)="questionnaireList(2)">
+            <label class="btn btn-outline-light s-label" [for]="site.siteId">{{site?.siteName}}</label>
+        </div>
+    </div> -->
+</div>
+
+<!-- <div class="card" *ngFor="let item of formsData">
+    <strong>{{item.formId}}</strong>
+    <span (click)="copyForm(item)">View</span>
+</div> -->
+
+<div class="row">
+    <form [formGroup]="form" *ngIf="questions.length !== 0" class="col-lg-9">
+        <!-- <div class="logo-back">
+            <img src="assets/themes/IVIS_LOGO_copy.png"  width="250px" height="80" alt="">
+        </div> -->
+        <div class="client-form row m-0">
+            <!-- <p class="heading">APPLICATION</p> -->
+            <div *ngFor="let question of questions"
+                [ngClass]="{'col-lg-4': question.questionType === 'text', 'col-lg-12': question?.key?.length > 50}">
+
+                <ng-container *ngIf="!question.dependent">
+                    <div class="mb-3" *ngIf="question.questionType === 'text'">
+                        <label>{{ question.templateOptions.Label }}</label>
+                        <input type="text" class="form-control" [formControlName]="question.key" placeholder="Enter">
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'number'">
+                        <label>{{ question.templateOptions.Label }}</label>
+                        <input type="number" class="form-control" [formControlName]="question.key" placeholder="Enter"
+                            (keyup)="setNo($event, question)">
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'textarea'">
+                        <label>{{ question.templateOptions.Label }}</label>
+                        <textarea type="text" class="form-control" [formControlName]="question.key" placeholder="Enter"></textarea>
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'select'">
+                        <label>{{ question.templateOptions.Label }}</label><br>
+                        <select class="form-control" [formControlName]="question.key">
+                            <option *ngFor="let option of question.questionOptions" [value]="option">{{ option }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'date'">
+                        <label>{{ question.templateOptions.Label }}</label><br>
+                        <input type="date" class="form-control" [formControlName]="question.key">
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'radio'">
+                        <label>{{ question.templateOptions.Label }}</label><br>
+                        <div class="form-check form-check-inline" *ngFor="let option of question.questionOptions">
+                            <input class="form-check-input" type="radio" [formControlName]="question.key"
+                                [value]="option">
+                            <label class="form-check-label">{{ option | titlecase }}</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" *ngIf="question.questionType === 'file'">
+                        <div class="mb-3">
+                            <input class="form-control" type="file" [formControlName]="question.key"
+                                (change)="uploadFile($event)">
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="form.get(question.key)!.value === 'yes'">
+                    <div *ngFor="let id of question.dependentQuestions">
+                        <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'text'">
+                            <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                            <input type="text" class="form-control" [formControlName]="getQuestionById(id).key"
+                                placeholder="Enter">
+                        </div>
+
+                        <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'select'">
+                            <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                            <select class="form-control" [formControlName]="getQuestionById(id).key">
+                                <option *ngFor="let option of getQuestionById(id).questionOptions" [value]="option">
+                                    {{ option | titlecase }}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'date'">
+                            <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                            <input type="date" [formControlName]="getQuestionById(id).key">
+                        </div>
+
+                        <div class="mb-1" *ngIf="getQuestionById(id).questionType === 'radio'">
+                            <label>{{ getQuestionById(id).templateOptions.Label }}</label><br>
+                            <div class="form-check form-check-inline"
+                                *ngFor="let option of getQuestionById(id).questionOptions">
+                                <input class="form-check-input" type="radio"
+                                    [formControlName]="getQuestionById(id).key" [value]="option">
+                                <label class="form-check-label">{{ option | titlecase }}</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'checkbox'">
+                            <label>{{ getQuestionById(id).templateOptions.Label }}</label><br>
+                            <div class="form-check form-check-inline"
+                                *ngFor="let option of getQuestionById(id).questionOptions">
+                                <input class="form-check-input" type="checkbox"
+                                    [formControlName]="getQuestionById(id).key" [value]="option">
+                                <label class="form-check-label">{{ option | titlecase }}</label>
+                            </div>
+                        </div>
+                        <!-- <label for="{{getQuestionById(id)}}">{{getQuestionById(id).templateOptions.Label}}</label>
+                        <input *ngIf="getQuestionById(id).questionType === 'text'" type="text" [formControlName]="getQuestionById(id).key"> -->
+                    </div>
+                </ng-container>
+
+                <ng-container>
+                    <div class="repet-sec" *ngFor="let set of getRepetativeArr(question); let s = index;">
+                        <p class="heading">Section - {{s+1}}</p>
+                        <div *ngFor="let id of question.dependentQuestions">
+                            <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'text'">
+                                <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                                <input type="text" class="form-control" [name]="getQuestionById(id).key + s"
+                                    (change)="setFormControl(getQuestionById(id).key + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+
+                            <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'select'">
+                                <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                                <select class="form-control" [name]="getQuestionById(id).key + s"
+                                    (change)="setFormControl(getQuestionById(id).key + s, $event)">
+                                    <option *ngFor="let option of getQuestionById(id).questionOptions"
+                                        [value]="option">{{ option | titlecase }}</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'date'">
+                                <label>{{ getQuestionById(id).templateOptions.Label }}</label>
+                                <input type="date" [name]="getQuestionById(id).key + s"
+                                    (change)="setFormControl(getQuestionById(id).key + s, $event)">
+                            </div>
+
+                            <div class="mb-1" *ngIf="getQuestionById(id).questionType === 'radio'">
+                                <label>{{ getQuestionById(id).templateOptions.Label }}</label><br>
+                                <div class="form-check form-check-inline"
+                                    *ngFor="let option of getQuestionById(id).questionOptions">
+                                    <input class="form-check-input" type="radio"
+                                        [name]="getQuestionById(id).key + s"
+                                        (change)="setFormControl(getQuestionById(id).key + s, $event)"
+                                        [value]="option">
+                                    <label class="form-check-label">{{ option | titlecase }}</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" *ngIf="getQuestionById(id).questionType === 'checkbox'">
+                                <label>{{ getQuestionById(id).templateOptions.Label }}</label><br>
+                                <div *ngFor="let option of getQuestionById(id).questionOptions">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                            [name]="getQuestionById(id).key + s"
+                                            (change)="setFormControl(getQuestionById(id).key + s, $event)"
+                                            [value]="option" />
+                                        {{option}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnMonday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Monday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnMonday' + s"
+                                    (change)="setFormControl('whenOnMondayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnTuesday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Tuesday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnTuesday' + s"
+                                    (change)="setFormControl('whenOnTuesdayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnWednesday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Wednesday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnWednesday' + s"
+                                    (change)="setFormControl('whenOnWednesdayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnThursday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Thursday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnThursday' + s"
+                                    (change)="setFormControl('whenOnThursdayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnFriday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Friday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnFriday' + s"
+                                    (change)="setFormControl('whenOnFridayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnSaturday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Saturday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnSaturday' + s"
+                                    (change)="setFormControl('whenOnSaturdayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="form.get('shouldWeSendNotificationsToThisContactOnSunday' + s)?.value === 'yes'">
+                            <div class="mb-3">
+                                <label>When on Sunday should we send this contact notifications?</label>
+                                <input type="date" class="form-control"
+                                    [name]="'shouldWeSendNotificationsToThisContactOnSunday' + s"
+                                    (change)="setFormControl('whenOnSundayShouldWeSendThisContactNotifications' + s, $event)"
+                                    placeholder="Enter">
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <!-- <button type="submit" (click)="submit()">Submit</button> -->
+        <div class="d-flex justify-content-end mt-2">
+            <button class="btn btn-danger me-2" style="background-color: #D44124;"
+                (click)="submit('draft')">Save</button>
+            <button class="btn btn-primary" style="background-color: #104b86;"
+                (click)="submit('submitted')">Submit</button>
+        </div>
+    </form>
+
+    <ng-container *ngIf="questions.length !== 0">
+        <div class="col-lg-3">
+            <div class="card">
+                <strong>Draft</strong>
+                <span (click)="copyForm(draft)">View</span>
+            </div>
+
+            <div class="card" *ngFor="let item of formsData">
+                <strong>{{item.formId}}</strong>
+                <span (click)="copyForm(item)">View</span>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="questions.length === 0">
+        <p>Loading...</p>
+    </ng-container>
+</div>

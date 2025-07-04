@@ -1,0 +1,174 @@
+form {
+  /* width: 100%; */
+  /* width: 50vw; */
+  
+}
+
+.client-form {
+  overflow-y: auto;
+  height: calc(100vh - 175px);
+  /* border-radius: 0 0 10px 10px; */
+  /* background-color: #fff; */
+}
+
+.logo-back {
+  border-radius: 10px 10px 0 0;
+  background-color: #000;
+  text-align: center;
+  /* object-fit: cover; */
+}
+
+.sub-form {
+  border: 1px solid #dddddd;
+  margin: 15px 5px;
+  padding: 15px;
+  box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+}
+
+input {
+  border: 1px solid #BDBDBD;
+  color: #212121;
+  font-family: TP, sans-serif;
+  font-size: 16px;
+  margin: 1px 0;
+  padding: 8px;
+
+  /* border: none; */
+  border-radius: 3px;
+  /* box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2); */
+  color: dimgray;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+label {
+  color: #fff;
+  font-family: TP, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+select {
+  appearance: revert;
+  --webkit-appearance: revert;
+}
+
+button {
+  font-family: TP, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.btn-group {
+  width: 15%;
+  position: absolute;
+  left: 30px;
+  display: flex;
+  top: 235px;
+  flex-direction: column;
+}
+
+.r-label {
+  border-radius: 5px !important;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.s-label {
+  font-size: 12px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.btn-group label {
+  box-shadow: none !important;
+}
+
+.heading {
+  font-family: TP, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+}
+
+.repet-sec {
+  border: 3px dotted #fff;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  /* background-color: #2f2f2f; */
+}
+
+
+
+.card {
+  --bg: #f7f7f8;
+  --hover-bg: #ffe5f4;
+  --hover-text: #e50087;
+  max-width: 200px;
+  height: 100px;
+  text-align: center;
+  background: var(--bg);
+  padding: 1.5em;
+  padding-block: 1.8em;
+  margin: 5px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s cubic-bezier(0.6, 0.4, 0, 1), transform 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: black;
+  cursor: pointer;
+}
+
+.card__body {
+  color: #464853;
+  line-height: 1.5em;
+  font-size: 1em;
+}
+
+.card> :not(span) {
+  transition: 0.3s cubic-bezier(0.6, 0.4, 0, 1);
+}
+
+.card>strong {
+  display: block;
+  font-size: 16px;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.card span {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  top: 100%;
+  transition: all 0.3s cubic-bezier(0.6, 0.4, 0, 1);
+}
+
+.card:hover span {
+  top: 0;
+  font-size: 1.2em;
+}
+
+.card:hover {
+  background: var(--hover-bg);
+}
+
+.card:hover>div,
+.card:hover>strong {
+  opacity: 0;
+}

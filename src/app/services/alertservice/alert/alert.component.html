@@ -1,0 +1,23 @@
+<div *ngIf="message">
+<div class="modal max-center" id="warningmodal1;" style="display: block;">
+    <div class="formcont max-center" style="width: 300px;">
+      <div class="modalform">
+        <div class="formtitle" style="padding: 4px 12px;align-items: center;font-size: 14px;">
+          <span>
+            <img *ngIf="message.title == 'Warning' || message.title == 'Failed' || message.title == 'Error' " src="assets/icons/warning.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+            <img *ngIf="message.title == 'Success'" src="assets/icons/ok.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+            <img *ngIf="message.title == 'Information'" src="assets/icons/info.svg" style="width: 16px; margin: 0 3px 2px 0; padding:0;">
+            {{message.title}}
+          </span>
+          <img src="assets/icons/close.svg" alt="edit" #close (click)="closeAlertModal()">
+        </div>
+        <div class="" style="padding:15px 30px 0 30px;">
+          <div style="display: flex;place-content: center;">
+            <!-- <div class="servicetitle" style="margin-bottom: 10px; font-family: TP,sans-serif;">{{message.text}}</div> -->
+            <div class="alertMsg" style="margin-bottom: 10px;">{{message.text}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

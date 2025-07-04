@@ -1,0 +1,98 @@
+{
+  "ads": [
+    {
+      "UserName": "vamsi-osakaodessa",
+      "UserId": null
+    },
+    {
+      "UserName": "ivisus",
+      "UserId": null
+    },
+    {
+      "UserName": "raviv",
+      "UserId": null
+    }
+  ],
+
+  "alerts": [
+    {
+      "UserName": "",
+      "UserId": 1545
+    },
+    {
+      "UserName": "",
+      "UserId": 1626
+    },
+    {
+      "UserName": "",
+      "UserId": 1658
+    },
+    {
+      "UserName": "",
+      "UserId": 1659
+    },
+    {
+      "UserName": "",
+      "UserId": 1660
+    },
+    {
+      "UserName": "",
+      "UserId": 1661
+    },
+    {
+      "UserName": "",
+      "UserId": 1687
+    },
+    {
+      "UserName": "",
+      "UserId": 1694
+    },
+    {
+      "UserName": "",
+      "UserId": 1673
+    }
+  ],
+
+  "timelapse": [
+    {
+      "UserName": "james@wardscurr.com",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": 1545
+    },
+    {
+      "UserName": "",
+      "UserId": 1626
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    },
+    {
+      "UserName": "",
+      "UserId": null
+    }
+  ]
+}

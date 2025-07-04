@@ -1,0 +1,298 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<app-alert></app-alert>
+<!-- <app-chatpopup drag></app-chatpopup> -->
+<app-navbar></app-navbar>
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align: center; align-self: center;">
+          <div class="searchbox">
+            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
+            <input type="text" placeholder="Search for sites" [(ngModel)]="searchText" #searchinput>
+            <img src="assets/icons/search.svg">
+          </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+          <div class="title1 topTitle" style="margin:0 0 0 25px;">
+            <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{currentSite?.siteName }} - Sensors</span>
+            <!-- <span>Support Helpdesk</span> -->
+            <!-- <div class="action-icons">
+              <div>&nbsp;</div>
+            </div> -->
+            <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
+        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
+          (click)="footageList(site, i)">
+          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
+            <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA" *ngIf="navActive == i">
+            <div class="label">{{ site?.siteName }} </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+
+      <div class="col-lg-9 col-sm-12">
+        <div>
+          <!-- <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{
+            currentSite?.siteName ? currentSite?.siteName : currentSite?.siteName }}</span>
+          <hr class="mb-0" id="hr1"> -->
+
+          <div class="title1 d-flex justify-content-between">
+            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <div class="row mx-0 mt-1 w-100">
+              <div class="col-md-3 ps-0" *ngIf="currentSite">
+                <span class="label">SiteId</span>
+                <select class="form-select mb-3" [(ngModel)]="currentSite.siteId" (change)="filter()">
+                  <!-- <option value="">All</option> -->
+                  <option *ngFor="let item of siteData;" [value]="item.siteId">{{item.siteName}}</option>
+                </select>
+              </div>
+              <div class="col-md-2 ps-0">
+                <span class="label">Zone</span>
+                <select class="form-select mb-3" [(ngModel)]="zoneId" (change)="filter()">
+                  <option value="">All</option>
+                  <option *ngFor="let item of eventData" [value]="item.zoneId">{{ item.zoneName}}</option>
+                </select>
+              </div>
+              <div class="col-md-2 ps-0">
+                <span class="label">device Name</span>
+                <select class="form-select mb-3" [(ngModel)]="sensorDeviceId" (change)="filter()">
+                  <option value="">All</option>
+                  <option *ngFor="let item of sensorDevicesData;" [value]="item.slice(0,9)">{{item}}</option>
+                </select>
+              </div>
+
+              <div class="col-md-2 ps-0">
+                <div class="searchbox mx-3 my-3" style="width: 250px;">
+                  <!-- <img *ngIf="searchText1" src="assets/icons/x.svg" style="position: absolute;"> -->
+                  <input type="search" placeholder="Search" [(ngModel)]="searchText1">
+                  <img src="assets/icons/search.svg">
+                </div>
+              </div>
+              <!-- <div class="col-md-2 ps-0">
+                <span class="label">Sensor Type</span>
+                <select class="form-select mb-3" [(ngModel)]="sensortype" (change)="filter()">
+                  <option value="">All</option>
+                  <option [value]="1">{{ "Light"}}</option>
+                  <option [value]="2">{{ "Temperature"}}</option>
+                </select>
+              </div> -->
+              <!-- <div class="col-lg-2 ps-0">
+                <span class="label">Event Start Date</span>
+                <div class="input-group">
+                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="fromDate" ngbDatepicker
+                    #d1="ngbDatepicker" (ngModelChange)="filter()">
+                  <button class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img
+                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                </div>
+              </div>
+              <div class="col-lg-2 ps-0">
+                <span class="label">Event End Date</span>
+                <div class="input-group">
+                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="toDate" ngbDatepicker
+                    #d2="ngbDatepicker" (ngModelChange)="filter()">
+                  <button class="btn btn-outline-light py-0" (click)="d2.toggle()" type="button"><img
+                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                </div>
+              </div> -->
+              <!-- <div class="col-lg-1 ps-0" *ngIf="fromDate != '' || toDate != ''">
+                <button class="btn btn-sm btn-outline-danger mt-4"
+                  (click)="fromDate = ''; toDate = ''; filter()">Clear</button>
+              </div> -->
+            </div>
+            <div class="me-3">
+              <!-- <button class="py-2 px-3 create-brn" (click)="open()">Create Incident</button> -->
+            </div>
+          </div>
+
+          <!-- <div class="table-resp">
+            <table class="table table-hover" id="sensorTable">
+              <thead>
+                <tr>
+                  <th>Site ID</th>
+                  <th>Zone</th>
+                  <th>Device ID</th>
+                  <th>Sensor Type</th>
+                  <th>Last Updated</th>
+                  <th>Sensor ID</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="newEventData.length > 0">
+                <ng-container *ngFor="let site of newEventData">
+                  <ng-container *ngFor="let device of site.devices_data; let first = first">
+                    <tr>
+                      <td *ngIf="first" [attr.rowspan]="calculateRowspan(site.devices_data)">
+                        {{ site.site_id }}
+                      </td>
+                      <td *ngIf="first" [attr.rowspan]="calculateRowspan(site.devices_data)">
+                        {{ site.zoneId }}
+                      </td>
+                      <td [attr.rowspan]="device.data.length">{{ device.sensorDeviceId }}</td>
+                      <td [attr.rowspan]="device.data.length">
+                        <img src="assets/icons/light_mode_24dp_EA3323.svg" alt="" width="18px">
+                        {{ device.sensorType }}</td>
+                      <td [attr.rowspan]="device.data.length">{{ device.latestTimeStamp }}</td>
+                      <td>{{ device.data[0]?.sensorId }}</td>
+                      <td [style.color]="device.data[0]?.status == 1 ? 'green' : 'red' ">{{ device.data[0]?.status == 1 ? "ON" : 'OFF'}}</td>
+                    </tr>
+                    <tr *ngFor="let sensor of device.data.slice(1)">
+                      <td>{{ sensor.sensorId }}</td>
+                      <td>{{ sensor.status }}</td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+              <tbody *ngIf="newEventData.length === 0">
+                <tr>
+                  <td colspan="9" class="text-center">No Data Available</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+
+          
+          <div class="table-resp mx-2">
+            <table class="table table-hover ">
+              <thead>
+                <tr>
+                  <th>Site ID
+                    <img (click)="sort1('siteId')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>Zone Name
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <!-- <th>Device Type</th> -->
+                  <th>Device ID
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>Sensor Name
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th>Sensor Type
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <!-- <th>Battery (%)</th> -->
+                  <th>Last Updated
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <!-- <th>Light Sensor ID</th> -->
+                  <th>Light Status
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <!-- <th>Temp Sensor ID</th> -->
+                  <th>Temperature
+                    <img (click)="sort1('zoneName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Iterate through all sites -->
+                <ng-container *ngFor="let site of newEventData | SearchPipe:searchText1">
+                  <!-- Iterate through devices in the site -->
+                  <ng-container *ngFor="let device of site.devices_data | SearchPipe:searchText1">
+                    <tr>
+                      <td>{{ site.siteId }}</td>
+                      <td>{{ site.zoneName }}</td>
+                      <!-- <td>{{ site.device_type }}</td> -->
+                      <td>{{ device.sensorDeviceId }}</td>
+                      <td>{{device.sensorName}}</td>
+                      <td>
+                        <img src="assets/icons/light_mode_24dp_EA3323.svg" alt="" width="18px">
+                        {{ device.sensorType }}</td>
+                      <!-- <td [class.text-danger]="device.battery_percentage === 0">
+                        {{ device.battery_percentage }}%
+                      </td> -->
+                      <td>{{ device.latestTimeStamp }}</td>
+                      <!-- <td>{{ device.lightSensorId }}</td> -->
+                      <td [style.color]="device.lightStatus == 1 ? 'green' : 'red' ">{{ device.lightStatus == 1 ? "ON" : 'OFF'}}</td>
+                      <!-- <td [style.color]="device.data[0]?.status == 1 ? 'green' : 'red' ">{{ device.data[0]?.status == 1 ? "ON" : 'OFF'}}</td> -->
+                      <!-- <td>{{ device.tempSensorId }}</td> -->
+                      <td class="text-start">{{ device.tempStatus }} °C</td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+            </table>
+            <div class="d-flex align-items-center justify-content-center" style="height: 70%;" *ngIf="newEventData.length == 0">
+            <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
+            </div>
+          </div>  
+        <!-- <div class="table-resp">
+          <table class="table table-hover" id="sensorTable">
+            <thead>
+              <tr class="form1">
+                <th>
+                  <span>Site ID</span>
+                  <img (click)="sort('site_id')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                </th>
+                <th>
+                  <p>Zone</p>
+                  <img (click)="sort('zoneId')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                </th>
+                <th>
+                  <p>Device Type</p>
+                  <img (click)="sort('device_type')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                </th>
+                <th>Device ID</th>
+                <th>Sensor Type</th>
+                <th>Battery (%)</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+        
+            <tbody *ngIf="!showLoader">
+              <ng-container *ngFor="let site of newEventData ; let i = index">
+                <ng-container *ngFor="let device of site.devices_data; let first = first">
+                  <tr>
+                    <td *ngIf="first" [attr.rowspan]="site.devices_data.length">
+                      <p>{{ site.site_id }}</p>
+                    </td>
+                    <td *ngIf="first" [attr.rowspan]="site.devices_data.length">
+                      {{ site.zoneId }}
+                    </td>
+                    <td *ngIf="first" [attr.rowspan]="site.devices_data.length">
+                      {{ site.device_type }}
+                    </td>
+                    <td>{{ device.sensorDeviceId }}</td>
+                    <td>{{ device.sensorType }}</td>
+                    <td>
+                      <span [class.text-danger]="device.battery_percentage === 0">
+                        {{ device.battery_percentage }}
+                      </span>
+                    </td>
+                    <td>{{ device.latestTimeStamp }}</td>
+                    
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+           
+          <div class="d-flex align-items-center justify-content-center" style="height: 70%;"
+          *ngIf="newEventData.length == 0">
+          <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
+        </div>
+       </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

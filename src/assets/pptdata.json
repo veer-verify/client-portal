@@ -1,0 +1,220 @@
+{
+	"data": [
+		{
+			"id": "1001",
+			"pageType": "level_1",
+			"header": "INSIGHT REPORT",
+            "content" : {
+                "header" : "Stone Crest ",
+                "description" : "Stone Crest / March 2022",
+                "img" : [
+                    "assets/images/cam1.jpg",
+                    "assets/images/cam2.jpg",
+                    "assets/images/cam6.jpg",
+                    "assets/images/cam7.jpg",
+                    "assets/images/cam8.jpg"],
+                "video" : []
+            }
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_2",
+			"header": "Overview",
+            "content" :[
+                {
+                    "header" : "",
+                    "description" : [""],
+                    "img" : [],
+                    "video" : []
+                },
+                {
+                    "header" : "Deliverables",
+                    "description" : ["Camera-wise analysis","BI Reports"],
+                    "img" : [],
+                    "video" : []
+                }
+            ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_1",
+			"header": "Customer Traffic Analysis",
+            "content" :[
+               
+            ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Customer Traffic /  Stores",
+            "content" : [
+                {
+                    "header" : "Deliverables",
+                    "description" : ["Camera-wise analysis","BI Reports"],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                        
+                    "video" : []
+                },
+                 {
+                    "header" : "Parking Lot Traffic @ Stone Crest",
+                    "description" : [],
+                    "img" : [
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                }
+               
+              
+          ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Customer Traffic / Orthodontics",
+            "content" : [
+                {
+                    "header" : "",
+                    "description" : [],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : [
+                        
+                    ]
+                },
+                {
+                    "header" : "Analytics",
+                    "description" : ["People Enter Count","People Exit Count","Passing User Count"],
+                    "img" : [],
+                    "video" : []
+                },
+                 {
+                    "header" : "Analytics description:",
+                    "description" : ["Customers visiting and leaving the store are considered as “Enter” and “Exit” counts resp","Customers passing by the storing (without entering are counted as “Passing User Count”"],
+                    "img" : [],
+                    "video" : []
+                }
+          ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Customer Traffic / Plato’s closet",
+            "content" : [
+  
+                {
+                    "header" : "Cam Position",
+                    "description" : ["Normal (no change required)"],
+                    "img" : [],
+                      
+                    "video" : []
+                },
+                 {
+                    "header" : "Analytics :",
+                    "description" : ["People Enter Count","People Exit Count","Passing User Count"],
+                    "img" : [ ],
+                      
+                    "video" : []
+                },
+                {
+                    "header" : "Analytics description :",
+                    "description" : ["Customers visiting and leaving the store are considered as “Enter” and “Exit” counts resp.  ","Customers passing by the storing (without entering are counted as “Passing User Count"],
+                    "img" : [ ],
+                      
+                    "video" : []
+                },
+                {
+                    "header" : "  :",
+                    "description" : [],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                }
+          ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Customer Traffic / Beauty Supply",
+            "content" : [
+                {
+                    "header" : "Cam Position",
+                    "description" : ["Normal (no change required)"],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                },
+                 {
+                    "header" : "Analytics :",
+                    "description" : ["People Enter Count","People Exit Count","Passing User Count"],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                },
+                {
+                    "header" : "Analytics description :",
+                    "description" : ["Customers visiting and leaving the store are considered as “Enter” and “Exit” counts resp.  ","Customers passing by the storing (without entering are counted as “Passing User Count"],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                }
+               
+              
+          ]
+			
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Street Traffic / Vehicle Entrance/Exit",
+            "content" : [
+                {
+                    "header" : "",
+                    "description" : [],
+                    "img" : [
+                        "assets/images/cam1.jpg",
+                        "assets/images/cam2.jpg",
+                        "assets/images/cam3.jpg",
+                        "assets/images/cam4.jpg",
+                        "assets/images/cam5.jpg",
+                        "assets/images/cam6.jpg",
+                        "assets/images/cam7.jpg",
+                        "assets/images/cam8.jpg"],
+                    "video" : []
+                }
+          ]
+		},
+        {
+			"id": "1001",
+			"pageType": "level_3",
+			"header": "Parking lot Traffic / Stone Crest",
+            "content" : [
+                {
+                    "header" : "",
+                    "description" : [],
+                    "img" : [],
+                    "video" : [
+                        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"]
+                }
+          ]
+		},
+        {
+			"id": "1001",
+			"pageType": "level_1",
+			"header": "Reports",
+            "content" : []
+		}		
+	]
+}

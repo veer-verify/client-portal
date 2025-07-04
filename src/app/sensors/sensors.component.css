@@ -1,0 +1,257 @@
+
+
+.full-screen-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+  
+  .optionlabel-active {
+    cursor: pointer;
+    background: #084982;
+    padding: 14px;
+    border-radius: 5px;
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 1px;
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .d-label {
+    font-size: 14px;
+    margin-top: 13px;
+    text-align: left;
+    color: #7f7f7f !important;
+  }
+  
+  .label {
+    letter-spacing: 1px;
+    font-size: 13px;
+  }
+  
+  
+  .add-form-button {
+    border-radius: 50px;
+    box-shadow: none;
+    border-width: none;
+    border-color: #0000;
+  }
+  
+  input {
+    height: 35px;
+    border-radius: 5px;
+    border-width: 0;
+    padding: 0 10px;
+  }
+  
+  input,
+  textarea {
+    caret-color: #333131;
+  }
+  
+  input#session-date {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  input#session-date::-webkit-calendar-picker-indicator {
+    display: block;
+    top: 0;
+    left: 0;
+    background: #0000;
+    position: absolute;
+    transform: scale(12);
+    cursor: pointer;
+  }
+  
+  input[type='date']:after {
+    content: attr(placeholder)
+  }
+  
+  .form-select {
+    border: 1px solid #dee2e6 !important;
+    color: #7f7f7f !important;
+    height: 35px;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+
+  /* .table-res {
+    height: calc(100vh - 500px);
+    overflow-y: auto;
+    background-color: #e6e8e8;
+    font-size: 14px;
+  } */
+  
+  
+  
+  .create-brn {
+    width: 150px;
+    border-radius: 30px;
+    background: #104B86;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  }
+  
+  .close-btn {
+    width: 100px;
+    border-radius: 30px;
+    border: none;
+    background: #D34124;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  .form-control {
+    box-shadow: none;
+    font-size: 12px;
+  }
+  
+  .btn {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .new-item {
+    font-size: 10px;
+    background-color: #c31111;
+    border-radius: 30px;
+    text-align: center;
+    color: #ffffff;
+    width: 35px;
+  }
+  
+  
+  
+  
+  /* table grid code for advertisements */
+  
+  .grid-container {
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    justify-content: space-between;
+    text-align: center;
+    place-items: center;
+    grid-gap: 2px;
+    margin-left: 10px;
+    margin-top: 25px;
+  }
+  
+  @media screen and (min-width:426px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  @media screen and (min-width:725px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media screen and (min-width:1435px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media screen and (min-width:2000px) {
+    .grid-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media screen and (min-width:2561px) {
+    .grid-container {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  .title1 {
+    text-transform: none;
+  }
+  
+  .name {
+    display: none;
+  }
+  
+  .camname {
+    text-decoration: none;
+  }
+  
+  .camname:focus {
+    color: #084982;
+  }
+  
+  .camname:hover .name {
+    display: contents;
+  }
+  
+  
+  /* advertisementBox */
+  .advertisementBox {
+    width: 330px;
+    background: #fff;
+    /* padding: 2px; */
+    border: 1px solid #666666;
+    border-radius: 15px;
+    margin: 10px 10px 10px 10px;
+    font-family: PS, sans-serif;
+    letter-spacing: 1px;
+    align-items: center;
+    display: flex;
+  }
+  
+  .adsContent {
+    display: block;
+    padding: 20px;
+    width: -webkit-fill-available;
+  }
+  
+  #hr2 {
+    margin: 8px 0 10px 0;
+  }
+  
+  .adImg {
+    max-height: 45px
+  }
+  
+  .ad1 {
+    font-size: 14px;
+    text-align: left;
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  .ad2 {
+    font-size: 9px;
+    font-weight: 900;
+    text-align: left;
+    text-transform: uppercase;
+    color: #104B86
+  }
+  
+  .ad3 {
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  
+  .ad1 img {
+    height: 18px;
+    margin: 2px 5px 0 -3px;
+  }
+  
+  /* .video {
+    width: 30vw;
+    height: 50vh;
+  } */

@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg  >
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" 
+ width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+</metadata>
+
+ <linearGradient id="MyGradient1">
+          <stop offset="5%" stop-color="#0756ce" />
+          <stop offset="95%" stop-color="#3152AB" />
+</linearGradient>
+
+ <linearGradient id="MyGradient2">
+          <stop offset="5%" stop-color="#3152AB" />
+          <stop offset="95%" stop-color="#664D80" />
+</linearGradient>
+
+ <linearGradient id="MyGradient3">
+          <stop offset="5%" stop-color="#664D80" />
+          <stop offset="95%" stop-color="#A1474f" />
+</linearGradient>
+
+ <linearGradient id="MyGradient4">
+          <stop offset="5%" stop-color="#A1472f" />
+          <stop offset="95%" stop-color="#d04329" />
+</linearGradient>
+
+
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+ stroke="none">
+<path fill="url(#MyGradient1)" d="M110 4605 l0 -515 460 0 460 0 0 515 0 515 -460 0 -460 0 0 -515z"/>
+<path fill="url(#MyGradient2)" d="M1390 4605 l0 -515 495 0 495 0 0 515 0 515 -495 0 -495 0 0 -515z"/>
+<path fill="url(#MyGradient3)" d="M2740 4605 l0 -515 495 0 495 0 0 515 0 515 -495 0 -495 0 0 -515z"/>
+<path fill="url(#MyGradient4)" d="M4090 4605 l0 -515 460 0 460 0 0 515 0 515 -460 0 -460 0 0 -515z"/>
+<path fill="url(#MyGradient1)" d="M110 3235 l0 -495 460 0 460 0 0 495 0 495 -460 0 -460 0 0 -495z"/>
+<path fill="url(#MyGradient2)" d="M1390 3235 l0 -495 495 0 495 0 0 495 0 495 -495 0 -495 0 0 -495z"/>
+<path fill="url(#MyGradient3)" d="M2740 3235 l0 -495 495 0 495 0 0 495 0 495 -495 0 -495 0 0 -495z"/>
+<path fill="url(#MyGradient4)" d="M4090 3235 l0 -495 460 0 460 0 0 495 0 495 -460 0 -460 0 0 -495z"/>
+<path fill="url(#MyGradient1)" d="M110 1885 l0 -495 460 0 460 0 0 495 0 495 -460 0 -460 0 0 -495z"/>
+<path fill="url(#MyGradient2)" d="M1390 1885 l0 -495 495 0 495 0 0 495 0 495 -495 0 -495 0 0 -495z"/>
+<path fill="url(#MyGradient3)" d="M2740 1885 l0 -495 495 0 495 0 0 495 0 495 -495 0 -495 0 0 -495z"/>
+<path fill="url(#MyGradient4)" d="M4090 1885 l0 -495 460 0 460 0 0 495 0 495 -460 0 -460 0 0 -495z"/>
+<path fill="url(#MyGradient1)" d="M110 515 l0 -515 460 0 460 0 0 515 0 515 -460 0 -460 0 0 -515z"/>
+<path fill="url(#MyGradient2)" d="M1390 515 l0 -515 495 0 495 0 0 515 0 515 -495 0 -495 0 0 -515z"/>
+<path fill="url(#MyGradient3)" d="M2740 515 l0 -515 495 0 495 0 0 515 0 515 -495 0 -495 0 0 -515z"/>
+<path fill="url(#MyGradient4)" d="M4090 515 l0 -515 460 0 460 0 0 515 0 515 -460 0 -460 0 0 -515z"/>
+</g>
+</svg>

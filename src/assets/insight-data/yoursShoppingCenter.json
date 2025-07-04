@@ -1,0 +1,788 @@
+{
+  "Status": "Success",
+  "Message": "List generated successfully",
+  "Sun": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Mon": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Tue": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Wed": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Thu": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Fri": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ],
+  "Sat": [
+    {
+      "data": [
+        {
+          "total": "13",
+          "icon": "Customers13.png",
+          "type": "Orthodonics - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers14.png",
+          "type": "Davita Dialysis - Customers"
+        },
+        {
+          "total": "34",
+          "icon": "Customers15.png",
+          "type": "Hair Salon - Customers"
+        },
+        {
+          "total": "347",
+          "icon": "Customers16.png",
+          "type": "Counture Nails - Customers"
+        },
+        {
+          "total": "154",
+          "icon": "Customers17.png",
+          "type": "Platos Closet - Customers"
+        },
+        {
+          "total": "46",
+          "icon": "Customers18.png",
+          "type": "592 Lounge Restaurant - Customers"
+        },
+        {
+          "total": "109",
+          "icon": "Customers19.png",
+          "type": "Beauty Supply - Customers"
+        },
+        {
+          "total": "10",
+          "icon": "Customers110.png",
+          "type": "Lam Sexy Fit - Customers"
+        },
+        {
+          "total": "0",
+          "icon": "Customers111.png",
+          "type": "H&R Block - Customers"
+        },
+        {
+          "total": "9",
+          "icon": "Customers191.png",
+          "type": "TBD - Customers"
+        }
+      ],
+      "name": "Tenant Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "55",
+          "icon": "Asset_Vechicles111.png",
+          "type": "Restaurant Parking - Vehicles"
+        },
+        {
+          "total": "161",
+          "icon": "Asset_Vechicles112.png",
+          "type": "Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "14",
+          "icon": "Asset_Vechicles113.png",
+          "type": "Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "170",
+          "icon": "Asset_Vechicles114.png",
+          "type": "Beauty Supply Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "53",
+          "icon": "Asset_Vechicles115.png",
+          "type": "Beauty Supply Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_Vechicles116.png",
+          "type": "Rear Parking Lot-01 - Vehicles"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_Vechicles117.png",
+          "type": "Rear Parking Lot-02 - Vehicles"
+        },
+        {
+          "total": "3",
+          "icon": "Asset_Vechicles118.png",
+          "type": "Rear Parking Lot-03 - Vehicles"
+        },
+        {
+          "total": "44",
+          "icon": "Asset_Vechicles119.png",
+          "type": "Restaurant Porch Lot - Vehicles"
+        },
+        {
+          "total": "82",
+          "icon": "Asset_Vechicles1110.png",
+          "type": "Drive Way(Cam06) - Vehicles"
+        }
+      ],
+      "name": "Vehicle Analytics"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+/* for page */
+
+button {
+    /* width: 100%; */
+    border-radius: 30px;
+    background: #104B86;
+    color: #fff;
+    font-size: 12px;
+    width: -webkit-fill-available;
+    -webkit-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+    -moz-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+}
+
+p {
+    margin: 0;
+}
+
+.linechart {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 5px;
+    border: 2px solid #7f7f7f;
+    width: 50%;
+}
+.topTitle{
+    text-align: center !important;
+}
+.chartcont{
+    display: flex;
+}
+
+@media  screen and (max-width:991px) {
+    .chartcont{display: grid;} 
+    .linechart{width: 100%; padding: 2px; margin-bottom: 20px;}
+}
+
+/* datepicker CSS */
+.sqr {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 20px;
+    border: none;
+    outline: 2px solid #7f7f7f;
+    border-radius: 1px;
+  }
+  .calendericon {
+    height: 25px;
+    position: absolute;
+    right: 5px;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    height: 40px;
+    width: 900px;
+    background-color: #00000000 !important;
+    z-index: 99;
+  }
+  
+  /* CSS for Datepicker */
+  .dateinputform {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    pointer-events: all;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    width: 100%;
+  }
+  .dateinput {
+    pointer-events: none;
+    visibility: none;
+    border: #00000000;
+    outline: none;
+    background-color: #00000000;
+    color: #00000000;
+    display: none;
+    width: 100%;
+  }
+  :host ::ng-deep .ngb-dp-months {
+    background: rgb(180, 180, 230);
+    font-family: PS, sans-serif;
+    color: #ffffff !important;
+    font-size: 12px;
+  }
+  :host ::ng-deep .ngb-dp-month {
+    background: #104b86;
+    pointer-events: all;
+  }
+  :host ::ng-deep .the-ngb-dp-class {
+    background: rgb(248, 209, 209);
+    pointer-events: all;
+  }
+  ::ng-deep div.ngb-dp-arrow > button {
+    color: #ffffff;
+    z-index: 99;
+    pointer-events: all;
+  }
+  :host ::ng-deep .ngb-dp {
+    font-family: PS, sans-serif;
+  }
+  :host ::ng-deep ngb-datepicker {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #ffffff;
+    font-family: PS, sans-serif;
+    font-size: 12px;
+    -webkit-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+    -moz-box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
+  }
+  :host::ng-deep .ngb-dp-header {
+    color: #ffffff !important;
+    background: #104b86;
+  }
+  :host ::ng-deep .ngb-dp-day > .btn-light {
+    border: red;
+    background-color: #ffffff !important;
+    color: #7f7f7f !important;
+    margin: auto;
+  }
+  :host
+    ::ng-deep
+    ngb-datepicker-navigation-select.ngb-dp-navigation-select
+    > .custom-select {
+    border-radius: 10px !important;
+    background-color: #00000000;
+    color: #ffffff !important;
+    border: none;
+    text-align: center;
+  }
+  :host
+    ::ng-deep
+    ngb-datepicker-navigation-select.ngb-dp-navigation-select
+    > .custom-select
+    > option {
+    background-color: rgba(16, 75, 134, 0.6);
+    border-radius: 15px;
+    outline: none;
+  }
+  
+  :host ::ng-deep .ngb-dp-day {width: 100%;}
+  :host ::ng-deep .ngb-dp-weekday {width: 100%;}
+  :host ::ng-deep [ngbDatepickerDayView] {width: 100%;}
+  :host ::ng-deep ngb-datepicker {width: 100%;}
+  :host ::ng-deep .ngb-dp-month {width: 100%;}
+  
+  /**/
+  
+  :host ::ng-deep #months > .ngb-dp-months {display: none;}
+  :host ::ng-deep #months > .ngb-dp-header {padding: 4px; }
+  #searchinput:active > :host ::ng-deep #months {display: visible;}
+  .padd{padding: 2.5px !important; height: 49px !important;}
+  #months{position: inherit;top: 0;}
+  :host ::ng-deep #monthpicker > ngb-datepicker {width: 100%; top:33px }
+  
+  /* datepicker CSS ends */
+
+
+
+  
+  /* table grid code for advertisements */
+
+  .grid-container {
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    justify-content: space-around;
+    text-align: center;
+    place-items: center;
+    grid-gap: 5px;
+    margin-left: 10px;
+    margin-top: 25px;
+  }
+    @media screen and (min-width:426px){
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+      }  
+    }
+    @media screen and (min-width:1281px) {
+        .grid-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media screen and (min-width:1885px) {
+        .grid-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media screen and (min-width:2490px) {
+        .grid-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media screen and (min-width:3151px) {
+        .grid-container {
+          grid-template-columns: repeat(5, 1fr);
+        }
+    }
+  /* advertisementBox */
+  .advertisementBox{
+    width:98%;
+    background:#fff;
+    /* padding: 2px; */
+    border: 1px solid #666666;
+    border-radius: 15px;
+    margin: 4px 10px;
+    font-family: MS,sans-serif ;
+    letter-spacing: 1px;
+    align-items: center;
+    display: flex;
+  }
+  .adsContent{
+      display: block;
+      padding: 10px;
+      width: -webkit-fill-available;
+  }
+  #hr2{margin:8px 0 10px 0;}
+  .adImg{max-height:45px}
+  .ad1 img{height:18px; margin: 2px 5px 0 -3px;}
+  .clrblok{
+    width: 100px;
+    background-color: #000;
+    /* background-color: #F5B400;
+    background-color: #EF2800; */
+    color: #fff;
+    font-weight: 700;
+    margin: 5px;
+    border-radius: 5px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 5px;
+  }
+  .head{
+    font-family: PS,sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 5px;
+
+  }
+  .head span{
+    font-size: 10px;
+    color: #c0c0c0;
+  }
+  .placeholderForReports {
+    letter-spacing: 5px;
+    margin: 18px;
+    font-size: 20px;
+    color: #fff;
+    font-family: PS, sans-serif;
+    text-transform: uppercase;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 15vh;
+    justify-content: center;
+    text-align: center;
+    font-weight: 200;
+  }
+
+.tooltiptext1 {
+    letter-spacing: 0;
+    font-size: 10px;
+    background-color: #fff;
+    color: #555;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    left: 540px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    z-index: 0;
+    text-align: left;
+    text-transform:none;
+    top: -5px;
+  }
+  .tooltiptext1::after {
+    content: "";
+    position: absolute;
+    transform: rotate(180deg);
+    top: 16px;
+    left: -10px;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+  }
+
+  .info{
+    cursor: pointer;
+    display: flex;
+  }
+  .info:hover +.tooltiptext1 {
+    display: block;
+    opacity: 1;
+  }
+  .infocircle{
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #104b86;
+    border: 1px solid #fff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .blck{
+    padding: 0 5px;
+    color:white;
+    display: block;
+    justify-content: space-between;
+    margin: 2px;
+    border-radius: 3px;
+    font-family: MS,sans-serif;
+    font-size: 9px;
+    text-align: center;
+    width: 54px;
+  }
+  .box{
+    border: 1px solid #fff;
+    width: 98%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-family: TP,sans-serif;
+  }
+  .setbox{
+    text-align: center;
+    width: 60%;
+  }
+  .inbox{
+    /* background-color: #fff; */
+    padding: 8px 10px;
+    color: #fff;
+    margin-right: 0;
+    margin-left: auto;
+    width: 40%;
+    border-radius: 5px;
+    font-weight: 600;
+    border: 1px solid #fff;
+  }
+
+  .grid-container1 {
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    justify-content: space-around;
+    text-align: center;
+    place-items: center;
+    grid-gap: 5px;
+    margin-left: 5px;
+    /* margin-top: 5px; */
+  }
+  #graphholder{
+    display: grid;
+    height: 25%;
+  }
+  @media screen and (min-width:773px){
+    .grid-container1 {
+        grid-template-columns: repeat(4, 1fr);
+     }  
+     #graphholder{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }  
+  @media screen and (max-width:773px){
+    .grid-container1 {
+        grid-template-columns: repeat(2, 1fr);
+    }  
+    #graphholder{
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .card{
+    font-family: ES,sans-serif !important;
+  }
+
+  :host ::ng-deep .highcharts-credits{
+    fill: #00000000 !important;
+    pointer-events: none;
+  }
+  :host ::ng-deep .highcharts-root{
+    font-family: PS,sans-serif !important;
+    /* font-weight: 600; */
+    letter-spacing: 2px;
+  }
+  .card{
+  margin: 10px;    
+  }

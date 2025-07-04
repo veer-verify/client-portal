@@ -1,0 +1,998 @@
+{
+  "Status": "Success",
+  "Message": "List generated successfully",
+  "Sun": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Mon": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Tue": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Wed": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Thu": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Fri": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ],
+  "Sat": [
+    {
+      "data": [
+        {
+          "total": "52",
+          "icon": "Asset_18.png",
+          "type": "Customer Count"
+        },
+        {
+          "total": "63",
+          "icon": "Drive_thru1.png",
+          "type": "Drive-Thru Customer Count"
+        }
+      ],
+      "name": "CUSTOMER ANALYTICS"
+    },
+    {
+      "data": [
+        {
+          "total": "2",
+          "icon": "Asset_191.png",
+          "type": "Aisle 1 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_192.png",
+          "type": "Aisle 2 Impression Rate"
+        },
+        {
+          "total": "1",
+          "icon": "Asset_193.png",
+          "type": "Aisle 3 Impression Rate"
+        },
+        {
+          "total": "0",
+          "icon": "Asset_19.png",
+          "type": "Aisle 4 Impression Rate"
+        },
+        {
+          "total": "4",
+          "icon": "Asset_110.png",
+          "type": "Aisle 5 Impression Rate"
+        },
+        {
+          "total": "8",
+          "icon": "Asset_111.png",
+          "type": "Aisle 6 Impression Rate"
+        },
+        {
+          "total": "5",
+          "icon": "Asset_112.png",
+          "type": "Aisle 7 Impression Rate"
+        }
+      ],
+      "name": "Pharmacy Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:03",
+          "icon": "Drive_thru3.png",
+          "type": "Avg. Drive-Thru Turnaround Time"
+        }
+      ],
+      "name": "Employee Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:05",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 1 Productivity "
+    },
+    {
+      "data": [
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:00",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 2 Productivity"
+    },
+    {
+      "data": [
+        {
+          "total": "0:01",
+          "icon": "Asset_113.png",
+          "type": "Avg. Rush Order Turnaround Time"
+        },
+        {
+          "total": "0:03",
+          "icon": "Asset_113.png",
+          "type": "Avg. Standard Order Turnaround Time "
+        },
+        {
+          "total": "0:02",
+          "icon": "Asset_113.png",
+          "type": "Avg. Narcotics Order Turnaround Time"
+        },
+        {
+          "total": "0:04",
+          "icon": "Asset_113.png",
+          "type": "Avg. Antibiotics Order Turnaround Time"
+        }
+      ],
+      "name": "Employee 3 Productivity "
+    }
+  ]
+}

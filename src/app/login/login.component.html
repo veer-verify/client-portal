@@ -1,0 +1,152 @@
+<app-loader *ngIf="showLoader"></app-loader>
+
+
+<div class="loginpage ">
+  <img [src]="storageService.logo" class="p-2" width="300px">
+  <!-- <img src="assets/themes/IVISsecurity_logo.png" class="logo"> -->
+   <!-- <img src="assets/themes/UneeviuLogowhite (1).png" class="p-2" width="200px"> -->
+  <!-- <img src="assets/themes/Uneeviu Logo Blue png.png" class="logo"> -->
+
+  <div>
+    <div class="pagetitlelogin" *ngIf="dialogType == ''">SIGN IN</div>
+    <div class="pagetitlelogin" *ngIf="dialogType == 'signup'">SIGN UP</div>
+    <div class="pagetitlelogin" *ngIf="dialogType == 'passwordRecovery' || dialogType == 'forgotPwd'">PASSWORD RECOVERY</div>
+
+    <div class="logincont" (keyup.enter)="loginNew(); toggleSkip('signin')" *ngIf="dialogType == ''">
+      <!-- <div class="strip"></div> -->
+      <div class="form">
+        <form [formGroup]="loginForm">
+          <input type="text" placeholder="Username" formControlName="userName">
+          <div style="position: relative;">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" id="pwd">
+            <img [src]="!showPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" id="pwdimg" alt="" class="hidden-icon" (click)="togglePwd('password')">
+          </div>
+        </form>
+
+        <div class="forgotpass" (click)="openFrogotpassDialog('forgotPwd')">forgot password? &nbsp;</div>
+        <button class="signinBtn w-50 mt-1" (click)="loginNew(); toggleSkip('signin')">SIGN IN</button>
+        <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'">{{errInfo?.text}}</p>
+        <!-- <p class="error" *ngIf="showsessionerror != ''">{{ showsessionerror }}</p> -->
+        <!-- <a class="create-account" (click)="openFrogotpassDialog('signup')">create account</a> -->
+      </div>
+
+    </div>
+
+    <div class="logincont" (keyup.enter)="loginNew(); toggleSkip('signin')" *ngIf="dialogType == 'signup'">
+      <!-- <div class="strip"></div> -->
+      <div class="form">
+        <form [formGroup]="signupForm">
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" placeholder="First Name" formControlName="firstName">
+            </div>
+            <div class="col-lg-6">
+              <input type="text" placeholder="Last Name" formControlName="lastName">
+            </div>
+            <div class="col-lg-12">
+              <input type="email" placeholder="Email" formControlName="email">
+            </div>
+            <div class="col-lg-12">
+              <div style="position: relative;">
+                <input [type]="showNewPassword ? 'text' : 'password'" placeholder="Password" formControlName="password">
+                <img [src]="!showNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('newPassword')">
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div style="position: relative;">
+                <input [type]="showConfirmNewPassword ? 'text' : 'password'" placeholder="Confirm Password" formControlName="confirmPassword">
+                <img [src]="!showConfirmNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('confirmNewPassword')">
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-end">
+          <button class="rstPwdBtn" style="background-color: brown;" (click)="closeConfirmPassword()">Cancel</button>
+          <button class="rstPwdBtn" (click)="signup()">SIGNUP</button>
+          <!-- <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'" style="position: absolute; bottom: -330px;">{{errInfo?.text}}</p> -->
+        </div>
+      </div>
+
+      <div class="mt-1 d-flex flex-wrap p-2" *ngIf="signupForm.get('password')?.dirty">
+        <span class="block fw-bold" [ngClass]="{'text-success': signupForm.value.password.match('^(?=.*[A-Z])')}">&nbsp; *Atleast one uppercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': signupForm.value.password.match('(?=.*[a-z])')}">&nbsp; *Atleast one lowercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': signupForm.value.password.match('(.*[0-9].*)')}">&nbsp; *Atleast one digit.</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': signupForm.value.password.match('(?=.*[!@#$%^&*])')}">&nbsp; *Atleast one special character</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': signupForm.value.password.match('.{6,}')}">&nbsp; *Atleast 6 characters long</span>
+     </div>
+
+     <ng-container *ngIf="dialogType == 'signup'">
+        <app-googlelogin></app-googlelogin>
+    </ng-container>
+    </div>
+
+    <!-- password recovery-->
+    <div class="logincont" *ngIf="dialogType == 'forgotPwd'">
+      <div class="text-secondary">Enter Your Email</div>
+        <div class="form">
+          <input type="text" placeholder="Email" [formControl]="userEmail">
+          <div class="d-flex justify-content-end">
+            <button class="rstPwdBtn" style="background-color: brown;" (click)="closeConfirmPassword()">Cancel</button>
+            <button class="rstPwdBtn" (click)="forgotPass()">SUBMIT</button>
+            <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'" style="position: absolute; bottom: -330px;">{{errInfo?.text}}</p>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- first time password recovery-->
+    <div class="logincont" *ngIf="dialogType == 'firstTime'">
+      <div class="text-secondary" *ngIf="showSkip">Please Change Your DEFAULT PASSWORD <span class="text-primary">(Recommended)</span></div>
+        <div class="form">
+          <input type="text" placeholder="Email" [formControl]="userEmail">
+          <div class="d-flex justify-content-end">
+            <button class="rstPwdBtn" style="background-color: brown;" (click)="skipLogin()" *ngIf="showSkip">SKIP</button>
+            <button class="rstPwdBtn" style="background-color: brown;" (click)="closeConfirmPassword()" *ngIf="!showSkip">Cancel</button>
+            <button class="rstPwdBtn" (click)="verifyEmail()" *ngIf="showSkip">SUBMIT</button>
+            <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'" style="position: absolute; bottom: -330px;">{{ errInfo?.text }}</p>
+          </div>
+        </div>
+    </div>
+
+    <!-- confirm password -->
+    <div class="logincont" *ngIf="dialogType == 'passwordRecovery'">
+      <div class="text-primary">Your Email has Verified Successfully with our Records. Please Change Your Password.</div>
+        <form [formGroup]="updatePasswordForm" class="form">
+          <div class="row">
+            <div class="col-lg-12">
+              <div style="position: relative;">
+                <input [type]="showOldPassword ? 'text' : 'password'" placeholder="Old Password" formControlName="oldPassword">
+                <img [src]="!showOldPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('oldPassword')">
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div style="position: relative;">
+                <input [type]="showNewPassword ? 'text' : 'password'" placeholder="New Password" formControlName="newPassword">
+                <img [src]="!showNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('newPassword')">
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div style="position: relative;">
+                <input [type]="showConfirmNewPassword ? 'text' : 'password'" placeholder="Confirm New Password" formControlName="confirmNewPassword">
+                <img [src]="!showConfirmNewPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" alt="" class="hidden-icon" (click)="togglePwd('confirmNewPassword')">
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="error" *ngIf="errormsg">{{errormsg}}</div> -->
+          <button class="rstPwdBtn" style="background-color: brown;" (click)="closeConfirmPassword()">Cancel</button>
+          <button class="rstPwdBtn" (click)="updatePassword()">Submit</button>
+          <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'" style="position: absolute; top: 270px;">{{errInfo?.text}}</p>
+        </form>
+
+       <div class="mt-1 d-flex flex-wrap p-2" *ngIf="updatePasswordForm.get('newPassword')?.dirty">
+        <span class="block fw-bold" [ngClass]="{'text-success': updatePasswordForm.value.password.match('^(?=.*[A-Z])')}">&nbsp; *Atleast one uppercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': updatePasswordForm.value.password.match('(?=.*[a-z])')}">&nbsp; *Atleast one lowercase letter</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': updatePasswordForm.value.password.match('(.*[0-9].*)')}">&nbsp; *Atleast one digit.</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': updatePasswordForm.value.password.match('(?=.*[!@#$%^&*])')}">&nbsp; *Atleast one special character</span>
+        <span class="block fw-bold" [ngClass]="{'text-success': updatePasswordForm.value.password.match('.{6,}')}">&nbsp; *Atleast 6 characters long</span>
+     </div>
+    </div>
+  </div>
+</div>

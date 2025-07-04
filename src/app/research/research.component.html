@@ -1,0 +1,107 @@
+<div class="page">
+    <div style="width:100vw; overflow:hidden">
+      <div class="searchbar">
+        <div class="row">
+          <div class="col-lg-3 col-sm-12" style="text-align:center;align-self: center;"><div  class="searchbox"  style="opacity: 0.1; pointer-events:none"><input type="text" placeholder="Search Reports"><img src="assets/icons/search.svg"></div></div>
+          <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1"><div class="title1 topTitle" style="margin:0 0 0 25px;"><span>{{currentsite}}</span>
+            <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+            <div class="tooltiptext">Do you need Safety Escort?</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+      <div class="cont">
+          <div class="row">
+              <div class="col-lg-3 col-sm-12 btnvisible">
+                  <div class="optionlabelparent">
+                    <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)"  #optionlabel>
+                        <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisSecurity"><div class="label"> Select Quarter</div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                    </div>
+                    <div class="panel" hide="!item.isActive">
+                      <div class="accordionElements" *ngFor="let item of report" (click)="selectReport(item)"> <span class="dot"></span><p style="margin: 0 0 0 20px">{{item.title}}</p>   </div>
+                    </div>
+                  </div>
+                  <br>
+              </div>
+              <!-- Left Column Ends -->
+
+              <!-- Right Column Starts -->
+              <div class="col-lg-9 col-sm-12">
+                <!-- Placeholder for reports -->
+                  <!-- <div class="placeholderForReports"><p>Select the timeframe on the left to view and download your reserach report<br>&#8592;</p></div> -->
+                <!-- Reports -->
+                <div class="title1">
+                  {{reporttitle ? reporttitle :""}}
+                  <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions()">
+
+                </div>
+                <hr id="hr1">
+                <!-- write report code here -->
+
+
+
+                <div class="tables">
+                  <div class="dataTable">
+                      <div class="tableBox" style="display: block; padding: 0;">
+
+                          <!-- here form starts -->
+                          <div class="researchcontent">
+
+
+                            <div class="title">
+                              <div>
+                                <div class="pagetitle">
+                                  RESEARCH REPORT
+                                </div>
+                                <div class="pagesubtitle">
+                                  {{currentsite}} - {{selectedreport.title}}
+                                </div>
+                              </div>
+                              <img src="assets/icons/IVISsecurity_logo.png">
+                            </div>
+
+                            <div class="contents" *ngFor="let item of selectedreport.contents">
+                              <div class="conttitle">{{item.title}}</div>
+                              <div class="contcontent" *ngFor="let i of item.content">
+                                <ul>
+                                  <li>
+                                    <span style="font-weight: 600;" *ngIf="i.title">{{i.title}} - </span>
+                                    <span>{{i.content}}</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <!-- here form ends -->
+                      </div>
+                  </div>
+                 </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+            <!-- Column with Reports Ends -->
+            </div>
+            <!-- Row Ends -->
+        </div>
+        <!-- <div class="placeholderForEmpty">
+          Coming Soon...
+        </div> -->
+    </div>
+
+
+
+    <div id="modal">
+      <div class="close" (click)="closemodal()"></div>
+      <div id="modalcontent"></div>
+    </div>

@@ -1,0 +1,147 @@
+
+
+
+<div class="page">
+  <div style="width:100vw; overflow:hidden">
+    <div class="searchbar">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12" style="text-align:center;align-self: center;"><div  class="searchbox"><input type="text" placeholder="Search Reports"><img src="assets/icons/search.svg"></div></div>
+        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1"><div class="title1 topTitle" style="margin:0 0 0 25px;">Research
+          <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
+          <div class="tooltiptext">Do you need Safety Escort?</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+    <div class="cont">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 btnvisible" id = "topple" style="min-height: 30vh">
+
+
+                <!-- Quarters without multiple types of reports -->
+                <div class="optionlabelparent"  style="position: relative;overflow: visible;">
+                  <div class="optionlabel" Style="position:relative;" (click)="visible = !visible">
+                      <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><div class="label">Select Month</div><div class="download"></div><div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+                  </div>
+                  <div class="calender" *ngIf="visible" style="position: absolute; top:53px">
+                    <div class="title" style="margin: 5px 0 12px; text-align: center;">
+                      <i (click)="prevYear()" [className]="years[0]==2014 ? 'arrow left fade': 'arrow left'"></i>
+                      <span style="font-family: PS,sans-serif; font-size:18px;color:#fff; margin:0 30%;"><a style="width: 200px;">{{years[0]}}</a></span>
+                      <i (click)="nextYear()" [className]="years[0]==currentyear ? 'arrow right fade': 'arrow right' "></i></div>
+                    <div class="months">
+                      <div class="grid-cont">
+                        <div [className]="years[0]==currentyear && i>currentMonthIndex ? 'gridElements fadeout':'gridElements'" *ngFor="let month of months; let i=index" (click)="selectedmonth(i)">
+                          <span style="font-family: PS,sans-serif;">{{month}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <!-- generate report btn -->
+                <div style="text-align:center">
+                  <button class="generateBtn">
+                    GENERATE REPORT
+                  </button>
+                </div>
+            </div>
+            <!-- Left Column Ends -->
+
+            <!-- Right Column Starts -->
+            <div class="col-lg-9 col-sm-12">
+              <div class="title1">
+                Q3 2021
+                <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+              </div>
+              <hr id="hr1">
+              <!-- write report code here -->
+
+
+
+
+                <!-- Report start -->
+
+                <div class="tables" >
+
+
+                <div class="dataTable">
+                  <div class="tableBox" style="display: block; padding: 0;">
+
+                    <div class="pagecont" id="pagecont" *ngFor = "let page of ppt?.data; let i = index" [attr.data-index]="i" [style.display]="(page.pageType=='level_2')? 'flex':'block'">
+                      <div class="bars" *ngIf="page.pageType=='level_3'" style="top: -35px; left: 20px;">_</div>
+                      <div class="bars" *ngIf="page.pageType=='level_3'" style="top: -35px;">__________________________</div>
+                      <div class="bars" *ngIf="page.pageType=='level_3'" style=" bottom: 20px;">__________________________</div>
+                      <hr class="tophr" *ngIf="(page.pageType=='level_1')">
+                      <div class="pageheader"
+                       [ngClass]="[
+                       (page.pageType=='level_1' && i == 0)  ? 'pagetitle':
+                       (page.pageType=='level_1' && i != 0)  ? 'subpagetitle':
+                       (page.pageType=='level_2' ? 'level2': 'normalheader')
+                       ]">
+                        {{page.header}}
+                       </div>
+                       <div class="auth" *ngIf="page.pageType=='level_1'">
+                        {{page.content.description}}
+                       </div>
+                       <img src="assets/icons/logo_white.png" *ngIf=" (page.pageType=='level_1' && i == 0)" class="logo">
+                       <div  *ngIf="page.pageType!='level_1'" [ngClass]="page.pageType=='level_2' ? 'level2content':'othercontent'" >
+                        <div class="flexcontainer" >
+                          <div class="medias" *ngIf="cont(page.content).length !=0"
+                            [style.gridTemplateColumns]="
+                            cont(page.content).length == 1 ? 'repeat(1,1fr)' :
+                            cont(page.content).length == 2 ? 'repeat(2,1fr)' :
+                            cont(page.content).length == 3 ? 'repeat(2,1fr)' :
+                            cont(page.content).length >4 ? 'repeat(4,1fr)' : 'repeat(2,1fr)'" >
+                            <div class="mediaelems" *ngFor="let media of cont(page.content)">
+                              <img [src]="media" alt="" width="auto" *ngIf="checkExtension(media) == 'img'">
+                              <div  *ngIf="checkExtension(media) != 'img'">
+                                  <video style="background: #f54;width: 100%; margin-top: 10px;" width="auto" controls>
+                                    <source [src]="media" type='video/mp4'>
+                                  </video>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="descrp"  *ngIf="cont1(page.content).length !=0">
+                            <div class="contentelems" *ngFor="let content of cont1(page.content)">
+                              <div style="font-size: 18px; font-weight: 600;font-family: TP,sans-serif;letter-spacing: 2px;text-transform: uppercase;margin-left: 12px;" [style.color]="page.pageType=='level_2' ? '#1d1d1d':'#1d1d1d'" >{{content.header}}</div>
+                              <div style="font-size: 12px;margin-left: 15px;" *ngIf="content.description.length <= 1 ">{{content.description}}</div>
+                              <span *ngIf="content.description.length > 1 ">
+                                <ul *ngFor="let item of content.description">
+                                  <li>{{item}}</li>
+                                </ul>
+
+                              </span>
+                            </div>
+                            <div class="level2hr" *ngIf="page.pageType=='level_2'">______</div>
+                          </div>
+                        </div>
+                       </div>
+                       <hr class="bottomhr" *ngIf="(page.pageType=='level_1')">
+                    </div>
+                  </div>
+
+                </div>
+               </div>
+               <!-- Reports End here -->
+
+
+
+
+
+
+            </div>
+          <!-- Column with Reports Ends -->
+          </div>
+          <!-- Row Ends -->
+      </div>
+      <!-- <div class="placeholderForEmpty">
+        Coming Soon...
+      </div> -->
+  </div>
+
+
+
+  <div id="modal">
+    <div class="close" (click)="closemodal()"></div>
+    <div id="modalcontent"></div>
+  </div>

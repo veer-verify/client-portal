@@ -1,0 +1,438 @@
+{
+  "Status": "Success",
+  "Message": "List generated successfully",
+  "Sun": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Mon": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Tue": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Wed": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Thu": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Fri": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ],
+  "Sat": [
+    {
+      "data": [
+        {
+          "total": "525",
+          "icon": "Asset_17.png",
+          "type": "Vehicles"
+        },
+        {
+          "total": "0",
+          "icon": "Pump_Only.png",
+          "type": "Pump Only Rate"
+        },
+        {
+          "total": "63",
+          "icon": "Pump_to_store.png",
+          "type": "Pump-To-Store Conversion Rate"
+        },
+        {
+          "total": "462",
+          "icon": "Park_to_store.png",
+          "type": "Park-To-Store Conversion Rate"
+        },
+        {
+          "total": "1039",
+          "icon": "Group_Size3.png",
+          "type": "Total Group Size"
+        }
+      ],
+      "name": "Gas Pump Analytics"
+    },
+    {
+      "data": [
+        {
+          "total": "6",
+          "icon": "Store_Sanitation.png",
+          "type": "Store Sanitation Check"
+        },
+        {
+          "total": "41",
+          "icon": "Freezer_Activity1.png",
+          "type": "Freezer Activity"
+        },
+        {
+          "total": "289",
+          "icon": "Fridge_Activity.png",
+          "type": "Fridge Activity"
+        },
+        {
+          "total": "38",
+          "icon": "ATM_Activity.png",
+          "type": "ATM Activity"
+        },
+        {
+          "total": "0",
+          "icon": "ATM_Open.png",
+          "type": "ATM Refresh Rate"
+        }
+      ],
+      "name": "Customer Analytics"
+    }
+  ]
+}
