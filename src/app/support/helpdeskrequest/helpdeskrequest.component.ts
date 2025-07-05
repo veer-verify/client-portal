@@ -34,7 +34,7 @@ export class HelpdeskrequestComponent implements OnInit {
   placeholder = "Data is not available";
   site: any;
   subscription: Subscription;
-  commonUrl = `http://usstaging.ivisecurity.com:8080/common/downloadFile_1_0?requestName=service-requests-test&assetName=}`
+  // commonUrl = `http://usstaging.ivisecurity.com:8080/common/downloadFile_1_0?requestName=service-requests-test&assetName=}`
 
 
   constructor(

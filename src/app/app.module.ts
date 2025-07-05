@@ -144,11 +144,11 @@ import { ImagePipe } from './services/pipes/image.pipe';
     //   useClass: AuthInterceptor,
     //   multi: true
     // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorInterceptor,
-    //   multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
     provideCharts(withDefaultRegisterables()),
     DatePipe,
     {

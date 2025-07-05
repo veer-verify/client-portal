@@ -18,21 +18,15 @@ export class ProximityService {
   constructor(private http: HttpClient) { }
 
   getMetadata() {
-    let url = `${environment.commonUrl}/getValuesListByType_1_0`;
+    let url = `${environment.metadataUrl}/getValuesListByType_1_0`;
     return this.http.get(url);
   }
 
   getMetadataByType(payload: any) {
-    let url = `${environment.commonUrl}/getValuesListByType_1_0`;
+    let url = `${environment.metadataUrl}/getValuesListByType_1_0`;
     let params = new HttpParams().set('type', payload);
     return this.http.get(url, {params: params});
   }
-
-  // getMetadataByType1(payload: any) {
-  //   let url = 'http://usstaging.ivisecurity.com:8080/common/getValuesListByType_1_0';
-  //   let params = new HttpParams().set('type', payload);
-  //   return this.http.get(url, {params: params});
-  // }
 
   modifyAssetForDevice(payload: any) {
     let url = environment.adsUrl + '/modifyAssetForDevice_1_0';

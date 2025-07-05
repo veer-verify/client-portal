@@ -121,8 +121,7 @@ export class ApiService {
 
 
   getHelpDeskCategories() {
-    // let url = `${this.baseurl}businessInterface/helpdesk/categoryList_1_0`;
-    let url = `${environment.helpdeskUrl}/generic/categoryList_1_0`;
+    let url = `${environment.helpdeskUrl}/categoryList_1_0`;
     // var a = this.storageService.getEncrData('user');
     // let payload = {
     //   userName: a.UserName,
@@ -133,8 +132,7 @@ export class ApiService {
   }
 
   addHelpDeskRequest(payload: any, file?: any) {
-    // let url = `${this.baseurl}businessInterface/helpdesk/addServiceRequest_1_0`;
-    let url = `${environment.helpdeskUrl}/supportRequests/addService_1_0`;
+    let url = `${environment.helpdeskUrl}/addService_1_0`;
     var user = this.storageService.getEncrData('user');
     let formData = new FormData();
 
@@ -161,7 +159,7 @@ export class ApiService {
   }
 
   updateHelpDeskRequest(payload: any) {
-    let url = `${environment.helpdeskUrl}/supportRequests/updateService_1_0/${payload?.serviceReqId}`;
+    let url = `${environment.helpdeskUrl}/updateService_1_0/${payload?.serviceReqId}`;
     var user = this.storageService.getEncrData('user');
     let formData = new FormData();
 
@@ -181,7 +179,7 @@ export class ApiService {
   }
 
   getHelpDeskRequests(payload?: any) {
-    let url = `${environment.helpdeskUrl}/supportRequests/ListServiceRequest_1_0`;
+    let url = `${environment.helpdeskUrl}/ListServiceRequest_1_0`;
     var user = this.storageService.getEncrData('user');
 
     // let departments: Array<any> = Array.from(user?.roleList, (item: any) => item.department);
@@ -192,7 +190,7 @@ export class ApiService {
     // }
 
     let params = new HttpParams();
-    if(user && this.storageService.isUser()) {
+    if(user && !this.storageService.isSuperAdmin()) {
       params = params.set('userId', user?.UserId);
     }
     if(payload?.siteId) {
@@ -227,7 +225,6 @@ export class ApiService {
   }
 
   deleteHelpDeskRequests(payload: any) {
-    // let url = `${this.baseurl}businessInterface/helpdesk/deleteServiceRequest_1_0`;
     // var a = this.storageService.getEncrData('user');
     // var b = this.storageService.getEncrData('siteidfromgaurdpage');
     // var payload = {
@@ -237,12 +234,12 @@ export class ApiService {
     //   siteId: b.siteId,
     //   serviceId: serviceid
     // }
-    let url = `${environment.helpdeskUrl}/supportRequests/deleteServiceRequest_1_0/${payload?.serviceReqId}`;
+    let url = `${environment.helpdeskUrl}/deleteServiceRequest_1_0/${payload?.serviceReqId}`;
     return this.http.put(url, null);
   }
 
   assignServiceRequest(payload: any) {
-    let url = `${environment.helpdeskUrl}/supportRequests/assignServiceRequest_1_0`;
+    let url = `${environment.helpdeskUrl}/assignServiceRequest_1_0`;
     var user = this.storageService.getEncrData('user');
     // payload.modifiedBy = user?.UserId;
     payload.assignedBy = user?.UserId;

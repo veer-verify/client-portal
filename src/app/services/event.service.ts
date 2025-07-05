@@ -25,7 +25,7 @@ export class EventService {
   }
 
   public getSites(): any {
-    // let url = `http://54.92.215.87:945/incidents/incidentSitesList_1_0`;
+    // let url = `http://54.92.215.87:945/incidentSitesList_1_0`;
     let url = `${environment.sitesUrl}/listSites_1_0`;
     return this.http.get(url);
   }
@@ -38,12 +38,12 @@ export class EventService {
 
   //incidents
   getTags() {
-    let url = `${environment.incidentsUrl}/incidents/List_1_0/actionTag`;
+    let url = `${environment.incidentsUrl}/List_1_0/actionTag`;
     return this.http.get(url);
   }
 
   incidentList(payload?: any) {
-    let url = `${environment.incidentsUrl}/incidents/incidentList_1_0`;
+    let url = `${environment.incidentsUrl}/incidentList_1_0`;
     let params = new HttpParams();
 
     var user = this.storageService.getEncrData('user');
@@ -81,7 +81,7 @@ export class EventService {
 
 
   createIncident(payload: any, file: any) {
-    let url = `${environment.incidentsUrl}/incidents/createIncident_1_0`;
+    let url = `${environment.incidentsUrl}/createIncident_1_0`;
     let formData = new FormData();
     let x = payload.eventFromTime;
     let y = payload.eventToTime;

@@ -61,12 +61,12 @@ export class SiteService {
   }
 
   getHelpDeskCategories() {
-    let url = `${environment.helpdeskUrl}/serviceHelpdesk/categoryList_1_0`;
+    let url = `${environment.helpdeskUrl}/categoryList_1_0`;
     return this.http.get(url);
   }
 
   addHelpDeskRequest(payload: any) {
-    let url = `${environment.helpdeskUrl}/serviceHelpdesk/addService_1_0`;
+    let url = `${environment.helpdeskUrl}/addService_1_0`;
     var user = this.storageService.getEncrData('user');
     let formData = new FormData();
     formData.append('siteId', payload.siteId ? payload.siteId : payload.siteId);
@@ -82,7 +82,7 @@ export class SiteService {
   }
 
   updateHelpDeskRequest(payload: any) {
-    let url = `${environment.helpdeskUrl}/serviceHelpdesk/updateService_1_0/${payload?.serviceReqId}`;
+    let url = `${environment.helpdeskUrl}/updateService_1_0/${payload?.serviceReqId}`;
     var user = this.storageService.getEncrData('user');
     let formData = new FormData();
     formData.append('siteId', payload.siteId ? payload.siteId : payload.siteId);
@@ -98,7 +98,7 @@ export class SiteService {
   }
 
   getHelpDeskRequests(payload: any) {
-    let url = `${environment.helpdeskUrl}/serviceHelpDesk/ListServiceHelpDesk_1_0`;
+    let url = `${environment.helpdeskUrl}/ListServiceHelpDesk_1_0`;
     let params = new HttpParams();
     if (payload?.site?.siteId) {
       params = params.set('siteId', payload?.site?.siteId);
@@ -107,12 +107,12 @@ export class SiteService {
   }
 
   deleteHelpDeskRequests(payload: any) {
-    let url = `${environment.helpdeskUrl}/serviceHelpDesk/deleteServiceHelpDesk_1_0/${payload?.serviceReqId}`;
+    let url = `${environment.helpdeskUrl}/deleteServiceHelpDesk_1_0/${payload?.serviceReqId}`;
     return this.http.put(url, null);
   }
 
   listSiteServices(payload: any): Observable<any> {
-    let url = `${environment.sitesUrl}/site/listSiteServices_1_0`;
+    let url = `${environment.sitesUrl}/listSiteServices_1_0`;
     let params = new HttpParams().set('siteId', payload?.siteId);
     return this.http.get(url, {params: params});
   }
