@@ -42,9 +42,9 @@ export class AuthService {
     let url = environment.authUrl + `/user_login_1_0`;
     let payload = {
       userName: username,
-      password: btoa(JSON.stringify(password)),
+      // password: btoa(JSON.stringify(password)),
+      password: password,
       callingSystemDetail: 'portal',
-      // createdBy: 1
     };
     return this.http.post(url, payload);
   }

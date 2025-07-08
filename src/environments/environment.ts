@@ -21,6 +21,7 @@ export const environment = {
   authUrl: `${dev_url}/userDetails`,
   sitesUrl: `${dev_url}/vipsites`,
   metadataUrl: `${dev_url}/metadata`,
+  commonDownUrl: `${dev_url}/common`,
   adsUrl: `${dev_url}/proximityAdsMain`,
   rulesUrl: `${dev_url}/proximityAdsRules `,
   insightsUrl: `${dev_url}/insights`,
@@ -28,9 +29,7 @@ export const environment = {
   sensorUrl:`${dev_url}/sensors`,
   faqUrl: `${dev_url}/faq`,
   inventoryUrl: `${dev_url}/inventory`,
-  // genericUrl: `${dev_url}/generic`,
   helpdeskUrl: `${dev_url}/supportRequests`,
-  commonDownUrl: `${dev_url}/common`,
   incidentsUrl: `${dev_url}/incidents`,
 };
 

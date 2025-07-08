@@ -4,7 +4,7 @@ export const environment = {
   production: true,
 
   // authUrl: `http://rsmgmt.ivisecurity.com:8543/userDetails`,
-  // commonUrl: `http://rsmgmt.ivisecurity.com:8844/metadata`,
+  // metadataUrl: `http://rsmgmt.ivisecurity.com:8844/metadata`,
   // commonDownUrl: `http://rsmgmt.ivisecurity.com:8001/common`,
   // sitesUrl: `http://rsmgmt.ivisecurity.com:8943`,
   // incidentsUrl: `http://rsmgmt.ivisecurity.com:8945`,
@@ -17,7 +17,7 @@ export const environment = {
 
 
   authUrl: `https://authivis-rsmgmt.ivisecurity.com/userDetails`,
-  commonUrl: `https://metadata-rsmgmt.ivisecurity.com/metadata`,
+  metadataUrl: `https://metadata-rsmgmt.ivisecurity.com/metadata`,
   commonDownUrl: `https://common-s3-rsmgmt.ivisecurity.com/common`,
   sitesUrl: `https://vipsites-rsmgmt.ivisecurity.com`,
   incidentsUrl: `https://alerts-rsmgmt.ivisecurity.com`,

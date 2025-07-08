@@ -455,8 +455,7 @@ export class ApiService {
   }
 
   createUserWithShortDetails(payload: any) {
-    // let url = `${environment.authUrl}/createUserWithShortDetails_1_0`;
-    let url = 'http://192.168.0.180:8922/userDetails/createUserWithShortDetails_1_0';
+    let url = `${environment.authUrl}/createUserWithShortDetails_1_0`;
     var user = this.storageService.getEncrData('user');
 
     payload.realm = 'IVISUSA';

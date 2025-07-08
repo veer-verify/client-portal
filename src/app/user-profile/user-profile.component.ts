@@ -34,7 +34,7 @@ export class UserProfileComponent {
       questionOptions: [],
       hasDependent: false,
       templateOptions: {
-        Label: 'First Name',
+        Label: 'First Name*',
         required: true,
       },
     },
@@ -45,7 +45,7 @@ export class UserProfileComponent {
       questionOptions: [],
       hasDependent: false,
       templateOptions: {
-        Label: 'Last Name',
+        Label: 'Last Name*',
         required: true,
       },
     },
@@ -56,7 +56,7 @@ export class UserProfileComponent {
       questionOptions: [],
       hasDependent: false,
       templateOptions: {
-        Label: 'User Name',
+        Label: 'User Name*',
         required: true,
       },
     },
@@ -67,7 +67,7 @@ export class UserProfileComponent {
       questionOptions: [],
       hasDependent: false,
       templateOptions: {
-        Label: 'Email',
+        Label: 'Email*',
         required: true,
       },
     },
@@ -83,7 +83,7 @@ export class UserProfileComponent {
       questionOptions: [],
       hasDependent: false,
       templateOptions: {
-        Label: 'select Role',
+        Label: 'Select Role*',
         required: true,
       },
     },
@@ -501,7 +501,6 @@ export class UserProfileComponent {
     this.showLoader = true;
     this.apiservice.getUserNamesByUserName().subscribe({
       next: (res: any) => {
-        console.log(res)
         this.showLoader = false;
         if (res.statusCode == 200) {
           this.usersList = res.data;

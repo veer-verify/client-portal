@@ -29,7 +29,13 @@ export class VideoPlayerComponent {
   offerData: any;
 
   hitStream: boolean = false;
+  encoded: any;
   ngOnInit(): void {
+    const username = "admin";
+    const password = "verifai123789";
+    let credentails = `${username}:${password}`;
+    this.encoded = btoa(credentails);
+
     this.hitStream = true;
     this.requestICEServers();
   }
@@ -47,6 +53,9 @@ export class VideoPlayerComponent {
       this.showLoader = true;
       fetch(this.videoData + "whep", {
         method: 'OPTIONS',
+                headers: {
+          'Authorization': `Basic ${this.encoded}`
+        }
       }).then((res) => {
         this.showLoader = false
         this.peerConnection = new RTCPeerConnection({
@@ -218,6 +227,7 @@ export class VideoPlayerComponent {
       method: 'POST',
       headers: {
         'Content-Type': 'application/sdp',
+        'Authorization': `Basic ${this.encoded}`
       },
       body: offer.sdp,
     }).then((res: any) => {
