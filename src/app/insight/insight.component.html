@@ -179,10 +179,10 @@
       </div>
       <div class="col-lg-1" style="overflow-y: auto; overflow-x: hidden; height: 60vh;">
         <div *ngFor="let img of images?.Images">
-          <img [src]="images.baseUrl + img.imageName"
+          <img [src]="images.baseUrl + img.imageName | image | async"
             [className]="zoomIn ? 'insight-image-active' : 'insight-image'"
             (click)="openZoomModel(images.baseUrl + img.imageName)"
-            alt="img">
+            alt="Loading...">
         </div>
       </div>
     </div>
@@ -225,7 +225,7 @@
 
     <div class="formcont max-center" style="max-width: 800px;" >
       <div class="modalform">
-        <img [src]="currentImg" width="100%" height="500px" style="cursor: zoom-out;" alt="" (click)="closeZoomModal()">
+        <img [src]="currentImg | image | async" width="100%" height="500px" style="cursor: zoom-out;" alt="Loading..." (click)="closeZoomModal()">
       </div>
     </div>
   </div>

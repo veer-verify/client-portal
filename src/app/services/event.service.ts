@@ -36,7 +36,6 @@ export class EventService {
   }
 
 
-  //incidents
   getTags() {
     let url = `${environment.incidentsUrl}/List_1_0/actionTag`;
     return this.http.get(url);
@@ -198,7 +197,7 @@ export class EventService {
   }
 
   getHealth(payload?: any): Observable<any> {
-    let url = environment.sitesUrl + '/deviceHealth/generateDeviceHealthstats_2_0';
+    let url = environment.sitesUrl + '/generateDeviceHealthstats_2_0';
     let user = this.storageService.getEncrData('user');
     let params = new HttpParams();
     if(user) {
@@ -217,7 +216,7 @@ export class EventService {
   }
 
   downtimesForDeviceId(payload?: any): Observable<any> {
-    let url = environment.sitesUrl + '/deviceHealth/downtimesForDeviceIdandDuration';
+    let url = environment.sitesUrl + '/downtimesForDeviceIdandDuration';
     let params = new HttpParams();
     // if(payload?.siteId) {
     //   params = params.set('site_id', payload.siteId);
@@ -232,7 +231,7 @@ export class EventService {
   }
 
   nvrList(payload: any) {
-    let url = `${environment.incidentsUrl}/NVRDetails/NVRList_1_0`;
+    let url = `${environment.incidentsUrl}/NVRList_1_0`;
     let params = new HttpParams();
     if(payload?.siteId) {
       params = params.set('siteId', payload?.siteId)
@@ -241,15 +240,14 @@ export class EventService {
   }
 
   updateNVRDetails(payload: any) {
-    let url = `${environment.incidentsUrl}/NVRDetails/updateNVRDetails_1_0/${payload?.id}`;
+    let url = `${environment.incidentsUrl}/updateNVRDetails_1_0/${payload?.id}`;
     return this.http.put(url, payload);
   }
 
 
 
-  baseUrl: string = "http://3.80.46.52:432";
   getDetailsForVideoOrUrl(payload: any) {
-    let url = this.baseUrl + "/SalesLiveEvents/getDetailsForVideoOrUrl_1_0";
+    let url = environment.sitesUrl + "/getDetailsForVideoOrUrl_1_0";
     let formData = new FormData();
     if(payload.rtspUrl) {
       formData.append("rtspUrl", payload.rtspUrl);
@@ -261,7 +259,7 @@ export class EventService {
   }
 
   getImageToDrawPolygon_1_0(payload: any) {
-    let url = this.baseUrl + `/SalesLiveEvents/getImageToDrawPolygon_1_0/${payload}`;
+    let url = environment.sitesUrl + `/getImageToDrawPolygon_1_0/${payload}`;
     return this.http.get(url);
   }
 

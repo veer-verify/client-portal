@@ -158,6 +158,6 @@
     </div>
   
     <div class="dialog-content">
-      <video [src]="environment + currentItem?.filename + '&requestName=lapsevideos' + '&levels=' + currentItem?.cameraId" autoplay controls class="video"></video>
+      <video [src]="environment + currentItem?.filename + '&requestName=lapsevideos' + '&levels=' + currentItem?.cameraId | image | async" autoplay controls class="video"></video>
     </div>
   </div>

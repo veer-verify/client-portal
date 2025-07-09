@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, Subject, take } from 'rxjs';
+import { BehaviorSubject, finalize, Subject, take } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
@@ -83,7 +83,6 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
-
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
@@ -170,7 +169,7 @@ export class NavbarComponent implements OnInit {
       next: (res: any) => {
         this.showLoader = false;
         localStorage.clear();
-        this.storageService.site_sub.next(null);
+        this.storageService.site_sub.complete();
         this.authservice.isLoggedin.complete();
         this.router.navigateByUrl('/login');
       },

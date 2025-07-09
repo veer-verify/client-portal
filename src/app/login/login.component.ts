@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
     // this.showsessionerror = this.authservice.showSessonError;
     // setTimeout(() => {this.showsessionerror = '';}, 5000);
 
-    localStorage.clear()
+    localStorage.clear();
+    
     this.alertService.getMessage().subscribe((res: any) => {
       this.errInfo = res;
     });

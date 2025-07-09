@@ -256,9 +256,8 @@ export class ApiService {
 
   
 
-  //insights
   getNonWorkingDays(siteId: any, year: any) {
-    let url = `${environment.insightsUrl}/insights/notWorkingDays_1_0?siteId=${siteId}&year=${year}`;
+    let url = `${environment.insightsUrl}/notWorkingDays_1_0?siteId=${siteId}&year=${year}`;
     return this.http.get(url);
   }
 
@@ -270,7 +269,7 @@ export class ApiService {
 
   getBiAnalyticsReport(siteId: any, startDate: any, endDate: any) {
     // console.log(endDate)
-    let biAnalyticsReport = environment.insightsUrl + '/insights/biAnalyticsReport_1_0?';
+    let biAnalyticsReport = environment.insightsUrl + '/biAnalyticsReport_1_0?';
     const newurl1 = `${biAnalyticsReport}SiteId=${siteId}&fromDate=${startDate}&toDate=${endDate}`;
     // console.log("bireport: ",newurl1);
     return this.http.get(newurl1);
@@ -288,17 +287,17 @@ export class ApiService {
 
   getBiAnalyticsResearch(siteId: any, startDate: any) {
     // console.log("researchTrends"+siteId,startDate)
-    let biAnalyticsReport = environment.insightsUrl + '/insights/getAnalyticsListforSite_1_0?';
+    let biAnalyticsReport = environment.insightsUrl + '/getAnalyticsListforSite_1_0?';
     const newurl1 = `${biAnalyticsReport}SiteId=${siteId}&date=${startDate}`
-    const newurl = environment.insightsUrl + "/insights/getAnalyticsListforSite_1_0?SiteId=1002&date=2022-03-01";
+    const newurl = environment.insightsUrl + "/getAnalyticsListforSite_1_0?SiteId=1002&date=2022-03-01";
     // console.log("bireport: ",newurl);
     return this.http.get(newurl1);
   }
 
 
   getBiTrends1(siteId: any, date: any, typeid: any) {
-    // let url1 = `${environment.insightsUrl}/insights/analyticTrends_1_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
-    let url = `${environment.insightsUrl}/insights/analyticTrends_2_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
+    // let url1 = `${environment.insightsUrl}/analyticTrends_1_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
+    let url = `${environment.insightsUrl}/analyticTrends_2_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
     return this.http.get(url)
   }
 
@@ -320,7 +319,7 @@ export class ApiService {
   }
 
   listInsightImages(payload: any) {
-    let url = `${environment.sitesUrl}/insights/listInsightImages_1_0`;
+    let url = `${environment.sitesUrl}/listInsightImages_1_0`;
     let params = new HttpParams().set('siteId', payload?.siteId)
     return this.http.get(url, {params: params});
   }

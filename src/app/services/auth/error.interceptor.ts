@@ -35,7 +35,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     //     return next.handle(this.addToken(request, accessToken));
     //   })
     // );
-    // console.log(token)
 
     if (token) {
       request = this.addToken(request, JSON.parse(token));
