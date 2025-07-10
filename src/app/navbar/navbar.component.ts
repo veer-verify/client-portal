@@ -169,7 +169,7 @@ export class NavbarComponent implements OnInit {
       next: (res: any) => {
         this.showLoader = false;
         localStorage.clear();
-        this.storageService.site_sub.complete();
+        this.storageService.site_sub.next(null);
         this.authservice.isLoggedin.complete();
         this.router.navigateByUrl('/login');
       },
