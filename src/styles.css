@@ -573,17 +573,15 @@ input:focus {
 /* Searchbar CSS ends here */
 
 .placeholderForEmpty {
-  letter-spacing: 5px;
-  margin: 25px;
-  font-size: 20px;
+  letter-spacing: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
   color: #fff;
   font-family: PS, sans-serif;
   text-transform: uppercase;
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 15vh;
-  justify-content: center;
-  text-align: center;
 }
 
 

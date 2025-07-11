@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
   name: 'image'
@@ -8,6 +9,7 @@ export class ImagePipe implements PipeTransform {
 
   constructor(
     private http: HttpClient,
+    private sanitizer: DomSanitizer
   ) { }
 
   

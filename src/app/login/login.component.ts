@@ -179,13 +179,12 @@ export class LoginComponent implements OnInit {
   }
 
   manageUserSession() {
-    this.authservice.manageUserSession('logIn').subscribe((res: any) => {
-      // console.log(res);
-      localStorage.setItem('sId', JSON.stringify(res.sessionId ?? ''))
-    }, (err) => {
-      console.log(err)
+    this.authservice.manageUserSession('logIn').subscribe({
+      next: (res: any) => {
+        localStorage.setItem('sId', JSON.stringify(res.sessionId ?? ''));
+      }
     })
-  }
+  };
 
   showPassword: boolean = false;
   showOldPassword: boolean = false;

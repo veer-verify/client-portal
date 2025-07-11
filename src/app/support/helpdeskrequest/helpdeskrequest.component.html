@@ -209,7 +209,7 @@
               <!-- <iframe width="500" height="600" [attr.src]="sanitizedURL" type="application/pdf"></iframe> -->
               <!-- <object [attr.data]="sanitizedURL" type="application/pdf" width="100%" height="500px"></object> -->
               <!-- <embed src="http://usstaging.ivisecurity.com:8001/common/downloadFile_1_0?assetName=TermsandConditions.pdf&requestName=TermsandConditions" type=""> -->
-                <iframe [src]="sanitizeUrl(environment + '/downloadFile_1_0?assetName=TermsandConditions.pdf&requestName=TermsandConditions')"  class="tncblock" id="embed"></iframe>
+                <iframe [src]="environment + '/downloadFile_1_0?assetName=TermsandConditions.pdf&requestName=TermsandConditions' | sanitize"  class="tncblock" id="embed"></iframe>
             </div>
           </div>
         </div>

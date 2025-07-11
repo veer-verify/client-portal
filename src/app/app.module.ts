@@ -65,6 +65,7 @@ import {
 } from 'angularx-social-login';
 import { AddIncidentComponent } from './add-incident/add-incident.component';
 import { ImagePipe } from './services/pipes/image.pipe';
+import { SanitizePipe } from './services/pipes/sanitize.pipe';
 
 
 
@@ -116,7 +117,8 @@ import { ImagePipe } from './services/pipes/image.pipe';
     CreateFormComponent,
     ClientFormComponent,
     AddIncidentComponent,
-    ImagePipe
+    ImagePipe,
+    SanitizePipe
   ],
   imports: [
     BrowserModule,

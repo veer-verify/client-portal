@@ -155,30 +155,23 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    // this.showLoader = true;
-    // this.authservice.logout().subscribe((res:any)=>{
-    //   this.showLoader = false;
-    //     localStorage.clear();
-    //     this.authservice.isLoggedin.next(false);
-    //     this.router.navigateByUrl('/login');
-    // });
-    // this.siteSer.serviceData.complete();
-
     this.showLoader = true;
     this.authservice.manageUserSession('logOut').subscribe({
-      next: (res: any) => {
-        this.showLoader = false;
-        localStorage.clear();
-        this.storageService.site_sub.next(null);
-        this.authservice.isLoggedin.complete();
-        this.router.navigateByUrl('/login');
-      },
       error: (err: any) => {
         this.showLoader = false;
-        localStorage.clear();
-        this.storageService.site_sub.next(null);
-        this.authservice.isLoggedin.complete();
         this.router.navigateByUrl('/login');
+        localStorage.clear();
+        this.storageService.site_sub.complete();
+        this.authservice.isLoggedin.complete();
+        window.location.reload();
+      },
+      complete: () => {
+        this.showLoader = false;
+        this.router.navigateByUrl('/login');
+        localStorage.clear();
+        this.storageService.site_sub.complete();
+        this.authservice.isLoggedin.complete();
+        window.location.reload();
       }
     })
   }
