@@ -169,6 +169,10 @@
     }
   }
 
+  .title .label {
+    color: #fff;
+  }
+
   .title1 {
     text-transform: none;
   }

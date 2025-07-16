@@ -17,7 +17,8 @@
         <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
           <div class="title1 topTitle" style="margin:0 0 0 25px;">
             <!-- <span>Support Helpdesk</span> -->
-            <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{ currentSite?.siteName }}</span>
+            <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{
+              currentSite?.siteName }}</span>
             <!-- <div class=" action-icons">
               <div>&nbsp;</div>
             </div> -->
@@ -32,23 +33,25 @@
   <div class="cont">
     <div class="row">
       <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
-        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index" (click)="footageList(site, i)">
-            <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
-                <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
-                <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA" *ngIf="navActive == i">
-                <div class="label">{{ site?.siteName }} </div>
-                <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
-            </div>
+        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
+          (click)="footageList(site, i)">
+          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
+            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
+            <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA"
+              *ngIf="navActive == i">
+            <div class="label">{{ site?.siteName }} </div>
+            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
+          </div>
         </div>
         <br>
-    </div>
+      </div>
 
 
-    <div class="col-lg-9 col-sm-12">
+      <div class="col-lg-9 col-sm-12">
         <div>
-            <!-- <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{ currentSite?.siteName }}</span>
+          <!-- <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{ currentSite?.siteName }}</span>
             <hr class="mb-0" id="hr1"> -->
-            <div class="title1 d-flex justify-content-between">
+          <div class="title">
             <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
             <div class="row mx-0 mt-1 w-100">
               <!-- <div class="col-md-3 ps-0">
@@ -64,6 +67,7 @@
                   <option *ngFor="let item of camData" [value]="item?.cameraId">{{item?.name}}</option>
                 </select>
               </div>
+
               <div class="col-lg-2 ps-0">
                 <span class="label">From Date</span>
                 <div class="input-group">
@@ -78,8 +82,10 @@
                   <button class="btn btn-outline-light py-0" (click)="d2.toggle()" type="button"><img src="assets/icons/calender.svg" alt="" width="12"></button>
                 </div>
               </div>
+
               <div class="col-lg-1 ps-0" *ngIf="fromDate != '' || toDate != ''">
-                <button class="btn btn-sm btn-outline-danger mt-4" (click)="fromDate = ''; toDate = ''; filter()">Clear</button>
+                <button class="btn btn-sm btn-outline-danger mt-4"
+                  (click)="fromDate = ''; toDate = ''; filter()">Clear</button>
               </div>
             </div>
             <div class="me-3">
@@ -91,41 +97,46 @@
             <table class="table table-hover" id="mytable">
               <thead style="position: sticky; top: 0; z-index: 1;">
                 <tr class="form1">
-                <th>No</th>
-                <th scope="col">
-                  <span>Camera</span>
-                  <img (click)="sort('cameraName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                </th>
-                <th scope="col">
-                  <span>Generated Date</span>
-                  <img (click)="sort('generatedDate')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                </th>
-                <th scope="col" class="text-center">
-                  <span>Clip</span>
-                </th>
-                <th scope="col" class="text-center">
-                  <span>Info</span>
-                </th>
-                <!-- <th></th> -->
+                  <th>No</th>
+                  <th scope="col">
+                    <span>Camera</span>
+                    <img (click)="sort('cameraName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                  </th>
+                  <th scope="col">
+                    <span>Generated Date</span>
+                    <img (click)="sort('generatedDate')" class="pointer ms-1" src="assets/icons/sorticon.svg"
+                      width="15px">
+                  </th>
+                  <th scope="col" class="text-center">
+                    <span>Clip</span>
+                  </th>
+                  <th scope="col" class="text-center">
+                    <span>Info</span>
+                  </th>
+                  <!-- <th></th> -->
                 </tr>
               </thead>
 
               <tbody>
-                <tr *ngFor="let item of newEventData; let i=index" [style.background-color]="tableIndex == i ? '#ababab': ''">
+                <tr *ngFor="let item of newEventData; let i=index"
+                  [style.background-color]="tableIndex == i ? '#ababab': ''">
                   <td>{{i+1}}</td>
-                    <td>{{item?.cameraName}}</td>
-                    <td>{{item?.generatedDate | date: 'short'}}</td>
-                    <td class="text-center">
-                      <img src="assets/icons/play_circle_black.svg" class="me-2 pointer" alt="" width="18" (click)="openPlayModel(item)">
-                    </td>
-                    <td class="text-center">
-                      <img src="assets/icons/info-outline.svg" class="pointer" alt="" width="16" (click)="openInfoModel(item)">
-                    </td>
+                  <td>{{item?.cameraName}}</td>
+                  <td>{{item?.generatedDate | date: 'short'}}</td>
+                  <td class="text-center">
+                    <img src="assets/icons/play_circle_black.svg" class="me-2 pointer" alt="" width="18"
+                      (click)="openPlayModel(item)">
+                  </td>
+                  <td class="text-center">
+                    <img src="assets/icons/info-outline.svg" class="pointer" alt="" width="16"
+                      (click)="openInfoModel(item)">
+                  </td>
                 </tr>
               </tbody>
             </table>
             <!-- table -->
-            <div class="d-flex align-items-center justify-content-center" style="height: 70%;" *ngIf="paginatedData.length == 0">
+            <div class="d-flex align-items-center justify-content-center" style="height: 70%;"
+              *ngIf="paginatedData.length == 0">
               <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
             </div>
           </div>
@@ -136,28 +147,30 @@
   </div>
 </div>
 
-  <div class="new-dialog" id="infoModel">
-    <div class="dialog-header d-flex justify-content-between p-1">
-      <p>Camera timelapse configuration details</p>
-      <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeModel('infoModel')"></p>
-    </div>
-  
-    <div class="dialog-content" style="width: 500px;">
-      <ul>
-        <li>Frame Capture Rate:&nbsp;<span class="fw-bold">1 frame in {{currentItem?.lapseFrequency}} min</span></li>
-        <li>Timelapse Video Start Time:&nbsp;<span class="fw-bold">{{currentItem?.lapseSchedule}}nd hour</span></li>
-        <li>Timelapse Video Mode:&nbsp;<span class="fw-bold">Daily</span></li>
-      </ul>
-    </div>
+<div class="new-dialog" id="infoModel">
+  <div class="dialog-header d-flex justify-content-between p-1">
+    <p>Camera timelapse configuration details</p>
+    <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeModel('infoModel')"></p>
   </div>
 
-  <div class="new-dialog" id="playModel">
-    <div class="dialog-header d-flex justify-content-between p-1">
-      <p>{{currentItem?.cameraName}} - Timelapse Video</p>
-      <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeModel('playModel')"></p>
-    </div>
-  
-    <div class="dialog-content">
-      <video [src]="environment + currentItem?.filename + '&requestName=lapsevideos' + '&levels=' + currentItem?.cameraId | image | async" autoplay controls class="video"></video>
-    </div>
+  <div class="dialog-content" style="width: 500px;">
+    <ul>
+      <li>Frame Capture Rate:&nbsp;<span class="fw-bold">1 frame in {{currentItem?.lapseFrequency}} min</span></li>
+      <li>Timelapse Video Start Time:&nbsp;<span class="fw-bold">{{currentItem?.lapseSchedule}}nd hour</span></li>
+      <li>Timelapse Video Mode:&nbsp;<span class="fw-bold">Daily</span></li>
+    </ul>
   </div>
+</div>
+
+<div class="new-dialog" id="playModel">
+  <div class="dialog-header d-flex justify-content-between p-1">
+    <p>{{currentItem?.cameraName}} - Timelapse Video</p>
+    <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeModel('playModel')"></p>
+  </div>
+
+  <div class="dialog-content">
+    <video
+      [src]="environment + currentItem?.filename + '&requestName=lapsevideos' + '&levels=' + currentItem?.cameraId | image | async"
+      autoplay controls class="video"></video>
+  </div>
+</div>

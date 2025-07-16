@@ -1,13 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
-import { DatePipe, formatDate } from '@angular/common';
-import { Router } from '@angular/router';
-import { AlertService } from '../services/alertservice/alert-service.service';
-import { AuthService } from '../services/auth/authservice.service';
+import { DatePipe } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
-import { SiteService } from '../services/site.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
 
@@ -23,15 +19,11 @@ export class TimelapseComponent implements OnInit {
 
   constructor(
     private apiservice: ApiService,
-    private router: Router,
-    private alertService: AlertService,
-    private authservice: AuthService,
     private storageService: StorageService,
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
-    private siteSer: SiteService
-    ) { }
+  ) { }
 
     userData: any;
     currentTime: any;
@@ -44,10 +36,10 @@ export class TimelapseComponent implements OnInit {
         this.navActive = res?.index
       });
 
-      let d1 = new Date();
-      let d2 = new Date(d1);
-      d2.setMinutes (d1.getMinutes() - 1440);
-      this.currentTime = formatDate(d2, 'yyyy-MM-ddThh:mm:ss', 'en-us')
+      // let d1 = new Date();
+      // let d2 = new Date(d1);
+      // d2.setMinutes (d1.getMinutes() - 1440);
+      // this.currentTime = formatDate(d2, 'yyyy-MM-ddThh:mm:ss', 'en-us')
 
       this.getSitesListForUserName();
       this.getTags();
@@ -199,7 +191,6 @@ export class TimelapseComponent implements OnInit {
     })
   }
 
-  // siteId: any = '';
   cameraId: any = '';
   objectName: any = '';
   actionTag: any = '';
