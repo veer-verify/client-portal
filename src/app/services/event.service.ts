@@ -2,9 +2,9 @@ import { formatDate } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jsPDF from 'jspdf';
-import { StorageService } from './auth/storage.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -124,7 +124,7 @@ export class EventService {
 
   //incidents
   listTimeLapseVideos(payload?: any) {
-    let url = `${environment.timelapseUrl}/timeLapse/listTimeLapseVideos_1_0`;
+    let url = `${environment.timelapseUrl}/listTimeLapseVideos_1_0`;
     let params = new HttpParams();
     if(payload?.siteId || payload?.siteId) {
       params = params.set('siteId', payload?.siteId ? payload?.siteId : payload?.siteId)
@@ -147,11 +147,11 @@ export class EventService {
   }
 
 
-  sensorUrl: any = 'http://192.168.0.169:1234';
+  // sensorUrl: any = 'http://192.168.0.169:1234';
   // sensorUrl: any = 'http://usstaging.ivisecurity.com:947';
 
   listSensorDevices(payload?:any) {
-     let url = this.sensorUrl + '/sensors/ListSensorDevices_1_0'
+     let url = environment.sensorUrl + '/ListSensorDevices_1_0'
      let params = new HttpParams();
      // if(payload?.siteId) {
        params = params.set('siteId', payload?.siteId)
@@ -160,8 +160,8 @@ export class EventService {
   }
 
   listSensorData(payload?: any) {
-    let url = this.sensorUrl + '/sensors/listSensorData_2_0'
-    // let url = `${environment.sensorUrl}/sensors/listSensorData_1_0`;
+    let url = environment.sensorUrl + '/listSensorDataForSiteId_1_0'
+    // let url = `${environment.sensorUrl}/listSensorData_1_0`;
     let params = new HttpParams();
     // if(payload?.siteId) {
       params = params.set('siteId', payload?.siteId)
@@ -179,7 +179,7 @@ export class EventService {
   }
 
   listZonesForSiteId(payload?: any) {
-    let url = `${environment.sensorUrl}/sensors/listZonesForSiteId_1_0`;
+    let url = `${environment.sensorUrl}/listZonesForSiteId_1_0`;
     let params = new HttpParams();
     if(payload?.siteId) {
       params = params.set('siteId', payload.siteId)
@@ -188,7 +188,7 @@ export class EventService {
   }
 
   listSensorTypesForSiteId(payload?: any) {
-    let url = `${environment.sensorUrl}/sensors/listSensorTypesForSiteId_1_0`;
+    let url = `${environment.sensorUrl}/listSensorTypesForSiteId_1_0`;
     let params = new HttpParams();
     if(payload?.siteId) {
       params = params.set('siteId', payload.siteId)

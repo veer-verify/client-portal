@@ -3,10 +3,10 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
 import { NgbDate, NgbDatepickerNavigateEvent, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { SiteService } from '../services/site.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-insight',
@@ -383,7 +383,7 @@ export class InsightComponent implements OnInit {
     this.optionlabel.nativeElement.click();
     // this.setweekenddisable();
     // this.showLoader = true;
-    this.apiservice.getServices(site.siteId);
+    // this.apiservice.getServices(site.siteId);
     this.getsitenonworkingdays();
     // this.listInsightImages(site);
   }
@@ -392,16 +392,16 @@ export class InsightComponent implements OnInit {
     // this.dates(this.datesarr)
     var a;
     //  add beow when received no data dates as array
-    this.apiservice.clientServices(this.currentsiteid).subscribe((res: any) => {
-      a = res.nonWorkingDays;
-      if (a == "Sat-Sun") {
-        this.disabledays = this.weekend
-      } else if (a == "Sun") {
-        this.disabledays = this.sunday
-      } else {
-        this.disabledays = false;
-      }
-    })
+    // this.apiservice.clientServices(this.currentsiteid).subscribe((res: any) => {
+    //   a = res.nonWorkingDays;
+    //   if (a == "Sat-Sun") {
+    //     this.disabledays = this.weekend
+    //   } else if (a == "Sun") {
+    //     this.disabledays = this.sunday
+    //   } else {
+    //     this.disabledays = false;
+    //   }
+    // })
   }
   weekend(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);

@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, retry } from 'rxjs';
-import { StorageService } from './auth/storage.service';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -100,34 +100,25 @@ export class ApiService {
     })
   }
 
-  getServices(siteId: any) {
-    var Request_type = "Services";
-    let servicesurl1 = `${this.baseurl}businessInterface/Client/clientServices_1_0?accountId=${siteId}&Request_type=${Request_type}&calling_user_details=IVISUSA`;
-    // console.log("services: ",servicesurl1);
-    this.http.get(servicesurl1).subscribe((res: any) => {
-      // localStorage.setItem('siteservices', JSON.stringify(res));
-      this.storageService.storeEncrData('siteservices', res);
-      this.siteservices$.next(res);
-      if (res.Status != "Failed") {
-        if (res.background != null) {
-          // document.body.style.backgroundImage= `linear-gradient(325deg, rgba(0, 7, 39, 0.9) 18%, rgba(29, 0, 0, 0.9) 66%), url(${res.background})`
-          document.body.style.backgroundImage = `linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%),url(${res.background})`;
-        } else {
-          document.body.style.backgroundImage = `linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url(assets/icons/background.jpg)) no repeat`;
-        }
-      }
-    }, (error: any) => { console.log(error); })
-  }
+  // getServices(siteId: any) {
+  //   var Request_type = "Services";
+  //   let servicesurl1 = `${this.baseurl}businessInterface/Client/clientServices_1_0?accountId=${siteId}&Request_type=${Request_type}&calling_user_details=IVISUSA`;
+  //   this.http.get(servicesurl1).subscribe((res: any) => {
+  //     this.storageService.storeEncrData('siteservices', res);
+  //     this.siteservices$.next(res);
+  //     if (res.Status != "Failed") {
+  //       if (res.background != null) {
+  //         document.body.style.backgroundImage = `linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%),url(${res.background})`;
+  //       } else {
+  //         document.body.style.backgroundImage = `linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url(assets/icons/background.jpg)) no repeat`;
+  //       }
+  //     }
+  //   }, (error: any) => { console.log(error); })
+  // }
 
 
   getHelpDeskCategories() {
     let url = `${environment.helpdeskUrl}/categoryList_1_0`;
-    // var a = this.storageService.getEncrData('user');
-    // let payload = {
-    //   userName: a.UserName,
-    //   accessToken: 'abc',
-    //   calling_System_Detail: "portal"
-    // }
     return this.http.get(url);
   }
 
@@ -261,11 +252,11 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  clientServices(siteId: any) {
-    var Request_type = "Services";
-    let servicesurl1 = `${environment.insightsUrl}/clientServices_1_0?accountId=${siteId}&Request_type=${Request_type}`;
-    return this.http.get(servicesurl1)
-  }
+  // clientServices(siteId: any) {
+  //   var Request_type = "Services";
+  //   let servicesurl1 = `${environment.insightsUrl}/clientServices_1_0?accountId=${siteId}&Request_type=${Request_type}`;
+  //   return this.http.get(servicesurl1)
+  // }
 
   getBiAnalyticsReport(siteId: any, startDate: any, endDate: any) {
     // console.log(endDate)

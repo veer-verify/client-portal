@@ -4,11 +4,11 @@ import { BehaviorSubject, finalize, Subject, take } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { StorageService } from '../services/auth/storage.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SiteService } from '../services/site.service';
 import { menuItems } from './menu-items';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -159,7 +159,7 @@ export class NavbarComponent implements OnInit {
     this.authservice.manageUserSession('logOut').subscribe({
       error: (err: any) => {
         this.showLoader = false;
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/error');
         localStorage.clear();
         this.storageService.site_sub.complete();
         this.authservice.isLoggedin.complete();

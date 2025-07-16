@@ -5,11 +5,11 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { StorageService } from '../services/auth/storage.service';
 import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
 import { SiteService } from '../services/site.service';
 import { environment } from 'src/environments/environment';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-timelapse',
@@ -38,13 +38,12 @@ export class TimelapseComponent implements OnInit {
     currentInfo: any;
     ngOnInit(): void {
       this.userData = this.storageService.getEncrData('user');
-      // this.currentInfo = this.storageService.getEncrData('navItem');
-      // console.log(this.currentInfo)
 
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
         this.navActive = res?.index
-      })
+      });
+
       let d1 = new Date();
       let d2 = new Date(d1);
       d2.setMinutes (d1.getMinutes() - 1440);
@@ -54,12 +53,12 @@ export class TimelapseComponent implements OnInit {
       this.getTags();
   }
 
-  serviceData: any;
-  getsiteservices1(site: any){
-    this.siteSer.listSiteServices(site).subscribe((res: any) => {
-      this.serviceData = res.siteServicesList;
-    })
-  }
+  // serviceData: any;
+  // getsiteservices1(site: any){
+  //   this.siteSer.listSiteServices(site).subscribe((res: any) => {
+  //     this.serviceData = res.siteServicesList;
+  //   })
+  // }
 
 
   getTimeDifference(date1: Date, date2: Date): string {
@@ -141,7 +140,7 @@ export class TimelapseComponent implements OnInit {
           }
         });
       }
-      this.getsiteservices1(this.currentInfo?.site)
+      // this.getsiteservices1(this.currentInfo?.site)
       this.camerasListForSites(this.siteData[0]);
 
       if(!this.currentInfo) {
@@ -183,7 +182,7 @@ export class TimelapseComponent implements OnInit {
     this.camerasListForSites(data);
     this.currentSite = data;
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
-    this.getsiteservices1(data)
+    // this.getsiteservices1(data)
     this.navActive = index;
     this.showLoader = true;
     this.eventSer.listTimeLapseVideos(data).subscribe((res: any) => {

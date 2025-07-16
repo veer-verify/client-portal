@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({

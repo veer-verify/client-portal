@@ -1,8 +1,6 @@
 import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { NavigationStart, Router, RoutesRecognized } from '@angular/router';
 import { AuthService } from './services/auth/authservice.service';
-import { StorageService } from './services/auth/storage.service';
-import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',

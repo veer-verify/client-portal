@@ -5,8 +5,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
 import { SiteService } from '../services/site.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-support',

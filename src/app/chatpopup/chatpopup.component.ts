@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } fro
 import { Router, RoutesRecognized } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({

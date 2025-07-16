@@ -5,9 +5,9 @@ import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 // import { Color, Label } from 'ng2-charts';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
 import { ChartService } from '../services/charts/chart.service';
 import { SiteService } from '../services/site.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-trends',

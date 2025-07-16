@@ -29,7 +29,7 @@
 
                             <div>
                                 <a style="position: relative;" (click)="update()">
-                                    <img class="profileImage" [src]="userinfo?.profileImage" alt=""
+                                    <img class="profileImage" [src]="userinfo?.profileImage | image | async" alt=""
                                         onerror="this.src='assets/images/icons8-customer-80.png'">
                                     <img src="assets/icons/editicon2.svg" class="editicon" width="16px" alt="">
                                 </a>
@@ -291,7 +291,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center my-2">
-                            <button class="req-btn" (click)="applyMapping()" [disabled]="filter === 1">Submit</button>
+                            <button class="req-btn" (click)="applyMapping()" *ngIf="filter !== 1">{{ filter == 2 ? 'Unassign' : 'Assign' }}</button>
                         </div>
                     </div>
                 </div>

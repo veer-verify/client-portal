@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alertservice/alert-service.service';
 import { EventService } from 'src/app/services/event.service';
 import { ProximityService } from 'src/app/services/proximity.service';
-import { StorageService } from '../services/auth/storage.service';
 import { SiteService } from '../services/site.service';
 import { UserServiceService } from '../services/user-service.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-add-incident',

@@ -9,7 +9,7 @@ import {
 import { BehaviorSubject, catchError, filter, map, Observable, switchMap, take, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from './authservice.service';
-import { StorageService } from './storage.service';
+import { StorageService } from '../storage.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

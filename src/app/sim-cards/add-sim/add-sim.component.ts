@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AlertService } from 'src/app/services/alertservice/alert-service.service';
 import { ApiService } from 'src/app/services/api.service';
-import { StorageService } from 'src/app/services/auth/storage.service';
 import { ProximityService } from 'src/app/services/proximity.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({

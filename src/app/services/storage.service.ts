@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,9 @@ export class StorageService {
   // accordianLogo = 'assets/themes/CameraLogowhite.png';
   // activeLogo = 'assets/themes/Uneeviu Logo Blue png.png';
   // inActiveLogo = 'assets/themes/Uneeviu Logo Blue png.png';
+
+  private readonly key = "verifai";
+
 
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
   site_sub: BehaviorSubject<any> = new BehaviorSubject(null);
@@ -97,18 +102,13 @@ export class StorageService {
     else if (storageKey == 'userinfo') { x = 'krG#m$b7'; localStorage.removeItem(x) }
   }
 
-  // ss$ = new BehaviorSubject<any>('');
-  // rt$ = new BehaviorSubject<any>('');
-  // sc$ = new BehaviorSubject<any>('');
-  // sgp$ = new BehaviorSubject<any>('');
+  public encrypt(txt: string): string {
+    return CryptoJS.AES.encrypt(txt, this.key).toString();
+  }
 
-  // getdata(key:any){
-  //   if(key == 'savedcams'){this.getEncrData(key).then((res:any) =>{this.sc$.next(res);})}
-  //   if(key == 'refreshToken'){this.getEncrData(key).then((res:any) =>{this.rt$.next(res);})}
-  //   if(key == 'selectedsite'){this.getEncrData(key).then((res:any) =>{this.ss$.next(res);})}
-  //   if(key == 'siteidfromgaurdpage'){this.getEncrData(key).then((res:any) =>{this.sgp$.next(res);})}
-  //   if(key == 'user'){this.getEncrData(key).then((res:any) =>{this.sgp$.next(res);})}
-  // }
+  public decrypt(txtToDecrypt: string) {
+    return CryptoJS.AES.decrypt(txtToDecrypt, this.key).toString(CryptoJS.enc.Utf8);
+  }
 
   public isSuperAdmin(): boolean {
     const user = this.getEncrData('user');

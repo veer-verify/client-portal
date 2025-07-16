@@ -120,15 +120,15 @@ export class ProximityService {
 
 
   // simCardsAPIS
-  baseUrl1 = 'http://usstaging.ivisecurity.com:950';
+  // baseUrl1 = 'http://usstaging.ivisecurity.com:950';
 
   addSimCardDetails(payload:any) {
-    let url = this.baseUrl1 + '/deviceSimDetails/addSimCardDetails_1_0'
+    let url = environment.simsUrl + '/addSimCardDetails_1_0'
     return this.http.post(url,payload);
   }
 
   getSimDetailsForSiteId(payload?:any) {
-    let url = this.baseUrl1 + '/deviceSimDetails/getSimDetailsForSiteId_1_0';
+    let url = environment.simsUrl + '/getSimDetailsForSiteId_1_0';
     let params = new HttpParams();
     if(payload?.siteId) {
       params = params.set('siteId', payload?.siteId);
@@ -137,7 +137,7 @@ export class ProximityService {
   }
 
   deviceSimStats(payload:any) {
-    let url = this.baseUrl1 + '/deviceSimDetails/getSpeedDetailsForSim_1_0'
+    let url = environment.simsUrl + '/getSpeedDetailsForSim_1_0'
     let params = new HttpParams();
     if(payload?.simId) {
       params = params.set('simId', payload?.simId);
@@ -146,12 +146,12 @@ export class ProximityService {
   }
 
   updateSimDetailsForSim(payload:any) {
-     let url = this.baseUrl1 + '/deviceSimDetails/updateSimDetailsForSim_1_0';
+     let url = environment.simsUrl + '/updateSimDetailsForSim_1_0';
     return this.http.put(url, payload);
   }
 
   getCentralBox(payload:any) {
-    let url = `http://rsmgmt.ivisecurity.com:8943/centralBox/getCentralBox_1_0/${payload.siteId}`
+    let url = `${environment.sitesUrl}/${payload.siteId}`
     return this.http.get(url);
   }
 

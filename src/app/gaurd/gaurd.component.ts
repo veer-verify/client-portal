@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { BehaviorSubject, catchError, fromEvent, map, Observable, of } from 'rxjs';
 import { ApiService } from '../services/api.service';
-import { StorageService } from '../services/auth/storage.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth/authservice.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -186,7 +186,7 @@ export class GaurdComponent implements OnInit {
     var x: any = this.storageService.getEncrData('savedcams');
     this.currentsite = x[0].siteId;
     this.cameras = x[0].data;
-    this.apiService.getServices(this.currentsite);
+    // this.apiService.getServices(this.currentsite);
     this.commoncommands();
     this.firstTimeout = setTimeout(() => {
       this.panel.nativeElement.style.maxHeight = this.panel.nativeElement.style.scrollHeight + 'px';
@@ -214,7 +214,7 @@ export class GaurdComponent implements OnInit {
         } else {
           this.currentsite = this.sites?.siteList[0]?.siteId;
         }
-        this.apiService.getServices(this.currentsite); //this was required once check ones to be removed
+        // this.apiService.getServices(this.currentsite); //this was required once check ones to be removed
         if(user?.UserId == 1641) {
           // this.cameras = this.myNewData;
           this.apiService.getCamerasForSiteId({siteId: this.currentsite}).subscribe((cams: any) => {
@@ -234,7 +234,7 @@ export class GaurdComponent implements OnInit {
         //  code for sales team ends
         this.commoncommands();
         this.savecams();
-        this.apiService.getServices(this.currentsite);
+        // this.apiService.getServices(this.currentsite);
         const sortAlphaNum = (a: any, b: any) => a.cameraId.localeCompare(b.cameraId, 'en', { numeric: true })
         this.cameras = this.cameras.sort(sortAlphaNum)
         this.firstTimeout = setTimeout(() => {
@@ -380,7 +380,7 @@ export class GaurdComponent implements OnInit {
         });
 
       } else {
-        this.apiService.getServices(site.siteId);
+        // this.apiService.getServices(site.siteId);
         var x: any = this.storageService.getEncrData('savedcams');
         if(x) {
           x.forEach((el: any) => {
@@ -594,7 +594,7 @@ export class GaurdComponent implements OnInit {
           if (el.siteId == a[0].siteId) {
             this.cameras = el.data;
             this.currentsite = el.siteId;
-            this.apiService.getServices(el.siteId);
+            // this.apiService.getServices(el.siteId);
           }
         });
         setTimeout(() => {

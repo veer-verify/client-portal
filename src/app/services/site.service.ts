@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StorageService } from './auth/storage.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,11 +58,6 @@ export class SiteService {
   updateCameraName(payload: any) {
     let url = environment.sitesUrl + '/camera/updateCameraName_1_0';
     return this.http.post(url, payload)
-  }
-
-  getHelpDeskCategories() {
-    let url = `${environment.helpdeskUrl}/categoryList_1_0`;
-    return this.http.get(url);
   }
 
   addHelpDeskRequest(payload: any) {

@@ -7,10 +7,10 @@ import jsPDF from 'jspdf';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { StorageService } from '../services/auth/storage.service';
 import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
 import { SiteService } from '../services/site.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-sim-cards',
@@ -40,8 +40,10 @@ export class SimCardsComponent {
     currentInfo: any
     ngOnInit(): void {
       this.userData = this.storageService.getEncrData('user');
-      this.currentInfo = this.storageService.getEncrData('navItem');
-      // console.log(this.currentInfo)
+      this.storageService.site_sub.subscribe((res) => {
+        this.currentInfo = res;
+        this.navActive = res?.index
+      });
       let d1 = new Date();
       let d2 = new Date(d1);
       d2.setMinutes (d1.getMinutes() - 360);
@@ -91,12 +93,12 @@ export class SimCardsComponent {
     })
   }
 
-  serviceData: any;
-  getsiteservices1(site: any){
-    this.siteSer.listSiteServices(site).subscribe((res: any) => {
-      this.serviceData = res.siteServicesList;
-    })
-  }
+  // serviceData: any;
+  // getsiteservices1(site: any){
+  //   this.siteSer.listSiteServices(site).subscribe((res: any) => {
+  //     this.serviceData = res.siteServicesList;
+  //   })
+  // }
 
 
   getTimeDifference(date1: Date, date2: Date): string {
@@ -152,7 +154,10 @@ export class SimCardsComponent {
           }
         });
       }
-      this.getsiteservices1(this.currentInfo?.site);
+            if(!this.currentInfo) {
+        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+      }
+      // this.getsiteservices1(this.currentInfo?.site);
       this.footageList(this.currentInfo?.site, this.currentInfo?.index);
     }, (err: any) => {
       this.showLoader = false;
@@ -183,7 +188,7 @@ export class SimCardsComponent {
     this.camerasListForSites(data);
     this.currentSite = data;
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
-    this.getsiteservices1(data);
+    // this.getsiteservices1(data);
     this.navActive = index;
     this.showLoader = true;
     this.proxSer.getSimDetailsForSiteId(data).subscribe((res: any) => {

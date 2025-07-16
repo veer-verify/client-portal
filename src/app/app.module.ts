@@ -45,7 +45,6 @@ import { DummyVideoComponent } from './utilities/dummy-video/dummy-video.compone
 import { NgxPrintElementModule } from 'ngx-print-element';
 import { UniquePipe } from './services/pipes/unique.pipe';
 import { DeviceHealthComponent } from './device-health/device-health.component';
-import { GoogleloginComponent } from './googlelogin/googlelogin.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
@@ -56,13 +55,6 @@ import { ErrInfoComponent } from './utilities/err-info/err-info.component';
 import { CreateFormComponent } from './utilities/create-form/create-form.component';
 import { VideoPlayerComponent } from './utilities/video-player/video-player.component';
 import { ClientFormComponent } from './client-form/client-form.component';
-
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider,
-  SocialLoginModule,
-  SocialAuthServiceConfig
-} from 'angularx-social-login';
 import { AddIncidentComponent } from './add-incident/add-incident.component';
 import { ImagePipe } from './services/pipes/image.pipe';
 import { SanitizePipe } from './services/pipes/sanitize.pipe';
@@ -110,7 +102,6 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
     DummyVideoComponent,
     UniquePipe,
     DeviceHealthComponent,
-    GoogleloginComponent,
     UserProfileComponent,
     NvrComponent,
     ErrInfoComponent,
@@ -129,12 +120,7 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
     FormsModule,
     ReactiveFormsModule,
     BaseChartDirective,
-    NgbModule,
-    SocialLoginModule
-    // SocialLoginModule
-    // ChartsModule,
-    // NgxPrintElementModule
-  
+    NgbModule
   ],
   providers: [
     {
@@ -152,30 +138,7 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
       multi: true
     },
     provideCharts(withDefaultRegisterables()),
-    DatePipe,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: true,
-        providers: [
-          // {
-          //   id: GoogleLoginProvider.PROVIDER_ID,
-          //   provider: new GoogleLoginProvider('654230831370-a114u4r22ehgpfrods4irbj91eoerq9a.apps.googleusercontent.com',
-          //   {
-          //    // scopes : environment.auth.scopes,
-          //     prompt : 'none'
-          //   }),
-          // },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1442566939524545')
-          }
-        ],
-        onError: (err: any) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }
+    DatePipe
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

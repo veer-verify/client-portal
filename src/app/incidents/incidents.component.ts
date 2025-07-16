@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { StorageService } from '../services/auth/storage.service';
 import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
 import { SiteService } from '../services/site.service';
 import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-incidents',

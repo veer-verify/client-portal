@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { StorageService } from '../services/auth/storage.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth/authservice.service';
 import { SiteService } from '../services/site.service';
@@ -10,6 +9,7 @@ import { AlertService } from '../services/alertservice/alert-service.service';
 import { environment } from 'src/environments/environment';
 import { ApiService } from '../services/api.service';
 import Swal from 'sweetalert2';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-live-view',
@@ -143,7 +143,7 @@ export class LiveViewComponent implements OnInit {
         //   this.closeSideNav = true
         // }
 
-        this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+        this.sites = res.sites.sort((a: any, b: any) => a.siteId > b.siteId ? 1 : a.siteId < b.siteId ? -1 : 0);
         this.getsiteservices(this.sites[0]);
         if (!this.currentInfo) {
           this.storageService.site_sub.next({ site: this.sites[0], index: 0 });

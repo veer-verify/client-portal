@@ -5,7 +5,7 @@ import { AlertService } from '../services/alertservice/alert-service.service';
 import { UserServiceService } from '../services/user-service.service';
 import { Router } from '@angular/router';
 import { SiteService } from '../services/site.service';
-import { StorageService } from '../services/auth/storage.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-client-form',

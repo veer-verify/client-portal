@@ -4,7 +4,7 @@
 
 
 const dev_url: string = 'https://usstaging.ivisecurity.com';
-// const dev_url: string = 'http://192.168.0.180';
+const local_url: string = 'http://192.168.0.180';
 export const environment = {
   production: false,
 
@@ -27,11 +27,13 @@ export const environment = {
   adsUrl: `${dev_url}/proximityAdsMain`,
   rulesUrl: `${dev_url}/proximityAdsRules `,
   insightsUrl: `${dev_url}/insights`,
-  timelapseUrl: `${dev_url}/timelapse`,
+  timelapseUrl: `${dev_url}/timeLapse`,
   sensorUrl:`${dev_url}/sensors`,
+  simsUrl:`${dev_url}/simDevices`,
   faqUrl: `${dev_url}/faq`,
   inventoryUrl: `${dev_url}/inventory`,
   helpdeskUrl: `${dev_url}/supportRequests`,
+  genericUrl: `${dev_url}/generic`,
   incidentsUrl: `${dev_url}/guard_monitoring`,
 };
 

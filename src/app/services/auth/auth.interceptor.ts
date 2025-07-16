@@ -3,30 +3,87 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { StorageService } from './storage.service';
+import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
+import { StorageService } from '../storage.service';
+import { Router } from '@angular/router';
+import { AuthService } from './authservice.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
+private isRefreshing = false;
+  private refreshTokenSubject = new BehaviorSubject<any>(null);
+
+
   constructor(
+    private router: Router,
+    private authSer: AuthService,
     private storageService: StorageService
-  ) {}
+  ) { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const user = this.storageService.getEncrData('user');
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let token = localStorage.getItem('acTok');
 
-    // if(user?.AccessToken) {
-      const authReq = request.clone({
-        setHeaders: {
-          // Authorization: `Bearer ${user.AccessToken}`
-          'Referrer-Policy': 'unsafe-url',
+    if (token) {
+      request = this.addToken(request, JSON.parse(token));
+    }
+
+    return next.handle(request).pipe(catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return this.handle401Error(request, next);
+        } else {
+          return throwError(() => error);
         }
-      });
-      return next.handle(authReq);
-    // }
-    // return next.handle(request);
+      })
+    );
+  }
+
+
+  private addToken(request: HttpRequest<any>, token: string) {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+
+
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    let currentUser = this.storageService.getEncrData('user');
+
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.refreshTokenSubject.next(null);
+
+      this.storageService.loader_sub.next(true);
+      return this.authSer.getAccessforRefreshToken(currentUser).pipe(
+        switchMap((res: any) => {
+          this.storageService.loader_sub.next(false);
+          localStorage.setItem('acTok', JSON.stringify(res.access_token));
+          this.isRefreshing = false;
+          this.refreshTokenSubject.next(res.access_token);
+          return next.handle(this.addToken(request, res.access_token));
+        }),
+        catchError((err) => {
+          this.storageService.loader_sub.next(false);
+          this.isRefreshing = false;
+          // this.authSer.logout();
+          return throwError(() => err);
+        })
+      );
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter(token => token != null),
+        take(1),
+        switchMap(accessToken => {
+          // console.log(accessToken)
+          return next.handle(this.addToken(request, accessToken));
+        })
+      );
+    }
   }
 }

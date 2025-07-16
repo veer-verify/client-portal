@@ -12,11 +12,11 @@ import { ElementRef } from '@angular/core';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { Collapse } from 'bootstrap';
-import { StorageService } from '../services/auth/storage.service';
 import { AuthService } from '../services/auth/authservice.service';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
 import { map } from 'rxjs';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -289,6 +289,8 @@ export class UserProfileComponent {
       } else {
         this.alertservice.error('error', res.message);
       }
+    }, (err) => {
+        this.alertservice.error('error', 'Request Entity Too Large');
     });
   }
   // closecollapse() {

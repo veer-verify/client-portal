@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil, timer } from 'rxjs';
-import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../alertservice/alert-service.service';
 import { environment } from 'src/environments/environment';
 import { DatePipe, formatDate } from '@angular/common';
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +42,7 @@ export class AuthService {
     let url = environment.authUrl + `/user_login_1_0`;
     let payload = {
       userName: username,
-      password: btoa(JSON.stringify(password)),
+      password: this.storageService.encrypt(password),
       // password: password,
       callingSystemDetail: 'portal',
     };

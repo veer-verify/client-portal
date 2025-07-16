@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { StorageService } from '../services/auth/storage.service';
 import { DatePipe } from '@angular/common';
 import { ProximityService } from '../services/proximity.service';
 import { SiteService } from '../services/site.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({

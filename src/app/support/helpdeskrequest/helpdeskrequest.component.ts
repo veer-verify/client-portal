@@ -5,8 +5,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/services/alertservice/alert-service.service';
 import { ApiService } from 'src/app/services/api.service';
-import { StorageService } from 'src/app/services/auth/storage.service';
 import { SiteService } from 'src/app/services/site.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
