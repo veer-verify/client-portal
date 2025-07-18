@@ -137,11 +137,22 @@
                     <textarea type="text" class="form-control" [formControlName]="question.key"
                         placeholder="Enter"></textarea>
                 </div>
-
+<!-- 
                 <div class="" *ngIf="question.questionType === 'select'">
                     <label class="label" [title]="question.title">{{ question.templateOptions.Label }} <img [src]="question.image" alt=""  width="16px"></label><br>
                     <select class="form-control" [formControlName]="question.key" [multiple]="question.multiple">
                         <option value="" disabled>Select</option>
+                        <ng-container *ngFor="let option of question.questionOptions">
+                            <option [value]="option.roleId" >
+                                {{ option.name }}
+                            </option>
+                        </ng-container>
+                    </select>
+                </div> -->
+                 <div class="" *ngIf="question.questionType === 'select'">
+                    <label class="label" [title]="question.title">{{ question.templateOptions.Label }} <img [src]="question.image" alt=""  width="16px"></label><br>
+                    <select class="form-select" [formControlName]="question.key" >
+                        <option value="" disabled>Select Role</option>
                         <ng-container *ngFor="let option of question.questionOptions">
                             <option [value]="option.roleId" >
                                 {{ option.name }}
