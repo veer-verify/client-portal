@@ -456,6 +456,7 @@ export class ApiService {
     payload.callingSystemDetail = 'portal';
     payload.accountId = user.accountId ?? 0;
     payload.createdBy = user.UserId;
+    payload.roleList = [payload.roleList];
     return this.http.post(url, payload);
   }
 

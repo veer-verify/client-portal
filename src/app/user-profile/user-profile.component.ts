@@ -276,13 +276,14 @@ export class UserProfileComponent {
 
   updateProfilePicture() {
     var userUpdate = this.storageService.getEncrData('user');
+
     let obj = {
       file: this.pic,
       userId: userUpdate.UserId,
     };
     this.apiservice.updateProfilePicture(obj).subscribe((res: any) => {
       if (res.status_code == 200) {
-        this.alertservice.success('success', res.message);
+        this.alertservice.success('success', `Profile image updated successfully for ${userUpdate.FirstName} ${userUpdate.LastName}`);
         // this.collapseInstance = new Collapse(this.collapseExample.nativeElement);
         // this.collapseInstance.hide()
         this.getUser();

@@ -168,12 +168,12 @@ export class NavbarComponent implements OnInit {
         localStorage.clear();
         this.storageService.site_sub.complete();
         this.authservice.isLoggedin.complete();
-        // window.location.reload();
+        window.location.reload();
       },
       complete: () => {
         this.storageService.site_sub.complete();
         this.authservice.isLoggedin.complete();
-        // window.location.reload();
+        window.location.reload();
       }
     })
   }
