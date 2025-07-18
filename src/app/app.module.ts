@@ -19,7 +19,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule,  ReactiveFormsModule  } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './services/alertservice/alert/alert.component';
-import { DatePipe, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { SitePipe } from './insight/sitePipe.pipe';
 import { SortPipe } from './services/pipes/sorting-pipe.pipe';
 // import { ChartsModule } from 'ng2-charts';
@@ -125,7 +125,7 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
   providers: [
     {
       provide: LocationStrategy,
-      useClass: PathLocationStrategy
+      useClass: HashLocationStrategy
     },
     // {
     //   provide: HTTP_INTERCEPTORS,

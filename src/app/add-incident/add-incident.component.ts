@@ -63,9 +63,9 @@ export class AddIncidentComponent implements OnInit {
     const formGroupConfig: { [key: string]: any } = {};
     this.questions.forEach((question: any) => {
       if(question.templateOptions.required) {
-        formGroupConfig[question.key] = new FormControl('', Validators.required);
+        formGroupConfig[question.key] = this.fb.control('', Validators.required);
       } else {
-        formGroupConfig[question.key] = new FormControl('');
+        formGroupConfig[question.key] = this.fb.control('');
       }
     });
     this.form = this.fb.group(formGroupConfig);

@@ -445,6 +445,7 @@ export class ApiService {
   }
 
   createUserWithShortDetails(payload: any) {
+    console.log(payload)
     let url = `${environment.authUrl}/createUserWithShortDetails_1_0`;
     var user = this.storageService.getEncrData('user');
 

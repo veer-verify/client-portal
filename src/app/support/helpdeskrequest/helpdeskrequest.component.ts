@@ -159,7 +159,7 @@ export class HelpdeskrequestComponent implements OnInit {
   //   })
   // }
 
-  siteData: any
+  siteData: any = []
   getSitesListForUserName() {
     this.showLoader = true;
     this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
@@ -232,7 +232,6 @@ export class HelpdeskrequestComponent implements OnInit {
 
     this.apiservice.getHelpDeskRequests().subscribe((res: any) => {
       this.showLoader = false;
-      // console.log(res)
       if (res.statusCode === 200) {
         // this.listUserByRoles();
         this.requests = res.serviceRequestList;
@@ -315,7 +314,6 @@ export class HelpdeskrequestComponent implements OnInit {
       toDate: this.displaYendDate
     }).subscribe((res: any) => {
       this.showLoader = false;
-      // console.log(res)
       if (res.statusCode === 200) {
         // this.listUserByRoles();
         this.pageSize = res.totalPages;
@@ -365,7 +363,6 @@ export class HelpdeskrequestComponent implements OnInit {
     // this.totalsites = [...new Set(this.totalsites)];
     // this.totalsites = (this.totalsites.filter((el: any) => { return el != null; }))
     this.totalsites = this.siteData;
-
   }
 
   selectedsite: any;
