@@ -14,7 +14,6 @@ export class AlertComponent implements OnInit {
 
   constructor(private alertService: AlertService) {
     var timer: any = null;
-    // subscribe to alert messages
     this.subscription = alertService.getMessage().subscribe(message => {
       if (timer) {clearTimeout(timer); timer = null;}
       // timer = setTimeout(()=>{this.closeMessage()}, 5000);
@@ -22,12 +21,14 @@ export class AlertComponent implements OnInit {
       timer;
     });
   }
+
   ngOnInit() {  
   }
+
   ngOnDestroy(): void {
-    // unsubscribe on destroy to prevent memory leaks
     this.subscription.unsubscribe();
   }
+
   closeMessage() {
     this.alertService.clearAlertMessage();    
   } 
@@ -35,7 +36,9 @@ export class AlertComponent implements OnInit {
 
   closeAlertModal(){
     this.alertService.clearAlertMessage();    
-    var x = <HTMLElement>document.getElementById('warningmodal1')
-    x.style.display = "none";
+    var x = <HTMLElement>document.getElementById('warningmodal1');
+    if(x) {
+      x.style.display = "none";
+    }
   }
 }

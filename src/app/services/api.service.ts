@@ -438,14 +438,12 @@ export class ApiService {
 
   createUser(payload: any) {
     let url = `${environment.authUrl}/createUser_1_0`;
-    // let url = 'http://192.168.0.218:9000/userDetails/createUser_1_0';
     var user = this.storageService.getEncrData('user');
     payload.createdBy = user.UserId;
     return this.http.post(url, payload);
   }
 
   createUserWithShortDetails(payload: any) {
-    console.log(payload)
     let url = `${environment.authUrl}/createUserWithShortDetails_1_0`;
     var user = this.storageService.getEncrData('user');
 
@@ -457,7 +455,7 @@ export class ApiService {
     payload.callingSystemDetail = 'portal';
     payload.accountId = user.accountId ?? 0;
     payload.createdBy = user.UserId;
-    payload.roleList = [payload.roleList];
+    payload.roleList = [parseInt(payload.roleList)];
     return this.http.post(url, payload);
   }
 
