@@ -44,6 +44,9 @@ export class SiteService {
     if(payload?.UserName) {
       params = params.set('userName', payload?.UserName)
     }
+    
+    params = params.set('siteStatus','Active')
+    
     return this.http.get(url, { params: params });
   }
 

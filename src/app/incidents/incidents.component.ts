@@ -128,6 +128,10 @@ export class IncidentsComponent implements OnInit {
     })
   }
 
+  getsitesListByService(){
+    
+  }
+
   camData: any = [];
   camerasListForSites(siteId: any) {
     this.eventSer.camerasListForSites(siteId).subscribe((res: any) => {

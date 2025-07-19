@@ -125,6 +125,7 @@
                     <label class="label">{{ question.templateOptions.Label }}</label>
                     <input type="text" class="form-control" [formControlName]="question.key" [name]="question.key"
                         placeholder="Enter">
+                 <p class="text-start text-danger" *ngIf="form.get(question.key)!.invalid && is_submitted">*required</p>
                 </div>
 
                 <div class="" *ngIf="question.questionType === 'number'">
@@ -159,6 +160,7 @@
                             </option>
                         </ng-container>
                     </select>
+                    <p class="text-start text-danger" *ngIf="form.get(question.key)!.invalid && is_submitted">*required</p>
                 </div>
 
                 <div class="" *ngIf="question.questionType === 'date'">

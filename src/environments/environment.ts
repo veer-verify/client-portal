@@ -20,7 +20,8 @@ export const environment = {
   // adsUrl: `${dev_url}:8946/proximityAdsMain`,
   // sensorUrl: `${dev_url}:8947/sensors`,
 
-  authUrl: `${dev_url}/userDetails`,
+  // authUrl: `${dev_url}/userDetails`,
+  authUrl: `http://192.168.0.103:3002/userDetails`,
   sitesUrl: `${dev_url}/vipsites`,
   metadataUrl: `${dev_url}/metadata`,
   commonDownUrl: `${dev_url}/common`,

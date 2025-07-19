@@ -75,7 +75,9 @@ export class AddIncidentComponent implements OnInit {
     let file = event?.target?.files[0];
   }
 
+  is_submitted: boolean = false;
   submit() {
+    this.is_submitted = true
     if(this.form.valid) {
       this.newItemEvent.emit(this.form.value);
     } else {
