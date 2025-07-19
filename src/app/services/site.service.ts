@@ -42,12 +42,21 @@ export class SiteService {
     let url = environment.sitesUrl + '/getSitesListForUserName_1_0/';
     let params = new HttpParams();
     if(payload?.UserName) {
-      params = params.set('userName', payload?.UserName)
+      params = params.set('userName', payload?.UserName);
     }
     
-    params = params.set('siteStatus','Active')
+    params = params.set('siteStatus','Active');
     
     return this.http.get(url, { params: params });
+  }
+  getsitesListByService(payload:any){
+    console.log(payload)
+    //  let url = environment.sitesUrl + '/getsitesListByService_1_0/';
+    let url = 'http://192.168.0.103:3004/vipsites/getsitesListByService_1_0/';
+     let params = new HttpParams();
+      params = params.set('sites',payload.sites);
+      params = params.set('service',payload.service);
+    return this.http.get(url,{ params: params } );
   }
 
   getCamerasForSiteId(payload: any) {

@@ -94,11 +94,13 @@ export class IncidentsComponent implements OnInit {
   }
 
   siteData: any = [];
+  
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((sites: any) => {
+    this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
       this.showLoader = false;
-      this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+      this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+      // this.getsitesListByService(res.sites);
       var user = this.storageService.getEncrData("user");
       if (user.UserName == 'sales@ivisecurity.com') {
         this.siteData.forEach((item: any) => {
@@ -128,9 +130,22 @@ export class IncidentsComponent implements OnInit {
     })
   }
 
-  getsitesListByService(){
-    
-  }
+  // getsitesListByService(sites: any){
+  //   this.showLoader=true;
+
+  //   let data = Array.from(sites, (item: any) => item.siteId);
+  //   this.siteSer.getsitesListByService({sites:data, service:'alerts'}).subscribe((res:any)=>{
+  //      this.showLoader=false;
+  //     if(res.statusCode==200){
+  //        this.siteData=res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+       
+  //     }
+  //     else{
+  //       this.siteData=[]
+  //     }
+  //   })
+
+  // }
 
   camData: any = [];
   camerasListForSites(siteId: any) {
