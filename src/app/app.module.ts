@@ -127,11 +127,11 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
