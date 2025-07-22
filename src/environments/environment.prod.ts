@@ -32,7 +32,6 @@ export const environment = {
   faqUrl: `${prod_url}/faq`,
   inventoryUrl: `${prod_url}/inventory`,
   helpdeskUrl: `${prod_url}/supportRequests`,
-  genericUrl: `${prod_url}/generic`,
   incidentsUrl: `${prod_url}/guard_monitoring`,
 
   // authUrl: `https://authivis-rsmgmt.ivisecurity.com/userDetails`,
@@ -46,17 +45,4 @@ export const environment = {
   // insightsUrl: `https://bi-rsmgmt.ivisecurity.com/insights`,
   // adsUrl: `https://prox-rsmgmt.ivisecurity.com/proximityAdsMain`,
   // timelapseUrl: `https://timelapse-rsmgmt.ivisecurity.com/timeLapse`,
-
-  // authUrl: `https://authivis-rsmgmt.ivisecurity.com/userDetails`,
-  // metadataUrl: `https://metadata-rsmgmt.ivisecurity.com/metadata`,
-  // commonDownUrl: `https://common-s3-rsmgmt.ivisecurity.com/common`,
-  // sitesUrl: `https://vipsites-rsmgmt.ivisecurity.com`,
-  // incidentsUrl: `https://alerts-rsmgmt.ivisecurity.com/incidents`,
-  // sensorUrl: `https://iot-rsmgmt.ivisecurity.com`,
-  // simsUrl:`https://sim-rsmgmt.ivisecurity.com/simDevices`,
-  // helpdeskUrl: `https://sup-rsmgmt.ivisecurity.com/supportRequests`,
-  // genericUrl: `https://sup-rsmgmt.ivisecurity.com/generic`,
-  // insightsUrl: `https://bi-rsmgmt.ivisecurity.com/insights`,
-  // adsUrl: `https://prox-rsmgmt.ivisecurity.com`,
-  // timelapseUrl: `https://timelapse-rsmgmt.ivisecurity.com`,
 };

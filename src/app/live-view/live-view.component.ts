@@ -143,7 +143,7 @@ export class LiveViewComponent implements OnInit {
         //   this.closeSideNav = true
         // }
 
-        this.sites = res.sites.sort((a: any, b: any) => a.siteId > b.siteId ? 1 : a.siteId < b.siteId ? -1 : 0);
+        this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         this.getsiteservices(this.sites[0]);
         if (!this.currentInfo) {
           this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
