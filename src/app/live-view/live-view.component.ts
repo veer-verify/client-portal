@@ -341,7 +341,7 @@ export class LiveViewComponent implements OnInit {
         icon: "info",
         title: "To move the camera, please use below link!",
         // text: "Something went wrong!",
-        footer: `<a href="http://clientportal.ivisecurity.com" target="_blank">CLICK HERE!</a>`,
+        footer: `<a href="http://clientportal.ivisecurity.com:8421/clientPortalUs/" target="_blank">CLICK HERE!</a>`,
         showCloseButton: true,
         showConfirmButton: false,
       });

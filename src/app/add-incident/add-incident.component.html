@@ -154,7 +154,7 @@
                     <select class="form-select" [formControlName]="question.key" >
                         <option value="" disabled>Select Role</option>
                         <ng-container *ngFor="let option of question.questionOptions">
-                            <option [value]="option.roleId" >
+                            <option [value]="option.deptId" >
                                 {{ option.name }}
                             </option>
                         </ng-container>

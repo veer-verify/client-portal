@@ -33,7 +33,6 @@ export const environment = {
   faqUrl: `${dev_url}/faq`,
   inventoryUrl: `${dev_url}/inventory`,
   helpdeskUrl: `${dev_url}/supportRequests`,
-  genericUrl: `${dev_url}/generic`,
   incidentsUrl: `${dev_url}/guard_monitoring`,
 };
 
