@@ -68,7 +68,7 @@ export class SiteService {
   getCameras(payload: any) {return payload}
 
   updateCameraName(payload: any) {
-    let url = environment.sitesUrl + '/camera/updateCameraName_1_0';
+    let url = environment.sitesUrl + '/updateCameraName_1_0';
     return this.http.post(url, payload)
   }
 

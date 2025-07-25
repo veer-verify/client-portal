@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token = localStorage.getItem('acTok');
+    let token = JSON.parse(localStorage.getItem('acTok')!);
 
     // let token = this.refreshTokenSubject.pipe(
     //   filter(token => token != null),
@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     // );
 
     if (token) {
-      request = this.addToken(request, JSON.parse(token));
+      request = this.addToken(request, token);
     }
 
     return next.handle(request).pipe(catchError(error => {

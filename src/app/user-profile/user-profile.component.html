@@ -29,8 +29,7 @@
 
                             <div>
                                 <a style="position: relative;" (click)="update()">
-                                    <img class="profileImage" [src]="userinfo?.profileImage | image | async" alt=""
-                                        onerror="this.src='assets/images/icons8-customer-80.png'">
+                                    <img class="profileImage" [src]="userinfo.profileImage | image | async" alt="" onerror="this.src='assets/images/icons8-customer-80.png'">
                                     <img src="assets/icons/editicon2.svg" class="editicon" width="16px" alt="">
                                 </a>
                             </div>
@@ -38,10 +37,10 @@
 
                         <div class="mt-3 user-detail">
                             <a>
-                                <p class="text-white">{{userinfo?.userName}}</p>
+                                <p class="text-white">{{userinfo.userName}}</p>
                             </a>
-                            <a [href]="'mailto:' + userinfo?.email">
-                                <p>{{userinfo?.email}}</p>
+                            <a [href]="'mailto:' + userinfo.email">
+                                <p>{{userinfo.email}}</p>
                             </a>
                         </div>
                     </div>

@@ -216,8 +216,6 @@ export class ApiService {
   }
 
   deleteHelpDeskRequests(payload: any) {
-    // var a = this.storageService.getEncrData('user');
-    // var b = this.storageService.getEncrData('siteidfromgaurdpage');
     // var payload = {
     //   userName: a.UserName,
     //   accessToken: 'abc',

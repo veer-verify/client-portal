@@ -77,9 +77,9 @@ export class LoginComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    if (this.apiService.sessionstatus() == false) {
-      localStorage.clear();
-    }
+    // if (this.apiService.sessionstatus() == false) {
+    //   localStorage.clear();
+    // }
     if (this.apiService.error != '') {
       // this.errInfo = this.apiService.error;
       // this.showsessionerror = true;
@@ -130,6 +130,7 @@ export class LoginComponent implements OnInit {
           this.storageService.storeEncrData('user', res);
           localStorage.setItem('acTok', JSON.stringify(res.AccessToken || ''));
           this.authservice.isLoggedin.next(true);
+          // this.storageService.site_sub.next(null);
           this.authservice.getAuthStatus();
           this.manageUserSession();
           this.getMetadata();
@@ -307,7 +308,8 @@ export class LoginComponent implements OnInit {
 
   getMetadata() {
     this.proxSer.getMetadata().subscribe((res: any) => {
-      localStorage.setItem('metaData', JSON.stringify(res));
+      // localStorage.setItem('metaData', JSON.stringify(res));
+      this.storageService.storeEncrData('metaData', res);
     })
   }
 

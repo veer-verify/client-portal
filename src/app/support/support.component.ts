@@ -738,8 +738,6 @@ export class SupportComponent implements OnInit {
     //   this.currentaddsubcat = { serviceSubcatName: 'Other' }
     // }
     this.showLoader = true;
-    var site = this.storageService.getEncrData('siteidfromgaurdpage');
-    var site1 = this.storageService.getEncrData('navItem');
 
     if (!this.addtime) { this.addtime = '' }
     else { this.addtime = String(this.addtime).replace("T", " ") + ':00' }

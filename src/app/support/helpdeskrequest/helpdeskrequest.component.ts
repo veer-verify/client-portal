@@ -51,15 +51,31 @@ export class HelpdeskrequestComponent implements OnInit {
   today: any;
   currentInfo: any;
   userData: any;
-  // isAdmin: boolean = false;
-  // isAdminJr: boolean = false;
   showLoader = false;
-  environment = environment.commonDownUrl;
+  headers: any;
+  pdfSrc: any;
+  // environment = environment.commonDownUrl;
   ngOnInit(): void {
+    const token = JSON.parse(localStorage.getItem('acTok')!)
+    this.headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+    let url = `${environment.commonDownUrl}/downloadFile_1_0?requestName=TermsandConditions&assetName=TermsandConditions.pdf`;
+    this.http.get(url, { headers: headers, responseType: 'blob' }).subscribe(
+      (data: Blob) => {
+        const fileURL = URL.createObjectURL(data);
+        this.pdfSrc = fileURL
+      },
+      (error) => {
+        console.error('Error fetching PDF:', error);
+      }
+    );
+
     this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en-us')
     this.userData = this.storageService.getEncrData('user');
     // this.currentInfo = this.storageService.getEncrData('navItem');
-    
+
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.currentsite = res?.site.siteId;
@@ -84,19 +100,9 @@ export class HelpdeskrequestComponent implements OnInit {
       this.opentnc();
       localStorage.removeItem('tnc');
     }
-
-    // let a: Array<any> = Array.from(this.userData.roleList, (item: any) => item.department);
-    // if(a.includes('Client') || a.includes('Site')) {
-    //   this.isAdmin = false;
-    // } else {
-    //   this.isAdmin = true;
-    // }
-
-    // this.isAdmin = this.storageService.isAdmin();
   }
-  
+
   ngAfterViewInit() {
-    this.site = this.storageService.getEncrData('siteidfromgaurdpage');
     // this.gethelpDeskCategories();
     let x = (new Date(Date.now()).getFullYear());
     let y = (new Date(Date.now()).getMonth() + 1);
@@ -113,19 +119,19 @@ export class HelpdeskrequestComponent implements OnInit {
 
   getMetaDataValue(type: string, key: number) {
     // console.log(key)
-    let data: any = JSON.parse(localStorage.getItem('metaData')!);
+    let data: any = this.storageService.getEncrData('metaData');
     return data?.filter((item: any) => item.typeName == type)[0]?.metadata.filter((el: any) => el.keyId == key)[0]?.value
   }
 
   getMetaDataTypes(type: string) {
-    let data: any = JSON.parse(localStorage.getItem('metaData')!);
+    let data: any = this.storageService.getEncrData('metaData');
     return data?.filter((item: any) => item.typeName == type)[0]?.metadata
   }
   serviceStatus: any;
   getMetadata() {
-    let data = JSON.parse(localStorage.getItem('metaData')!) || [];
-    for(let item of data) {
-      if(item.typeName == 'ServiceRequestStatus') {
+    let data = this.storageService.getEncrData('metaData') || [];
+    for (let item of data) {
+      if (item.typeName == 'ServiceRequestStatus') {
         this.serviceStatus = item.metadata;
       }
     }
@@ -140,8 +146,8 @@ export class HelpdeskrequestComponent implements OnInit {
 
   listUserByRoles(data?: any) {
     this.apiservice.listUsersByRoles(data).subscribe((res: any) => {
-      if(res.statusCode === 200) {
-        if(data?.assignedTo) {
+      if (res.statusCode === 200) {
+        if (data?.assignedTo) {
           this.assignUsers = res.roleDetails.filter((obj: any) => obj.category !== 'Admin').flatMap((item: any) => item.users);
         } else {
           this.assignUsers = res.roleDetails.filter((obj: any) => obj.category === 'Admin').flatMap((item: any) => item.users);
@@ -164,15 +170,15 @@ export class HelpdeskrequestComponent implements OnInit {
     this.showLoader = true;
     this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
       this.showLoader = false;
-      if(res.Status === 'Success') {
+      if (res.Status === 'Success') {
         this.siteData = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-        if(!this.currentInfo) {
-          this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+        if (!this.currentInfo) {
+          this.storageService.site_sub.next({ site: this.siteData[0], index: 0 });
         }
-      }        
+      }
 
 
-      
+
       this.getHelpDeskRequestsNew();
     }, (err: any) => {
       this.showLoader = false;
@@ -247,8 +253,8 @@ export class HelpdeskrequestComponent implements OnInit {
         } else {
           let minDate = new Date(
             Math.min(...a.map((element: any) => {
-                return new Date(element.createdTime);
-              }),
+              return new Date(element.createdTime);
+            }),
             ),
           );
           if (minDate) {
@@ -328,7 +334,7 @@ export class HelpdeskrequestComponent implements OnInit {
       this.newHelpdeskRequests = [];
     })
 
-    if(type == 'submit') {
+    if (type == 'submit') {
       this.show = !this.show;
     }
   }
@@ -477,22 +483,22 @@ export class HelpdeskrequestComponent implements OnInit {
     this.pagination();
     this.show = !this.show;
   }
-  
+
   clearsearchfilters() {
     this.selectedsite = undefined,
-    this.selectedCategory = undefined,
-    this.selectedSubcategory = undefined,
-    this.selectedStatus = undefined,
-    this.selectedCreatedBy = undefined;
+      this.selectedCategory = undefined,
+      this.selectedSubcategory = undefined,
+      this.selectedStatus = undefined,
+      this.selectedCreatedBy = undefined;
     this.startDate = undefined,
-    this.endDate = undefined;
+      this.endDate = undefined;
 
     this.searched = false;
     this.displaYstartDate = undefined;
     this.displaYendDate = undefined;
     // this.filtereddata = (this.requests.filter(function (e: any) { return e.status !== 6 })).reverse();
     // this.pagination();
-    
+
     this.getHelpDeskRequestsNew();
     this.show = !this.show;
   }
@@ -816,7 +822,7 @@ export class HelpdeskrequestComponent implements OnInit {
       this.error1 = true;
     }
   }
-  
+
   closedassignModal() {
     var x = <HTMLElement>document.getElementById('assignmodal')
     x.style.display = "none";
@@ -986,8 +992,6 @@ export class HelpdeskrequestComponent implements OnInit {
     //   this.currentaddsubcat = { serviceSubcatName: 'Other' }
     // }
     this.showLoader = true;
-    var site = this.storageService.getEncrData('siteidfromgaurdpage');
-    var site1 = this.storageService.getEncrData('navItem');
 
     if (!this.addtime) { this.addtime = '' }
     else { this.addtime = String(this.addtime).replace("T", " ") + ':00' }
@@ -1012,7 +1016,7 @@ export class HelpdeskrequestComponent implements OnInit {
           this.alertService.success("Failed", "Failed to add request please try again later.")
         }
       }, (err) => {
-        this.showLoader =  false;
+        this.showLoader = false;
       });
     } else {
       this.showLoader = false;

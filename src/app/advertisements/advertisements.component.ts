@@ -172,7 +172,7 @@ export class AdvertisementsComponent implements OnInit {
   deviceMode: any;
   addStatus: any;
   getMetadata() {
-    let data = JSON.parse(localStorage.getItem('metaData')!);
+    let data = this.storageService.getEncrData('metaData');
     for(let item of data) {
       if(item.type == 2) {
         this.deviceType = item.metadata;

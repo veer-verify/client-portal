@@ -1,20 +1,21 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Pipe, PipeTransform } from '@angular/core';
 import { StorageService } from '../storage.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-  name: 'image'
+  name: 'pdf'
 })
-export class ImagePipe implements PipeTransform {
+export class PdfPipe implements PipeTransform {
 
   private http = inject(HttpClient);
   private storage_service = inject(StorageService)
+  private sanitizer = inject(DomSanitizer);
 
-  async transform(url: string): Promise<any> {
-    if(!url) return;
-    const token = JSON.parse(localStorage.getItem('acTok')!)
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    const imageBlob = await this.http.get(url, { headers, responseType: 'blob' }).toPromise() as Blob;
+  transform(url: string): unknown {
+    let sanitized: any = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    console.log(sanitized)
+    const imageBlob = this.http.get(url).toPromise();
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
       reader.onloadend = () => resolve(reader.result as string);
@@ -24,6 +25,7 @@ export class ImagePipe implements PipeTransform {
         reject(new Error('Failed to fetch image as Blob'));
       }
     });
+    // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }

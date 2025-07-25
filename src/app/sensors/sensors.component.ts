@@ -241,7 +241,7 @@ export class SensorsComponent implements OnInit {
 
   tempRanges: any;
   getMetadata() {
-    let data = JSON.parse(localStorage.getItem('metaData')!);
+    let data = this.storageService.getEncrData('metaData');
     for(let item of data) {
       if(item.typeName == `tempRangeForSensor${this.currentSite?.siteId}`) {
         this.tempRanges = item.metadata;

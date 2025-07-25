@@ -167,8 +167,6 @@ export class ChatpopupComponent implements OnInit {
       this.currentsubcategory = {serviceSubcatName :'other'}
     }
     this.showLoader =true;
-    var site = this.storageservice.getEncrData('siteidfromgaurdpage');
-    var site1 = this.storageservice.getEncrData('navItem');
 
     if(!this.time){this.time = ''}
     else{this.time = String(this.time).replace("T", " ") + ':00'}

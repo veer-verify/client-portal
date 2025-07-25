@@ -47,8 +47,12 @@ export class AddIncidentComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   user: any;
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.storageService.getEncrData("user");
+  }
+  
+  ngOnChanges(): void {
+    this.resetForm();
     this.initilizeForm();
   }
 
@@ -77,10 +81,7 @@ export class AddIncidentComponent implements OnInit {
     this.is_submitted = true
     if(this.form.valid) {
       this.newItemEvent.emit(this.form.value);
-    } else {
-      this.alertSer.error('error', 'Please fill all fields');
     }
-    this.resetForm();
   }
 
   fillShortName(event: any) {

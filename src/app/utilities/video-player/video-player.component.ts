@@ -11,13 +11,10 @@ import { SiteService } from 'src/app/services/site.service';
 })
 export class VideoPlayerComponent {
 
+  @Input() site: any;
   @Input() videoData: any;
   @Input() gridClicked: any;
   @Input() width: any;
-
-  constructor(
-    private siteSer: SiteService
-  ) {}
 
   @ViewChild('video') video!: ElementRef;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -41,29 +38,33 @@ export class VideoPlayerComponent {
   }
 
   ngAfterViewInit() {
+    if (this.site === 36498) {
+      this.video.nativeElement.muted = false;
+    } else {
+      this.video.nativeElement.muted = true;
+    }
     this.video.nativeElement.controls = false;
-    this.video.nativeElement.muted = true;
     this.video.nativeElement.autoplay = true;
     this.video.nativeElement.playsInline = true;
   }
-  
+
   showLoader: boolean = false;
   requestICEServers() {
     if (this.hitStream) {
       this.showLoader = true;
       fetch(this.videoData + "whep", {
         method: 'OPTIONS',
-                headers: {
+        headers: {
           'Authorization': `Basic ${this.encoded}`
         }
       }).then((res) => {
-        this.showLoader = false
+        this.showLoader = false;
         this.peerConnection = new RTCPeerConnection({
           iceServers: this.linkToIceServers(res.headers.get('Link')),
         });
         const direction = 'sendrecv';
         this.peerConnection.addTransceiver('video', { direction });
-        // this.peerConnection.addTransceiver('audio', { direction });
+        this.peerConnection.addTransceiver('audio', { direction });
         this.peerConnection.onicecandidate = (evt: RTCPeerConnectionIceEvent) => this.onLocalCandidate(evt);
         this.peerConnection.oniceconnectionstatechange = () => this.onConnectionState();
         this.peerConnection.ontrack = (evt: RTCTrackEvent) => {
@@ -71,11 +72,10 @@ export class VideoPlayerComponent {
         };
         this.createOffer();
       }).catch((err) => {
-          // console.log(err)
-          // this.video.nativeElement.src = '/assets/Screen Recording 2024-12-07 102136.mp4';
-          // this.hitStream = false;
-          this.showLoader = false;
-          this.onError(err.toString());
+        // this.video.nativeElement.src = '/assets/Screen Recording 2024-12-07 102136.mp4';
+        // this.hitStream = false;
+        this.showLoader = false;
+        this.onError(err.toString());
       });
     }
   }
@@ -153,7 +153,7 @@ export class VideoPlayerComponent {
     this.peerConnection!.createOffer()
       .then((offer: RTCSessionDescriptionInit) => {
         this.showLoader = false;
-        // this.editOffer(offer);
+        this.editOffer(offer);
         this.offerData = this.parseOffer(offer.sdp!);
         this.peerConnection!.setLocalDescription(offer);
         this.sendOffer(offer);
@@ -162,16 +162,16 @@ export class VideoPlayerComponent {
       });
   };
 
-  // editOffer(offer: RTCSessionDescriptionInit) {
-  //   const sections = offer.sdp!.split('m=');
-  //   for (let i = 0; i < sections.length; i++) {
-  //     const section = sections[i];
-  //     if (section.startsWith('audio')) {
-  //       sections[i] = this.enableStereoOpus(section);
-  //     }
-  //   }
-  //   offer.sdp = sections.join('m=');
-  // };
+  editOffer(offer: RTCSessionDescriptionInit) {
+    const sections = offer.sdp!.split('m=');
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      if (section.startsWith('audio')) {
+        sections[i] = this.enableStereoOpus(section);
+      }
+    }
+    offer.sdp = sections.join('m=');
+  };
 
   parseOffer(offer: string) {
     const ret: any = {
@@ -192,34 +192,34 @@ export class VideoPlayerComponent {
     return ret;
   };
 
-  // enableStereoOpus(section: any) {
-  //   let opusPayloadFormat = '';
-  //   let lines = section.split('\r\n');
+  enableStereoOpus(section: any) {
+    let opusPayloadFormat = '';
+    let lines = section.split('\r\n');
 
-  //   for (let i = 0; i < lines.length; i++) {
-  //     if (lines[i].startsWith('a=rtpmap:') && lines[i].toLowerCase().includes('opus/')) {
-  //       opusPayloadFormat = lines[i].slice('a=rtpmap:'.length).split(' ')[0];
-  //       break;
-  //     }
-  //   }
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('a=rtpmap:') && lines[i].toLowerCase().includes('opus/')) {
+        opusPayloadFormat = lines[i].slice('a=rtpmap:'.length).split(' ')[0];
+        break;
+      }
+    }
 
-  //   if (opusPayloadFormat === '') {
-  //     return section;
-  //   }
+    if (opusPayloadFormat === '') {
+      return section;
+    }
 
-  //   for (let i = 0; i < lines.length; i++) {
-  //     if (lines[i].startsWith('a=fmtp:' + opusPayloadFormat + ' ')) {
-  //       if (!lines[i].includes('stereo')) {
-  //         lines[i] += ';stereo=1';
-  //       }
-  //       if (!lines[i].includes('sprop-stereo')) {
-  //         lines[i] += ';sprop-stereo=1';
-  //       }
-  //     }
-  //   }
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('a=fmtp:' + opusPayloadFormat + ' ')) {
+        if (!lines[i].includes('stereo')) {
+          lines[i] += ';stereo=1';
+        }
+        if (!lines[i].includes('sprop-stereo')) {
+          lines[i] += ';sprop-stereo=1';
+        }
+      }
+    }
 
-  //   return lines.join('\r\n');
-  // };
+    return lines.join('\r\n');
+  };
 
   sendOffer(offer: RTCSessionDescriptionInit) {
     this.showLoader = true;
@@ -249,11 +249,9 @@ export class VideoPlayerComponent {
   };
 
   onRemoteAnswer(sdp: string) {
-    if (this.restartTimeout !== null) {
-      return;
-    }
+    if (this.restartTimeout !== null) return;
 
-    if(this.peerConnection?.signalingState !== 'closed') {
+    if (this.peerConnection?.signalingState !== 'closed') {
       this.peerConnection!.setRemoteDescription(new RTCSessionDescription({
         type: 'answer',
         sdp,
@@ -286,9 +284,9 @@ export class VideoPlayerComponent {
           throw new Error(`bad status code ${res.status}`);
       }
     }).catch((err) => {
-        this.showLoader = false;
-        this.onError(err.toString());
-      });
+      this.showLoader = false;
+      this.onError(err.toString());
+    });
   };
 
   generateSdpFragment(od: any, candidates: RTCIceCandidate[]) {
@@ -320,7 +318,7 @@ export class VideoPlayerComponent {
     let finalWidth = 1280;
     let finalHeight = 720;
     this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, finalWidth, finalHeight);
-    
+
     const screenshotDataUrl = this.canvas.nativeElement.toDataURL('image/png');
     const link = document.createElement('a');
     link.href = screenshotDataUrl;

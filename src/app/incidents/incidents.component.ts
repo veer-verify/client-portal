@@ -1,14 +1,10 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateFormatter } from '../services/customDateFormatter';
 import { DatePipe, formatDate } from '@angular/common';
-import { Router } from '@angular/router';
-import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
-import { AuthService } from '../services/auth/authservice.service';
 import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
-import { SiteService } from '../services/site.service';
 import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
@@ -23,19 +19,14 @@ export class IncidentsComponent implements OnInit {
 
   constructor(
     private apiservice: ApiService,
-    private router: Router,
-    private alertService: AlertService,
-    private authservice: AuthService,
     private storageService: StorageService,
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
-    private siteSer: SiteService,
     public storageSer: StorageService
   ) { }
 
   environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=incidents&assetName=';
-  // commonsUrl: string = 'https://commonssl.ivisecurity.com/common/downloadFile_1_0?requestName=incidents&assetName='
   userData: any;
   currentTime: any;
   currentInfo: any
@@ -55,13 +46,18 @@ export class IncidentsComponent implements OnInit {
     this.getTags();
   }
 
+  isVideo(data: string) {
+    if(!data) return;
+    let arr = ['mp4', 'avi'];
+    return arr.includes(data?.split('.')[data.split('.').length - 1])
+  }
+
   // serviceData: any;
   // getsiteservices1(site: any) {
   //   this.siteSer.listSiteServices(site).subscribe((res: any) => {
   //     this.serviceData = res.siteServicesList;
   //   })
   // }
-
 
   getTimeDifference(date1: Date, date2: Date): string {
     let first: any = new Date(date1);
@@ -313,6 +309,7 @@ export class IncidentsComponent implements OnInit {
   }
 
   closeModel(type: string) {
+    this.currentVideoData = null;
     if (type === 'playModel') {
       this.tableIndex = null;
     }
@@ -347,7 +344,6 @@ export class IncidentsComponent implements OnInit {
   // }
 
   async generatePdf() {
-    this.showLoader = true;
     let urls: any = [];
     await this.currentVideoData.files.forEach((item: any) => {
       let isImg = item.split('.')[item.split('.').length - 1] != 'mp4' && item.split('.')[item.split('.').length - 1] != 'avi';
@@ -355,7 +351,7 @@ export class IncidentsComponent implements OnInit {
         urls.push(this.environment + item);
       }
     });
-
+    
     const doc = new jsPDF('p', 'px', [420, 420]);
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
@@ -367,12 +363,13 @@ export class IncidentsComponent implements OnInit {
       }
       doc.addImage(imgData, 'PNG', 10, 10, 400, 400);
     }
-    this.showLoader = false;
+    
     doc.save(`${new Date()}.pdf`);
   }
-
+  
   private loadImage(url: string): Promise<HTMLImageElement> {
-    
+    this.showLoader = true;
+    this.showLoader = false;
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.crossOrigin = 'Anonymous';

@@ -50,15 +50,11 @@ export class LiveViewComponent implements OnInit {
   resizeObservable: any;
   resizeSubscription: any;
   currentInfo: any;
-  x: any
   ngOnInit(): void {
     // this.userActivity();
     // this.myFun();
     document.body.style.backgroundImage = "linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url('../../assets/icons/background.jpg'))";
     this.user = this.storageService.getEncrData("user");
-    this.x = this.storageService.getEncrData('siteidfromgaurdpage');
-    this.siteServices = this.storageService.getEncrData('siteservices');
-    // this.currentInfo = this.storageService.getEncrData('navItem');
     this.storageService.site_sub.subscribe({
       next: (res) => {
         this.currentInfo = res;
@@ -165,9 +161,6 @@ export class LiveViewComponent implements OnInit {
             }
           });
         }
-
-        this.storageService.storeEncrData('selectedsite', this.sites);
-        this.storageService.storeEncrData('siteidfromgaurdpage', this.sites[0]);
         if (this.sites.length > 0) {
           this.firstAPiHitforCamdata();
         } else {
@@ -236,12 +229,10 @@ export class LiveViewComponent implements OnInit {
     // this.storageService.storeEncrData('navItem', {site: site, index: this.sites.indexOf(site)});
     this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }
-    this.storageService.storeEncrData('siteidfromgaurdpage', site);
     this.getsiteservices(site);
     this.pagenumber = 1;
     // this.adjustGrid();
     this.viewPanelData = site;
-    this.storageService.storeEncrData('siteidfromgaurdpage', site);
     if (site.siteId != this.currentsite) {
       this.showLoader = true;
       this.siteSer.getCamerasForSiteId({ siteId: site.siteId }).subscribe((cams: any) => {
@@ -284,7 +275,6 @@ export class LiveViewComponent implements OnInit {
   }
 
   loadCameraList(event: any, site: any, index: any) {
-    this.storageService.storeEncrData('siteidfromgaurdpage', site);
     var siteId = site.siteId;
     this.currentsite = siteId;
   }

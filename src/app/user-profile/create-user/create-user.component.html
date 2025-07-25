@@ -1,0 +1,14 @@
+<form [formGroup]="userForm" (ngSubmit)="submit()">
+    <div class="row">
+        <div class="col-lg-6">
+            <input type="text" class="form-control" formControlName="firstName">
+        </div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" formControlName="lastName">
+        </div>
+    </div>
+
+    <div>
+        <button type="submit">submit</button>
+    </div>
+</form>

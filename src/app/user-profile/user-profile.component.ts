@@ -2,20 +2,15 @@ import {
   Component,
   ViewChildren,
   QueryList,
-  AfterViewInit,
   ViewChild,
   HostListener,
-  signal,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
-import { Collapse } from 'bootstrap';
 import { AuthService } from '../services/auth/authservice.service';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
-import { map } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -141,7 +136,6 @@ export class UserProfileComponent {
   currentInfo: any;
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
-    var site = this.storageService.getEncrData('siteidfromgaurdpage');
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
     });
@@ -155,21 +149,19 @@ export class UserProfileComponent {
   userinfo: any = null;
   getUser() {
     this.showLoader = true;
-    this.apiservice.getUserInfoForId(this.userData?.UserId).subscribe(
-      (res: any) => {
+    this.apiservice.getUserInfoForId(this.userData?.UserId).subscribe({
+      next: (res: any) => {
         this.showLoader = false;
-        if (res.Status === 'Failed') {
-          this.userinfo = null;
-        } else {
+        if (res.Status !== 'Failed') {
           this.userinfo = res;
           this.user = { ...this.userinfo };
           this.getSitesListForUserName();
         }
       },
-      (err) => {
+      error: (err) => {
         this.showLoader = false;
       }
-    );
+    })
   }
 
   siteData: any = [];
@@ -233,7 +225,8 @@ export class UserProfileComponent {
 
     if (index == 2) {
       this.getUserNamesByUserName();
-      this.userDetailslistRoles();    }
+      this.userDetailslistRoles();
+    }
   }
 
   scrollToSection(sectionId: string): void {
@@ -291,7 +284,7 @@ export class UserProfileComponent {
         this.alertservice.error('error', res.message);
       }
     }, (err) => {
-        this.alertservice.error('error', 'Request Entity Too Large');
+      this.alertservice.error('error', 'Request Entity Too Large');
     });
   }
   // closecollapse() {
@@ -598,74 +591,66 @@ export class UserProfileComponent {
   applyMapping() {
     let isChecked = this.userSites.some((item: any) => item.assigned);
     if (this.filter == 2) {
-      // if(!isChecked) return;
+      if (!isChecked) {
+        this.alertservice.sweetError('Please select atleast one site!');
+        return;
+      };
 
       this.showLoader = true;
-      this.apiservice
-        .unassignSiteForUser({
-          userId: this.createdUser
-            ? this.createdUser
-            : this.currentUser?.userId,
-          loginId: this.userData?.UserId,
-          siteId: Array.from(
-            this.userSites.filter((el: any) => el['assigned']),
-            (item: any) => item.siteId
-          ),
-        })
-        .subscribe({
-          next: (res: any) => {
-            this.showLoader = false;
-            this.createdUser = null;
-            if (res.statusCode === 200) {
-              this.alertservice.success('success', res.message);
-              this.getSitesForGlobal({
-                userId: this.currentUser?.userId,
-                assigned: this.currentFilter.value,
-              });
-            } else {
-              this.alertservice.error('error', res.message);
-            }
-          },
-          error: (err: any) => {
-            this.showLoader = false;
-            this.alertservice.error('error', 'Failed');
-          },
-        });
+      this.apiservice.unassignSiteForUser({
+        userId: this.createdUser ? this.createdUser : this.currentUser?.userId,
+        loginId: this.userData?.UserId,
+        siteId: Array.from(this.userSites.filter((el: any) => el['assigned']), (item: any) => item.siteId),
+      }).subscribe({
+        next: (res: any) => {
+          this.showLoader = false;
+          this.createdUser = null;
+          if (res.statusCode === 200) {
+            this.alertservice.success('success', res.message);
+            this.getSitesForGlobal({
+              userId: this.currentUser?.userId,
+              assigned: this.currentFilter.value,
+            });
+          } else {
+            this.alertservice.error('error', res.message);
+          }
+        },
+        error: (err: any) => {
+          this.showLoader = false;
+          this.alertservice.error('error', 'Failed');
+        },
+      });
     } else if (this.filter == 3 || this.filter == -1) {
-      // if(!isChecked) return;
+      if (!isChecked) {
+        this.alertservice.sweetError('Please select atleast one site!');
+        return;
+      };
 
       this.showLoader = true;
-      this.apiservice
-        .applySitesMapping({
-          userId: this.createdUser
-            ? this.createdUser
-            : this.currentUser?.userId,
-          loginId: this.userData?.UserId,
-          siteList: Array.from(
-            this.userSites.filter((el: any) => el['assigned']),
-            (item: any) => item.siteId
-          ),
-        })
-        .subscribe({
-          next: (res: any) => {
-            this.showLoader = false;
-            if (res.status === 'Success') {
-              this.closeDialog('userSites');
-              this.createdUser = null;
-              this.alertservice.success('success', res.message);
-              this.getSitesForGlobal({
-                userId: this.currentUser?.userId,
-                assigned: this.currentFilter.value,
-              });
-            } else {
-              this.alertservice.error('error', res.message);
-            }
-          },
-          error: (err: any) => {
-            this.showLoader = false;
-            this.alertservice.error('error', 'Failed');
-          },
-        });
+      this.apiservice.applySitesMapping({
+        userId: this.createdUser ? this.createdUser : this.currentUser?.userId,
+        loginId: this.userData?.UserId,
+        siteList: Array.from(this.userSites.filter((el: any) => el['assigned']), (item: any) => item.siteId),
+      }).subscribe({
+        next: (res: any) => {
+          this.showLoader = false;
+          if (res.status === 'Success') {
+            this.closeDialog('userSites');
+            this.createdUser = null;
+            this.alertservice.success('success', res.message);
+            this.getSitesForGlobal({
+              userId: this.currentUser?.userId,
+              assigned: this.currentFilter.value,
+            });
+          } else {
+            this.alertservice.error('error', res.message);
+          }
+        },
+        error: (err: any) => {
+          this.showLoader = false;
+          this.alertservice.error('error', 'Failed');
+        },
+      });
     }
   }
 
@@ -682,14 +667,14 @@ export class UserProfileComponent {
 
   userDetailslistRoles() {
     this.userSer.listRoles().subscribe((res: any) => {
-        if (res.statusCode == 200) {
-          this.userRoles = res.roleList;
-          let obj: any = this.questionList.filter((item: any) => item.key === 'roleList')[0];
-          obj.questionOptions = this.userRoles;
-        } else {
-          this.alertservice.error('error', res.message);
-        }
-      },
+      if (res.statusCode == 200) {
+        this.userRoles = res.roleList;
+        let obj: any = this.questionList.filter((item: any) => item.key === 'roleList')[0];
+        obj.questionOptions = this.userRoles;
+      } else {
+        this.alertservice.error('error', res.message);
+      }
+    },
       (err: any) => {
         this.alertservice.error('error', err);
       }

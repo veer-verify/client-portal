@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, finalize, Subject, take } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Subject, take, throwError } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
@@ -89,7 +89,7 @@ export class NavbarComponent implements OnInit {
               this.serviceData = response.siteServicesList;
               this.navItems = menuItems;
             }
-          }
+          },
         })
       }
     })
@@ -166,14 +166,14 @@ export class NavbarComponent implements OnInit {
         this.showLoader = false;
         this.router.navigateByUrl('/error');
         localStorage.clear();
-        this.storageService.site_sub.complete();
-        this.authservice.isLoggedin.complete();
-        window.location.reload();
+        this.storageService.site_sub.next(null);
+        this.authservice.isLoggedin.next(false);
+        // window.location.reload();
       },
       complete: () => {
-        this.storageService.site_sub.complete();
-        this.authservice.isLoggedin.complete();
-        window.location.reload();
+        this.storageService.site_sub.next(null);
+        this.authservice.isLoggedin.next(false);
+        // window.location.reload();
       }
     })
   }

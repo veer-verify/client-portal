@@ -22,7 +22,6 @@ import { AlertComponent } from './services/alertservice/alert/alert.component';
 import { DatePipe, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { SitePipe } from './insight/sitePipe.pipe';
 import { SortPipe } from './services/pipes/sorting-pipe.pipe';
-// import { ChartsModule } from 'ng2-charts';
 import { ClientServicesComponent } from './client-services/client-services.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { ErrorpageComponent } from './services/errorpage/errorpage.component';
@@ -58,6 +57,8 @@ import { ClientFormComponent } from './client-form/client-form.component';
 import { AddIncidentComponent } from './add-incident/add-incident.component';
 import { ImagePipe } from './services/pipes/image.pipe';
 import { SanitizePipe } from './services/pipes/sanitize.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { CreateUserComponent } from './user-profile/create-user/create-user.component';
 
 
 
@@ -109,7 +110,8 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
     ClientFormComponent,
     AddIncidentComponent,
     ImagePipe,
-    SanitizePipe
+    SanitizePipe,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,8 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
     FormsModule,
     ReactiveFormsModule,
     BaseChartDirective,
-    NgbModule
+    NgbModule,
+    PdfViewerModule
   ],
   providers: [
     {

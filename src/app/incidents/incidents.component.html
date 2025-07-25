@@ -224,15 +224,14 @@
     <p>{{currentVideoData?.siteName}} - {{currentVideoData?.name | uppercase}}</p>
 
     <div class="d-flex align-items-center">
-      <p><img src="assets/icons/file_download_white.svg" class="pointer" (click)="generatePdf()" title="Download"
-          alt=""></p>
+      <!-- <p><img src="assets/icons/file_download_white.svg" class="pointer" (click)="generatePdf()" title="Download"
+          alt=""></p> -->
       <p><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel('playModel')"
           title="close" alt=""></p>
     </div>
   </div>
 
-  <div class="dialog-content" style="position: relative; width: 55vw; height: 55vh;" #reportDialog
-    *ngIf="currentVideoData">
+  <div class="dialog-content" style="position: relative; width: 55vw; height: 55vh;" #reportDialog *ngIf="currentVideoData">
     <div id="canvas">
       <!-- <div class="header d-flex">
         <div><img src="assets/icons/IVISsecurity_logo.png" width="150" alt="ivisSecurity"></div>
@@ -248,17 +247,11 @@
       <div>
         <div style="height: 35vh;">
           <!-- image -->
-          <img *ngIf="
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'JPG' ||
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'png' ||
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'jpg' ||
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'jpeg'"
+          <img *ngIf="!isVideo(currentTileItem)"
             [src]="environment + currentTileItem | image | async" width="100%" height="100%" alt="NO DATA">
 
           <!-- video -->
-          <video *ngIf="
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'mp4' ||
-                      currentTileItem?.split('.')[currentTileItem?.split('.').length - 1] === 'avi'"
+          <video *ngIf="isVideo(currentTileItem)"
             [src]="environment + currentTileItem | image | async" class="bg-dark" controls autoplay width="100%" height="100%"></video>
         </div>
 
@@ -271,17 +264,11 @@
           <div class="scroll-tiles" *ngFor="let data of currentTiles; let i = index"
             [ngStyle]="{'border': currentTileItem == data ? '3px solid red' : 'none'}" (click)="getCurrentTile(data)">
             <!-- image -->
-            <img *ngIf="
-              data?.split('.')[data?.split('.').length - 1] === 'JPG' ||
-              data?.split('.')[data?.split('.').length - 1] === 'png' ||
-              data?.split('.')[data?.split('.').length - 1] === 'jpg' ||
-              data?.split('.')[data?.split('.').length - 1] === 'jpeg'" [src]="environment + data | image | async" width="100%"
+            <img *ngIf="!isVideo(currentTileItem)" [src]="environment + data | image | async" width="100%"
               height="100%" alt="NO DATA">
 
             <!-- video -->
-            <video *ngIf="
-              data?.split('.')[data?.split('.').length - 1] === 'mp4' ||
-              data?.split('.')[data?.split('.').length - 1] === 'avi'" [src]="environment + data | image | async" class="bg-dark"
+            <video *ngIf="isVideo(currentTileItem)" [src]="environment + data | image | async" class="bg-dark"
               width="100%" height="100%"></video>
           </div>
 

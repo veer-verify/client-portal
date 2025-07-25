@@ -171,7 +171,7 @@
 
             <div>
               <ng-container>
-                <app-video-player [videoData]="camera?.httpUrl + '/'" [gridClicked]="gridClicked" #videos></app-video-player>
+                <app-video-player [site]="currentsite" [videoData]="camera?.httpUrl + '/'" [gridClicked]="gridClicked" #videos></app-video-player>
               </ng-container>
               <!-- <ng-container *ngIf="camera.indexNo != 1 && !camera.videoUrl">
                 <app-dummy-video [videoData]="camera?.videoUrl" [gridClicked]="gridClicked" #videos></app-dummy-video>

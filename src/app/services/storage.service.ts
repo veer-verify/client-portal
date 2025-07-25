@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 
@@ -28,10 +28,14 @@ export class StorageService {
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
   site_sub: BehaviorSubject<any> = new BehaviorSubject(null);
 
+  // site(): Observable<any> {
+  //   return this.site_sub.asObservable();
+  // }
+
   constructor() { }
 
   commonsUrl = "https://commonssl-rsmgmt.ivisecurity.com/"
-  storeEncrData(storageKey: string, value: any) {
+  storeEncrData1(storageKey: string, value: any) {
     var x: string;
     const y = btoa(escape(JSON.stringify(value)));
     if (storageKey == 'refreshToken') { x = 'rft'; this.forStoring(x, y) }
@@ -46,9 +50,9 @@ export class StorageService {
     else { x = storageKey; this.forStoring(x, y) };
   }
 
-  storeEncrData1(key: string, value: any) {
-    const data: any = btoa(encodeURIComponent(JSON.stringify(value)));
-    localStorage.setItem(key, data);
+  storeEncrData(key: string, value: any) {
+    // const data: any = btoa(encodeURIComponent(JSON.stringify(value)));
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   forStoring(x: string, encryptedValue: string) {
@@ -57,7 +61,7 @@ export class StorageService {
   }
 
 
-  getEncrData(key: string) {
+  getEncrData1(key: string) {
     var x: string;
     if (key == 'refreshToken') { x = 'rft'; return this.forGetting(x) }
     else if (key == 'selectedsite') { x = 'cs'; return this.forGetting(x) }
@@ -71,9 +75,10 @@ export class StorageService {
     else { x = key; return this.forGetting(x) }
   }
 
-  getEncrData1(key: string) {
-    const data: any = localStorage.getItem(key);
-    return JSON.parse(decodeURIComponent(atob(data)));
+  getEncrData(key: string) {
+    // const data: any = localStorage.getItem(key);
+    // return JSON.parse(decodeURIComponent(atob(data)));
+    return JSON.parse(localStorage.getItem(key)!)
   }
 
   forGetting(key: any) {
