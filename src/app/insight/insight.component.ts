@@ -46,12 +46,10 @@ export class InsightComponent implements OnInit {
   currentInfo: any
   ngOnInit(): void {
     // this.getsitenonworkingdays();
-    // for maxdate as today
     this.user = this.storageService.getEncrData("user");
-    // this.currentInfo = this.storageService.getEncrData('navItem');
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
-      if(res) {
+      if (res) {
         this.listInsightImages(res?.site);
       }
     })
@@ -86,20 +84,21 @@ export class InsightComponent implements OnInit {
   getSitename() {
     this.showLoader = true;
     this.siteSer.getSitesListForUserName(this.user).subscribe((res: any) => {
-      this.showLoader =false;
+      this.showLoader = false;
       if (res.status == 'Failed') {
         if (res.Message == "Data not available") {
           // this.router.navigateByUrl('/guard');
         }
       } else {
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+        // this.currentSite = this.sites[0].siteName
         // this.getsiteservices1(this.currentInfo?.site);
         // this.listInsightImages(this.currentInfo?.site);
 
-        if(!this.currentInfo) {
-          this.storageService.site_sub.next({site: this.sites[0], index: 0});
+        if (!this.currentInfo) {
+          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
         }
-        
+
         // var sitelist = this.sites.sites
         // const sortAlphaNum = (a: any, b: any) => a.siteName.localeCompare(b.siteName, 'en', { numeric: true })
         // sitelist = this.sites.sites.sort(sortAlphaNum);
@@ -108,15 +107,15 @@ export class InsightComponent implements OnInit {
         var user = this.storageService.getEncrData("user");
         if (user.UserName == 'sales@ivisecurity.com') {
           this.sites.forEach((item: any) => {
-            if(item.siteId == 36349) {
+            if (item.siteId == 36349) {
               item.siteName = "Your Shopping Center";
               item.siteShortName = "Machinery Service";
-              }
-              if(item.siteId == 36347) {
-                item.siteName = "Your Pharmacy";
+            }
+            if (item.siteId == 36347) {
+              item.siteName = "Your Pharmacy";
               item.siteShortName = "Machinery Service";
-              }
-              if(item.siteId == 36331) {
+            }
+            if (item.siteId == 36331) {
               item.siteName = "Your Machinery Service";
               item.siteShortName = "Machinery Service";
             }
@@ -143,7 +142,7 @@ export class InsightComponent implements OnInit {
     this.placeholderhere = "";
     this.showLoader = true;
     var user = this.storageService.getEncrData("user");
-    if(user.UserName != 'sales@ivisecurity.com') {
+    if (user.UserName != 'sales@ivisecurity.com') {
       this.apiservice.getBiAnalyticsReport(x, y, z).subscribe((res: any) => {
         this.showLoader = false;
         if (res.status != "Failed") {
@@ -171,7 +170,7 @@ export class InsightComponent implements OnInit {
           }
           this.reports = res;
           if (this.reports == null) {
-            this.placeholderhere = "Please select a date range to view your INSIGHTS";
+            this.placeholderhere = "NO DATA!";
           }
         } else {
           this.reportsite = this.currentsite;
@@ -186,41 +185,41 @@ export class InsightComponent implements OnInit {
           setTimeout(() => { this.showLoader = false; }, 1000);
           this.alertservice.warning("Error", "Something went wrong please try after some time ");
         });
-    } else if(user.UserName == 'sales@ivisecurity.com') {
+    } else if (user.UserName == 'sales@ivisecurity.com') {
       this.showLoader = true;
       let dayName = this.getDayName(this.displaYstartDate);
       let url: any;
-      if(this.currentsite == 'Your Gas Station') {
+      if (this.currentsite == 'Your Gas Station') {
         url = 'assets/insight-data/yoursGasStation.json';
-      } else if(this.currentsite == 'Your Machinery Service') {
+      } else if (this.currentsite == 'Your Machinery Service') {
         url = 'assets/insight-data/yoursMachinery.json';
-      } else if(this.currentsite == 'Your Shopping Center') {
+      } else if (this.currentsite == 'Your Shopping Center') {
         url = 'assets/insight-data/yoursShoppingCenter.json';
-      } else if(this.currentsite == 'Your Pharmacy') {
+      } else if (this.currentsite == 'Your Pharmacy') {
         url = 'assets/insight-data/yoursPharmacy.json';
       }
       this.http.get(url).subscribe((x: any) => {
         // console.log(x);
         setTimeout(() => this.showLoader = false, 1000);
-        if(dayName == 'Sunday') {
+        if (dayName == 'Sunday') {
           x = x.Sun;
           this.reports = x;
-        } else if(dayName == 'Monday') {
+        } else if (dayName == 'Monday') {
           x = x.Mon;
           this.reports = x;
-        } else if(dayName == 'Tuesday') {
+        } else if (dayName == 'Tuesday') {
           x = x.Tue;
           this.reports = x;
-        } else if(dayName == 'Wednesday') {
+        } else if (dayName == 'Wednesday') {
           x = x.Wed;
           this.reports = x;
-        } else if(dayName == 'Thursday') {
+        } else if (dayName == 'Thursday') {
           x = x.Thu;
           this.reports = x;
-        } else if(dayName == 'Friday') {
+        } else if (dayName == 'Friday') {
           x = x.Fri;
           this.reports = x;
-        } else if(dayName == 'Saturday') {
+        } else if (dayName == 'Saturday') {
           x = x.Sat;
           this.reports = x;
         }
@@ -265,108 +264,136 @@ export class InsightComponent implements OnInit {
   }
 
   firstreport() {
-    var p = this.storageService.getEncrData('siteidfromgaurdpage');
-    if (p == null) {
-      // this.router.navigateByUrl('/guard')
-    }
-    else {
-      this.currentsite = p.siteName;
-      this.currentsiteid = p.siteId;
-      // this.setweekenddisable();
-      var siteId = p.siteId;
-      this.startDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'dd-MM-yyyy');
-      this.endDate = this.startDate;
-      var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-      var startDateParts: any = this.startDate.split("-");
-      var endDateParts: any = this.endDate.split("-");
-      var sd = this.months[Number(startDateParts[1]) - 1] + ' ' + startDateParts[0] + ', ' + startDateParts[2]
-      var ed = this.months[Number(endDateParts[1]) - 1] + ' ' + endDateParts[0] + ', ' + endDateParts[2];
-      if (sd != ed) { this.selectedSpan = sd + ' - ' + ' ' + ed } else { this.selectedSpan = sd }
-      // console.log(yesterday)
-      // setTimeout(() => {
-      //   if(this.lastWorkingDay ){
-      //     yesterday = this.lastWorkingDay;
-      //    this.getreports(siteId,yesterday,yesterday);
-      //   //  console.log(yesterday);
-      //   //  console.log(new Date(this.lastWorkingDay))
-      //   } else{
-      this.getsitenonworkingdays();
-
-      //  this.getreports(siteId,yesterday,yesterday);
-      //   }
-      // },2000)
-
-      // else{
-      // this.getsitenonworkingdays();
-      // this.getreports(siteId,this.lastWorkingDay,this.lastWorkingDay);
-      //   if(!this.lastWorkingDay){
-      //     this.getreports(siteId,yesterday,yesterday);
-      //   }
-      // }
-
-      // console.log("yesdate",yesterday)
-
-      this.displaYstartDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
-      this.displaYendDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
-      this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-    }
-  }
-
-  getsitenonworkingdays() {
-    var p = this.storageService.getEncrData('siteidfromgaurdpage');
-    var siteId = p.siteId;
-    var year = (new Date()).getFullYear();
-    var yeararr = [year - 1, year - 2, year - 3, year - 4]
-    var datesarr: any = [];
-
-    this.apiservice.getNonWorkingDays(siteId, year).subscribe((res: any) => {
-      // console.log(res)
-      if (res.status == "Success") {
-        if(res.LastWorkingDay !== "") {
-          var dateParts = res.LastWorkingDay.split('-');
-          this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-          this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
-          this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-          this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-          this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-          this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
-          this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-        } else {
-          this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
-            // console.log(res);
-            this.lastWorkingDay = res.LastWorkingDay;
-            if(this.lastWorkingDay != "") {
-              this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-              this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-              this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
-            }
-            this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-          })
-          // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd');
-        }
-        datesarr.push(res.NotWorkingDaysList);
-        this.datesarr = datesarr.flat();
-
-        yeararr.forEach((el: any, i: number) => {
-          this.apiservice.getNonWorkingDays(siteId, el).subscribe((res: any) => {
-            if (res.status == "Success") {
-              datesarr.push(res.NotWorkingDaysList);
-              this.datesarr = datesarr.flat()
-            }
-          })
-        });
-
-        setTimeout(() => {
-          this.dates(this.datesarr)
-        }, 2000);
-      } else {
-        console.log("Last Working Day does not exist");
+    // var p = this.storageService.getEncrData('siteidfromgaurdpage');
+    this.storageService.site_sub.subscribe({
+      next: (res) => {  
+        var p = res.site;
+        this.currentsite = p.siteName;
+        this.currentsiteid = p.siteId;
+        // this.setweekenddisable();
+        var siteId = p.siteId;
+        this.startDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'dd-MM-yyyy');
+        this.endDate = this.startDate;
         var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-        this.getreports(siteId, yesterday, yesterday);
-        this.dates([]);
+        var startDateParts: any = this.startDate.split("-");
+        var endDateParts: any = this.endDate.split("-");
+        var sd = this.months[Number(startDateParts[1]) - 1] + ' ' + startDateParts[0] + ', ' + startDateParts[2]
+        var ed = this.months[Number(endDateParts[1]) - 1] + ' ' + endDateParts[0] + ', ' + endDateParts[2];
+        if (sd != ed) { this.selectedSpan = sd + ' - ' + ' ' + ed } else { this.selectedSpan = sd }
+
+        // setTimeout(() => {
+        //   if(this.lastWorkingDay ){
+        //     yesterday = this.lastWorkingDay;
+        //    this.getreports(siteId,yesterday,yesterday);
+        //   //  console.log(yesterday);
+        //   //  console.log(new Date(this.lastWorkingDay))
+        //   } else{
+        this.getsitenonworkingdays();
+
+        //  this.getreports(siteId,yesterday,yesterday);
+        //   }
+        // },2000)
+
+        // else{
+        // this.getsitenonworkingdays();
+        // this.getreports(siteId,this.lastWorkingDay,this.lastWorkingDay);
+        //   if(!this.lastWorkingDay){
+        //     this.getreports(siteId,yesterday,yesterday);
+        //   }
+        // }
+
+        // console.log("yesdate",yesterday)
+
+        // this.displaYstartDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
+        // this.displaYendDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
+        // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+
       }
     })
+
+  }
+
+  async getsitenonworkingdays() {
+    // var p = this.storageService.getEncrData('siteidfromgaurdpage');
+    // const p = await this.storageService.site_sub.toPromise().then((res) => res);
+    // console.log(p);
+    // console.log('completed!');
+
+    
+    this.storageService.site_sub.subscribe({
+      next: (res) => {
+        var p = res.site;
+        var siteId = p.siteId;
+        var year = (new Date()).getFullYear();
+        var yeararr = [year - 1, year - 2, year - 3, year - 4];
+        var datesarr: any = [];
+
+        this.apiservice.getNonWorkingDays(siteId, year).subscribe((res: any) => {
+          // console.log(res)
+          if (res.status == "Success") {
+            if (res.LastWorkingDay !== "") {
+              var dateParts = res.LastWorkingDay.split('-');
+              this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
+              this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
+              this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+
+              // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
+
+              this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+              this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
+              // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+              this.minenddate = this.displaYstartDate;
+            } else {
+              this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
+                this.lastWorkingDay = res.LastWorkingDay;
+                if (this.lastWorkingDay != "") {
+                  var dateParts = res.LastWorkingDay.split('-');
+                  this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
+                  this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
+                  this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+
+
+                  // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
+                                this.minenddate = this.displaYstartDate;
+
+
+                  this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+                  this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
+                }
+                // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+              })
+              // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd');
+            }
+            
+            datesarr.push(res.NotWorkingDaysList);
+            this.datesarr = datesarr.flat();
+
+            yeararr.forEach((el: any) => {
+              this.apiservice.getNonWorkingDays(siteId, el).subscribe((res: any) => {
+                if (res.status == "Success") {
+                  datesarr.push(res.NotWorkingDaysList);
+                  this.datesarr = datesarr.flat();
+                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
+                }
+              })
+            });
+            setTimeout(() => {
+              this.dates(this.datesarr)
+            }, 2000);
+
+          } else {
+            console.log("Last Working Day does not exist");
+            var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+            this.getreports(siteId, yesterday, yesterday);
+            this.dates([]);
+          }
+        })
+      }
+    });
+
+
 
 
   }
@@ -375,7 +402,7 @@ export class InsightComponent implements OnInit {
   currentSite: any;
   siteClicked(site: any) {
     this.currentSite = site;
-    this.storageService.site_sub.next({site: site, index: this.sites.indexOf(site)});
+    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
     this.storageService.storeEncrData('siteidfromgaurdpage', site);
     this.currentsite = site.siteName;
     this.currentsiteid = site.siteId;
@@ -443,6 +470,7 @@ export class InsightComponent implements OnInit {
   displaYendDate: any;
   minenddate = { year: 2014, month: 1, day: 1 };
   onDateSelect(event: any, select: any) {
+    // console.log(event);
     this.selectedMonth = '';
     var x = event.day;
     var y = event.month;
@@ -528,7 +556,7 @@ export class InsightComponent implements OnInit {
   images: any
   listInsightImages(data: any) {
     this.apiservice.listInsightImages(data).subscribe((res: any) => {
-      if(res.statusCode === 200) {
+      if (res.statusCode === 200) {
         this.images = res;
       } else {
         this.images = []

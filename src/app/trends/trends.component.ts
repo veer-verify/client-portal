@@ -102,7 +102,6 @@ getResearchData(siteId:any, date:any){
         this.seletedresearch = filter[0];
         this.currentfield = filter[0].service;
         this.currentfieldid = filter[0].serviceId;
-        console.log(this.currentfieldid)
       }
 
       // if(filter.length !== 0) {
@@ -143,8 +142,11 @@ getBiTrends(){
     } else {
       this.graphsdata = [];
     }
+    
     const y = <any>(document.getElementById("graphholder"));
-    y.innerHTML = '';
+    if(y) {
+      y.innerHTML = '';
+    }
     this.graphsdata.forEach((el:any) => {
       y.insertAdjacentHTML("beforeend",
       `<div class='card' style="margin:8px; padding:5px;"><div id=${'container'+String(this.graphsdata.indexOf(el))}></div></div>`);
@@ -270,16 +272,21 @@ removeDuplicateSites(){
   this.sites = names_array_new.reverse();
 }
 firstreport(){
-  var p =  this.storageService.getEncrData('siteidfromgaurdpage');
-  if(p == null){
-    // this.router.navigateByUrl('/guard')
-  }
-  else{
-    this.currentsite = p.siteName;
-    this.reportsite = this.currentsite;
-    this.currentsiteid = p.siteId;
-    // this.showLoader=true;
-    this.getsitenonworkingdays();
+  // var p =  this.storageService.getEncrData('siteidfromgaurdpage');
+  // if(p == null){
+  //   // this.router.navigateByUrl('/guard')
+  // }
+
+  this.storageService.site_sub.subscribe({
+    next: (res) => {
+      var p = res.site;
+      this.currentsite = p.siteName;
+      this.reportsite = this.currentsite;
+      this.currentsiteid = p.siteId;
+      // this.showLoader=true;
+      this.getsitenonworkingdays();
+    }
+  })
     // setTimeout(() => {
     //   if(this.lastWorkingDay){
     //     // console.log(this.lastWorkingDay)
@@ -289,7 +296,6 @@ firstreport(){
     //     this.getResearchData(this.currentsiteid,yesterday);
     //   }
     // }, 2000);
-  }
 }
 siteClicked(e:any, site:any){
   // this.showLoader = true;
@@ -385,50 +391,55 @@ datesarr=[];
 disabledays:any;
 disabledDates:NgbDateStruct[]=[{year:2019,month:2,day:26}]
 getsitenonworkingdays(){
-  var p =  this.storageService.getEncrData('siteidfromgaurdpage');
-  var siteId=p.siteId;
-  var year = (new Date()).getFullYear();
-  var yeararr=[year-1, year-2, year-3, year-4]
-  var datesarr:any=[]
-  this.apiservice.getNonWorkingDays(siteId, year).subscribe((res:any)=>{
-    // console.log(res)
-    if(res.status=="Success") {
-      if(res.LastWorkingDay !== "") {
-        var dateParts = res.LastWorkingDay.split('-');
-        this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-        this.selectedSpan = this.months[Number(dateParts[1])-1]+' '+dateParts[0] +', '+ dateParts[2];
-        this.displayDate = dateParts[1]+'-'+dateParts[2]+'-'+ dateParts[0];
-        this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-      } else {
-        this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
-          this.lastWorkingDay = res.LastWorkingDay;
-          this.displayDate = res.LastWorkingDay;
-          this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-        })
-        // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd')
-      }
-
-      datesarr.push(res.NotWorkingDaysList);
-      this.datesarr = datesarr.flat();
-      // if(this.currentsiteid == siteId){
-      //   this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-      // }
-      yeararr.forEach((el:any) => {
-        this.apiservice.getNonWorkingDays(siteId,el).subscribe((res:any)=>{
-          if(res.status=="Success"){
-            datesarr.push(res.NotWorkingDaysList);
-            this.datesarr = datesarr.flat()
+  // var p =  this.storageService.getEncrData('siteidfromgaurdpage');
+  this.storageService.site_sub.subscribe({
+    next: (res) => {
+      var p = res.site;
+      var siteId=p.siteId;
+      var year = (new Date()).getFullYear();
+      var yeararr=[year-1, year-2, year-3, year-4]
+      var datesarr:any=[]
+      this.apiservice.getNonWorkingDays(siteId, year).subscribe((res:any)=>{
+        // console.log(res)
+        if(res.status=="Success") {
+          if(res.LastWorkingDay !== "") {
+            var dateParts = res.LastWorkingDay.split('-');
+            this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
+            this.selectedSpan = this.months[Number(dateParts[1])-1]+' '+dateParts[0] +', '+ dateParts[2];
+            this.displayDate = dateParts[1]+'-'+dateParts[2]+'-'+ dateParts[0];
+            this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+          } else {
+            this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
+              this.lastWorkingDay = res.LastWorkingDay;
+              this.displayDate = res.LastWorkingDay;
+              this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+            })
+            // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd')
           }
-        })
-      });
-      setTimeout(() => {
-        this.dates(this.datesarr)
-      }, 2000);
-    }else{
-      console.log("Trends : Last working day is not available")
-      var yesterday =this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-      this.getResearchData(this.currentsiteid,yesterday);
-      this.dates([]);
+    
+          datesarr.push(res.NotWorkingDaysList);
+          this.datesarr = datesarr.flat();
+          // if(this.currentsiteid == siteId){
+          //   this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+          // }
+          yeararr.forEach((el:any) => {
+            this.apiservice.getNonWorkingDays(siteId,el).subscribe((res:any)=>{
+              if(res.status=="Success"){
+                datesarr.push(res.NotWorkingDaysList);
+                this.datesarr = datesarr.flat()
+              }
+            })
+          });
+          setTimeout(() => {
+            this.dates(this.datesarr)
+          }, 2000);
+        }else{
+          console.log("Trends : Last working day is not available")
+          var yesterday =this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+          this.getResearchData(this.currentsiteid,yesterday);
+          this.dates([]);
+        }
+      })
     }
   })
 }

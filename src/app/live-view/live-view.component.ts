@@ -500,20 +500,6 @@ export class LiveViewComponent implements OnInit {
     });
   }
 
-  sanitizedUrls: Map<string, SafeResourceUrl> = new Map();
-  sanitizeUrl(url: string | undefined): SafeResourceUrl | null {
-    if (url === undefined) {
-      return null;
-    } else {
-      let sanitizedUrl = this.sanitizedUrls.get(url);
-      if (!sanitizedUrl) {
-        sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        this.sanitizedUrls.set(url, sanitizedUrl);
-      }
-      return sanitizedUrl;
-    }
-  }
-
   @ViewChildren('videos') videos!: QueryList<any>;
   normalCapture(camera: any, index: any) {
     let videoComponents = this.videos.toArray();
@@ -581,14 +567,12 @@ export class LiveViewComponent implements OnInit {
 
   zoom(x: any) {
     this.configSer.zoom({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe((res: any) => {
-      // console.log(res);
       this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'zoom' } });
     })
   }
 
   focus(x: any) {
     this.configSer.focus({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe((res: any) => {
-      // console.log(res);
       this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'focus' } });
     })
   }
@@ -596,7 +580,6 @@ export class LiveViewComponent implements OnInit {
   updateMsg: any;
   home() {
     this.configSer.home({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId }).subscribe((res: any) => {
-      // console.log(res);
       this.updateMsg = res.message;
       setTimeout(() => this.updateMsg = null, 3000);
     }, (err: any) => {
@@ -607,9 +590,7 @@ export class LiveViewComponent implements OnInit {
 
 
   createCameraControls(data: any) {
-    this.configSer.createCameraControls(data).subscribe((res) => {
-      // console.log(res);
-    })
+    this.configSer.createCameraControls(data).subscribe()
   }
 
 }
