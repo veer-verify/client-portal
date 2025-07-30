@@ -130,11 +130,11 @@ import { CreateUserComponent } from './user-profile/create-user/create-user.comp
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

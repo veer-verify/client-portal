@@ -43,6 +43,7 @@ export class AuthService {
     let payload = {
       userName: username,
       password: this.storageService.encrypt(password),
+      // password: btoa(JSON.stringify(password)),
       // password: password,
       callingSystemDetail: 'portal',
     };
