@@ -114,8 +114,8 @@
                   <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
                 </span>
 
-                <span (click)="cameraIdClicked(item)" style="position: absolute; right: 10px;">
-                  <img src="assets/icons/settings.svg" width="16" alt="" *ngIf="serviceData?.cameraConfig === 'T' && camIndex != c">
+                <span (click)="cameraIdClicked(item)" style="position: absolute; right: 10px;" *ngIf="serviceData?.cameraConfig === 'T' && camIndex != c">
+                  <img src="assets/icons/settings.svg" width="16" alt="">
                 </span>
               </div>
             </span>
@@ -129,7 +129,7 @@
           <div class="camerabox" #camerabox *ngFor="let camera of paginatedCameraList; let j=index">
             <div class="tile-detail px-2">
               <div class="title" #title>
-                <img [src]="camera?.videoUrl ? 'assets/icons/green-dot.png' : 'assets/icons/red-dot.png'" width="16px" alt="" class="me-1">
+                <!-- <img [src]="camera?.videoUrl ? 'assets/icons/green-dot.png' : 'assets/icons/red-dot.png'" width="16px" alt="" class="me-1"> -->
                 <span class="me-2"  *ngIf="camIndex != j">{{camera?.name}}</span>
                 
                 <!-- input -->

@@ -36,7 +36,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     //   })
     // );
 
-    if (token  && !request.url.includes('/move/')) {
+    if (token) {
       request = this.addToken(request, token);
     }
 

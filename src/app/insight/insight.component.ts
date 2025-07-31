@@ -49,9 +49,9 @@ export class InsightComponent implements OnInit {
     this.user = this.storageService.getEncrData("user");
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
-      if (res) {
-        this.listInsightImages(res?.site);
-      }
+      // if (res) {
+      //   this.listInsightImages(res?.site);
+      // }
     })
     let x = (new Date(Date.now()).getFullYear());
     let y = (new Date(Date.now()).getMonth() + 1);
@@ -93,7 +93,6 @@ export class InsightComponent implements OnInit {
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         // this.currentSite = this.sites[0].siteName
         // this.getsiteservices1(this.currentInfo?.site);
-        // this.listInsightImages(this.currentInfo?.site);
 
         if (!this.currentInfo) {
           this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
@@ -264,146 +263,107 @@ export class InsightComponent implements OnInit {
   }
 
   firstreport() {
-    // var p = this.storageService.getEncrData('siteidfromgaurdpage');
-    this.storageService.site_sub.subscribe({
-      next: (res) => {  
-        var p = res.site;
-        this.currentsite = p.siteName;
-        this.currentsiteid = p.siteId;
-        // this.setweekenddisable();
-        var siteId = p.siteId;
-        this.startDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'dd-MM-yyyy');
-        this.endDate = this.startDate;
-        var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-        var startDateParts: any = this.startDate.split("-");
-        var endDateParts: any = this.endDate.split("-");
-        var sd = this.months[Number(startDateParts[1]) - 1] + ' ' + startDateParts[0] + ', ' + startDateParts[2]
-        var ed = this.months[Number(endDateParts[1]) - 1] + ' ' + endDateParts[0] + ', ' + endDateParts[2];
-        if (sd != ed) { this.selectedSpan = sd + ' - ' + ' ' + ed } else { this.selectedSpan = sd }
+    var p = this.storageService.getEncrData('currentSite');
+    this.currentsite = p.siteName;
+    this.currentsiteid = p.siteId;
 
-        // setTimeout(() => {
-        //   if(this.lastWorkingDay ){
-        //     yesterday = this.lastWorkingDay;
-        //    this.getreports(siteId,yesterday,yesterday);
-        //   //  console.log(yesterday);
-        //   //  console.log(new Date(this.lastWorkingDay))
-        //   } else{
-        this.getsitenonworkingdays();
+    // this.setweekenddisable();
+    var siteId = p.siteId;
+    this.startDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'dd-MM-yyyy');
+    this.endDate = this.startDate;
+    var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+    var startDateParts: any = this.startDate.split("-");
+    var endDateParts: any = this.endDate.split("-");
+    var sd = this.months[Number(startDateParts[1]) - 1] + ' ' + startDateParts[0] + ', ' + startDateParts[2]
+    var ed = this.months[Number(endDateParts[1]) - 1] + ' ' + endDateParts[0] + ', ' + endDateParts[2];
+    if (sd != ed) { this.selectedSpan = sd + ' - ' + ' ' + ed } else { this.selectedSpan = sd }
 
-        //  this.getreports(siteId,yesterday,yesterday);
-        //   }
-        // },2000)
+    // setTimeout(() => {
+    //   if(this.lastWorkingDay ){
+    //     yesterday = this.lastWorkingDay;
+    //    this.getreports(siteId,yesterday,yesterday);
+    //   //  console.log(yesterday);
+    //   //  console.log(new Date(this.lastWorkingDay))
+    //   } else{
+    this.getsitenonworkingdays();
 
-        // else{
-        // this.getsitenonworkingdays();
-        // this.getreports(siteId,this.lastWorkingDay,this.lastWorkingDay);
-        //   if(!this.lastWorkingDay){
-        //     this.getreports(siteId,yesterday,yesterday);
-        //   }
+    //  this.getreports(siteId,yesterday,yesterday);
+    //   }
+    // },2000)
+
+    // else{
+    // this.getsitenonworkingdays();
+    // this.getreports(siteId,this.lastWorkingDay,this.lastWorkingDay);
+    //   if(!this.lastWorkingDay){
+    //     this.getreports(siteId,yesterday,yesterday);
+    //   }
+    // }
+
+    // console.log("yesdate",yesterday)
+
+    // this.displaYstartDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
+    // this.displaYendDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
+    // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+
+  }
+
+  getsitenonworkingdays() {
+    var p = this.storageService.getEncrData('currentSite');
+    
+    var siteId = p.siteId;
+    // var year = (new Date()).getFullYear();
+    // var yeararr = [year - 1, year - 2, year - 3, year - 4];
+    // var datesarr: any = [];
+
+    this.apiservice.getNonWorkingDays(siteId).subscribe((res: any) => {
+      if (res.status == "Success") {
+        // if (res.LastWorkingDay !== "") {
+          var dateParts = res.LastWorkingDay.split('-');
+          this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
+          this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
+          this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+
+          // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+          this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
+
+          this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
+          this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
+          // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+          this.minenddate = this.displaYstartDate;
         // }
+        
+        // datesarr.push(res.NotWorkingDaysList);
+        // this.datesarr = datesarr.flat();
 
-        // console.log("yesdate",yesterday)
+        // yeararr.forEach((el: any) => {
+        //   this.apiservice.getNonWorkingDays(siteId, el).subscribe((res: any) => {
+        //     if (res.status == "Success") {
+        //       datesarr.push(res.NotWorkingDaysList);
+        //       this.datesarr = datesarr.flat();
+        //       this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
+        //     }
+        //   })
+        // });
+        // setTimeout(() => {
+        //   this.dates(this.datesarr)
+        // }, 2000);
 
-        // this.displaYstartDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
-        // this.displaYendDate = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'MM-dd-yyyy');
-        // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-
+      } else {
+        console.log("Last Working Day does not exist");
+        var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+        this.getreports(siteId, yesterday, yesterday);
+        this.dates([]);
       }
     })
-
   }
 
-  async getsitenonworkingdays() {
-    // var p = this.storageService.getEncrData('siteidfromgaurdpage');
-    // const p = await this.storageService.site_sub.toPromise().then((res) => res);
-    // console.log(p);
-    // console.log('completed!');
-
-    
-    this.storageService.site_sub.subscribe({
-      next: (res) => {
-        var p = res.site;
-        var siteId = p.siteId;
-        var year = (new Date()).getFullYear();
-        var yeararr = [year - 1, year - 2, year - 3, year - 4];
-        var datesarr: any = [];
-
-        this.apiservice.getNonWorkingDays(siteId, year).subscribe((res: any) => {
-          // console.log(res)
-          if (res.status == "Success") {
-            if (res.LastWorkingDay !== "") {
-              var dateParts = res.LastWorkingDay.split('-');
-              this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-              this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
-              this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-              // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
-
-              this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-              this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
-              // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-              this.minenddate = this.displaYstartDate;
-            } else {
-              this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
-                this.lastWorkingDay = res.LastWorkingDay;
-                if (this.lastWorkingDay != "") {
-                  var dateParts = res.LastWorkingDay.split('-');
-                  this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-                  this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
-                  this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-
-                  // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
-                                this.minenddate = this.displaYstartDate;
-
-
-                  this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-                  this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
-                }
-                // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
-              })
-              // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd');
-            }
-            
-            datesarr.push(res.NotWorkingDaysList);
-            this.datesarr = datesarr.flat();
-
-            yeararr.forEach((el: any) => {
-              this.apiservice.getNonWorkingDays(siteId, el).subscribe((res: any) => {
-                if (res.status == "Success") {
-                  datesarr.push(res.NotWorkingDaysList);
-                  this.datesarr = datesarr.flat();
-                  this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
-                }
-              })
-            });
-            setTimeout(() => {
-              this.dates(this.datesarr)
-            }, 2000);
-
-          } else {
-            console.log("Last Working Day does not exist");
-            var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-            this.getreports(siteId, yesterday, yesterday);
-            this.dates([]);
-          }
-        })
-      }
-    });
-
-
-
-
-  }
   disabledays: any
   lastWorkingDay: any;
   currentSite: any;
   siteClicked(site: any) {
     this.currentSite = site;
     this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
-    this.storageService.storeEncrData('siteidfromgaurdpage', site);
+    this.storageService.storeEncrData('currentSite', site);
     this.currentsite = site.siteName;
     this.currentsiteid = site.siteId;
     // this.getsiteservices1(site);
@@ -412,7 +372,6 @@ export class InsightComponent implements OnInit {
     // this.showLoader = true;
     // this.apiservice.getServices(site.siteId);
     this.getsitenonworkingdays();
-    // this.listInsightImages(site);
   }
 
   setweekenddisable() {
@@ -470,7 +429,6 @@ export class InsightComponent implements OnInit {
   displaYendDate: any;
   minenddate = { year: 2014, month: 1, day: 1 };
   onDateSelect(event: any, select: any) {
-    // console.log(event);
     this.selectedMonth = '';
     var x = event.day;
     var y = event.month;
@@ -486,13 +444,13 @@ export class InsightComponent implements OnInit {
   }
 
   generateReport() {
-    this.listInsightImages(this.currentSite);
+    // this.listInsightImages(this.currentSite);
     var dateParts: any = this.startDate.split("-");
-    var startDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+    var start = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
     var dateParts1: any = this.endDate.split("-");
-    var endDate = new Date(+dateParts1[2], dateParts1[1] - 1, +dateParts1[0]);
+    var end = new Date(+dateParts1[2], dateParts1[1] - 1, +dateParts1[0]);
     if (this.startDate != "null" && this.endDate != "null") {
-      if (startDate > endDate) {
+      if (start > end) {
         this.alertservice.warning("Error", "Start Date cannot be later than End Date")
       } else {
         this.getAnalyticsData();

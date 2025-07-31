@@ -77,12 +77,12 @@ ngOnInit(): void {
     // this.getTrendsData();
 }
 
-serviceData: any;
-getsiteservices1(site: any){
-  this.siteSer.listSiteServices(site).subscribe((res: any) => {
-    this.serviceData = res.siteServicesList;
-  })
-}
+// serviceData: any;
+// getsiteservices1(site: any){
+//   this.siteSer.listSiteServices(site).subscribe((res: any) => {
+//     this.serviceData = res.siteServicesList;
+//   })
+// }
 
 seletedresearch:any;
 getResearchData(siteId:any, date:any){
@@ -220,7 +220,7 @@ getSitename(){
           // res.siteList.sort(function (a:any, b:any) {return a.siteName.localeCompare(b.siteName);});
           // console.log(res)
           this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-          this.getsiteservices1(this.currentInfo?.site);
+          // this.getsiteservices1(this.currentInfo?.site);
           if(!this.currentInfo) {
             this.storageService.site_sub.next({site: this.sites[0], index: 0});
           }
@@ -272,21 +272,16 @@ removeDuplicateSites(){
   this.sites = names_array_new.reverse();
 }
 firstreport(){
-  // var p =  this.storageService.getEncrData('siteidfromgaurdpage');
+  var p = this.storageService.getEncrData('currentSite');
   // if(p == null){
   //   // this.router.navigateByUrl('/guard')
   // }
+  this.currentsite = p.siteName;
+  this.reportsite = this.currentsite;
+  this.currentsiteid = p.siteId;
+  // this.showLoader=true;
+  this.getsitenonworkingdays();
 
-  this.storageService.site_sub.subscribe({
-    next: (res) => {
-      var p = res.site;
-      this.currentsite = p.siteName;
-      this.reportsite = this.currentsite;
-      this.currentsiteid = p.siteId;
-      // this.showLoader=true;
-      this.getsitenonworkingdays();
-    }
-  })
     // setTimeout(() => {
     //   if(this.lastWorkingDay){
     //     // console.log(this.lastWorkingDay)
@@ -307,7 +302,7 @@ siteClicked(e:any, site:any){
   this.currentsite = site.siteName;
   this.currentsiteid = site.siteId
   // this.apiservice.getServices(site.siteId);
-  this.getsiteservices1(site)
+  // this.getsiteservices1(site)
   // e.target.parentNode.parentNode.previousElementSibling.click()
   this.optionlabel.nativeElement.click();
   this.rsdata = null;
@@ -324,7 +319,7 @@ siteClicked(e:any, site:any){
 currentfield:any;
 currentfieldid:any;
 fieldClicked(field:any){
-  console.log(field)
+  // console.log(field)
   this.graphsdata = null;
   this.currentfield = field.service;
   this.currentfieldid = field.serviceId;
@@ -391,55 +386,42 @@ datesarr=[];
 disabledays:any;
 disabledDates:NgbDateStruct[]=[{year:2019,month:2,day:26}]
 getsitenonworkingdays(){
-  // var p =  this.storageService.getEncrData('siteidfromgaurdpage');
-  this.storageService.site_sub.subscribe({
-    next: (res) => {
-      var p = res.site;
-      var siteId=p.siteId;
-      var year = (new Date()).getFullYear();
-      var yeararr=[year-1, year-2, year-3, year-4]
-      var datesarr:any=[]
-      this.apiservice.getNonWorkingDays(siteId, year).subscribe((res:any)=>{
-        // console.log(res)
-        if(res.status=="Success") {
-          if(res.LastWorkingDay !== "") {
-            var dateParts = res.LastWorkingDay.split('-');
-            this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-            this.selectedSpan = this.months[Number(dateParts[1])-1]+' '+dateParts[0] +', '+ dateParts[2];
-            this.displayDate = dateParts[1]+'-'+dateParts[2]+'-'+ dateParts[0];
-            this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-          } else {
-            this.apiservice.getNonWorkingDays(siteId, year - 1).subscribe((res: any) => {
-              this.lastWorkingDay = res.LastWorkingDay;
-              this.displayDate = res.LastWorkingDay;
-              this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-            })
-            // this.lastWorkingDay = this.pipe.transform(new Date(), 'yyyy-MM-dd')
-          }
-    
-          datesarr.push(res.NotWorkingDaysList);
-          this.datesarr = datesarr.flat();
-          // if(this.currentsiteid == siteId){
-          //   this.getResearchData(this.currentsiteid, this.lastWorkingDay);
-          // }
-          yeararr.forEach((el:any) => {
-            this.apiservice.getNonWorkingDays(siteId,el).subscribe((res:any)=>{
-              if(res.status=="Success"){
-                datesarr.push(res.NotWorkingDaysList);
-                this.datesarr = datesarr.flat()
-              }
-            })
-          });
-          setTimeout(() => {
-            this.dates(this.datesarr)
-          }, 2000);
-        }else{
-          console.log("Trends : Last working day is not available")
-          var yesterday =this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-          this.getResearchData(this.currentsiteid,yesterday);
-          this.dates([]);
-        }
-      })
+  var p =  this.storageService.getEncrData('currentSite');
+  var siteId=p.siteId;
+  // var year = (new Date()).getFullYear();
+  // var yeararr=[year-1, year-2, year-3, year-4]
+  // var datesarr:any=[]
+  this.apiservice.getNonWorkingDays(siteId).subscribe((res:any)=>{
+    if(res.status=="Success") {
+      // if(res.LastWorkingDay !== "") {
+        var dateParts = res.LastWorkingDay.split('-');
+        this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
+        this.selectedSpan = this.months[Number(dateParts[1])-1]+' '+dateParts[0] +', '+ dateParts[2];
+        this.displayDate = dateParts[1]+'-'+dateParts[2]+'-'+ dateParts[0];
+        this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+      // }
+
+      // datesarr.push(res.NotWorkingDaysList);
+      // this.datesarr = datesarr.flat();
+      // if(this.currentsiteid == siteId){
+      //   this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+      // }
+      // yeararr.forEach((el:any) => {
+      //   this.apiservice.getNonWorkingDays(siteId,el).subscribe((res:any)=>{
+      //     if(res.status=="Success"){
+      //       datesarr.push(res.NotWorkingDaysList);
+      //       this.datesarr = datesarr.flat()
+      //     }
+      //   })
+      // });
+      // setTimeout(() => {
+      //   this.dates(this.datesarr)
+      // }, 2000);
+    }else{
+      console.log("Trends : Last working day is not available")
+      var yesterday =this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+      this.getResearchData(this.currentsiteid,yesterday);
+      this.dates([]);
     }
   })
 }

@@ -245,9 +245,14 @@ export class ApiService {
 
   
 
-  getNonWorkingDays(siteId: any, year: any) {
-    let url = `${environment.insightsUrl}/notWorkingDays_1_0?siteId=${siteId}&year=${year}`;
-    return this.http.get(url);
+  getNonWorkingDays(siteId: any, year?: any) {
+    let url = `${environment.insightsUrl}/notWorkingDays_1_0`;
+    let params = new HttpParams();
+    params = params.set('siteId', siteId)
+    if(year) {
+      params = params.set('year', year)
+    }
+    return this.http.get(url, {params: params});
   }
 
   // clientServices(siteId: any) {
@@ -308,7 +313,7 @@ export class ApiService {
   }
 
   listInsightImages(payload: any) {
-    let url = `${environment.sitesUrl}/listInsightImages_1_0`;
+    let url = `${environment.sitesUrl}/listInsightImages_1_0/`;
     let params = new HttpParams().set('siteId', payload?.siteId)
     return this.http.get(url, {params: params});
   }

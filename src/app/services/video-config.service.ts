@@ -34,7 +34,7 @@ export class VideoConfigService {
 
   createCameraControls(payload: any) {
     // console.log(payload)
-    let url = `${environment.sitesUrl}/manageCameraControls/createCameraControls_1_0`;
+    let url = `${environment.sitesUrl}/createCameraControls_1_0`;
     let obj = {
       siteId: payload?.siteId,
       deviceId: payload?.unitId,
