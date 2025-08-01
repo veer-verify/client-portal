@@ -325,26 +325,26 @@ export class LiveViewComponent implements OnInit {
 
   currentCam: any;
   cameraIdClicked(cam: any) {
-    let location = window.location.hostname;
-    if (location === "client.ivisecurity.com") {
-      Swal.fire({
-        icon: "info",
-        title: "To move the camera, please use below link!",
-        footer: `<a href="http://clientportal.ivisecurity.com:8421/clientPortalUs/" target="_blank">CLICK HERE!</a>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-      });
-    } else {
-      this.currentCam = cam;
-      this.gridClicked = 1;
-      this.pagenumber = this.cameras.indexOf(cam) + 1;
-      this.pagination();
-      var x = this.gridCont.nativeElement;
-      x.style.gridTemplateColumns = "repeat(1, 1fr)";
-      x.style.paddingRight = 20 + "%";
-      this.paginatedCameraList = [cam];
-      this.closemodal();
-    }
+    // let location = window.location.hostname;
+    // if (location === "client.ivisecurity.com") {
+    //   Swal.fire({
+    //     icon: "info",
+    //     title: "To move the camera, please use below link!",
+    //     footer: `<a href="http://clientportal.ivisecurity.com:8421/clientPortalUs/" target="_blank">CLICK HERE!</a>`,
+    //     showCloseButton: true,
+    //     showConfirmButton: false,
+    //   });
+    // } else {
+    this.currentCam = cam;
+    this.gridClicked = 1;
+    this.pagenumber = this.cameras.indexOf(cam) + 1;
+    this.pagination();
+    var x = this.gridCont.nativeElement;
+    x.style.gridTemplateColumns = "repeat(1, 1fr)";
+    x.style.paddingRight = 20 + "%";
+    this.paginatedCameraList = [cam];
+    this.closemodal();
+    // }
   }
 
   pagenumber = 1;
@@ -378,6 +378,9 @@ export class LiveViewComponent implements OnInit {
   }
 
   pagination() {
+    if (this.gridClicked == 1) {
+      this.currentCam = this.cameras[Number(this.pagenumber) - 1];
+    }
     var cameras = this.cameras;
     this.selector();
     const sortAlphaNum = (a: any, b: any) => a.cameraId.localeCompare(b.cameraId, 'en', { numeric: true });
@@ -554,36 +557,62 @@ export class LiveViewComponent implements OnInit {
 
   range: number = 10;
   move(x: any, y: any) {
-    this.configSer.move({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, y: y, steps: this.range }).subscribe((res: any) => {
-      this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'move' } });
-      this.updateMsg = res.message;
-      setTimeout(() => this.updateMsg = null, 3000)
-    }, (err: any) => {
-      this.updateMsg = 'Failed';
-      setTimeout(() => this.updateMsg = null, 3000);
+    this.updateMsg = 'Please Wait...';
+    this.configSer.move({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, y: y, steps: this.range }).subscribe({
+      next: (res: any) => {
+        this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'move' } });
+        this.updateMsg = res.message;
+        setTimeout(() => this.updateMsg = null, 3000);
+      },
+      error: (err: any) => {
+        this.updateMsg = 'Failed!';
+        setTimeout(() => this.updateMsg = null, 3000);
+      }
     })
   }
 
   zoom(x: any) {
-    this.configSer.zoom({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe((res: any) => {
-      this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'zoom' } });
+    this.updateMsg = 'Please Wait...';
+    this.configSer.zoom({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe({
+      next: (res: any) => {
+        this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'zoom' } });
+        this.updateMsg = res.message;
+        setTimeout(() => this.updateMsg = null, 3000);
+      },
+      error: (err: any) => {
+        this.updateMsg = 'Failed!';
+        setTimeout(() => this.updateMsg = null, 3000);
+      }
     })
   }
 
   focus(x: any) {
-    this.configSer.focus({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe((res: any) => {
-      this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'focus' } });
+    this.updateMsg = 'Please Wait...';
+    this.configSer.focus({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId, x: x, steps: this.range }).subscribe({
+      next: (res: any) => {
+        this.createCameraControls({ ...this.currentsite, ...this.currentCam, ...{ operationName: 'focus' } });
+        this.updateMsg = res.message;
+        setTimeout(() => this.updateMsg = null, 3000);
+      },
+      error: (err: any) => {
+        this.updateMsg = 'Failed!';
+        setTimeout(() => this.updateMsg = null, 3000);
+      }
     })
   }
 
   updateMsg: any;
   home() {
-    this.configSer.home({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId }).subscribe((res: any) => {
-      this.updateMsg = res.message;
-      setTimeout(() => this.updateMsg = null, 3000);
-    }, (err: any) => {
-      this.updateMsg = 'Failed';
-      setTimeout(() => this.updateMsg = null, 3000);
+    this.updateMsg = 'Please Wait...';
+    this.configSer.home({ url: this.currentCam.camera_config_url, cam: this.currentCam.cameraId }).subscribe({
+      next: (res: any) => {
+        this.updateMsg = res.message;
+        setTimeout(() => this.updateMsg = null, 3000);
+      },
+      error: (err: any) => {
+        this.updateMsg = 'Failed!';
+        setTimeout(() => this.updateMsg = null, 3000);
+      }
     })
   }
 

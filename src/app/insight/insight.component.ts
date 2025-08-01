@@ -49,9 +49,10 @@ export class InsightComponent implements OnInit {
     this.user = this.storageService.getEncrData("user");
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
-      // if (res) {
-      //   this.listInsightImages(res?.site);
-      // }
+      if (res) {
+        this.storageService.storeEncrData('currentSite', res.site);
+        // this.listInsightImages(res?.site);
+      }
     })
     let x = (new Date(Date.now()).getFullYear());
     let y = (new Date(Date.now()).getMonth() + 1);
@@ -102,7 +103,8 @@ export class InsightComponent implements OnInit {
         // const sortAlphaNum = (a: any, b: any) => a.siteName.localeCompare(b.siteName, 'en', { numeric: true })
         // sitelist = this.sites.sites.sort(sortAlphaNum);
 
-        this.firstreport();
+        // this.firstreport();
+        this.getsitenonworkingdays();
         var user = this.storageService.getEncrData("user");
         if (user.UserName == 'sales@ivisecurity.com') {
           this.sites.forEach((item: any) => {
@@ -135,14 +137,14 @@ export class InsightComponent implements OnInit {
 
   reportsd: any;
   reported: any;
-  getreports(x: any, y: any, z: any) {
-    this.reportsd = y;
-    this.reported = z;
+  getreports(site: any) {
+    // this.reportsd = y;
+    // this.reported = z;
     this.placeholderhere = "";
     this.showLoader = true;
     var user = this.storageService.getEncrData("user");
     if (user.UserName != 'sales@ivisecurity.com') {
-      this.apiservice.getBiAnalyticsReport(x, y, z).subscribe((res: any) => {
+      this.apiservice.getBiAnalyticsReport(site, this.displaYstartDate, this.displaYendDate).subscribe((res: any) => {
         this.showLoader = false;
         if (res.status != "Failed") {
           res = res.AnalyticsReportList;
@@ -169,7 +171,7 @@ export class InsightComponent implements OnInit {
           }
           this.reports = res;
           if (this.reports == null) {
-            this.placeholderhere = "NO DATA!";
+            this.placeholderhere = "NO DATA AVAILABLE!";
           }
         } else {
           this.reportsite = this.currentsite;
@@ -309,32 +311,35 @@ export class InsightComponent implements OnInit {
 
   getsitenonworkingdays() {
     var p = this.storageService.getEncrData('currentSite');
-    
     var siteId = p.siteId;
+    this.currentsite = p.siteName;
+    this.currentsiteid = p.siteId;
     // var year = (new Date()).getFullYear();
     // var yeararr = [year - 1, year - 2, year - 3, year - 4];
     // var datesarr: any = [];
 
-    this.apiservice.getNonWorkingDays(siteId).subscribe((res: any) => {
+    this.apiservice.getNonWorkingDays(siteId, this.displaYstartDate?.year).subscribe((res: any) => {
       if (res.status == "Success") {
         // if (res.LastWorkingDay !== "") {
-          var dateParts = res.LastWorkingDay.split('-');
-          this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-          this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[2] + ', ' + dateParts[0];
-          this.startDate = this.endDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
+        this.disabledDates = res.NotWorkingDaysList
+          // var dateParts = res.LastWorkingDay.split('-');
+          // this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
           // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-          this.displaYstartDate = {year: Number(this.lastWorkingDay?.split('-')[0]), month: Number(this.lastWorkingDay?.split('-')[1]), day: Number(this.lastWorkingDay?.split('-')[2])}
 
-          this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
-          this.getreports(siteId, this.lastWorkingDay, this.lastWorkingDay);
+          this.startDate = this.endDate = res.LastWorkingDay.split('-')[2] + '-' + res.LastWorkingDay.split('-')[1] + '-' + res.LastWorkingDay.split('-')[0];
+          this.displaYstartDate = {year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
+          // console.log(this.displaYstartDate)
+          this.selectedSpan = `${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
+
+          // this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
           // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
+          this.getreports(siteId);
           this.minenddate = this.displaYstartDate;
+          this.dates(res.NotWorkingDaysList);
         // }
         
         // datesarr.push(res.NotWorkingDaysList);
         // this.datesarr = datesarr.flat();
-
         // yeararr.forEach((el: any) => {
         //   this.apiservice.getNonWorkingDays(siteId, el).subscribe((res: any) => {
         //     if (res.status == "Success") {
@@ -349,16 +354,17 @@ export class InsightComponent implements OnInit {
         // }, 2000);
 
       } else {
-        console.log("Last Working Day does not exist");
-        var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-        this.getreports(siteId, yesterday, yesterday);
-        this.dates([]);
+        // var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+        // this.dates([]);
+        this.selectedSpan = `${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
+        this.getreports(siteId);
+        this.disabledays = false
       }
     })
   }
 
   disabledays: any
-  lastWorkingDay: any;
+  // lastWorkingDay: any;
   currentSite: any;
   siteClicked(site: any) {
     this.currentSite = site;
@@ -389,59 +395,63 @@ export class InsightComponent implements OnInit {
     //   }
     // })
   }
+
   weekend(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
     return d.getDay() === 0 || d.getDay() === 6; // sat sun off
   }
+
   sunday(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
     return d.getDay() === 0;
   }
-  datesarr = ["2022-05-02", "2022-05-03", "2022-05-21", "2022-05-24", "2022-05-11", "2022-05-06"];
+
+  // datesarr = ["2022-05-02", "2022-05-03", "2022-05-21", "2022-05-24", "2022-05-11", "2022-05-06"];
   dates(arr: any[]) {
-    // console.log(arr)
+    // if(arr.length !== 0) {}
     arr.forEach(el => {
       var splits: any = el.split("-");
-      var newdate;
-      // console.log(+splits[2], +splits[1], +splits[0]);
       this.disabledDates.push({ year: +splits[0], month: +splits[1], day: +splits[2] })
     });
     this.disabledays = this.isDisabled;
   }
+
   disabledDates: NgbDateStruct[] = [
     { year: 2019, month: 2, day: 26 }
   ]
+
   isDisabled = (date: NgbDateStruct, current: { month: number, year: number }) => {
-    //in current we have the month and the year actual
-    return this.disabledDates.find(x => new NgbDate(x.year, x.month, x.day).equals(date)) ?
-      true : false;
+    return this.disabledDates.find(x => new NgbDate(x.year, x.month, x.day).equals(date)) ? true : false;
   }
+
   // For input Data of Start and End Date of Report
   startDateValue() {
     const date = (document.getElementById("startDate") as HTMLInputElement).value;
     this.startDate = date;
   }
+
   endDateValue() {
     const date = (document.getElementById("endDate") as HTMLInputElement).value;
     this.endDate = date;
   }
+  
   displaYstartDate: any;
   displaYendDate: any;
   minenddate = { year: 2014, month: 1, day: 1 };
-  onDateSelect(event: any, select: any) {
-    this.selectedMonth = '';
-    var x = event.day;
-    var y = event.month;
-    var a;
-    var b;
-    if (x < 10) { a = '0' + x; } else { a = x };
-    if (y < 10) { b = '0' + y; } else { b = y };
-    if (select == 'end') { this.endDate = a + '-' + b + '-' + event.year; this.displaYendDate = b + '-' + a + '-' + event.year };
-    if (select == 'start') {
-      this.startDate = a + '-' + b + '-' + event.year; this.displaYstartDate = b + '-' + a + '-' + event.year;
-      this.minenddate = { year: event.year, month: event.month, day: event.day };
-    };
-  }
+  // onDateSelect(event: any, select: any) {
+  //   this.selectedMonth = '';
+  //   var x = event.day;
+  //   var y = event.month;
+  //   var a;
+  //   var b;
+  //   if (x < 10) { a = '0' + x; } else { a = x };
+  //   if (y < 10) { b = '0' + y; } else { b = y };
+  //   if (select == 'end') { this.endDate = a + '-' + b + '-' + event.year; this.displaYendDate = b + '-' + a + '-' + event.year };
+  //   if (select == 'start') {
+  //     this.startDate = a + '-' + b + '-' + event.year; this.displaYstartDate = b + '-' + a + '-' + event.year;
+  //     this.minenddate = { year: event.year, month: event.month, day: event.day };
+  //   };
+  // }
 
   generateReport() {
     // this.listInsightImages(this.currentSite);
@@ -453,7 +463,8 @@ export class InsightComponent implements OnInit {
       if (start > end) {
         this.alertservice.warning("Error", "Start Date cannot be later than End Date")
       } else {
-        this.getAnalyticsData();
+        this.getsitenonworkingdays()
+        // this.getAnalyticsData();
       }
     } else {
       if (this.reports == null) {
@@ -467,7 +478,6 @@ export class InsightComponent implements OnInit {
 
   // To get analytics report data to display according to date
   getAnalyticsData() {
-    // this.showLoader = true;
     var x = this.currentsiteid;
     var y = this.startDate.split("-").reverse().join("-");
     var z = this.endDate.split("-").reverse().join("-");
@@ -476,8 +486,10 @@ export class InsightComponent implements OnInit {
     var sd = this.months[Number(startDateParts[1]) - 1] + ' ' + startDateParts[0] + ', ' + startDateParts[2];
     var ed = this.months[Number(endDateParts[1]) - 1] + ' ' + endDateParts[0] + ', ' + endDateParts[2];
     if (sd != ed) { this.selectedSpan = sd + ' - ' + ' ' + ed } else { this.selectedSpan = sd }
-    this.getreports(x, y, z);
+    this.getreports(x);
   }
+
+
   downloadReport() {
     this.showLoader = true;
     this.apiservice.getsiteid(this.currentsiteid).subscribe((res: any) => {
@@ -536,7 +548,7 @@ export class InsightComponent implements OnInit {
     // this.showLoader = true
     var startDate = this.startDate.split("-").reverse().join("-");
     var endDate = this.endDate.split("-").reverse().join("-");
-    this.getreports(this.currentsiteid, startDate, endDate);
+    this.getreports(this.currentsiteid);
   }
   dateNavigate($event: NgbDatepickerNavigateEvent) {
     var month = $event.next.month;
@@ -586,12 +598,12 @@ export class InsightComponent implements OnInit {
     }
   }
 
-  searchMonthreport() {
-    if (this.monthselected == true) {
-      this.visible = false;
-      this.getAnalyticsData();
-    }
-  }
+  // searchMonthreport() {
+  //   if (this.monthselected == true) {
+  //     this.visible = false;
+  //     this.getAnalyticsData();
+  //   }
+  // }
 
   onInput(e: any) {
     var x = e.target.value;

@@ -1,4 +1,4 @@
-<app-loader *ngIf="showLoader"></app-loader>
+<app-loader *ngIf="storageService.loading_text === 'Loading...'"></app-loader>
 <app-alert></app-alert>
 <app-navbar></app-navbar>
 
@@ -135,9 +135,8 @@
               </tbody>
             </table>
             <!-- table -->
-            <div class="d-flex align-items-center justify-content-center" style="height: 70%;"
-              *ngIf="paginatedData.length == 0">
-              <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
+            <div class="d-flex align-items-center justify-content-center" style="height: 70%;">
+              <h2 class="text-secondary" style="font-family: PS, sans-serif;">{{storageService.loading_text}}</h2>
             </div>
           </div>
 

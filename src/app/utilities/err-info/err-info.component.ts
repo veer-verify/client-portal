@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-err-info',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./err-info.component.css']
 })
 export class ErrInfoComponent {
+
+  @Input({required: true}) text: string;
 
 }

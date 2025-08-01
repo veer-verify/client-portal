@@ -1,5 +1,5 @@
 // const prod_url: string = 'http://rsmgmt.ivisecurity.com';
-const prod_url: string = 'http://prod.ivisecurity.com';
+const prod_url: string = 'https://prod.ivisecurity.com';
 
 export const environment = {
   production: true,

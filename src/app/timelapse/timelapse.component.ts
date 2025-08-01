@@ -19,7 +19,7 @@ export class TimelapseComponent implements OnInit {
 
   constructor(
     private apiservice: ApiService,
-    private storageService: StorageService,
+    public storageService: StorageService,
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
@@ -70,7 +70,7 @@ export class TimelapseComponent implements OnInit {
   toQRmodal() { return this.apiservice.toQR() }
 
 
-  showLoader: boolean = false;
+  // showLoader: boolean = false;
   sites: boolean = true;
   devices: boolean = false;
 
@@ -110,10 +110,9 @@ export class TimelapseComponent implements OnInit {
 
 
   getSitesListForUserName() {
-    this.showLoader = true;
+        this.storageService.loading_text = 'Loading...';
     this.apiservice.getSitesListForUserName(this.userData).subscribe((sites: any) => {
-      // console.log(sites);
-      this.showLoader = false;
+        this.storageService.loading_text = '';
       this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       var user = this.storageService.getEncrData("user");
       if (user.UserName == 'sales@ivisecurity.com') {
@@ -138,14 +137,10 @@ export class TimelapseComponent implements OnInit {
       if(!this.currentInfo) {
         this.storageService.site_sub.next({site: this.siteData[0], index: 0});
       }
-
-      // if(this.currentInfo) {
-        this.footageList(this.currentInfo?.site, this.currentInfo?.index);
-      // } else {
-      //   this.footageList(this.siteData[0], 0);
-      // }
+      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
     }, (err: any) => {
-      this.showLoader = false;
+        this.storageService.loading_text = 'NO DATA!';
+
     })
   }
 
@@ -176,18 +171,19 @@ export class TimelapseComponent implements OnInit {
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
     // this.getsiteservices1(data)
     this.navActive = index;
-    this.showLoader = true;
+        this.storageService.loading_text = 'Loading...';
     this.eventSer.listTimeLapseVideos(data).subscribe((res: any) => {
       // console.log(res);
-      this.showLoader = false;
       if(res.statusCode == 200) {
+            this.storageService.loading_text = '';
         this.eventData = res.timeLapseList;
         this.newEventData = this.eventData;
       } else {
+            this.storageService.loading_text = 'NO DATA!';
         this.newEventData = [];
       }
     }, (err: any) => {
-      this.showLoader = false;
+            this.storageService.loading_text = 'NO DATA!';
     })
   }
 
@@ -197,14 +193,19 @@ export class TimelapseComponent implements OnInit {
   fromDate: any = '';
   toDate: any = '';
   filter() {
-    this.showLoader = true;
-    this.eventSer.listTimeLapseVideos({ siteId: this.currentSite.siteId, cameraId: this.cameraId, fromDate: this.fromDate, toDate: this.toDate }).subscribe((res: any) => {
-      this.showLoader = false;
+    this.storageService.loading_text = 'Loading...';
+    this.eventSer.listTimeLapseVideos({ siteId: this.currentSite.siteId, cameraId: this.cameraId, fromDate: this.fromDate, toDate: this.toDate }).subscribe({
+      next: (res: any) => {
       if (res.statusCode === 200) {
+        this.storageService.loading_text = '';
         this.newEventData = res.timeLapseList
       } else {
-        this.newEventData = [];
+        this.storageService.loading_text = 'NO DATA!';
       }
+    },
+    error: (err) => {
+              this.storageService.loading_text = 'NO DATA!';
+    }
     })
   }
 

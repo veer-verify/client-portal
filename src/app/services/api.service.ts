@@ -261,12 +261,17 @@ export class ApiService {
   //   return this.http.get(servicesurl1)
   // }
 
-  getBiAnalyticsReport(siteId: any, startDate: any, endDate: any) {
-    // console.log(endDate)
+  getBiAnalyticsReport(siteId: any, fromDate: any, toDate?: any) {
     let biAnalyticsReport = environment.insightsUrl + '/biAnalyticsReport_1_0?';
-    const newurl1 = `${biAnalyticsReport}SiteId=${siteId}&fromDate=${startDate}&toDate=${endDate}`;
-    // console.log("bireport: ",newurl1);
-    return this.http.get(newurl1);
+    let params = new HttpParams();
+    params = params.set('SiteId', siteId)
+    if(fromDate) {
+      params = params.set('fromDate', (`${fromDate.year}-${fromDate.month}-${fromDate.day}`))
+    }
+    if(toDate) {
+      params = params.set('toDate', (`${toDate?.year}-${toDate?.month}-${toDate?.day}`))
+    }
+    return this.http.get(biAnalyticsReport, {params: params});
   }
 
   downloadReport(siteId: any, startdate: any, enddate: any) {

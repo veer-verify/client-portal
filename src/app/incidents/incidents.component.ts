@@ -19,7 +19,7 @@ export class IncidentsComponent implements OnInit {
 
   constructor(
     private apiservice: ApiService,
-    private storageService: StorageService,
+    public storageService: StorageService,
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
@@ -74,7 +74,7 @@ export class IncidentsComponent implements OnInit {
   showOptions1() { return this.apiservice.showOptions1() }
 
 
-  showLoader: boolean = false;
+  // showLoader: boolean = false;
   sites: boolean = true;
   devices: boolean = false;
 
@@ -92,10 +92,10 @@ export class IncidentsComponent implements OnInit {
   siteData: any = [];
   
   getSitesListForUserName() {
-    this.showLoader = true;
+    this.storageService.loading_text = 'Loading...';
     this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
-      this.showLoader = false;
-      this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+    this.storageService.loading_text = '';
+    this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       // this.getsitesListByService(res.sites);
       var user = this.storageService.getEncrData("user");
       if (user.UserName == 'sales@ivisecurity.com') {
@@ -122,7 +122,7 @@ export class IncidentsComponent implements OnInit {
 
       this.footageList(this.currentInfo?.site, this.currentInfo?.index);
     }, (err: any) => {
-      this.showLoader = false;
+    this.storageService.loading_text = 'NO DATA!';
     })
   }
 
@@ -195,18 +195,20 @@ export class IncidentsComponent implements OnInit {
     }
     
     this.newEventData = [];
-    this.showLoader = true; 
+    this.storageService.loading_text = 'Loading...';
     this.eventSer.incidentList(data).subscribe((res: any) => {
-      this.showLoader = false;
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
       this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
       if (res.statusCode == 200) {
+        this.storageService.loading_text = '';
         this.eventData = res.IncidentList.sort((a: any, b: any) => a.createdTime > b.createdTime ? -1 : a.createdTime < b.createdTime ? 1 : 0);
         this.newEventData = this.eventData;
+      } else {
+                this.storageService.loading_text = 'No DATA!';
       }
     }, (err: any) => {
-      this.showLoader = false;
+    this.storageService.loading_text = 'NO DATA!';
     })
   }
     
@@ -230,7 +232,7 @@ export class IncidentsComponent implements OnInit {
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
     this.newEventData = [];
-    this.showLoader = true;
+    this.storageService.loading_text = 'Loading...';
     this.eventSer.incidentList({
       siteId: this.currentSite?.siteId,
       cameraId: this.cameraId,
@@ -239,7 +241,7 @@ export class IncidentsComponent implements OnInit {
       toDate: this.toDate,
       page: pageNumber
     }).subscribe((res: any) => {
-      this.showLoader = false;
+    this.storageService.loading_text = '';
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
       this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
@@ -247,7 +249,7 @@ export class IncidentsComponent implements OnInit {
         this.newEventData = res.IncidentList.sort((a: any, b: any) => a.createdTime > b.createdTime ? -1 : a.createdTime < b.createdTime ? 1 : 0);
       }
     }, (err) => {
-      this.showLoader = false
+    this.storageService.loading_text = 'NO DATA!';
     })
   }
 
@@ -368,8 +370,6 @@ export class IncidentsComponent implements OnInit {
   }
   
   private loadImage(url: string): Promise<HTMLImageElement> {
-    this.showLoader = true;
-    this.showLoader = false;
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.crossOrigin = 'Anonymous';

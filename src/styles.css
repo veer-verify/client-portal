@@ -792,9 +792,9 @@ input:focus {
     padding-top: 0;
   }
 
-  .table> :not(caption)>*>* {
+  /* .table> :not(caption)>*>* {
     padding: 0.5rem 0;
-  }
+  } */
 
   .icon {
     width: 33px;
@@ -990,7 +990,7 @@ input:focus {
 }
 
 .table-resp {
-  height: calc(100vh - 300px);
+  height: calc(100vh - 215px);
   overflow-y: auto;
   font-size: 14px;
   background-color: #fff;
