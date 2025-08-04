@@ -12,6 +12,8 @@ import { AuthService } from '../services/auth/authservice.service';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
 import { StorageService } from '../services/storage.service';
+import { pipe } from 'rxjs';
+import { SearchPipe } from '../services/pipes/search-pipe.pipe';
 
 @Component({
   selector: 'app-user-profile',
@@ -101,7 +103,8 @@ export class UserProfileComponent {
     private apiservice: ApiService,
     private alertservice: AlertService,
     private authservice: AuthService,
-    private userSer: UserServiceService
+    private userSer: UserServiceService,
+    private searchPipe: SearchPipe
   ) { }
 
   activeIndex: number = 0; // Start with the first item as active
@@ -492,6 +495,7 @@ export class UserProfileComponent {
   }
 
   userSearch: any;
+  siteSearch: any;
   usersList: any = [];
   getUserNamesByUserName() {
     this.showLoader = true;
@@ -530,11 +534,13 @@ export class UserProfileComponent {
     data.reset();
   }
 
+  selectAllSites: boolean = false;
   userSites: any = [];
   currentUser: any;
   filter: any;
   userIndex: any;
   openDialog(id: string, data?: any) {
+    this.selectAllSites = false;
     var x = <HTMLElement>document.getElementById(id);
     x.style.display = 'block';
 
@@ -570,6 +576,16 @@ export class UserProfileComponent {
         this.showLoader = false;
       },
     });
+  }
+
+  toggleSites() {
+    for (var i = 0; i < this.userSites.length; i++) {
+      this.selectAllSites ? this.searchPipe.transform(this.userSites, this.siteSearch)[i].assigned = true : this.userSites[i].assigned = false;
+    }
+  }
+
+  toggleAllIndividual() {
+    this.selectAllSites = this.userSites.every((item: any) => item.assigned == true);
   }
 
   currentFilter: any;

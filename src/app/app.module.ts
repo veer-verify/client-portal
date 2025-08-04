@@ -123,7 +123,7 @@ import { CreateUserComponent } from './user-profile/create-user/create-user.comp
     ReactiveFormsModule,
     BaseChartDirective,
     NgbModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers: [
     {
@@ -141,7 +141,8 @@ import { CreateUserComponent } from './user-profile/create-user/create-user.comp
       multi: true
     },
     provideCharts(withDefaultRegisterables()),
-    DatePipe
+    DatePipe,
+    SearchPipe,
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

@@ -29,12 +29,7 @@
     letter-spacing: 1px;
     font-size: 13px;
   }
-  
-  .filter-label {
-    color: #fff;
-    letter-spacing: 1px;
-    font-size: 13px;
-  }
+
   
   
   .add-form-button {
@@ -76,8 +71,6 @@
   }
   
   .form-select {
-    font-family: sans-serif;
-    font-weight: 600;
     border: 1px solid #dee2e6 !important;
     color: #7f7f7f !important;
     height: 35px;
@@ -127,12 +120,6 @@
     text-align: center;
     color: #ffffff;
     width: 35px;
-  }
-  
-  .dialog-title {
-    color: #2a2a2a;
-    font-size: 16px;
-    font-weight: 700;
   }
   
   .dialog-desc {
@@ -195,9 +182,9 @@
     }
   }
   
-  .title1 {
+  /* .title1 {
     text-transform: none;
-  }
+  } */
   
   .name {
     display: none;

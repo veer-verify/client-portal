@@ -16,9 +16,9 @@
         </div>
 
         <div class="col-lg-7 col-sm-12" Style="border: none; align-self: center; opacity:1">
-          <div class="title1 topTitle" style="margin:0 0 0 25px;">
+          <div class="topTitle" style="margin:0 0 0 25px;">
             <!-- <span>Support Helpdesk</span> -->
-            <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{
+            <span class="title1">{{
               displaySite?.siteName }} - Alerts</span>
             <!-- <div class=" action-icons">
               <div>&nbsp;</div>
@@ -82,14 +82,14 @@
               <div class="col-md-3 ps-0">
                 <span class="filter-label ">Camera</span>
                 <select class="form-select mb-3" [(ngModel)]="cameraId" (change)="filter()">
-                  <option value="">All</option>
+                  <option value="">ALL</option>
                   <option *ngFor="let item of camData" [value]="item?.cameraId">{{item?.name}}</option>
                 </select>
               </div>
               <div class="col-md-2 ps-0">
                 <span class="filter-label ">Action Tag</span>
                 <select class="form-select mb-3" [(ngModel)]="actionTag" (change)="filter()">
-                  <option value="">All</option>
+                  <option value="">ALL</option>
                   <option *ngFor="let item of actionTags" [value]="item?.value">{{ item?.value | titlecase }}</option>
                 </select>
               </div>

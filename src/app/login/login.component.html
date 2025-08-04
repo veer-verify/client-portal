@@ -23,7 +23,7 @@
           </div>
         </form>
 
-        <div class="forgotpass" (click)="openFrogotpassDialog('forgotPwd')">forgot password? &nbsp;</div>
+        <div class="forgotpass" (click)="openFrogotpassDialog('forgotPwd')">Forgot Password? &nbsp;</div>
         <button class="signinBtn w-50 mt-1" (click)="loginNew(); toggleSkip('signin')">SIGN IN</button>
         <p class="error" [style.color]="errInfo?.title == 'error' ? 'red' : 'green'">{{errInfo?.text}}</p>
         <!-- <p class="error" *ngIf="showsessionerror != ''">{{ showsessionerror }}</p> -->
