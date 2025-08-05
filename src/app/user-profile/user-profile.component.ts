@@ -99,7 +99,7 @@ export class UserProfileComponent {
 
   constructor(
     private router: Router,
-    private storageService: StorageService,
+    public storageService: StorageService,
     private apiservice: ApiService,
     private alertservice: AlertService,
     private authservice: AuthService,

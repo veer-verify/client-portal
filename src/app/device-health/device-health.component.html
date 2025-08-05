@@ -37,10 +37,8 @@
         <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
           (click)="footageList(site, i)">
           <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
-            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
+                          <img [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
 
-            <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA"
-              *ngIf="navActive == i">
             <div class="label">{{ site?.siteName }} </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
           </div>

@@ -43,7 +43,7 @@
         <!-- sites -->
         <div class="optionlabelparent" *ngIf="sites.length > 1">
           <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel>
-            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <img [src]="storageService.activeLogo" alt="">
             <div class="label"> {{currentsite}} </div>
             <div class="accordionArrow">
               <img src="assets/icons/forward_arrow.svg" alt="drop">
@@ -67,7 +67,7 @@
         <div class="optionlabel"
           style="display: flex; position:relative; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px">
           <div (click)="start.toggle()" style="width:-webkit-fill-available; display:flex;align-items: center;">
-            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"><span *ngIf="startDate != 'null'"
+                        <img [src]="storageService.activeLogo" alt=""> <span *ngIf="startDate != 'null'"
               style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: calc(100% - (50px))">
               Date : {{displayDate ? displayDate : 'Select Date'}}</span><img src="assets/icons/calender.svg"
               class="calendericon"><br>
@@ -89,7 +89,7 @@
         <!-- fields / customer services -->
         <div class="optionlabelparent" *ngIf="rsdata">
           <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel1>
-            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+                        <img [src]="storageService.activeLogo" alt="">
             <div class="label"> {{currentfield ? currentfield : 'Select Field'}}</div>
             <div class="accordionArrow">
               <img src="assets/icons/forward_arrow.svg" alt="drop">

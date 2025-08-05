@@ -10,7 +10,7 @@
                         *ngIf="item.call(userData?.roleList)">
                         <p class="nav-name">
                             {{ item.name }}
-                            <img src="assets/icons/eye.svg" class="mb-1" width="14px" alt="">
+                          <img [src]="storageService.activeLogo" width="20px" alt="">
                         </p>
                         <!-- <img src="assets/icons/forward_arrow.svg" alt=""> -->
                     </a>
