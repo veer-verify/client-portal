@@ -4,7 +4,7 @@
 
 
 const dev_url: string = 'http://usstaging.ivisecurity.com';
-// const local_url: string = 'http://192.168.0.180';
+const local_url: string = 'http://192.168.0.180';
 export const environment = {
   production: false,
 
