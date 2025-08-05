@@ -153,7 +153,6 @@
               <!-- </div> -->
             </div>
           </div>
-          <!-- code for FAQ ends here -->
         </div>
 
         <!-- Code for contact us starts here -->
@@ -334,45 +333,45 @@
                 <div>
                   <span class="filter-label ">Site</span>
                   <select class="form-select" [(ngModel)]="selectedsite" #sitee>
-                    <!-- <option value="">Site</option> -->
+                    <option value="" disabled>Select Site</option>
                     <option *ngFor="let item of totalsites; let s = index" [value]="item?.siteId">{{item?.siteName}}</option>
                   </select>
                 </div>
                 <div>
                   <span class="filter-label ">Category</span>
                   <select class="form-select" [(ngModel)]="selectedCategory" (click)="getSubCat(selectedCategory)">
-                    <!-- <option value="">Site</option> -->
+                    <option value="" disabled>Select Category</option>
                        <option *ngFor="let item of showcategories; let s = index" [value]="item?.catId">{{item?.catName}}</option>
                   </select>
                 </div>
                 <div *ngIf="selectedCategory">
                   <span class="filter-label ">Sub-Category</span>
                   <select class="form-select" [(ngModel)]="selectedSubcategory">
-                    <!-- <option value="">Site</option> -->
+                    <option value="" disabled>Select Sub-Category</option>
                     <option *ngFor="let item of showsubcats; let s = index" [value]="item?.serviceSubcatId">{{item?.serviceSubcatName}}</option>
                   </select>
                 </div>
                 <div>
                   <span class="filter-label ">Status</span>
                   <select class="form-select" [(ngModel)]="selectedStatus">
-                    <!-- <option value="">Site</option> -->
+                    <option value="" disabled>Select Status</option>
                     <option *ngFor="let item of serviceStatus; let s = index" [value]="item.keyId">{{item.value}}</option>
                   </select>
                 </div>
                 <div>
                   <span class="filter-label ">Created by</span>
                   <select class="form-select" [(ngModel)]="selectedCreatedBy">
-                    <!-- <option value="">Site</option> -->
+                    <option value="" disabled>Select Createdby</option>
                     <option *ngFor="let item of assignUsers; let s = index" [value]="item.userId">{{item.userName}}</option>
                   </select>
                 </div>
                 <div>
                   <span class="filter-label ">From date</span><br>
-                  <input type="date" class="form-control" [(ngModel)]="displaYstartDate" [max]="today">
+                  <input type="date" class="form-control" [(ngModel)]="displaYstartDate" [max]="today" (ngModelChange)="fixEnd()">
                 </div>
                 <div *ngIf="displaYstartDate">
                   <span class="filter-label ">To date</span><br>
-                  <input type="date" class="form-control" [(ngModel)]="displaYendDate">
+                  <input type="date" class="form-control" [(ngModel)]="displaYendDate" [min]="fixToDate">
                 </div>
 
               <div>
@@ -889,15 +888,15 @@
           <div class="text-start">Priority</div>
           <div class=" d-flex">
             <div *ngFor="let fruit of fruits" class="d-flex align-items-center">
-              <input type="radio" class="me-1" [value]="fruit" name="addpriority" [(ngModel)]="currentaddpriority" >
+              <input type="radio" class="me-1" [value]="fruit" name="addpriority" [(ngModel)]="currentaddpriority">
               <label class="me-2">{{fruit}}</label>
             </div>
           </div>
         </div>
 
       <div class="radiobox mb-3">
-        <textarea type="text" placeholder="Description*" [(ngModel)]="adddescription" id="textareadescr" style="width: -webkit-fill-available;height: 50px;"></textarea>
-        <p class="text-start text-danger" *ngIf="error && (adddescription =='' || adddescription == null) ? 'errorshadow' : ''">*required</p>
+        <textarea type="text" placeholder="Description*" [(ngModel)]="adddescription" id="textareadescr" style="width: -webkit-fill-available; height: 50px;"></textarea>
+        <p class="text-start text-danger" *ngIf="error && (adddescription == '' || adddescription == null) ? 'errorshadow' : ''">*required</p>
       </div>
 
       <div style="display: flex;" class="radiobox">
@@ -1021,7 +1020,7 @@
       </div>
       <div class="mb-3">
         <small class="d-flex justify-content-start">Comments</small>
-          <input type="text" placeholder="Enter" [(ngModel)]="comments">
+          <input type="text" placeholder="Enter" class="w-100" [(ngModel)]="comments">
           <p class="text-start text-danger" style="font-size: 12px;" *ngIf="error1 && (comments =='' || comments == null) ? 'errorshadow' : ''">*required</p>
       </div>
     </div>

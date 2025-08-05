@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
 import { ChartService } from '../services/charts/chart.service';
 import { SiteService } from '../services/site.service';
 import { StorageService } from '../services/storage.service';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-trends',
@@ -88,24 +89,20 @@ export class TrendsComponent implements OnInit {
     this.gettimelines(date)
     this.showLoader = true;
     this.reportsite = this.currentsite;
-    this.apiservice.getBiAnalyticsResearch(this.currentInfo.site.siteId, date).subscribe((res: any) => {
-      // console.log(res)
+    this.apiservice.getBiAnalyticsResearch(this.currentInfo?.site?.siteId, date).subscribe((res: any) => {
       if (res.status != "Failed") {
         this.showLoader = false;
         this.placeholderhere = "";
         var filter;
         // filter = res.AnalyticsList.sort(function (a:any, b:any) {return a.service.localeCompare(b.service);});
         filter = res.AnalyticsList;
-        this.rsdata = filter;
-        if (this.currentfield == null || this.currentfieldid == null) {
+        if (filter.length !== 0) {
+          this.rsdata = filter;
           this.seletedresearch = filter[0];
           this.currentfield = filter[0].service;
           this.currentfieldid = filter[0].serviceId;
+          this.getBiTrends();
         }
-
-        // if(filter.length !== 0) {
-        this.getBiTrends();
-        // }
       } else {
         this.showLoader = false;
         // this.placeholderhere = "Data is not available for selected date. Please choose different date.";
@@ -121,6 +118,8 @@ export class TrendsComponent implements OnInit {
   }
   graphsdata: any;
   getBiTrends() {
+    var p = this.storageService.getEncrData('currentSite');
+
     var date;
     var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd');
     if (this.startDate == null) {
@@ -135,8 +134,7 @@ export class TrendsComponent implements OnInit {
     }
 
     this.showLoader = true;
-    this.apiservice.getBiTrends1(this.currentsiteid, date, this.currentfieldid).subscribe((res: any) => {
-      // console.log(res)
+    this.apiservice.getBiTrends1(p?.siteId, date, this.currentfieldid).subscribe((res: any) => {
       this.showLoader = false;
       if (res.status === "Success") {
         this.graphsdata = res.AnalyticsTrends;
@@ -280,7 +278,7 @@ export class TrendsComponent implements OnInit {
     // this.storageService.storeEncrData('navItem', {site: site, index: e.target.index});
     this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
 
-    this.storageService.storeEncrData('siteidfromgaurdpage', site);
+    this.storageService.storeEncrData('currentSite', site);
     this.currentsite = site.siteName;
     this.currentsiteid = site.siteId
     // this.apiservice.getServices(site.siteId);
@@ -371,7 +369,7 @@ export class TrendsComponent implements OnInit {
   disabledDates: NgbDateStruct[] = [{ year: 2019, month: 2, day: 26 }]
   getsitenonworkingdays() {
     var p = this.storageService.getEncrData('currentSite');
-    var siteId = p.siteId;
+    var siteId = p?.siteId;
     this.currentsite = p.siteName;
     this.reportsite = this.currentsite;
     // var year = (new Date()).getFullYear();
@@ -465,38 +463,38 @@ export class TrendsComponent implements OnInit {
   yaxis: any = [];
   antypes: any = [];
   annames: any = [];
-  getTrendsData() {
-    this.apiservice.getBiTrends('PEOPLECOUNT', '01-17-2022').subscribe((res: any) => {
-      // console.log(res)
-      this.trenddata = res;
-      // for filtering type and sorting wrt timeline
-      this.filtereddata = this.trenddata.filter((el: any) => el.analyticTypeValue == "ENTER")
-      this.filtereddata.sort(function (a: any, b: any) { return a.arrivalTime.localeCompare(b.arrivalTime); });
-      // making chart array by adding count for condition
-      const a = Array.from(this.filtereddata.reduce(
-        (m: any, { cameraHour, count }: { cameraHour: any, count: any }) => m.set(cameraHour, (m.get(cameraHour) || 0) + count), new Map
-      ), ([cameraHour, count]) => ({ cameraHour, count }));
-      a.forEach(el => {
-        this.xaxis.push(el.cameraHour);
-        this.yaxis.push(el.count)
-      });
-      // making array of analytics names from recieved data
-      const cde = Array.from(this.trenddata.reduce((m: any,
-        { analyticTypeId }: { analyticTypeId: any }) => m.set(analyticTypeId, (m.get(analyticTypeId) || 0)),
-        new Map), ([analyticTypeId]) => ({ analyticTypeId }));
-      cde.forEach(el => { this.annames.push(el.analyticTypeId) });
-      (this.selectedanalyticname = this.annames[0])
-      // making array of analytics types from recieved data
-      const abc = Array.from(this.trenddata.reduce((m: any,
-        { analyticTypeValue }: { analyticTypeValue: any }) => m.set(analyticTypeValue, (m.get(analyticTypeValue) || 0)),
-        new Map), ([analyticTypeValue]) => ({ analyticTypeValue }));
-      abc.forEach(el => { this.antypes.push(el.analyticTypeValue) });
-      (this.selectedanalytictype = this.antypes[0])
-      if (this.filtereddata) {
-        // setTimeout(()=>{this.instantiateChart();},500);
-      }
-    })
-  }
+  // getTrendsData() {
+  //   this.apiservice.getBiTrends('PEOPLECOUNT', '01-17-2022').subscribe((res: any) => {
+  //     // console.log(res)
+  //     this.trenddata = res;
+  //     // for filtering type and sorting wrt timeline
+  //     this.filtereddata = this.trenddata.filter((el: any) => el.analyticTypeValue == "ENTER")
+  //     this.filtereddata.sort(function (a: any, b: any) { return a.arrivalTime.localeCompare(b.arrivalTime); });
+  //     // making chart array by adding count for condition
+  //     const a = Array.from(this.filtereddata.reduce(
+  //       (m: any, { cameraHour, count }: { cameraHour: any, count: any }) => m.set(cameraHour, (m.get(cameraHour) || 0) + count), new Map
+  //     ), ([cameraHour, count]) => ({ cameraHour, count }));
+  //     a.forEach(el => {
+  //       this.xaxis.push(el.cameraHour);
+  //       this.yaxis.push(el.count)
+  //     });
+  //     // making array of analytics names from recieved data
+  //     const cde = Array.from(this.trenddata.reduce((m: any,
+  //       { analyticTypeId }: { analyticTypeId: any }) => m.set(analyticTypeId, (m.get(analyticTypeId) || 0)),
+  //       new Map), ([analyticTypeId]) => ({ analyticTypeId }));
+  //     cde.forEach(el => { this.annames.push(el.analyticTypeId) });
+  //     (this.selectedanalyticname = this.annames[0])
+  //     // making array of analytics types from recieved data
+  //     const abc = Array.from(this.trenddata.reduce((m: any,
+  //       { analyticTypeValue }: { analyticTypeValue: any }) => m.set(analyticTypeValue, (m.get(analyticTypeValue) || 0)),
+  //       new Map), ([analyticTypeValue]) => ({ analyticTypeValue }));
+  //     abc.forEach(el => { this.antypes.push(el.analyticTypeValue) });
+  //     (this.selectedanalytictype = this.antypes[0])
+  //     if (this.filtereddata) {
+  //       // setTimeout(()=>{this.instantiateChart();},500);
+  //     }
+  //   })
+  // }
   currentItem: any;
   selectedanalytictype: any; selectedanalyticname: any;
   selectAnalytic(event: any, param: any) {
@@ -507,10 +505,10 @@ export class TrendsComponent implements OnInit {
     (x.previousElementSibling.classList.toggle('active'))
   }
 
-  getTrendsDataonclick() {
-    // console.log(this.startDate, this.endDate, this.selectedanalyticname, this.selectedanalytictype)
-    this.getResearchData(this.currentsiteid, this.yesterday);
-  }
+  // getTrendsDataonclick() {
+  //   // console.log(this.startDate, this.endDate, this.selectedanalyticname, this.selectedanalytictype)
+  //   this.getResearchData(this.currentsiteid, this.yesterday);
+  // }
 
   //chart library code - linechart
   public lineChartLabels = this.xaxis;

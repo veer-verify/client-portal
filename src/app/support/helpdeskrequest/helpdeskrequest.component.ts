@@ -371,11 +371,11 @@ export class HelpdeskrequestComponent implements OnInit {
     this.totalsites = this.siteData;
   }
 
-  selectedsite: any;
+  selectedsite: any ;
   selectedCategory: any;
-  selectedSubcategory: any;
-  selectedStatus: any;
-  selectedCreatedBy: any;
+  selectedSubcategory: any ;
+  selectedStatus: any ;
+  selectedCreatedBy: any ;
   filtereddata: any = [];
   netfilter(type: any, site?: any) {
     var abc: any;
@@ -636,46 +636,59 @@ export class HelpdeskrequestComponent implements OnInit {
   }
 
   show = false;
+  fixToDate: string;
   filters() {
+    this.selectedsite = '';
+    this.selectedCategory = '';
+    this.selectedSubcategory = '';
+    this.selectedCreatedBy = '';
+    this.selectedStatus = '';
+    this.displaYstartDate = null;
+    this.displaYendDate = null;
+    this.fixToDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-us');
     this.listUserByRoles();
     this.show = !this.show;
   }
+
+  fixEnd() {
+    this.fixToDate = formatDate(this.displaYstartDate, 'yyyy-MM-dd', 'en-us');
+  }
+  
   showAddSite = false;
   closenow(value: any) {
     this.showAddSite = value;
   }
 
-  requestbean = {
-    PrefTimeToCall: '',
-    assignedTo: null,
-    assignedType: null,
-    createdBy: '',
-    createdTime: '',
-    description: '',
-    editedBy: null,
-    editedTime: null,
-    imagePath: null,
-    priority: '',
-    reason: null,
-    reasonCategory: null,
-    remarks: '',
-    requestType: '',
-    resolution: null,
-    serviceCategoryName: '',
-    serviceId: '',
-    serviceSubCategoryName: '',
-    status: '',
-    // accountId:''
-  }
+  // requestbean = {
+  //   PrefTimeToCall: '',
+  //   assignedTo: null,
+  //   assignedType: null,
+  //   createdBy: '',
+  //   createdTime: '',
+  //   description: '',
+  //   editedBy: null,
+  //   editedTime: null,
+  //   imagePath: null,
+  //   priority: '',
+  //   reason: null,
+  //   reasonCategory: null,
+  //   remarks: '',
+  //   requestType: '',
+  //   resolution: null,
+  //   serviceCategoryName: '',
+  //   serviceId: '',
+  //   serviceSubCategoryName: '',
+  //   status: '',
+  // }
 
   visible1 = false
   visible2 = false
   currentItem: any;
   openeditmodal(e: any, req: any) {
     this.currentItem = JSON.parse(JSON.stringify(req));
-    var x = <HTMLElement>document.getElementById('editmodal')
+    var x = <HTMLElement>document.getElementById('editmodal');
     x.style.display = "block";
-    this.requestbean = req;
+    // this.requestbean = req;
     // e.target.src = 'assets/icons/editicon2White_selected.svg';
     this.savedevent = e;
   }
@@ -696,7 +709,7 @@ export class HelpdeskrequestComponent implements OnInit {
     this.currentRequests = req.history?.sort((a: any, b: any) => b.histId - a.histId);
     this.currentComments = req.comments?.sort((a: any, b: any) => b.commentId - a.commentId)
     var x = <HTMLElement>document.getElementById('viewmodal')
-    this.requestbean = req;
+    // this.requestbean = req;
     x.style.display = "block";
     // e.target.src = 'assets/icons/viewWhite_selected.svg';
     this.savedevent = e;
@@ -711,7 +724,7 @@ export class HelpdeskrequestComponent implements OnInit {
   opencmtmodal(e: any, req: any) {
     this.currentItem = req;
     var x = <HTMLElement>document.getElementById('commentsmodel')
-    this.requestbean = req;
+    // this.requestbean = req;
     x.style.display = "block";
     this.savedevent = e;
   }
@@ -727,15 +740,16 @@ export class HelpdeskrequestComponent implements OnInit {
     this.currentaddsubcat = null;
     // this.requestbean.description = "";
     // this.requestbean.remarks = "";
-    this.requestbean.PrefTimeToCall = "";
+    // this.requestbean.PrefTimeToCall = "";
+    this.adddescription = '';
     this.addtime = '';
-    this.currentaddpriority = 'Low'
-    this.currentCall = 'no'
+    this.currentaddpriority = 'Low';
+    this.currentCall = 'no';
     this.addremark = '';
     this.file = null;
 
     this.error = false;
-    this.currentsite = this.currentInfo?.site.siteId
+    this.currentsite = this.currentInfo?.site.siteId;
     this.addopen = true;
     var x = <HTMLElement>document.getElementById('addmodal')
     x.style.display = "block";
@@ -755,7 +769,7 @@ export class HelpdeskrequestComponent implements OnInit {
     this.currentItem = item;
     var x = <HTMLElement>document.getElementById('deletemodal')
     x.style.display = "block";
-    this.requestbean = item;
+    // this.requestbean = item;
     // e.target.src = 'assets/icons/deleteWhite_selected.svg';
     this.savedevent = e;
   }
@@ -788,7 +802,7 @@ export class HelpdeskrequestComponent implements OnInit {
     this.currentItem = JSON.parse(JSON.stringify(item));
     var x = <HTMLElement>document.getElementById('assignmodal')
     x.style.display = "block";
-    this.requestbean = item;
+    // this.requestbean = item;
     this.savedevent = e;
   }
 
@@ -838,6 +852,7 @@ export class HelpdeskrequestComponent implements OnInit {
     this.date.nativeElement
     this.date.nativeElement.focus();
   }
+
   calldisabled = true
   mindate() {
     var today: any = new Date();
@@ -872,12 +887,12 @@ export class HelpdeskrequestComponent implements OnInit {
   }
 
   submitedit() {
-    if (this.requestbean.PrefTimeToCall != null) {
-      this.requestbean.PrefTimeToCall = (String(this.requestbean.PrefTimeToCall).replace("T", " "))
-      if (this.requestbean.PrefTimeToCall.length == 16) {
-        this.requestbean.PrefTimeToCall = this.requestbean.PrefTimeToCall + ':00'
-      }
-    }
+    // if (this.requestbean.PrefTimeToCall != null) {
+    //   this.requestbean.PrefTimeToCall = (String(this.requestbean.PrefTimeToCall).replace("T", " "))
+    //   if (this.requestbean.PrefTimeToCall.length == 16) {
+    //     this.requestbean.PrefTimeToCall = this.requestbean.PrefTimeToCall + ':00'
+    //   }
+    // }
 
     this.showLoader = true;
     if (this.currentItem.description != null && this.currentItem.description != "") {
@@ -977,26 +992,15 @@ export class HelpdeskrequestComponent implements OnInit {
 
   addremark: any;
   addreq() {
-    if (this.currentCall == 'yes' && this.addtime == '') {
-      this.alertService.success('Alert', 'Please select preferred time')
-    } else {
-      this.addreq1();
-    }
-  }
-
-  addreq1() {
     this.addopen = false;
-    // console.log(this.currentcategory);
-    // console.log(this.currentsubcategory);
-    // if (this.currentaddsubcat == null) {
-    //   this.currentaddsubcat = { serviceSubcatName: 'Other' }
-    // }
     this.showLoader = true;
-
-    if (!this.addtime) { this.addtime = '' }
-    else { this.addtime = String(this.addtime).replace("T", " ") + ':00' }
+    if (!this.addtime) {
+      this.addtime = ''
+    }
+    else {
+      this.addtime = String(this.addtime).replace("T", " ") + ':00'
+    }
     var payload = {
-      // siteId: site?.siteId ? site?.siteId : site1?.site?.siteId,
       siteId: this.currentsite,
       service_cat_id: this.currentaddcat,
       service_subcat_id: this.currentaddsubcat,

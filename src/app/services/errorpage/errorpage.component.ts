@@ -25,7 +25,7 @@ export class ErrorpageComponent implements OnInit {
   }
 
   loginpage(){  
-    this.authservice.logout();
+    // this.authservice.logout();
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }

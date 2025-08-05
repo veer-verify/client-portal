@@ -35,14 +35,8 @@ export class LoginComponent implements OnInit {
   updatePasswordForm: FormGroup;
   errInfo: any = null;
   ngOnInit(): void {
-    // const timeZoneOffset = new Date().getTimezoneOffset();
-    // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // console.log(timezone);
-    // this.showsessionerror = this.authservice.showSessonError;
-    // setTimeout(() => {this.showsessionerror = '';}, 5000);
-
     localStorage.clear();
-    
+  
     this.alertService.getMessage().subscribe((res: any) => {
       this.errInfo = res;
     });
@@ -98,7 +92,7 @@ export class LoginComponent implements OnInit {
     if (x) {
       this.apiService.getSites().subscribe((res: any) => {
         if (res.Message == "Failed") {
-          this.authservice.logout();
+          // this.authservice.logout();
           this.router.navigateByUrl('/login');
         } else {
           this.router.navigateByUrl('/guard');

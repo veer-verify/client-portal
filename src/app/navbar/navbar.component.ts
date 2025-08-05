@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, catchError, finalize, Subject, take, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, first, last, Subject, take, throwError } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
     this.listSiteServices();
     // this.getUser();
     this.updateUserFormControl();
-    this.check();
+    // this.check();
 
     // if (this.userData.roleList.length !== 0) {
     //   let a: Array<any> = Array.from(this.userData?.roleList, (item: any) => item.category);
@@ -83,6 +83,7 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
+                this.storageService.storeEncrData('currentSite', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
@@ -113,12 +114,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  check() {
-    var x = this.authservice.getAuthStatus();
-    if (x == false) {
-      this.authservice.logout();
-    }
-  }
+  // check() {
+  //   var x = this.authservice.getAuthStatus();
+  //   if (x == false) {
+  //     this.authservice.logout();
+  //   }
+  // }
 
   burgerIcon() {
     var x = this.topnav.nativeElement;
@@ -168,12 +169,10 @@ export class NavbarComponent implements OnInit {
         localStorage.clear();
         this.storageService.site_sub.next(null);
         this.authservice.isLoggedin.next(false);
-        // window.location.reload();
       },
       complete: () => {
         this.storageService.site_sub.next(null);
         this.authservice.isLoggedin.next(false);
-        // window.location.reload();
       }
     })
   }
@@ -187,9 +186,6 @@ export class NavbarComponent implements OnInit {
   forgotPass() {
     this.closeresetModal();
     let x: any = this.userData.UserName;
-    // if(x == '' || x == null){this.errormsg =('Please enter username'); this.alertservice.success("Error",this.errormsg)}
-    // else if(x != '' && x!= this.data.UserName){this.errormsg =('Username is invalid'); this.alertservice.success("Error",this.errormsg)}
-    // else{
     this.showLoader = true;
     this.authservice.forgotPassword(x).subscribe((res: any) => {
       this.showLoader = false;
@@ -202,17 +198,12 @@ export class NavbarComponent implements OnInit {
         this.errormsg = res.Message;
         this.alertservice.success("Failed", "Something went wrong. Please contact support@ivisecurity.com");
       }
-      // if(res.Status == "Failed"){this.errormsg = 'Username is invalid'; this.alertservice.success(this.errormsg)}
     })
-    // }
   }
 
   forgotPass1() {
     this.closeresetModal();
     let x: any = this.userData.UserName;
-    // if(x == '' || x == null){this.errormsg =('Please enter username'); this.alertservice.success("Error",this.errormsg)}
-    // else if(x != '' && x!= this.data.UserName){this.errormsg =('Username is invalid'); this.alertservice.success("Error",this.errormsg)}
-    // else{
     this.showLoader = true;
     this.authservice.forgotPassword(x).subscribe((res: any) => {
       this.showLoader = false;
@@ -225,9 +216,7 @@ export class NavbarComponent implements OnInit {
         this.errormsg = res.Message;
         this.alertservice.success("Failed", "Something went wrong. Please contact support@ivisecurity.com");
       }
-      // if(res.Status == "Failed"){this.errormsg = 'Username is invalid'; this.alertservice.success(this.errormsg)}
     })
-    // }
   }
 
   submitprofile() {
@@ -270,7 +259,6 @@ export class NavbarComponent implements OnInit {
       this.showLoader = true;
       this.openUpdatePassword();
       this.authservice.verifyEmail(this.verifyBody.email, this.verifyBody.UidToken).subscribe((res: any) => {
-        // console.log(res);
         this.showLoader = false;
         if (res?.Status == 'Success') {
           this.closeresetModal();
@@ -358,14 +346,6 @@ export class NavbarComponent implements OnInit {
     this.apiservice.getUserInfoForId(this.userData?.UserId).subscribe((res: any) => {
       this.userinfo = res;
     });
-
-
-    // this.router.events.subscribe((ev) => {
-    //   if(ev instanceof NavigationEnd) {
-    //     if(this.router.url == '/gaurd') {
-    //     }
-    //   }
-    // });
   }
 
   updateUser() {
@@ -448,7 +428,6 @@ export class NavbarComponent implements OnInit {
       userId: userUpdate.UserId
     }
     this.apiservice.updateProfilePicture(obj).subscribe((res: any) => {
-      // console.log(res);
       if (res.status_code == 200) {
         this.alertservice.success('success', res.message);
         this.getUser();

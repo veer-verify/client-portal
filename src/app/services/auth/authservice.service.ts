@@ -18,7 +18,7 @@ export class AuthService {
     private storageService: StorageService,
     private router: Router,
     private alertSer: AlertService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
   ) {
     this.restartTimer();
   }
@@ -119,20 +119,20 @@ export class AuthService {
     return this.http.post(url, payload);
   }
 
-  logout() {
-    let signouturl = `${environment.authUrl}/logout`;
-    let payload = { UserName: '', AccessToken: '' };
-    var a = this.storageService.getEncrData('user');
-    if (a) {
-      payload = {
-        UserName: a.UserName,
-        AccessToken: 'abc',
-      };
-    }
-    localStorage.clear();
-    this.storageService.deleteStoredEncrData('user');
-    return this.http.post(signouturl, payload);
-  }
+  // logout() {
+  //   let signouturl = `${environment.authUrl}/logout`;
+  //   let payload = { UserName: '', AccessToken: '' };
+  //   var a = this.storageService.getEncrData('user');
+  //   if (a) {
+  //     payload = {
+  //       UserName: a.UserName,
+  //       AccessToken: 'abc',
+  //     };
+  //   }
+  //   localStorage.clear();
+  //   this.storageService.deleteStoredEncrData('user');
+  //   return this.http.post(signouturl, payload);
+  // }
 
   getAuthStatus() {
     var a = this.storageService.getEncrData('user');
@@ -154,13 +154,13 @@ export class AuthService {
 
   private idleTimer: Observable<number>;
   private destroy_sub = new Subject<void>();
-  showSessonError: string = '';
   restartTimer(): void {
     const timeoutPeriod = 10 * 60 * 1000;
     this.idleTimer = timer(timeoutPeriod).pipe(takeUntil(this.destroy_sub));
     this.idleTimer.subscribe((res: any) => {
-      this.logout();
-      this.showSessonError = 'Sesson expired. Please login again!';
+      localStorage.clear();
+      this.storageService.site_sub.next(null);
+      this.isLoggedin.next(false);
       this.router.navigate(['/login']);
     });
   }

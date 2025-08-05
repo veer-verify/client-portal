@@ -27,7 +27,7 @@ export class ApiService {
     private http: HttpClient,
     private storageService: StorageService,
     private router: Router,
-    ) { }
+  ) { }
 
   getVideoUrl(payload: any): Observable<any> {
     return this.http.get(payload?.httpUrl);
@@ -54,7 +54,7 @@ export class ApiService {
   getSitesListForUserName(payload: any) {
     let url = environment.sitesUrl + '/getSitesListForUserName_1_0/';
     let params = new HttpParams();
-    if(payload?.UserName) {
+    if (payload?.UserName) {
       params = params.set('userName', payload?.UserName)
     }
     return this.http.get(url, { params: params });
@@ -134,14 +134,14 @@ export class ApiService {
     formData.append('createdBy', user?.UserId);
     formData.append('description', payload.description);
     // formData.append('PrefTimeToCall', payload.PrefTimeToCall);
-    
+
     formData.append('priority', payload.priority);
     formData.append('remarks', payload.remarks);
 
-    if(payload.prefTimeToCall) {
-      formData.append('prefTimeToCall', payload.prefTimeToCall) ;
+    if (payload.prefTimeToCall) {
+      formData.append('prefTimeToCall', payload.prefTimeToCall);
     }
-    if(file) {
+    if (file) {
       formData.append('requestName', 'service-requests-test');
       formData.append('assetName', file?.name);
       formData.append('assetFile', file);
@@ -181,38 +181,38 @@ export class ApiService {
     // }
 
     let params = new HttpParams();
-    if(user && !this.storageService.isSuperAdmin()) {
+    if (user && !this.storageService.isSuperAdmin()) {
       params = params.set('userId', user?.UserId);
     }
-    if(payload?.siteId) {
+    if (payload?.siteId) {
       params = params.set('siteId', payload?.siteId);
     }
-    if(payload?.serviceCategory) {
+    if (payload?.serviceCategory) {
       params = params.set('serviceCategory', payload?.serviceCategory);
     }
-    if(payload?.serviceSubCategory) {
+    if (payload?.serviceSubCategory) {
       params = params.set('serviceSubCategory', payload?.serviceSubCategory);
     }
-    if(payload?.status) {
+    if (payload?.status) {
       params = params.set('status', payload?.status);
     }
-    if(payload?.userId) {
+    if (payload?.userId) {
       params = params.set('userId', payload?.userId);
     }
-    if(payload?.page) {
+    if (payload?.page) {
       params = params.set('page', payload?.page);
     }
-    if(payload?.fromDate) {
+    if (payload?.fromDate) {
       params = params.set('fromDate', payload?.fromDate);
     }
-    if(payload?.toDate) {
+    if (payload?.toDate) {
       params = params.set('toDate', payload?.toDate);
     }
-    if(payload?.site?.siteId) {
+    if (payload?.site?.siteId) {
       params = params.set('siteId', payload?.siteId);
     }
-    
-    return this.http.get(url, {params: params});
+
+    return this.http.get(url, { params: params });
   }
 
   deleteHelpDeskRequests(payload: any) {
@@ -243,16 +243,16 @@ export class ApiService {
     return this.http.put(url, payload);
   }
 
-  
+
 
   getNonWorkingDays(siteId: any, year?: any) {
     let url = `${environment.insightsUrl}/notWorkingDays_1_0`;
     let params = new HttpParams();
     params = params.set('siteId', siteId)
-    if(year) {
+    if (year) {
       params = params.set('year', year)
     }
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   // clientServices(siteId: any) {
@@ -265,13 +265,13 @@ export class ApiService {
     let biAnalyticsReport = environment.insightsUrl + '/biAnalyticsReport_1_0?';
     let params = new HttpParams();
     params = params.set('SiteId', siteId)
-    if(fromDate) {
+    if (fromDate) {
       params = params.set('fromDate', (`${fromDate.year}-${fromDate.month}-${fromDate.day}`))
     }
-    if(toDate) {
+    if (toDate) {
       params = params.set('toDate', (`${toDate?.year}-${toDate?.month}-${toDate?.day}`))
     }
-    return this.http.get(biAnalyticsReport, {params: params});
+    return this.http.get(biAnalyticsReport, { params: params });
   }
 
   downloadReport(siteId: any, startdate: any, enddate: any) {
@@ -296,8 +296,18 @@ export class ApiService {
 
   getBiTrends1(siteId: any, date: any, typeid: any) {
     // let url1 = `${environment.insightsUrl}/analyticTrends_1_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
-    let url = `${environment.insightsUrl}/analyticTrends_2_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
-    return this.http.get(url)
+    let url = `${environment.insightsUrl}/analyticTrends_2_0`;
+    let params = new HttpParams();
+    params = params.set('SiteId', siteId);
+    if (date) {
+      params = params.set('date', date);
+
+    }
+    if (typeid) {
+      params = params.set('analyticTypeId', typeid);
+
+    }
+    return this.http.get(url, { params: params })
   }
 
   getBiTrends(type: any, date: any) {
@@ -320,7 +330,7 @@ export class ApiService {
   listInsightImages(payload: any) {
     let url = `${environment.sitesUrl}/listInsightImages_1_0/`;
     let params = new HttpParams().set('siteId', payload?.siteId)
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   sessionstatus() {
@@ -404,7 +414,7 @@ export class ApiService {
   listUsersByRole() {
     let url = environment.authUrl + '/listUsersByRole_1_0';
     let params = new HttpParams().set('roleId', 44);
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   listUsersByRoles(payload: any): Observable<any> {
@@ -412,10 +422,10 @@ export class ApiService {
     let params = new HttpParams().set('typeName', 'IVIS_Sopport_Roles');
 
     params = params.set('typeName', 'IVIS_Sopport_Roles')
-    if(payload?.department) {
+    if (payload?.department) {
       params = params.set('department', payload?.department)
     }
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   getSitesListForGlobalAccountId(payload: any): Observable<any> {
@@ -423,17 +433,17 @@ export class ApiService {
     let url = environment.authUrl + '/getSitesListForGlobalAccountId_1_0/';
     // var user = this.storageService.getEncrData('user');
     let params = new HttpParams();
-    if(payload?.userId) {
+    if (payload?.userId) {
       params = params.set('userId', payload?.userId)
     }
-    if(payload?.loginId) {
+    if (payload?.loginId) {
       params = params.set('loginId', payload?.loginId)
     }
-    if(payload?.assigned !== null) {
+    if (payload?.assigned !== null) {
       params = params.set('assigned', payload?.assigned)
     }
     params = params.set('callingSystemDetail', 'portal')
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   getUserNamesByUserName(): Observable<any> {
@@ -441,7 +451,7 @@ export class ApiService {
     let url = environment.authUrl + '/getUserNamesByUserIds_1_0';
     var user = this.storageService.getEncrData('user');
     let params = new HttpParams().set('user_id', user?.UserId);
-    return this.http.get(url, {params: params});
+    return this.http.get(url, { params: params });
   }
 
   createUser(payload: any) {
@@ -467,15 +477,15 @@ export class ApiService {
     return this.http.post(url, payload);
   }
 
-  applySitesMapping(payload: any){
+  applySitesMapping(payload: any) {
     var user = this.storageService.getEncrData('user');
-    let url =`${environment.authUrl}/applySitesMapping_1_0`;
+    let url = `${environment.authUrl}/applySitesMapping_1_0`;
     return this.http.post(url, payload);
   }
 
-  unassignSiteForUser(payload: any){
+  unassignSiteForUser(payload: any) {
     // let url = this.url1 + '/userDetails/unassignSiteForUser_1_0';
-    let url =`${environment.authUrl}/unassignSiteForUser_1_0`;
+    let url = `${environment.authUrl}/unassignSiteForUser_1_0`;
     return this.http.post(url, payload);
   }
 
@@ -523,7 +533,7 @@ export class ApiService {
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
     } else {
-      if(panel.scrollHeight > 400) {
+      if (panel.scrollHeight > 400) {
         panel.style.maxHeight = "200px";
         panel.style.overflow = 'scroll'
       } else {
