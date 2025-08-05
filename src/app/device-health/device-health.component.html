@@ -15,7 +15,7 @@
           </div>
         </div>
 
-        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
+        <div class="col-lg-7 col-sm-12" Style="border: none; align-self: center; opacity:1">
           <div class="title1 topTitle" style="margin:0 0 0 25px;">
             <!-- <span>Support Helpdesk</span> -->
             <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{
@@ -27,6 +27,19 @@
             <div class="tooltiptext">Do you need Safety Escort?</div> -->
           </div>
         </div>
+
+        <div class="col-lg-2 d-flex " *ngIf="newEventData.length !== 0">
+          <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="16px" [className]="currentPage == 1 || currentPage === 0 ? 'fade': 'pointer'" (click)="filter('prev')" alt="prev">
+          <div class="searchbox" style=" margin: 10px !important; padding: 4px !important; height: 30px;">
+            <select name="my-dropdown" class="dropdown" [(ngModel)]="currentPage" (ngModelChange)="filter($event)">
+              <option *ngFor="let number of selectNumbers" [value]="number">
+                <div style="padding: 15px; margin:10px; margin-right:15px"><span class="page-link">{{ number }} of {{ totalPages }}</span></div>
+              </option>
+            </select>
+          </div>
+          <img src="assets/icons/arrow.svg" width="16px" [className]="currentPage === totalPages ? 'fade': 'pointer'" (click)="filter('next')" alt="next">
+        </div>
+
       </div>
     </div>
   </div>
@@ -75,6 +88,7 @@
           </div>
         </div> -->
 
+       
         <div class="table-resp extra w-100">
           <table class="table table-hover" id="mytable">
             <thead style="position: sticky; top: 0; z-index: 1;">

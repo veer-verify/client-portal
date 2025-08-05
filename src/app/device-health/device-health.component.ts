@@ -86,8 +86,12 @@ export class DeviceHealthComponent {
     }
   ]
 
+  selectNumbers: any = [];
+  currentPage: number;
+  totalPages: number;
   userData: any;
-  currentInfo: any
+  currentInfo: any;
+
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.storageService.site_sub.subscribe((res) => {
@@ -227,6 +231,9 @@ export class DeviceHealthComponent {
       if(res.statusCode === 200) {
         this.eventData = res.DeviceHealthData;
         this.newEventData = this.eventData;
+              this.currentPage = res.page;
+      this.totalPages = res.totalPages;
+      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
       } else {
         this.newEventData = [];
       }
@@ -239,21 +246,34 @@ export class DeviceHealthComponent {
   siteId: any = '';
   time: any = '';
   status: any = '';
-  filter() {
+
+  filter(type?: string | Event) {
+
+    let pageNumber;
+    type == 'next' ? pageNumber = this.currentPage + 1 : type == 'prev' ? pageNumber = this.currentPage - 1 : pageNumber = type;
+    if(pageNumber == (this.totalPages + 1)) return;
+
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite.siteId));
     this.navActive = x;
     this.newEventData = [];
-
+      
     this.showLoader = true;
     this.eventSer.getHealth({
         siteId: this.currentSite?.siteId,
         time: this.time,
-        status: this.status
+        status: this.status,
+        pageno: pageNumber,
+        pagesize:10
+        
     }).subscribe((res: any) => {
       this.showLoader = false;
       if(res.statusCode === 200) {
         this.eventData = res.DeviceHealthData;
         this.newEventData = this.eventData;
+          this.currentPage = res.page;
+      this.totalPages = res.totalPages;
+      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
+
       } else {
         this.newEventData = [];
       }
@@ -279,8 +299,7 @@ export class DeviceHealthComponent {
   }
 
   // pageSize = 12;
-  currentPage: number;
-  totalPages: number;
+ 
   // get totalPages(): number {
   //   return Math.ceil(this.newEventData.length / this.pageSize);
   // }

@@ -293,3 +293,7 @@
     border: none;
     background-color: transparent;
   }
+  
+.fade {
+  opacity: 0.5;
+}
