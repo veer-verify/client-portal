@@ -34,7 +34,7 @@ export class InsightComponent implements OnInit {
   constructor(
     private apiservice: ApiService,
     private alertservice: AlertService,
-    private storageService: StorageService,
+    public storageService: StorageService,
     private router: Router,
     private eRef: ElementRef,
     private http: HttpClient,

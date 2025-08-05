@@ -21,8 +21,6 @@
     height: 36px;
     box-shadow: none;
     color: #6c757d;
-    font-family: PS, sans-serif;
-    font-size: 16px;
 }
 
 .labell {
@@ -44,7 +42,7 @@
 }
 
 .config-title {
-    font-family: PS, sans-serif;
+    font-family: TP, sans-serif;
     font-size: 20px;
     font-weight: 700;
     text-transform: uppercase;
@@ -77,6 +75,7 @@
 }
 
 .update-msg {
+    font-family: TP, sans-serif;
     color: brown;
     width: 100%;
     position: absolute;
@@ -521,9 +520,9 @@ button {
     opacity: 1;
 }
 
-.title1 {
+/* .title1 {
     text-transform: capitalize;
-}
+} */
 
 .name {
     display: none;

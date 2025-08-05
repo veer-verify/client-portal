@@ -258,9 +258,9 @@ select {
     opacity: 1 ;
   }
 
-  .title1{
+  /* .title1{
       text-transform: capitalize;
-  }
+  } */
 
   .name{
     display: none;

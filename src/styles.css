@@ -29,17 +29,17 @@
 
 :root {
     /** ivis */
-  --background-img:  linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("./assets/icons/background.jpg") no-repeat;
+  /* --background-img:  linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("./assets/icons/background.jpg") no-repeat;
   --cmn-background: linear-gradient(160deg, #D44124, #104b86);
   --card-background: #e6e8e8;
-  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%);
+  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%); */
 
   /** unv */
   /* --background-img: linear-gradient(325deg, #1E3F73 75%, #ffffff 25%); */
-  /* --background-img: #1E3F73;
+  --background-img: #1E3F73;
   --cmn-background: linear-gradient(160deg, #1E3F73, #ffffff);
   --card-background: #ffffff;
-  --loader-background: linear-gradient(325deg, #86a5d6, #1E3F73); */
+  --loader-background: linear-gradient(325deg, #86a5d6, #1E3F73);
 }
 
 
@@ -90,9 +90,9 @@ textarea {
   caret-color: #e1e1e1;
 } */
 
-.page {
+/* .page {
   font-family: sans-serif;
-}
+} */
 
 .pointer {
   cursor: pointer;
@@ -194,20 +194,17 @@ textarea {
 }
 
 .title1 {
-  width: -webkit-fill-available;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   margin: 4px 0 0px 10px;
-  /* margin: 15px 0 10px 55px; */
-  font-size: 16px;
+  font-size: 18px;
   color: #fff;
-  font-family: PS, sans-serif;
+  font-family: ES, sans-serif;
   text-transform: uppercase;
   position: relative;
-  /* display: inline-flex;
-  align-items: center; */
   text-overflow: ellipsis;
   overflow: hidden;
   text-wrap: nowrap;
+  font-weight: 700;
 }
 
 #hr1 {
@@ -392,10 +389,6 @@ textarea {
 }
 
 @media screen and (max-width:991px) {
-  /* .title1 {
-    margin: 15px 0 15px 15px;
-  } */
-
   .topTitle {
     text-align: center !important;
     justify-content: center;
@@ -536,11 +529,17 @@ textarea {
   border-radius: 6px;
   /* margin: 6px 12%; */
   font-size: 14px;
-  font-family: verdana, sans-serif;
+  font-family: TP, sans-serif;
   letter-spacing: 1px;
   align-items: center;
   outline: none;
   display: flex;
+}
+
+.form-select {
+  font-family: TP, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .searchbox input {
@@ -553,9 +552,8 @@ textarea {
 
 input[type="text"] {
   border: none;
-  width: -webkit-fill-available;
   color: #010101;
-  font-family: 'TP', sans-serif;
+  font-family: TP, sans-serif;
 }
 
 input[type="password"] {
@@ -989,8 +987,17 @@ input:focus {
   max-width: 90%;
 }
 
+  .filter-label {
+      font-family: TP, sans-serif;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 600;
+        text-transform: uppercase;
+  }
+
 .table-resp {
-  height: calc(100vh - 215px);
+  max-height: calc(100vh - 215px);
   overflow-y: auto;
   font-size: 14px;
   background-color: #fff;
@@ -1006,11 +1013,13 @@ table thead tr {
 }
 
 table thead tr th {
-  font-family: PS, sans-serif;
+  font-family: TP, sans-serif;
   padding: 8px;
   background: #104B86 !important;
   color: #fff !important;
   padding: 5px !important ;
+      text-transform: uppercase !important;
+      font-size: 12px;
 }
 
 table tbody tr td {
@@ -1019,7 +1028,12 @@ table tbody tr td {
   font-size: 12px;
 }
 
-
+  .dialog-title {
+    color: #2a2a2a;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: TP, sans-serif;
+  }
 
 
 .timer {
@@ -1101,12 +1115,14 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+    font-family: TP, sans-serif;
 }
 
 .dialog-header p{
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
+  font-family: TP, sans-serif;
 }
 
 

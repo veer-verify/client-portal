@@ -35,7 +35,8 @@
         <!-- Accordion for Location -->
         <div class="optionlabelparent" *ngIf="sites.length !== 0">
           <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel>
-            <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
+            <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA"> -->
+            <img [src]="storageService.activeLogo" alt="">
             <div class="label">{{currentsite}}</div>
             <div class="accordionArrow">
               <img src="assets/icons/forward_arrow.svg" alt="drop">

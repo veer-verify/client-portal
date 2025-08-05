@@ -21,7 +21,7 @@ export class DeviceHealthComponent {
     private router: Router,
     private alertService: AlertService,
     private authservice: AuthService,
-    private storageService: StorageService,
+    public storageService: StorageService,
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,

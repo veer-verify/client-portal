@@ -78,16 +78,15 @@
           </div>
         </div>
 
-        <div class="optionlabelparent" (click)="opentnc()"
+        <!-- <div class="optionlabelparent" (click)="opentnc()"
         [style.border]="tnc == false? '1px solid #fff' : ''"
         [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
           <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="tnc==false ? '#fff' : '#000'">
-            <!-- <img src="assets/icons/eye.svg" *ngIf="tnc" style="width: 20px;" alt="ivisUSA"> -->
             <img [src]="tnc ? storageService.activeLogo : storageService.inActiveLogo" alt="">
             <div class="label"> Terms & Conditions </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
-        </div>
+        </div> -->
         <br>
       </div>
 
@@ -169,18 +168,18 @@
               <div style="justify-content: space-around; display: flex;">
                 <div style="text-align: left; width: 48%;">
                   <div style="display: flex;align-items: center;"><img src="assets/icons/location.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">ADDRESS</span></div>
-                  <div style="margin-top: 15px; font-size:14px;">
+                  <!-- <div style="margin-top: 15px; font-size:14px;">
                     <b>IVIS Security, Inc. &#169;</b><br>
                     3945 W Cheyenne Ave #204,<br>
                     North Las Vegas, NV 89032<br>
                     United States
-                  </div>
-                  <!-- <div style="margin-top: 15px; font-size:14px;">
+                  </div> -->
+                  <div style="margin-top: 15px; font-size:14px;">
                     <b>
                       SadguruVilla - 123/128, &#169;</b><br>
                       Gorai, Borivali west,<br>
                       Mumbai MH - 400091 (INDIA)<br>
-                  </div> -->
+                  </div>
                 </div>
 
                 <div style="text-align: left; width: 48%;">
@@ -206,8 +205,6 @@
           <hr id="hr1">
           <div class="tables">
             <div>
-              <!-- <embed class="tncblock" [src]="environment + '/downloadFile_1_0?assetName=TermsandConditions.pdf&requestName=TermsandConditions'| sanitize| pdf" type="application/pdf"> -->
-              <!-- <iframe [src]="environment + '/downloadFile_1_0?assetName=TermsandConditions.pdf&requestName=TermsandConditions' | sanitize"  class="tncblock"></iframe> -->
               <pdf-viewer [src]="pdfSrc"
                 [render-text]="true"
                 [original-size]="false"

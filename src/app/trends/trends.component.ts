@@ -48,7 +48,7 @@ export class TrendsComponent implements OnInit {
   constructor(
     private apiservice: ApiService,
     private chartservice: ChartService,
-    private storageService: StorageService,
+    public storageService: StorageService,
     private siteSer: SiteService,
     private router: Router) { }
 

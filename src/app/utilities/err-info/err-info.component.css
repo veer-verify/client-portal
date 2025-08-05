@@ -10,7 +10,9 @@
 }
 
 .text-detail {
-    font-family: PS, sans-serif;
+    font-family: TP, sans-serif;
     color: #ababab;
     font-size: 36px;
+    background-color: transparent;
+    font-weight: 700;
 }
