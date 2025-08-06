@@ -285,16 +285,17 @@ export class ApiService {
   }
 
   getBiAnalyticsResearch(siteId: any, startDate: any) {
-    // console.log("researchTrends"+siteId,startDate)
-    let biAnalyticsReport = environment.insightsUrl + '/getAnalyticsListforSite_1_0?';
-    const newurl1 = `${biAnalyticsReport}SiteId=${siteId}&date=${startDate}`
-    const newurl = environment.insightsUrl + "/getAnalyticsListforSite_1_0?SiteId=1002&date=2022-03-01";
-    // console.log("bireport: ",newurl);
-    return this.http.get(newurl1);
+    let url = environment.insightsUrl + '/getAnalyticsListforSite_1_0';
+    let params = new HttpParams();
+    params = params.set('SiteId', siteId);
+    if(startDate) {
+      params = params.set('date', startDate)
+    }
+    return this.http.get(url, {params: params});
   }
 
 
-  getBiTrends1(siteId: any, date: any, typeid: any) {
+  getBiTrends(siteId: any, date: any, typeid: any) {
     // let url1 = `${environment.insightsUrl}/analyticTrends_1_0?SiteId=${siteId}&date=${date}&analyticTypeId=${typeid}`;
     let url = `${environment.insightsUrl}/analyticTrends_2_0`;
     let params = new HttpParams();
@@ -310,12 +311,12 @@ export class ApiService {
     return this.http.get(url, { params: params })
   }
 
-  getBiTrends(type: any, date: any) {
-    let biTrends = environment.insightsUrl + "biDataReport/BiData?accountId=1001&analyticTypeId=";
-    let url = `${biTrends}${type}&cameraDate=${date}`
-    // console.log(url);
-    return this.http.get(url)
-  }
+  // getBiTrends(type: any, date: any) {
+  //   let biTrends = environment.insightsUrl + "biDataReport/BiData?accountId=1001&analyticTypeId=";
+  //   let url = `${biTrends}${type}&cameraDate=${date}`
+  //   // console.log(url);
+  //   return this.http.get(url)
+  // }
   getsiteid(siteId: any) {
     let url = `${this.baseurl}cpus/sites/getBICustomerSiteId_1_0?accId=${siteId}`;
     return this.http.get(url)

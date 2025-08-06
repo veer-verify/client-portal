@@ -451,7 +451,7 @@ select {
     color: #ffffff;
     border-radius: 50px;
     padding: 8px;
-    width: 100px;
+  max-width: 100%;
     font-size: 12px;
   }
 

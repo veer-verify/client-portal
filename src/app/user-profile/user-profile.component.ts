@@ -179,7 +179,7 @@ export class UserProfileComponent {
           );
           var user = this.storageService.getEncrData('user');
           if (!this.currentInfo) {
-            this.storageService.site_sub.next({
+            this.storageService.site_sub1.next({
               site: this.siteData[0],
               index: 0,
             });
@@ -540,6 +540,7 @@ export class UserProfileComponent {
   filter: any;
   userIndex: any;
   openDialog(id: string, data?: any) {
+    console.log(data)
     this.selectAllSites = false;
     var x = <HTMLElement>document.getElementById(id);
     x.style.display = 'block';

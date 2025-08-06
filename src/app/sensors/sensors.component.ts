@@ -113,7 +113,7 @@ export class SensorsComponent implements OnInit {
         });
       }
       if(!this.currentInfo) {
-        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
       }
       // this.getsiteservices1(this.currentInfo?.site);
       this.footageList(this.currentInfo?.site, this.currentInfo?.index);
@@ -156,7 +156,7 @@ export class SensorsComponent implements OnInit {
   navActive!: number;
   footageList(data: any, index: any) {
     // this.storageService.storeEncrData('navItem', {site: data, index: index});
-    this.storageService.site_sub.next({site: data, index: index});
+    this.storageService.site_sub1.next({site: data, index: index});
     this.getMetadata()
     this.listZonesForSiteId(data);
     this.listSensorTypesForSiteId(data);

@@ -159,7 +159,7 @@ export class AuthService {
     this.idleTimer = timer(timeoutPeriod).pipe(takeUntil(this.destroy_sub));
     this.idleTimer.subscribe((res: any) => {
       localStorage.clear();
-      this.storageService.site_sub.next(null);
+      this.storageService.site_sub1.next(null);
       this.isLoggedin.next(false);
       this.router.navigate(['/login']);
     });

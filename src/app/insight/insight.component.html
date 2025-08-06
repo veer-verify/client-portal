@@ -96,7 +96,8 @@
               [maxDate]="maxDate" [markDisabled]="disabledays">
           </form> -->
 
-          <div class="d-flex">
+          <div class="d-flex w-100">
+                                   <img [src]="storageService.activeLogo" width="16px" alt="">
             <input class="form-control p-0" style="border: none;" placeholder="YYYY-MM-DD"
               [(ngModel)]="displaYstartDate" ngbDatepicker #d1="ngbDatepicker" [minDate]="{year: 2014, month: 1, day: 1}" [maxDate]="maxDate" [markDisabled]="disabledays">
             <a class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img src="assets/icons/calender.svg" alt="" width="12"></a>
@@ -119,7 +120,8 @@
               [markDisabled]="disabledays">
           </form> -->
 
-          <div class="d-flex">
+          <div class="d-flex w-100">
+                                   <img [src]="storageService.activeLogo" width="16px" alt="">
             <input class="form-control p-0" style="border: none;" placeholder="YYYY-MM-DD" [(ngModel)]="displaYendDate" ngbDatepicker #d1="ngbDatepicker" [minDate]="minenddate" [maxDate]="maxDate" [markDisabled]="disabledays">
             <a class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img src="assets/icons/calender.svg" alt="" width="12"></a>
           </div>

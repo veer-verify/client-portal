@@ -96,7 +96,7 @@ export class InsightComponent implements OnInit {
         // this.getsiteservices1(this.currentInfo?.site);
 
         if (!this.currentInfo) {
-          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
         }
 
         // var sitelist = this.sites.sites
@@ -368,7 +368,7 @@ export class InsightComponent implements OnInit {
   currentSite: any;
   siteClicked(site: any) {
     this.currentSite = site;
-    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
     this.storageService.storeEncrData('currentSite', site);
     this.currentsite = site.siteName;
     this.currentsiteid = site.siteId;
@@ -416,10 +416,7 @@ export class InsightComponent implements OnInit {
     this.disabledays = this.isDisabled;
   }
 
-  disabledDates: NgbDateStruct[] = [
-    { year: 2019, month: 2, day: 26 }
-  ]
-
+  disabledDates: NgbDateStruct[] = [{ year: 2019, month: 2, day: 26 }]
   isDisabled = (date: NgbDateStruct, current: { month: number, year: number }) => {
     return this.disabledDates.find(x => new NgbDate(x.year, x.month, x.day).equals(date)) ? true : false;
   }

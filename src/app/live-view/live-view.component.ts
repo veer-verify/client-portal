@@ -142,7 +142,7 @@ export class LiveViewComponent implements OnInit {
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         this.getsiteservices(this.sites[0]);
         if (!this.currentInfo) {
-          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
         }
         var user = this.storageService.getEncrData("user");
         if (user?.UserName == 'sales@ivisecurity.com') {
@@ -227,7 +227,7 @@ export class LiveViewComponent implements OnInit {
     this.loadingTxt = '';
     this.camIndex = -1;
     // this.storageService.storeEncrData('navItem', {site: site, index: this.sites.indexOf(site)});
-    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }
     this.getsiteservices(site);
     this.pagenumber = 1;

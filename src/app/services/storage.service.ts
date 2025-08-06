@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, first, last, Observable, shareReplay, Subject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 
@@ -9,29 +9,26 @@ import * as CryptoJS from 'crypto-js';
 export class StorageService {
 
   //ivis
-  // logo = 'assets/icons/logo_white.png';
-  // headerLogo = 'assets/themes/IVISsecurity_logo.png';
-  // accordianLogo = 'assets/icons/eye.svg';
-  // activeLogo = 'assets/icons/eye-blue.svg';
-  // inActiveLogo = 'assets/icons/eye-red.svg';
+  logo = 'assets/icons/logo_white.png';
+  headerLogo = 'assets/themes/IVISsecurity_logo.png';
+  accordianLogo = 'assets/icons/eye.svg';
+  activeLogo = 'assets/icons/eye-blue.svg';
+  inActiveLogo = 'assets/icons/eye-red.svg';
 
   //unv
-  logo = 'assets/themes/UneeviuLogowhite (1).png';
-  headerLogo = 'assets/themes/Uneeviu Logo Blue png.png';
-  accordianLogo = 'assets/themes/CameraLogowhite.png';
-  activeLogo = 'assets/themes/Uneeviu Logo Blue png.png';
-  inActiveLogo = 'assets/themes/Uneeviu Logo Blue png.png';
+  // logo = 'assets/themes/UneeviuLogowhite (1).png';
+  // headerLogo = 'assets/themes/Uneeviu Logo Blue png.png';
+  // accordianLogo = 'assets/themes/CameraLogowhite.png';
+  // activeLogo = 'assets/themes/Uneeviu Logo Blue png.png';
+  // inActiveLogo = 'assets/themes/Uneeviu Logo Blue png.png';
 
   private readonly key = "verifai";
 
 
   loading_text: string;
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
-  site_sub: BehaviorSubject<any> = new BehaviorSubject(null);
-
-  // site(): Observable<any> {
-  //   return this.site_sub.asObservable();
-  // }
+  site_sub1: Subject<any> = new Subject();
+  site_sub = this.site_sub1.asObservable().pipe(first());
 
   constructor() { }
 

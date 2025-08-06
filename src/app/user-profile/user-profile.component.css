@@ -277,8 +277,9 @@ p {
   color: #ffffff;
   border-radius: 50px;
   padding: 10px 14px;
-  width: 100px;
+  max-width: 100%;
   font-size: 14px;
+  font-family: TP, sans-serif;
 }
 
 .select-site {

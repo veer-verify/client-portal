@@ -51,7 +51,9 @@ export class TrendsComponent implements OnInit {
     private chartservice: ChartService,
     public storageService: StorageService,
     private siteSer: SiteService,
-    private router: Router) { }
+    private router: Router,
+    private datePipe: DatePipe
+  ) { }
 
   user: any;
   currentInfo: any
@@ -85,28 +87,32 @@ export class TrendsComponent implements OnInit {
   // }
 
   seletedresearch: any;
-  getResearchData(siteId: any, date: any) {
+  getResearchData(date: any) {
     this.gettimelines(date)
     this.showLoader = true;
     this.reportsite = this.currentsite;
     this.apiservice.getBiAnalyticsResearch(this.currentInfo?.site?.siteId, date).subscribe((res: any) => {
-      if (res.status != "Failed") {
+      if (res.Status == "Success") {
         this.showLoader = false;
         this.placeholderhere = "";
         var filter;
         // filter = res.AnalyticsList.sort(function (a:any, b:any) {return a.service.localeCompare(b.service);});
         filter = res.AnalyticsList;
+
         if (filter.length !== 0) {
           this.rsdata = filter;
           this.seletedresearch = filter[0];
           this.currentfield = filter[0].service;
           this.currentfieldid = filter[0].serviceId;
           this.getBiTrends();
+        } else {
+          this.placeholderhere = "NO DATA!";
+          this.rsdata = null
         }
       } else {
         this.showLoader = false;
         // this.placeholderhere = "Data is not available for selected date. Please choose different date.";
-        this.placeholderhere = "Please select a date to view your TRENDS"
+        this.placeholderhere = "NO DATA!"
         const y = <any>(document.getElementById("graphholder"));
         y.innerHTML = '';
         this.rsdata = null;
@@ -134,10 +140,14 @@ export class TrendsComponent implements OnInit {
     }
 
     this.showLoader = true;
-    this.apiservice.getBiTrends1(p?.siteId, date, this.currentfieldid).subscribe((res: any) => {
+    this.apiservice.getBiTrends(p?.siteId, date, this.currentfieldid).subscribe((res: any) => {
       this.showLoader = false;
-      if (res.status === "Success") {
+      if (res.Status === "Success") {
         this.graphsdata = res.AnalyticsTrends;
+        if (res.AnalyticsTrends.length === 0) {
+          this.graphsdata = [];
+
+        }
       } else {
         this.graphsdata = [];
       }
@@ -212,7 +222,7 @@ export class TrendsComponent implements OnInit {
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         // this.getsiteservices1(this.currentInfo?.site);
         if (!this.currentInfo) {
-          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
         }
         var user = this.storageService.getEncrData("user");
         if (user.UserName == 'sales@ivisecurity.com') {
@@ -272,28 +282,33 @@ export class TrendsComponent implements OnInit {
   //   // }, 2000);
   // }
 
-  siteClicked(e: any, site: any) {
+  siteClicked(site: any) {
     // this.showLoader = true;
     this.graphsdata = null;
     // this.storageService.storeEncrData('navItem', {site: site, index: e.target.index});
-    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
 
     this.storageService.storeEncrData('currentSite', site);
     this.currentsite = site.siteName;
-    this.currentsiteid = site.siteId
+    this.currentsiteid = site.siteId;
+
     // this.apiservice.getServices(site.siteId);
     // this.getsiteservices1(site)
-    // e.target.parentNode.parentNode.previousElementSibling.click()
+    // e.target.parentNode.parentNode.previousElementSibling.click();
+
     this.optionlabel.nativeElement.click();
     this.rsdata = null;
     var date;
     var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-    if ((this.startDate) == null) { date = yesterday } else {
+    if ((this.startDate) == null) {
+      date = yesterday
+    }
+    else {
       var startDateParts: any = this.startDate.split("-");
       date = [(startDateParts[2])] + '-' + startDateParts[1] + '-' + startDateParts[0];
     }
     // this.getResearchData(this.currentsiteid,date);
-    // this.rsdata = null;
+    this.rsdata = null;
     this.getsitenonworkingdays();
   }
   currentfield: any;
@@ -305,17 +320,18 @@ export class TrendsComponent implements OnInit {
     this.currentfieldid = field.serviceId;
     this.optionlabel1.nativeElement.click();
     this.seletedresearch = field;
+    this.getBiTrends()
   }
 
   getResearchonClick() {
     this.placeholderhere = "";
     if (this.startDate == null) {
       // var yesterday =this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-      this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+      this.getResearchData(this.lastWorkingDay);
     } else {
       var startDateParts: any = this.startDate.split("-");
       var sd = (startDateParts[2]) + '-' + startDateParts[1] + '-' + startDateParts[0]
-      this.getResearchData(this.currentsiteid, sd);
+      this.getResearchData(sd);
     }
     this.closemodal();
   }
@@ -378,11 +394,14 @@ export class TrendsComponent implements OnInit {
     this.apiservice.getNonWorkingDays(siteId).subscribe((res: any) => {
       if (res.status == "Success") {
         // if(res.LastWorkingDay !== "") {
-        var dateParts = res.LastWorkingDay.split('-');
-        this.lastWorkingDay = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]
-        this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[0] + ', ' + dateParts[2];
-        this.displayDate = dateParts[1] + '-' + dateParts[2] + '-' + dateParts[0];
-        this.getResearchData(this.currentsiteid, this.lastWorkingDay);
+        // var dateParts = res.LastWorkingDay.split('-');
+        this.disabledDates = res.NotWorkingDaysList
+        this.lastWorkingDay = res.LastWorkingDay
+        // this.selectedSpan = this.months[Number(dateParts[1]) - 1] + ' ' + dateParts[0] + ', ' + dateParts[2];
+        // this.displayDate = dateParts[1] + '-' + dateParts[2] + '-' + dateParts[0];
+        this.displayDate = { year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2]) };
+        this.getResearchData(this.lastWorkingDay);
+        this.dates(res.NotWorkingDaysList)
         // }
 
         // datesarr.push(res.NotWorkingDaysList);
@@ -402,24 +421,26 @@ export class TrendsComponent implements OnInit {
         //   this.dates(this.datesarr)
         // }, 2000);
       } else {
-        console.log("Trends : Last working day is not available")
-        var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
-        this.getResearchData(this.currentsiteid, yesterday);
-        this.dates([]);
+        // console.log("Trends : Last working day is not available")
+        // var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd')
+        // this.getResearchData(this.currentsiteid, yesterday);
+        // this.dates([]);
+
+        // this.selectedSpan = `${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
+        // this.getResearchData(this.datePipe.transform(new Date(), 'yyyy-MM-dd'));
+        this.disabledays = false
       }
     })
   }
   dates(arr: any[]) {
     arr.forEach(el => {
       var splits: any = el.split("-");
-      var newdate;
       this.disabledDates.push({ year: +splits[0], month: +splits[1], day: +splits[2] })
     });
     this.disabledays = this.isDisabled;
   }
   isDisabled = (date: NgbDateStruct, current: { month: number, year: number }) => {
-    return this.disabledDates.find(x => new NgbDate(x.year, x.month, x.day).equals(date)) ?
-      true : false;
+    return this.disabledDates.find(x => new NgbDate(x.year, x.month, x.day).equals(date)) ? true : false;
   }
 
 

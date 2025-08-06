@@ -9,8 +9,6 @@
       <div class="row">
         <div class="col-lg-3 col-sm-12"
           style="text-align:center;align-self: center;overflow:visible; padding-left: 20px">
-
-
           <div class="searchbox">
             <!-- placeholder="Search {{sites?.length ? sites?.length : ''}} Locations or {{rsdata?.length ? rsdata?.length : '0'}} Fields" -->
             <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
@@ -55,7 +53,7 @@
                         <div class="accordionElements"><p style="margin: 0 0 0 10px; display:flex"> <img src="assets/icons/search.svg" style="float:right;width: 10px; margin-right:15px;"> <input type="text" placeholder="Search Location"  [(ngModel)]="searchText"> </p></div>
                       </div> -->
             <div class="accordionElements" *ngFor="let site of sites  | SiteName: searchText"
-              (click)="siteClicked($event,site)">
+              (click)="siteClicked(site)">
               <div><span class="dot"></span></div>
               <p style="margin: 0 0 0 20px; font-size: 12px !important;">{{site.siteName}}</p>
             </div>
@@ -78,7 +76,8 @@
               (dateSelect)="onDateSelect($event, 'start')"
               [maxDate]="maxDate" [minDate]="{year: 2014, month: 1, day: 1}" [markDisabled]="disabledays">
           </form> -->
-                    <div class="d-flex">
+                    <div class="d-flex w-100">
+                       <img [src]="storageService.activeLogo" width="16px" alt="">
             <input class="form-control p-0" style="border: none;" placeholder="YYYY-MM-DD"
               [(ngModel)]="displayDate" ngbDatepicker #d1="ngbDatepicker" [minDate]="{year: 2014, month: 1, day: 1}" [maxDate]="maxDate" [markDisabled]="disabledays">
             <a class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img src="assets/icons/calender.svg" alt="" width="12"></a>
@@ -117,11 +116,11 @@
           </div>
         </div>
 
-        <div style="text-align:center" *ngIf="rsdata">
+        <!-- <div style="text-align:center" *ngIf="rsdata">
           <button class="generateBtn" (click)="getResearchonClick()">
             GENERATE TRENDS
           </button>
-        </div>
+        </div> -->
         <!--
                 <div class="optionlabel" *ngFor="let research of rsdata" style="padding:5px;margin-bottom: 10px;display: block;">
                   <div>

@@ -113,7 +113,7 @@ export class NvrComponent {
           });
         }
         if(!this.currentInfo) {
-          this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+          this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
         }
         // this.getsiteservices1(this.currentInfo?.site);
   
@@ -153,7 +153,7 @@ export class NvrComponent {
     navActive!: number;
     footageList(data: any, index: any) {
       // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
-      this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
+      this.storageService.site_sub1.next({site: data, index: this.siteData.indexOf(data)});
       if(data) {
         this.camerasListForSites(data);
       }

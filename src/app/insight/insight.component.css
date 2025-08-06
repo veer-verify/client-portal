@@ -1,3 +1,8 @@
+::ng-deep .dropdown-menu.show {
+  position: absolute;
+  left: -10px !important;
+}
+
 .insight-image {
   cursor: zoom-in;
   width: 150px;

@@ -83,7 +83,7 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
-                this.storageService.storeEncrData('currentSite', res.site);
+        this.storageService.storeEncrData('currentSite', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
@@ -167,11 +167,11 @@ export class NavbarComponent implements OnInit {
         this.showLoader = false;
         this.router.navigateByUrl('/error');
         localStorage.clear();
-        this.storageService.site_sub.next(null);
+        this.storageService.site_sub1.next(null);
         this.authservice.isLoggedin.next(false);
       },
       complete: () => {
-        this.storageService.site_sub.next(null);
+        this.storageService.site_sub1.next(null);
         this.authservice.isLoggedin.next(false);
       }
     })

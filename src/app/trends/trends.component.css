@@ -1,4 +1,8 @@
 /* for page */
+::ng-deep .dropdown-menu.show {
+  position: absolute;
+  left: -34px !important;
+}
 
 button {
     /* width: 100%; */

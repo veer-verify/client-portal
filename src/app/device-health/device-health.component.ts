@@ -151,7 +151,7 @@ export class DeviceHealthComponent {
 
       
       if(!this.currentInfo) {
-        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
         this.footageList(this.siteData[0], 0);
       } else {
         this.footageList(this.currentInfo?.site, this.currentInfo?.index);

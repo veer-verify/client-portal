@@ -353,7 +353,7 @@ export class GaurdComponent implements OnInit {
   myNewData = [];
   getCameras(event: any, site: any, index: any) {
     // this.storageService.storeEncrData('navItem', {site: site, index: index});
-    this.storageService.site_sub.next({site: site, index: this.sites.indexOf(site)});
+    this.storageService.site_sub1.next({site: site, index: this.sites.indexOf(site)});
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }
     this.storageService.storeEncrData('siteidfromgaurdpage', site);
     this.pagenumber = 1;
@@ -704,7 +704,7 @@ export class GaurdComponent implements OnInit {
   previousIndex: number = 0;
   getCamerasForSiteId(sitee: any, index: any) {
     // this.storageService.storeEncrData('navItem', {site: sitee, index: index});
-    this.storageService.site_sub.next({site: sitee, index: this.sites.indexOf(sitee)});
+    this.storageService.site_sub1.next({site: sitee, index: this.sites.indexOf(sitee)});
     sitee.first = !sitee.first;
     if(this.currentInfo) {
       this.currentInfo.site.first = true;
