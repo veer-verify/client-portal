@@ -3,14 +3,14 @@
 
 <div class="parent-container">
     <div class="row m-0 child-container">
-        <div class="col-lg-3 side-panel mt-1">
+        <div class="col-lg-3 d-lg-block d-none side-panel mt-1">
             <nav>
                 <ng-container *ngFor="let item of menuItems; let i = index">
                     <a class="list-group-item" [ngClass]="{'act': activeIndex === i}" (click)="setActive(i)"
                         *ngIf="item.call(userData?.roleList)">
                         <p class="nav-name">
                             {{ item.name }}
-                          <img [src]="storageService.activeLogo" width="16px" alt="">
+                            <img [src]="storageService.accordianLogo" width="16px" alt="" class="me-2">
                         </p>
                         <!-- <img src="assets/icons/forward_arrow.svg" alt=""> -->
                     </a>
@@ -29,7 +29,8 @@
 
                             <div>
                                 <a style="position: relative;" (click)="update()">
-                                    <img class="profileImage" [src]="userinfo.profileImage | image | async" alt="" onerror="this.src='assets/icons/dummy_300x300.png'">
+                                    <img class="profileImage" [src]="userinfo.profileImage | image | async" alt=""
+                                        onerror="this.src='assets/icons/dummy_300x300.png'">
                                     <img src="assets/icons/editicon2.svg" class="editicon" width="16px" alt="">
                                 </a>
                             </div>
@@ -165,19 +166,15 @@
                     </div>
                 </div>
 
-                <!-- <div *ngIf="activeIndex == 2">
-                    <app-client-form></app-client-form>
-                </div> -->
-
                 <div *ngIf="activeIndex == 2">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user-info">
                             <p>{{userData?.email}}</p>
                         </div>
-                    <div class="d-flex align-items-center gap-3 user-info">
-                        <p class="mb-0">{{ userData?.FirstName }}&nbsp;{{ userData?.LastName }}</p>
-                        <button (click)="openDialog('userDialog')" class="req-btn">Create User</button>
-                    </div>
+                        <div class="d-flex align-items-center gap-3 user-info">
+                            <p class="mb-0">{{ userData?.FirstName }}&nbsp;{{ userData?.LastName }}</p>
+                            <button (click)="openCreateUser()" class="req-btn">Create User</button>
+                        </div>
                     </div>
 
                     <hr id="hr1">
@@ -195,7 +192,7 @@
                         <div class="users">
                             <div class="card" *ngFor="let item of result; let i = index"
                                 [style.background-color]="userIndex == i ? '#95bbe9' : ''"
-                                (click)="openDialog('userSites', item)">
+                                (click)="openSiteMapping(item)">
                                 <div class="map-site">
                                     <!-- <a class="me-1" (click)="openDialog('userSites', item)">
                                         <img src="assets/images/icons8-check-mark-48.png" alt="" width="16px">
@@ -207,7 +204,8 @@
                                     </a>
                                 </div>
 
-                                <img [src]="item?.profileImageUrl" onerror="this.src='assets/images/icons8-user-50.png'" alt="">
+                                <img [src]="item?.profileImageUrl" onerror="this.src='assets/images/icons8-user-50.png'"
+                                    alt="">
                                 <div class="text">
                                     <p class="heading">{{item?.User_Name}}</p>
                                     <p class="info">{{ item?.Email }}</p>
@@ -215,99 +213,15 @@
                             </div>
                         </div>
 
-
-                        <ng-container *ngIf="result.length === 0">
-                            <p class="err-info">No data!</p>
-                        </ng-container>
+                        <!-- <ng-container *ngIf="storageService.loading_text">
+                            <app-err-info [text]="storageService.loading_text"></app-err-info>
+                        </ng-container> -->
                     </ng-container>
-
-
-
-                    <!-- user dialog -->
-                    <div class="new-dialog" id="userDialog">
-                        <div class="dialog-header d-flex justify-content-between p-1">
-                            <p>Create User</p>
-                            <p><img src="assets/icons/close.svg" class="pointer" width="20" alt=""
-                                    (click)="closeDialog('userDialog')"></p>
-                        </div>
-
-                        <div class="dialog-content">
-                            <app-add-incident [questions]="questionList"
-                                (newItemEvent)="getFormData($event)" (resetEmitter)="resetF($event)"></app-add-incident>
-                        </div>
-                    </div>
-
-
-                    <!-- global sites dialog -->
-                    <!-- <div class="new-dialog" id="globalSites">
-                        <div class="dialog-header d-flex justify-content-between p-1">
-                            <p>Map Sites</p>
-                            <p><img src="assets/icons/close.svg" class="pointer" width="20" alt=""
-                                    (click)="closeDialog('globalSites')"></p>
-                        </div>
-
-                        <div class="dialog-content" style="width: 500px;">
-                            <div class="form-check select-site" *ngFor="let item of globalSites">
-                                <input class="form-check-input" type="checkbox" name="option1" [id]="item.siteName" [(ngModel)]="item.isChecked">
-                                <label class="form-check-label" [for]="item.siteName">{{item.siteName}}</label>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-2">
-                            <button class="req-btn" (click)="applyMapping('globalSites')">Submit</button>
-                        </div>
-                    </div> -->
-
-
-                    <!-- user sites dialog -->
-                    <div class="new-dialog" id="userSites">
-                        <div class="dialog-header d-flex justify-content-between p-1">
-                            <p>Map Sites</p>
-                            <p><img src="assets/icons/close.svg" class="pointer" width="20" alt=""
-                                    (click)="closeDialog('userSites')"></p>
-                        </div>
-
-                        <div class="dialog-content" style="width: 500px;">
-                            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="siteSearch">
-
-                            <ng-container *ngIf="currentUser">
-                                <div class="btn-group my-2 me-1" role="group" *ngFor="let item of filters">
-                                    <input type="radio" class="btn-check" [value]="item.id" [id]="item.id" (change)="filterSites(item)" [(ngModel)]="filter">
-                                    <label class="btn btn-outline-dark" [for]="item.id">{{item.label}}</label>
-                                </div>
-                            </ng-container>
-
-                            <ng-container *ngIf="userSites | SearchPipe: siteSearch as pipeSites">
-                                <div style="height: 40vh; overflow: auto;">
-                                                                      <div class="form-check select-site"  *ngIf="filter !== 1 && pipeSites.length !== 0">
-                                        <input class="form-check-input" type="checkbox" id="all" [(ngModel)]="selectAllSites" (ngModelChange)="toggleSites()">
-                                        <label class="form-check-label" for="all">Select All</label>
-                                    </div>
-                                    <div class="form-check select-site" *ngFor="let item of pipeSites">
-                                        <input class="form-check-input" type="checkbox" [id]="item.siteName" [(ngModel)]="item.assigned" *ngIf="filter !== 1" (ngModelChange)="toggleAllIndividual()">
-                                        <label class="form-check-label" [for]="item.siteName">{{item.siteName}}</label>
-                                    </div>
-    
-                                    <ng-container *ngIf="userSites.length === 0">
-                                        <h5 class="text-center my-3">NO SITES ASSIGNED!</h5>
-                                    </ng-container>
-                                </div>
-                            </ng-container>
-
-                        </div>
-
-                        <div class="d-flex justify-content-center my-2">
-                            <button class="req-btn" (click)="applyMapping()" *ngIf="filter !== 1"
-                                [disabled]="currentUser?.roleName === 'Client-Member' || currentUser?.roleName !== 'Site-Admin'">
-                                {{ filter == 2 ? 'Unassign' : 'Assign' }}
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!userinfo">
-                <p class="err-info">Failed to get user data!</p>
+            <ng-container *ngIf="storageService.loading_text">
+                <app-err-info [text]="storageService.loading_text"></app-err-info>
             </ng-container>
         </div>
     </div>
@@ -316,3 +230,67 @@
         style="position: absolute; left: 0px; width: 1px; height:1px; opacity: 0; pointer-events: none;"
         (change)="onFileChange($event)">
 </div>
+
+
+<!-- user dialog -->
+ <ng-container *ngIf="showCreateUser">
+     <div class="dialog">
+         <div class="dialog-header">
+             <p>Create User</p>
+             <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeCreateUser()"></p>
+         </div>
+     
+         <div class="dialog-content">
+             <app-add-incident [questions]="questionList" (newItemEvent)="getFormData($event)"></app-add-incident>
+         </div>
+     </div>
+ </ng-container>
+
+
+<!-- user site mapping dialog -->
+ <ng-container *ngIf="showSiteMapping">
+     <div class="dialog">
+         <div class="dialog-header">
+             <p>Map Sites</p>
+             <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeSiteMapping()"></p>
+         </div>
+     
+         <div class="dialog-content" style="width: 500px;">
+             <input type="text" class="form-control" placeholder="Search" [(ngModel)]="siteSearch">
+     
+             <ng-container *ngIf="currentUser">
+                 <div class="btn-group my-2 me-1" role="group" *ngFor="let item of filters">
+                     <input type="radio" class="btn-check" [value]="item.id" [id]="item.id" (change)="filterSites(item)"
+                         [(ngModel)]="filter">
+                     <label class="btn btn-outline-dark" [for]="item.id">{{item.label}}</label>
+                 </div>
+             </ng-container>
+     
+             <ng-container *ngIf="userSites | SearchPipe: siteSearch as pipeSites">
+                 <div style="height: 40vh; overflow: auto;">
+                     <div class="form-check select-site" *ngIf="filter !== 1 && pipeSites.length !== 0">
+                         <input class="form-check-input" type="checkbox" id="all" [(ngModel)]="selectAllSites"
+                             (ngModelChange)="toggleSites()">
+                         <label class="form-check-label" for="all">Select All</label>
+                     </div>
+                     <div class="form-check select-site" *ngFor="let item of pipeSites">
+                         <input class="form-check-input" type="checkbox" [id]="item.siteName" [(ngModel)]="item.assigned"
+                             *ngIf="filter !== 1" (ngModelChange)="toggleAllIndividual()">
+                         <label class="form-check-label" [for]="item.siteName">{{item.siteName}}</label>
+                     </div>
+     
+                     <ng-container *ngIf="userSites.length === 0">
+                         <h5 class="text-center my-3">NO SITES ASSIGNED!</h5>
+                     </ng-container>
+                 </div>
+             </ng-container>
+         </div>
+     
+         <div class="d-flex justify-content-center my-2">
+             <button class="req-btn" (click)="applyMapping()" *ngIf="filter !== 1"
+                 [disabled]="currentUser?.roleName === 'Client-Member' || currentUser?.roleName === 'Site-Admin'">
+                 {{ filter == 2 ? 'Unassign' : 'Assign' }}
+             </button>
+         </div>
+     </div>
+ </ng-container>

@@ -1079,6 +1079,15 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 /* new-dialog */
+.dialog {
+  position: fixed;
+  z-index: 99;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #ffffff;
+}
+
 .new-dialog {
   display: none;
   position: fixed;

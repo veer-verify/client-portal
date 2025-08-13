@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, first, last, Observable, shareReplay, Subject } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, first, last, Observable, shareReplay, Subject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 
@@ -15,6 +15,13 @@ export class StorageService {
   activeLogo = 'assets/icons/eye-blue.svg';
   inActiveLogo = 'assets/icons/eye-red.svg';
 
+  address = 'IVIS Security, Inc';
+  city = '3945 W Cheyenne Ave #204';
+  state = 'North Las Vegas, NV 89032';
+  country = 'United States';
+  phone = '+1 (844) 438-4847';
+  email = 'support@ivisecurity.com';
+
   //unv
   // logo = 'assets/themes/UneeviuLogowhite (1).png';
   // headerLogo = 'assets/themes/Uneeviu Logo Blue png.png';
@@ -22,13 +29,21 @@ export class StorageService {
   // activeLogo = 'assets/themes/Uneeviu Logo Blue png.png';
   // inActiveLogo = 'assets/themes/Uneeviu Logo Blue png.png';
 
+  // address = 'SadguruVilla - 123/128';
+  // city = 'Gorai, Borivali west';
+  // state = 'Mumbai MH - 400091';
+  // country = 'INDIA';
+  // phone = '(+91)7490009174)';
+  // email = 'sales@uneeviu.com';
+
+  
   private readonly key = "verifai";
 
 
   loading_text: string;
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
   site_sub1: Subject<any> = new Subject();
-  site_sub = this.site_sub1.asObservable().pipe(first());
+  site_sub = this.site_sub1.asObservable().pipe(distinctUntilChanged());
 
   constructor() { }
 

@@ -162,7 +162,9 @@ export class LiveViewComponent implements OnInit {
           });
         }
         if (this.sites.length > 0) {
-          this.firstAPiHitforCamdata();
+          if(this.storageService.isUser()) {            
+            this.firstAPiHitforCamdata();
+          }
         } else {
           this.cameras = null;
         }

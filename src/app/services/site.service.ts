@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
@@ -17,6 +17,7 @@ export class SiteService {
     private http: HttpClient,
     private storageService: StorageService,
     private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   closemodal() {
@@ -37,22 +38,23 @@ export class SiteService {
   }
 
 
-  // otherSitesUrl = 'http://rsmgmt.ivisecurity.com:943';
   getSitesListForUserName(payload: any) {
     let url = environment.sitesUrl + '/getSitesListForUserName_1_0/';
+    // If you want to get the current route name, you can use ActivatedRoute or filter for NavigationEnd events
+    // Example: Get the current route's first child's data['routeName']
+    let routeName = this.activatedRoute.snapshot.firstChild?.data['routeName'];
     let params = new HttpParams();
     if(payload?.UserName) {
       params = params.set('userName', payload?.UserName);
     }
-    // params = params.set('service',payload?.service);
-    // params = params.set('siteStatus','Active');
+    params = params.set('service', routeName);
+    params = params.set('siteStatus','Active');
     
     return this.http.get(url, { params: params });
   }
 
   getCamerasForSiteId(payload: any) {
     let url = environment.sitesUrl + `/getCamerasForSiteIdForPortal_1_0/${payload?.siteId}`;
-    // let url = `http://192.168.0.126:8000/getCamerasForSiteIdForPortal_1_0/${payload?.siteId}`;
     return this.http.get(url);
   }
 

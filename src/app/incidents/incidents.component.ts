@@ -8,6 +8,7 @@ import { ProximityService } from '../services/proximity.service';
 import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-incidents',
@@ -23,7 +24,8 @@ export class IncidentsComponent implements OnInit {
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
-    public storageSer: StorageService
+    public storageSer: StorageService,
+    private siteService: SiteService
   ) { }
 
   environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=incidents&assetName=';
@@ -92,8 +94,8 @@ export class IncidentsComponent implements OnInit {
   siteData: any = [];
   
   getSitesListForUserName() {
-    this.storageService.loading_text = 'Loading...';
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
+    this.storageService.loading_text = 'loading...';
+    this.siteService.getSitesListForUserName(this.userData).subscribe((res: any) => {
     this.storageService.loading_text = '';
     this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       // this.getsitesListByService(res.sites);
@@ -195,7 +197,7 @@ export class IncidentsComponent implements OnInit {
     }
     
     this.newEventData = [];
-    this.storageService.loading_text = 'Loading...';
+    this.storageService.loading_text = 'loading...';
     this.eventSer.incidentList(data).subscribe((res: any) => {
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
@@ -232,7 +234,7 @@ export class IncidentsComponent implements OnInit {
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
     this.newEventData = [];
-    this.storageService.loading_text = 'Loading...';
+    this.storageService.loading_text = 'loading...';
     this.eventSer.incidentList({
       siteId: this.currentSite?.siteId,
       cameraId: this.cameraId,

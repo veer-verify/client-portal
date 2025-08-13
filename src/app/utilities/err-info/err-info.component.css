@@ -5,12 +5,13 @@
     justify-content: center; */
     position: absolute;
     top: 50%;
-    right: 40%;
+    right: 50%;
     transform: translate(50%, -50%);
 }
 
 .text-detail {
     font-family: TP, sans-serif;
+    text-transform: uppercase;
     color: #ababab;
     font-size: 36px;
     background-color: transparent;

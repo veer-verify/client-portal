@@ -233,11 +233,12 @@
     /* background: var(--cmn-background); */
     /* background-clip: text; */
     /* color: transparent; */
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     /* width: fit-content; */
     /* margin-left: auto; */
+    font-family: TP, sans-serif;
 }
 
 .hidden-icon {

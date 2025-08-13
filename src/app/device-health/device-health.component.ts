@@ -65,18 +65,28 @@ export class DeviceHealthComponent {
     //   sort: true
     // },
     {
+      id: 'latestReconnectedTime',
+      label: 'Recently Connected Time',
+      sort: true
+    },
+     {
+      id: 'latestUpOrDowntime',
+      label: 'latestUp Or Downtime',
+      sort: true
+    },
+    // {
+    //   id: '',
+    //   label: 'total up time',
+    //   sort: true
+    // },
+    // {
+    //   id: '',
+    //   label: 'total down time',
+    //   sort: true
+    // },
+    {
       id: '',
       label: 'device status',
-      sort: true
-    },
-    {
-      id: '',
-      label: 'total up time',
-      sort: true
-    },
-    {
-      id: '',
-      label: 'total down time',
       sort: true
     },
     {
@@ -127,7 +137,7 @@ export class DeviceHealthComponent {
   siteData: any = [];
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((sites: any) => {
+    this.siteSer.getSitesListForUserName(this.userData).subscribe((sites: any) => {
       this.showLoader = false;
       this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       var user = this.storageService.getEncrData("user");

@@ -135,11 +135,17 @@
                         <td>
                           <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
                         </td>
-                        <td>
+                        <!-- <td>
                           <p [style.color]="el.status === 'ONLINE' ? 'green' : 'red'">{{ el.totalUptime }}</p>
                         </td>
                         <td>
                           <p>{{ el.totalDowntime }}</p>
+                        </td> -->
+                         <td>
+                          <p>{{ el.latestReconnectedTime }}</p>
+                        </td>
+                        <td>
+                          <p>{{ el.latestUpOrDowntime }}</p>
                         </td>
                         <td><p class="text-primary pointer" (click)="openPlayModel(el, i)">View</p></td>
                         <td>

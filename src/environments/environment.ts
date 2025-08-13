@@ -4,7 +4,7 @@
 
 
 const dev_url: string = 'https://usstaging.ivisecurity.com';
-const local_url: string = 'http://192.168.0.180';
+const local_url: string = 'http://192.168.0.113';
 export const environment = {
   production: false,
 
@@ -12,7 +12,7 @@ export const environment = {
   // commonUrl: `${dev_url}:8844/metadata`,
   // commonDownUrl: `${dev_url}:8001/common`,
   // metadataUrl: `${dev_url}:8844/metadata`,
-  // sitesUrl: `${dev_url}:8943/vipsites`,
+  // sitesUrl: `${local_url}:3004/vipsites`,
   // incidentsUrl: `${dev_url}:8945/incidents`,
   // helpdeskUrl: `${dev_url}:8925/supportRequests`,
   // insightsUrl: `${dev_url}:8951/insights`,

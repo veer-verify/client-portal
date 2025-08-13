@@ -83,6 +83,7 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
+
         this.storageService.storeEncrData('currentSite', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {

@@ -51,19 +51,19 @@ export class ApiService {
   /* other logins */
   // otherSitesUrl = 'http://rsmgmt.ivisecurity.com:943';
 
-  getSitesListForUserName(payload: any) {
-    let url = environment.sitesUrl + '/getSitesListForUserName_1_0/';
-    let params = new HttpParams();
-    if (payload?.UserName) {
-      params = params.set('userName', payload?.UserName)
-    }
-    return this.http.get(url, { params: params });
-  }
+  // getSitesListForUserName(payload: any) {
+  //   let url = environment.sitesUrl + '/getSitesListForUserName_2_0/';
+  //   let params = new HttpParams();
+  //   if (payload?.UserName) {
+  //     params = params.set('userName', payload?.UserName)
+  //   }
+  //   return this.http.get(url, { params: params });
+  // }
 
-  getCamerasForSiteId(payload: any) {
-    let url = environment.sitesUrl + `/getCamerasForSiteId_1_0/${payload?.siteId}`;
-    return this.http.get(url)
-  }
+  // getCamerasForSiteId(payload: any) {
+  //   let url = environment.sitesUrl + `/getCamerasForSiteId_1_0/${payload?.siteId}`;
+  //   return this.http.get(url)
+  // }
 
   getCameras(siteId: any) {
     var a = this.storageService.getEncrData('user');

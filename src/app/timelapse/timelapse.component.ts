@@ -6,6 +6,7 @@ import { EventService } from '../services/event.service';
 import { ProximityService } from '../services/proximity.service';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-timelapse',
@@ -23,6 +24,7 @@ export class TimelapseComponent implements OnInit {
     public datepipe: DatePipe,
     private proxSer: ProximityService,
     private eventSer: EventService,
+    private siteService: SiteService
   ) { }
 
     userData: any;
@@ -110,8 +112,8 @@ export class TimelapseComponent implements OnInit {
 
 
   getSitesListForUserName() {
-        this.storageService.loading_text = 'Loading...';
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((sites: any) => {
+        this.storageService.loading_text = 'loading...';
+    this.siteService.getSitesListForUserName(this.userData).subscribe((sites: any) => {
         this.storageService.loading_text = '';
       this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       var user = this.storageService.getEncrData("user");

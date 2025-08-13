@@ -12,90 +12,17 @@ import { AuthService } from '../services/auth/authservice.service';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
 import { StorageService } from '../services/storage.service';
-import { pipe } from 'rxjs';
 import { SearchPipe } from '../services/pipes/search-pipe.pipe';
+import { SiteService } from '../services/site.service';
+import { createUserFields } from './create-user-fields';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent {
   userRoles: any[] = [];
-  questionList = [
-    {
-      key: 'firstName',
-      questionId: 1,
-      questionType: 'text',
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'First Name*',
-        required: true,
-      },
-    },
-    {
-      key: 'lastName',
-      questionId: 2,
-      questionType: 'text',
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'Last Name*',
-        required: true,
-      },
-    },
-    {
-      key: 'userName',
-      questionId: 3,
-      questionType: 'text',
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'User Name*',
-        required: true,
-      },
-    },
-    {
-      key: 'emailId',
-      questionId: 4,
-      questionType: 'text',
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'Email*',
-        required: true,
-      },
-    },
-    {
-      key: 'roleList',
-      questionId: 5,
-      image: 'assets/images/icons8-info-128.png',
-      title: `Member (Default): Has view-only access to the sites assigned to them.
-        Site/Support Admin: Has administrative privileges for the sites assigned. Can also create and manage users within their allocated scope.
-        Client Admin: Has full administrative access to all sites under their respective client account.`,
-      questionType: 'select',
-      multiple: true,
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'Select Role*',
-        required: true,
-      },
-    },
-    {
-      key: 'remarks',
-      questionId: 6,
-      questionType: 'text',
-      questionOptions: [],
-      hasDependent: false,
-      templateOptions: {
-        Label: 'Remarks',
-        required: false,
-      },
-    }
-  ];
 
   constructor(
     private router: Router,
@@ -104,10 +31,11 @@ export class UserProfileComponent {
     private alertservice: AlertService,
     private authservice: AuthService,
     private userSer: UserServiceService,
-    private searchPipe: SearchPipe
+    private searchPipe: SearchPipe,
+    private siteService: SiteService
   ) { }
 
-  activeIndex: number = 0; // Start with the first item as active
+  activeIndex: number = 0;
   highlightedSection: string | null = null;
   menuItems = [
     {
@@ -137,8 +65,10 @@ export class UserProfileComponent {
 
   userData: any;
   currentInfo: any;
+  questionList: any;
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
+    this.questionList = createUserFields;
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
     });
@@ -152,16 +82,21 @@ export class UserProfileComponent {
   userinfo: any = null;
   getUser() {
     this.showLoader = true;
+    this.storageService.loading_text = 'loading...';
     this.apiservice.getUserInfoForId(this.userData?.UserId).subscribe({
       next: (res: any) => {
         this.showLoader = false;
         if (res.Status !== 'Failed') {
+          this.storageService.loading_text = '';
           this.userinfo = res;
           this.user = { ...this.userinfo };
           this.getSitesListForUserName();
+        } else {
+
         }
       },
       error: (err) => {
+        this.storageService.loading_text = 'failed to get user!';
         this.showLoader = false;
       }
     })
@@ -170,7 +105,7 @@ export class UserProfileComponent {
   siteData: any = [];
   getSitesListForUserName() {
     // this.showLoader = true;
-    this.apiservice.getSitesListForUserName(this.userData).subscribe(
+    this.siteService.getSitesListForUserName(this.userData).subscribe(
       (sites: any) => {
         this.showLoader = false;
         if (sites.Status === 'Success') {
@@ -229,6 +164,9 @@ export class UserProfileComponent {
     if (index == 2) {
       this.getUserNamesByUserName();
       this.userDetailslistRoles();
+    } else if(index == 0) {
+          this.getUser();
+
     }
   }
 
@@ -467,11 +405,11 @@ export class UserProfileComponent {
     this.apiservice.createUserWithShortDetails(data).subscribe({
       next: (res: any) => {
         this.showLoader = false;
-        this.closeDialog('userDialog');
+        this.closeCreateUser()
 
         if (res.statusCode == 200) {
           this.createdUser = res.userId;
-          this.alertservice.success('success', res.message);
+          // this.alertservice.success('success', res.message);
           this.getUserNamesByUserName();
 
           this.alertservice
@@ -480,7 +418,7 @@ export class UserProfileComponent {
             )
             .then((response) => {
               if (response.isConfirmed) {
-                this.openDialog('userSites', null);
+                this.openSiteMapping(null);
               }
             });
         } else {
@@ -499,14 +437,19 @@ export class UserProfileComponent {
   usersList: any = [];
   getUserNamesByUserName() {
     this.showLoader = true;
+    this.storageService.loading_text = 'loading...'
     this.apiservice.getUserNamesByUserName().subscribe({
       next: (res: any) => {
         this.showLoader = false;
         if (res.statusCode == 200) {
           this.usersList = res.data;
+          this.storageService.loading_text = '';
+        } else {
+          this.storageService.loading_text = 'no users found!';
         }
       },
       error: (err) => {
+        this.storageService.loading_text = 'failed!'
         this.showLoader = false;
       },
     });
@@ -530,35 +473,42 @@ export class UserProfileComponent {
     },
   ];
 
-  resetF(data: any) {
-    data.reset();
-  }
-
   selectAllSites: boolean = false;
   userSites: any = [];
   currentUser: any;
   filter: any;
   userIndex: any;
-  openDialog(id: string, data?: any) {
-    console.log(data)
-    this.selectAllSites = false;
-    var x = <HTMLElement>document.getElementById(id);
-    x.style.display = 'block';
 
-    this.filter = 1;
+  showSiteMapping: boolean = false;
+  openSiteMapping(data: any) {
+    this.showSiteMapping = true;
+    // this.toggleAllIndividual();
     this.currentUser = data;
-    this.userIndex = this.usersList.indexOf(data);
-    if (id === 'userSites') {
-      this.userSites = [];
-      if (!data) {
-        this.filter = -1;
-      }
-      this.getSitesForGlobal({
-        userId: this.createdUser ? this.createdUser : data?.userId,
-        loginId: this.userData?.UserId,
-        assigned: null,
-      });
+    this.filter = 1;
+    if (!data) {
+      this.filter = -1;
     }
+    
+    // this.userIndex = this.usersList.indexOf(data);
+    // this.userSites = [];
+    this.getSitesForGlobal({
+      userId: this.createdUser ? this.createdUser : data?.userId,
+      loginId: this.userData?.UserId,
+      assigned: null,
+    });
+  }
+
+  closeSiteMapping() {
+    this.showSiteMapping = false
+  }
+
+  showCreateUser: boolean = false;
+  openCreateUser() {
+    this.showCreateUser = true;
+  }
+
+  closeCreateUser() {
+    this.showCreateUser = false;
   }
 
   getSitesForGlobal(data: any) {
@@ -568,9 +518,7 @@ export class UserProfileComponent {
         this.showLoader = false;
         if (res.Status == 'Success') {
           this.userSites = res.sitesList;
-          // this.createdUser = null;
-        } else {
-          this.userSites = [];
+          this.toggleAllIndividual();
         }
       },
       error: (err) => {
@@ -589,20 +537,14 @@ export class UserProfileComponent {
     this.selectAllSites = this.userSites.every((item: any) => item.assigned == true);
   }
 
-  currentFilter: any;
+  // currentFilter: any;
   filterSites(data: any) {
-    this.currentFilter = data;
+    // this.currentFilter = data;
     this.getSitesForGlobal({
       userId: this.createdUser ? this.createdUser : this.currentUser?.userId,
       loginId: this.userData?.UserId,
       assigned: data?.value,
     });
-  }
-
-  closeDialog(id: string) {
-    this.userIndex = -1;
-    var x = <HTMLElement>document.getElementById(id);
-    x.style.display = 'none';
   }
 
   applyMapping() {
@@ -623,11 +565,12 @@ export class UserProfileComponent {
           this.showLoader = false;
           this.createdUser = null;
           if (res.statusCode === 200) {
+            this.closeSiteMapping();
             this.alertservice.success('success', res.message);
-            this.getSitesForGlobal({
-              userId: this.currentUser?.userId,
-              assigned: this.currentFilter.value,
-            });
+            // this.getSitesForGlobal({
+            //   userId: this.currentUser?.userId,
+            //   assigned: false,
+            // });
           } else {
             this.alertservice.error('error', res.message);
           }
@@ -652,13 +595,13 @@ export class UserProfileComponent {
         next: (res: any) => {
           this.showLoader = false;
           if (res.status === 'Success') {
-            this.closeDialog('userSites');
+            this.closeSiteMapping();
             this.createdUser = null;
             this.alertservice.success('success', res.message);
-            this.getSitesForGlobal({
-              userId: this.currentUser?.userId,
-              assigned: this.currentFilter.value,
-            });
+            // this.getSitesForGlobal({
+            //   userId: this.currentUser?.userId,
+            //   assigned: true,
+            // });
           } else {
             this.alertservice.error('error', res.message);
           }
@@ -686,7 +629,7 @@ export class UserProfileComponent {
     this.userSer.listRoles().subscribe((res: any) => {
       if (res.statusCode == 200) {
         this.userRoles = res.roleList;
-        let obj: any = this.questionList.filter((item: any) => item.key === 'roleList')[0];
+        let obj: any = createUserFields.filter((item: any) => item.key === 'roleList')[0];
         obj.questionOptions = this.userRoles;
       } else {
         this.alertservice.error('error', res.message);
