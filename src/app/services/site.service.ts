@@ -38,7 +38,7 @@ export class SiteService {
   }
 
 
-  getSitesListForUserName(payload: any) {
+  getSitesListForUserName(payload: any): Observable<any> {
     let url = environment.sitesUrl + '/getSitesListForUserName_1_0/';
     // If you want to get the current route name, you can use ActivatedRoute or filter for NavigationEnd events
     // Example: Get the current route's first child's data['routeName']

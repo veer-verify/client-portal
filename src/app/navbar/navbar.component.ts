@@ -60,6 +60,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.listSiteServices();
+    this.getSitesListForUserName();
     this.updateUserFormControl();
     this.isAdmin = this.storageSer.isAdmin();
   }
@@ -73,7 +74,7 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) {
-          
+          this.storageService.site_sub1.next({ site: this.sitesList[0], index: 0 });
         };
 
         this.storageService.storeEncrData('currentSite', res.site);
@@ -85,6 +86,17 @@ export class NavbarComponent implements OnInit {
             }
           },
         })
+      }
+    })
+  }
+
+  sitesList = [];
+  getSitesListForUserName() {
+    this.siteSer.getSitesListForUserName(this.userData.UserName).subscribe({
+      next: (res) => {
+        if(res.Status === 'Success') {
+          this.sitesList = res.sites;
+        }
       }
     })
   }
