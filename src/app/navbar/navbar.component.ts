@@ -60,17 +60,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.listSiteServices();
-    // this.getUser();
     this.updateUserFormControl();
-    // this.check();
-
-    // if (this.userData.roleList.length !== 0) {
-    //   let a: Array<any> = Array.from(this.userData?.roleList, (item: any) => item.category);
-    //   if (a.includes('Admin')) {
-    //     this.isAdmin = true;
-    //   }
-    // }
-
     this.isAdmin = this.storageSer.isAdmin();
   }
 
@@ -82,7 +72,9 @@ export class NavbarComponent implements OnInit {
   listSiteServices(): void {
     this.storageService.site_sub.subscribe({
       next: (res) => {
-        if (!res) return;
+        if (!res) {
+          
+        };
 
         this.storageService.storeEncrData('currentSite', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
@@ -202,24 +194,6 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  forgotPass1() {
-    this.closeresetModal();
-    let x: any = this.userData.UserName;
-    this.showLoader = true;
-    this.authservice.forgotPassword(x).subscribe((res: any) => {
-      this.showLoader = false;
-      this.newpass = false;
-      this.username = '';
-      if (res.Status == "Success") {
-        this.alertservice.success("Success", "Your password reset link has been sent to your Email.");
-      }
-      if (res.Status == "Failed") {
-        this.errormsg = res.Message;
-        this.alertservice.success("Failed", "Something went wrong. Please contact support@ivisecurity.com");
-      }
-    })
-  }
-
   submitprofile() {
     this.alertservice.success("Information", "Profile edit is coming soon");
     this.editpro = false;
@@ -228,7 +202,6 @@ export class NavbarComponent implements OnInit {
   visible1 = false
   openModal() {
     var x = <HTMLElement>document.getElementById('editmodal1')
-    // x.style.display = "block";
     this.alertservice.success('Edit Profile', 'Coming Soon!')
   }
 

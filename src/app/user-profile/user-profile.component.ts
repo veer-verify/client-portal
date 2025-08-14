@@ -112,7 +112,6 @@ export class UserProfileComponent {
           this.siteData = sites?.sites.sort((a: any, b: any) =>
             a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0
           );
-          var user = this.storageService.getEncrData('user');
           if (!this.currentInfo) {
             this.storageService.site_sub1.next({
               site: this.siteData[0],

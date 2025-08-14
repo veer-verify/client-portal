@@ -43,7 +43,7 @@ export class StorageService {
   loading_text: string;
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
   site_sub1: Subject<any> = new Subject();
-  site_sub = this.site_sub1.asObservable().pipe(distinctUntilChanged());
+  site_sub = this.site_sub1.asObservable().pipe(shareReplay(1));
 
   constructor() { }
 
