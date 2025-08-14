@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, catchError, finalize, first, last, Subject, take, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, first, last, shareReplay, single, Subject, take, takeLast, throwError } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
@@ -17,7 +17,7 @@ import { StorageService } from '../services/storage.service';
 })
 export class NavbarComponent implements OnInit {
 
-  // @Input() serviceDataFromParent: any;
+  // @Input() siteInput: any;
   profileopened$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -27,8 +27,6 @@ export class NavbarComponent implements OnInit {
     private apiservice: ApiService,
     private alertservice: AlertService,
     private renderer1: Renderer2,
-    private cd: ChangeDetectorRef,
-    private http: HttpClient,
     private fb: FormBuilder,
     private siteSer: SiteService,
     public storageSer: StorageService
@@ -60,7 +58,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.listSiteServices();
-    this.getSitesListForUserName();
+    
     this.updateUserFormControl();
     this.isAdmin = this.storageSer.isAdmin();
   }
@@ -73,11 +71,9 @@ export class NavbarComponent implements OnInit {
   listSiteServices(): void {
     this.storageService.site_sub.subscribe({
       next: (res) => {
-        if (!res) {
-          this.storageService.site_sub1.next({ site: this.sitesList[0], index: 0 });
-        };
+        if (!res) return;
 
-        this.storageService.storeEncrData('currentSite', res.site);
+        this.storageService.storeEncrData('siteInfo', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
@@ -91,11 +87,12 @@ export class NavbarComponent implements OnInit {
   }
 
   sitesList = [];
-  getSitesListForUserName() {
+  getSites() {
     this.siteSer.getSitesListForUserName(this.userData.UserName).subscribe({
       next: (res) => {
-        if(res.Status === 'Success') {
+        if (res.Status === 'Success') {
           this.sitesList = res.sites;
+              this.storageService.storeEncrData('siteInfo', res.sites[0]);
         }
       }
     })

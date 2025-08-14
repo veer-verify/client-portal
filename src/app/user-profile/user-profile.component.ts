@@ -72,9 +72,6 @@ export class UserProfileComponent {
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
     });
-    // if (!this.currentInfo) {
-    //   this.storageService.site_sub.next({ index: 0, site: site });
-    // }
     this.getUser();
 
   }

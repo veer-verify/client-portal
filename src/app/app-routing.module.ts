@@ -36,14 +36,14 @@ const routes: Routes = [
   { path: 'timelapse', data: {routeName: "timeLapse"}, component: TimelapseComponent, canActivate:[AuthGuard] },
   { path: 'advertisement', data: {routeName: "advertisements"}, component: AdvertisementsComponent, canActivate:[AuthGuard] },
   { path: 'sensors', data: {routeName: "sensors"}, component: SensorsComponent, canActivate:[AuthGuard] },
-  { path: 'support', data: {routeName: "support"},  component: HelpdeskrequestComponent, canActivate:[AuthGuard] },
+  { path: 'support', data: {routeName: ""},  component: HelpdeskrequestComponent, canActivate:[AuthGuard] },
   // { path: 'services', data: {routeName: "services"},  component: ClientServicesComponent, canActivate:[AuthGuard] },
   { path: 'profile', data: {routeName: "profile"},  component: ProfileComponent, canActivate:[AuthGuard] },
   { path: 'admin', data: {routeName: "admin"},  component: AdminpanelComponent, canActivate:[AuthGuard] },
   { path: 'error', data: {routeName: "error"},  component: ErrorpageComponent},
   { path: 'sim-cards', data:{routeName:"simDetails"}, component:SimCardsComponent, canActivate:[AuthGuard]},
   { path: 'device-health', data:{routeName:"deviceHealth"}, component:DeviceHealthComponent, canActivate:[AuthGuard]},
-  { path: 'user-profile', data: {routeName: "profile"}, component: UserProfileComponent, canActivate:[AuthGuard] },
+  { path: 'user-profile', data: {routeName: ""}, component: UserProfileComponent, canActivate:[AuthGuard] },
   { path: 'nvr', data:{routeName:"nvr"}, component:NvrComponent, canActivate:[AuthGuard]}
 ];
 
