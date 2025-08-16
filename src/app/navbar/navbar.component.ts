@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, catchError, finalize, first, last, shareReplay, single, Subject, take, takeLast, throwError } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SiteService } from '../services/site.service';
 import { menuItems } from './menu-items';
@@ -69,7 +68,7 @@ export class NavbarComponent implements OnInit {
 
   serviceData: any;
   listSiteServices(): void {
-    this.storageService.site_sub.subscribe({
+    this.storageService.site_sub.pipe(first()).subscribe({
       next: (res) => {
         if (!res) return;
 
