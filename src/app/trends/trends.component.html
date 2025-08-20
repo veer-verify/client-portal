@@ -8,7 +8,7 @@
     <div class="searchbar">
       <div class="row">
         <div class="col-lg-3 col-sm-12"
-          style="text-align:center;align-self: center;overflow:visible; padding-left: 20px">
+          style="text-align:center;align-self: center;overflow:visible; padding-left: 10px; margin: 0;">
           <div class="searchbox">
             <!-- placeholder="Search {{sites?.length ? sites?.length : ''}} Locations or {{rsdata?.length ? rsdata?.length : '0'}} Fields" -->
             <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
@@ -63,7 +63,7 @@
 
 
         <!-- Start Date -->
-        <div class="optionlabel"
+        <div class="optionlabel py-2 mt-1"
           style="display: flex; position:relative; padding-bottom:15px; font-family:TP,sans-serif;  border-bottom: 2px solid #666666; border-radius:8px">
           <!-- <div (click)="start.toggle()" style="width:-webkit-fill-available; display:flex;align-items: center;">
                         <img [src]="storageService.activeLogo" alt=""> <span *ngIf="startDate != 'null'"

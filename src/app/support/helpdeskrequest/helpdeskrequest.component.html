@@ -78,7 +78,7 @@
           </div>
         </div>
 
-        <!-- <div class="optionlabelparent" (click)="opentnc()"
+        <div class="optionlabelparent" (click)="opentnc()"
         [style.border]="tnc == false? '1px solid #fff' : ''"
         [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
           <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="tnc==false ? '#fff' : '#000'">
@@ -86,7 +86,7 @@
             <div class="label"> Terms & Conditions </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
-        </div> -->
+        </div>
         <br>
       </div>
 
@@ -166,31 +166,26 @@
             <div class="childBox" style="padding: 5%; border-radius: 6px; margin-top: 0;">
               <div style="justify-content: space-around; display: flex;">
                 <div style="text-align: left; width: 48%;">
-                  <div style="display: flex;align-items: center;"><img src="assets/icons/location.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">ADDRESS</span></div>
-                  <!-- <div style="margin-top: 15px; font-size:14px;">
-                    <b>IVIS Security, Inc. &#169;</b><br>
-                    3945 W Cheyenne Ave #204,<br>
-                    North Las Vegas, NV 89032<br>
-                    United States
-                  </div> -->
+                  <div style="display: flex;align-items: center;">
+                    <img src="assets/icons/location.svg" style="height: 20px; margin-right:10px">
+                    <span style="color: #acacac; font-weight:bold;">ADDRESS</span>
+                  </div>
                   <div style="margin-top: 15px; font-size:14px;">
-                    <b>
-                      SadguruVilla - 123/128, &#169;</b><br>
-                      Gorai, Borivali west,<br>
-                      Mumbai MH - 400091 (INDIA)<br>
+                    <b>{{storageService.address}} &#169;</b><br>
+                      {{storageService.city}}<br>
+                      {{storageService.state}}<br>
+                      {{storageService.country}}<br>
                   </div>
                 </div>
 
                 <div style="text-align: left; width: 48%;">
-                  <div style="display: flex;align-items: center;"><img src="assets/icons/call.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">CALL</span></div>
-                  <div style="margin-top: 15px; font-size:14px;"><b>{{ '+1 (844) 438-4847' }}</b><br></div>
-                  <div style="margin-top: 5px; font-size:14px;"><b>{{ 'support@ivisecurity.com' }}</b><br></div>
+                  <div style="display: flex;align-items: center;">
+                    <img src="assets/icons/call.svg" style="height: 20px; margin-right:10px">
+                    <span style="color: #acacac; font-weight:bold;">CALL</span>
+                  </div>
+                  <div style="margin-top: 15px; font-size:14px;"><b>{{ storageService.phone }}</b><br></div>
+                  <div style="margin-top: 5px; font-size:14px;"><b>{{ storageService.email }}</b><br></div>
                 </div>
-                <!-- <div style="text-align: left; width: 48%;">
-                  <div style="display: flex;align-items: center;"><img src="assets/icons/call.svg" style="height: 20px; margin-right:10px"><span style="color: #acacac; font-weight:bold;">CALL</span></div>
-                  <div style="margin-top: 15px; font-size:14px;"><b>{{ '(+91)7490009174)' }}</b><br></div>
-                  <div style="margin-top: 5px; font-size:14px;"><b>{{ 'sales@uneeviu.com' }}</b><br></div>
-                </div> -->
               </div>
             </div>
           </div>

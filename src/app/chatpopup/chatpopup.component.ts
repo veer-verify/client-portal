@@ -3,6 +3,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
+import { SiteService } from '../services/site.service';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class ChatpopupComponent implements OnInit {
     private apiService: ApiService, 
     private alertService:AlertService,
     private storageservice: StorageService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private siteService: SiteService
   )
   {
     this.router.events.subscribe((event) => {
@@ -87,7 +89,7 @@ export class ChatpopupComponent implements OnInit {
   siteData: any
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiService.getSitesListForUserName(this.user).subscribe((sites: any) => {
+    this.siteService.getSitesListForUserName(this.user).subscribe((sites: any) => {
       this.showLoader = false;
       this.siteData = sites.sites?.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
     }, (err: any) => {

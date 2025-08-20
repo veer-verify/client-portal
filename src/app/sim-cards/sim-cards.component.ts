@@ -134,7 +134,7 @@ export class SimCardsComponent {
   siteData: any = [];
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((sites: any) => {
+    this.siteSer.getSitesListForUserName(this.userData).subscribe((sites: any) => {
       this.showLoader = false;
       this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       var user = this.storageService.getEncrData("user");

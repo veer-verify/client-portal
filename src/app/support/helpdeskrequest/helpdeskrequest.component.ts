@@ -168,7 +168,7 @@ export class HelpdeskrequestComponent implements OnInit {
   siteData: any = []
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiservice.getSitesListForUserName(this.userData).subscribe((res: any) => {
+    this.siteSer.getSitesListForUserName(this.userData).subscribe((res: any) => {
       this.showLoader = false;
       if (res.Status === 'Success') {
         this.siteData = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);

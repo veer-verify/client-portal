@@ -124,14 +124,12 @@ export class LoginComponent implements OnInit {
           this.storageService.storeEncrData('user', res);
           localStorage.setItem('acTok', JSON.stringify(res.AccessToken || ''));
           this.authservice.isLoggedin.next(true);
-          // this.storageService.site_sub.next(null);
           this.authservice.getAuthStatus();
           this.manageUserSession();
           this.getMetadata();
 
 
           if(res.Status == 'Success' && res.firstTime == 'F') {
-            // this.dialogType = '';
             this.router.navigateByUrl('/guard');
           } else if(res.Status == 'Success' && res.firstTime == 'T') {
             this.dialogType = 'firstTime';

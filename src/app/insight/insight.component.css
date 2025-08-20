@@ -115,10 +115,10 @@ table thead {
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 thead p {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 p {
   margin: 0;

@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth/authservice.service';
 import { StorageService } from '../services/storage.service';
+import { SiteService } from '../services/site.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class GaurdComponent implements OnInit {
     private changeDetection: ChangeDetectorRef,
     private storageService: StorageService,
     private sanitizer: DomSanitizer,
-    private authSer: AuthService
+    private authSer: AuthService,
+    private siteService: SiteService
   ) { }
 
   user: any;
@@ -217,7 +219,7 @@ export class GaurdComponent implements OnInit {
         // this.apiService.getServices(this.currentsite); //this was required once check ones to be removed
         if(user?.UserId == 1641) {
           // this.cameras = this.myNewData;
-          this.apiService.getCamerasForSiteId({siteId: this.currentsite}).subscribe((cams: any) => {
+          this.siteService.getCamerasForSiteId({siteId: this.currentsite}).subscribe((cams: any) => {
             this.cameras = cams;
             this.commoncommands();
             this.firstTimeout = setTimeout(() => {
@@ -362,7 +364,7 @@ export class GaurdComponent implements OnInit {
     this.storageService.storeEncrData('siteidfromgaurdpage', site);
     if (site.siteId != this.currentsite) {
       if(site.siteId > 36000) {
-        this.apiService.getCamerasForSiteId({siteId: site.siteId}).subscribe((cams: any) => {
+        this.siteService.getCamerasForSiteId({siteId: site.siteId}).subscribe((cams: any) => {
           // console.log(cams);
           this.myNewData = cams;
           this.cameras = this.myNewData;
@@ -677,7 +679,7 @@ export class GaurdComponent implements OnInit {
   otherCameras: any = [];
   getSitesListForUserName() {
     this.showLoader = true;
-    this.apiService.getSitesListForUserName(this.user).subscribe((sites: any) => {
+    this.siteService.getSitesListForUserName(this.user).subscribe((sites: any) => {
       // console.log(sites);
       this.showLoader = false;
       sites.sites.forEach((siteItem: any) => {
@@ -719,7 +721,7 @@ export class GaurdComponent implements OnInit {
       this.currentSite1 = sitee;
       this.showLoader = true;
       this.currentCamera1 = [];
-      this.apiService.getCamerasForSiteId(sitee).subscribe((cams: any) => {
+      this.siteService.getCamerasForSiteId(sitee).subscribe((cams: any) => {
         this.showLoader = false;
         if(cams.length > 0) {
           this.otherCameras = cams;

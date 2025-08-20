@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, catchError, finalize, first, last, Subject, take, throwError } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth/authservice.service';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SiteService } from '../services/site.service';
 import { menuItems } from './menu-items';
@@ -17,7 +16,7 @@ import { StorageService } from '../services/storage.service';
 })
 export class NavbarComponent implements OnInit {
 
-  // @Input() serviceDataFromParent: any;
+  // @Input() siteInput: any;
   profileopened$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -27,8 +26,6 @@ export class NavbarComponent implements OnInit {
     private apiservice: ApiService,
     private alertservice: AlertService,
     private renderer1: Renderer2,
-    private cd: ChangeDetectorRef,
-    private http: HttpClient,
     private fb: FormBuilder,
     private siteSer: SiteService,
     public storageSer: StorageService
@@ -60,17 +57,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.listSiteServices();
-    // this.getUser();
+    
     this.updateUserFormControl();
-    // this.check();
-
-    // if (this.userData.roleList.length !== 0) {
-    //   let a: Array<any> = Array.from(this.userData?.roleList, (item: any) => item.category);
-    //   if (a.includes('Admin')) {
-    //     this.isAdmin = true;
-    //   }
-    // }
-
     this.isAdmin = this.storageSer.isAdmin();
   }
 
@@ -83,7 +71,8 @@ export class NavbarComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
-        this.storageService.storeEncrData('currentSite', res.site);
+
+        this.storageService.storeEncrData('siteInfo', res.site);
         this.siteSer.listSiteServices(res?.site).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
@@ -92,6 +81,18 @@ export class NavbarComponent implements OnInit {
             }
           },
         })
+      }
+    })
+  }
+
+  sitesList = [];
+  getSites() {
+    this.siteSer.getSitesListForUserName(this.userData.UserName).subscribe({
+      next: (res) => {
+        if (res.Status === 'Success') {
+          this.sitesList = res.sites;
+              this.storageService.storeEncrData('siteInfo', res.sites[0]);
+        }
       }
     })
   }
@@ -201,24 +202,6 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  forgotPass1() {
-    this.closeresetModal();
-    let x: any = this.userData.UserName;
-    this.showLoader = true;
-    this.authservice.forgotPassword(x).subscribe((res: any) => {
-      this.showLoader = false;
-      this.newpass = false;
-      this.username = '';
-      if (res.Status == "Success") {
-        this.alertservice.success("Success", "Your password reset link has been sent to your Email.");
-      }
-      if (res.Status == "Failed") {
-        this.errormsg = res.Message;
-        this.alertservice.success("Failed", "Something went wrong. Please contact support@ivisecurity.com");
-      }
-    })
-  }
-
   submitprofile() {
     this.alertservice.success("Information", "Profile edit is coming soon");
     this.editpro = false;
@@ -227,7 +210,6 @@ export class NavbarComponent implements OnInit {
   visible1 = false
   openModal() {
     var x = <HTMLElement>document.getElementById('editmodal1')
-    // x.style.display = "block";
     this.alertservice.success('Edit Profile', 'Coming Soon!')
   }
 
