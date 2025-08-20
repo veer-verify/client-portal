@@ -604,6 +604,7 @@ export class InsightComponent implements OnInit {
 
   onInput(e: any) {
     var x = e.target.value;
+    
     var items = this.sites
     var a: any[] = items.filter((item: any) => JSON.stringify(item).toLowerCase().indexOf(x.toLowerCase()) !== -1);
     if (a.length != 0) {
@@ -611,7 +612,7 @@ export class InsightComponent implements OnInit {
         this.optionlabel.nativeElement.click();
       }
     }
-    (this.optionlabel.nativeElement.nextElementSibling.scrollHeight)
+    this.optionlabel.nativeElement.nextElementSibling.scrollHeight
   }
 
   toggleAccordian(event: any) {
