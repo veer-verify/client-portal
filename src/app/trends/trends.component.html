@@ -10,10 +10,8 @@
         <div class="col-lg-3 col-sm-12"
           style="text-align:center;align-self: center;overflow:visible; padding-left: 10px; margin: 0;">
           <div class="searchbox">
-            <!-- placeholder="Search {{sites?.length ? sites?.length : ''}} Locations or {{rsdata?.length ? rsdata?.length : '0'}} Fields" -->
             <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
-            <input type="text" (keyup)="onInput($event)" placeholder="Search" [(ngModel)]="searchText" #searchinput>
-            <!-- {{'Search from '+sites?.siteList?.length+' Locations'}} -->
+            <input type="text" (keyup)="onInput($event)" placeholder="Search" [(ngModel)]="searchText">
             <img src="assets/icons/search.svg">
           </div>
         </div>
