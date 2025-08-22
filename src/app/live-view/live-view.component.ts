@@ -469,7 +469,7 @@ export class LiveViewComponent implements OnInit {
     this.siteSer.siren_sub.next(true);
 
     this.btnIndex = this.cameras.indexOf(data);
-    this.http.get(`${environment.sitesUrl}/audio/play_1_0/${data.cameraId}`).subscribe((res: any) => {
+    this.http.get(`${environment.sitesUrl}/play_1_0/${data.cameraId}`).subscribe((res: any) => {
       this.siteSer.siren_sub.next(false);
       this.btnIndex = -1
       if (res.statusCode === 200) {
@@ -489,7 +489,7 @@ export class LiveViewComponent implements OnInit {
     this.siteSer.siren_sub.next(true);
 
     this.btnIndex = this.paginatedCameraList.indexOf(data);
-    this.http.get(`${environment.sitesUrl}/audio/play_1_0/${data.cameraId}`).subscribe((res: any) => {
+    this.http.get(`${environment.sitesUrl}/play_1_0/${data.cameraId}`).subscribe((res: any) => {
       this.siteSer.siren_sub.next(false);
       this.btnIndex = -1;
       if (res.statusCode === 200) {
