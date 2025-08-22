@@ -52,6 +52,7 @@ export class InsightComponent implements OnInit {
       if (res) {
         this.storageService.storeEncrData('currentSite', res.site);
         // this.listInsightImages(res?.site);
+        this.currentSite=res?.site;
       }
     })
     let x = (new Date(Date.now()).getFullYear());

@@ -63,6 +63,7 @@ export class TrendsComponent implements OnInit {
       this.currentInfo = res;
       if (res) {
         this.storageService.storeEncrData('currentSite', res.site);
+         this.newcurrentSite=res.site;
       }
     });
 
@@ -282,6 +283,7 @@ export class TrendsComponent implements OnInit {
   //   // }, 2000);
   // }
 
+  newcurrentSite:any;
   siteClicked(site: any) {
     // this.showLoader = true;
     this.graphsdata = null;
@@ -290,6 +292,7 @@ export class TrendsComponent implements OnInit {
 
     this.storageService.storeEncrData('currentSite', site);
     this.currentsite = site.siteName;
+    this.newcurrentSite=site;
     this.currentsiteid = site.siteId;
 
     // this.apiservice.getServices(site.siteId);

@@ -40,6 +40,7 @@ export class NvrComponent {
       // this.currentInfo = this.storageService.getEncrData('navItem');
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
+        console.log(this.currentInfo)
       })
 
       let a: Array<any> = Array.from(this.userData.roleList, (item: any) => item.roleId);

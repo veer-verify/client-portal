@@ -38,6 +38,8 @@ export class IncidentsComponent implements OnInit {
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.navActive = res?.index
+      this.currentSite=res?.site;
+      console.log(res)
     })
     let d1 = new Date();
     let d2 = new Date(d1);

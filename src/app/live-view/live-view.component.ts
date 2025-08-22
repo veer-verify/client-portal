@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth/authservice.service';
 import { SiteService } from '../services/site.service';
@@ -58,6 +58,7 @@ export class LiveViewComponent implements OnInit {
     this.storageService.site_sub.subscribe({
       next: (res) => {
         this.currentInfo = res;
+        this.viewPanelData=res?.site;
       }
     })
     this.getSitename();
@@ -225,11 +226,18 @@ export class LiveViewComponent implements OnInit {
   showcams = true;
   currentsite: any;
   myNewData = [];
+
+
+ 
+
   getCameras(event: any, site: any, index: any) {
     this.loadingTxt = '';
     this.camIndex = -1;
     // this.storageService.storeEncrData('navItem', {site: site, index: this.sites.indexOf(site)});
     this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
+
+    
+
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }
     this.getsiteservices(site);
     this.pagenumber = 1;
