@@ -172,9 +172,9 @@ export class HelpdeskrequestComponent implements OnInit {
       this.showLoader = false;
       if (res.Status === 'Success') {
         this.siteData = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-        if (!this.currentInfo) {
-          this.storageService.site_sub1.next({ site: this.siteData[0], index: 0 });
-        }
+        // if (!this.currentInfo) {
+        //   this.storageService.site_sub1.next({ site: this.siteData[0], index: 0 });
+        // }
       }
 
 

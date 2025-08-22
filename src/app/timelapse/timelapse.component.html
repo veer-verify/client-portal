@@ -1,6 +1,6 @@
 <app-loader *ngIf="storageService.loading_text === 'loading...'"></app-loader>
 <app-alert></app-alert>
-<app-navbar></app-navbar>
+<app-navbar [serviceDataInput]="currentSite"></app-navbar>
 
 <div class="page">
   <div style="width:100vw; overflow:hidden">

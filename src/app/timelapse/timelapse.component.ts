@@ -36,6 +36,7 @@ export class TimelapseComponent implements OnInit {
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
         this.navActive = res?.index
+        this.currentSite=res.site;
       });
 
       // let d1 = new Date();

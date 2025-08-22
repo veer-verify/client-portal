@@ -107,8 +107,9 @@ export class DeviceHealthComponent {
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.navActive = res?.index
+      this.currentSite=res?.site;
     })
-
+    
     this.getSitesListForUserName();
     this.getTags();
   }

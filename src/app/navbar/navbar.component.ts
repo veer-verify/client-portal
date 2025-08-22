@@ -17,6 +17,10 @@ import { StorageService } from '../services/storage.service';
 export class NavbarComponent implements OnInit {
 
   // @Input() siteInput: any;
+
+  @Input() data!: any;
+
+
   profileopened$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -65,22 +69,41 @@ export class NavbarComponent implements OnInit {
   ngAfterViewInit() {
     this.startlistenForProfile();
   }
-
-  serviceData: any;
-  listSiteServices(): void {
-    this.storageService.site_sub.subscribe({
-      next: (res) => {
-        if (!res) return;
-
-        this.storageService.storeEncrData('siteInfo', res.site);
-        this.siteSer.listSiteServices(res?.site).subscribe({
+  
+  @Input() serviceDataInput!:any;
+  ngOnChanges(){
+  
+ this.storageService.storeEncrData('siteInfo', this.serviceDataInput);
+ if(!this.serviceDataInput)
+  return ;
+        this.siteSer.listSiteServices(this.serviceDataInput).subscribe({
           next: (response) => {
             if (response.statusCode === 200) {
               this.serviceData = response.siteServicesList;
               this.navItems = menuItems;
             }
-          },
-        })
+          }
+       })
+  }
+
+  serviceData: any;
+  listSiteServices(): void {
+
+ 
+    this.storageService.site_sub.subscribe({
+      next: (res) => {
+        if (!res) return;
+     
+        this.storageService.storeEncrData('siteInfo', res.site);
+        // this.siteSer.listSiteServices(res?.site).subscribe({
+        //   next: (response) => {
+        //     if (response.statusCode === 200) {
+        //       this.serviceData = response.siteServicesList;
+        //       this.navItems = menuItems;
+        //     }
+        //   },
+        // })
+   
       }
     })
   }
