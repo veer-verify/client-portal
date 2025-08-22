@@ -34,8 +34,6 @@ export class HelpdeskrequestComponent implements OnInit {
   placeholder = "Data is not available";
   site: any;
   subscription: Subscription;
-  // commonUrl = `http://usstaging.ivisecurity.com:8080/common/downloadFile_1_0?requestName=service-requests-test&assetName=}`
-
 
   constructor(
     private apiservice: ApiService,
@@ -74,15 +72,17 @@ export class HelpdeskrequestComponent implements OnInit {
 
     this.today = formatDate(new Date(), 'yyyy-MM-dd', 'en-us')
     this.userData = this.storageService.getEncrData('user');
-    // this.currentInfo = this.storageService.getEncrData('navItem');
+    // this.currentInfo = this.storageService.getEncrData('siteInfo');
 
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.currentsite = res?.site.siteId;
-    })
+    });
+
     this.storageService.loader_sub.subscribe((res) => {
       this.showLoader = res
     });
+
     this.subscription = this.apiservice.editProfile$.subscribe(() => {
       this.gethelpDeskCategories();
     });
@@ -172,12 +172,10 @@ export class HelpdeskrequestComponent implements OnInit {
       this.showLoader = false;
       if (res.Status === 'Success') {
         this.siteData = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-        // if (!this.currentInfo) {
-        //   this.storageService.site_sub1.next({ site: this.siteData[0], index: 0 });
-        // }
+        if (!this.currentInfo) {
+          this.storageService.site_sub1.next({ site: this.siteData[0], index: 0 });
+        }
       }
-
-
 
       this.getHelpDeskRequestsNew();
     }, (err: any) => {
