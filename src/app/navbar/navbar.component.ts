@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
   
   @Input() serviceDataInput!:any;
   ngOnChanges(){
-
+  
  this.storageService.storeEncrData('siteInfo', this.serviceDataInput);
  if(!this.serviceDataInput)
   return ;
@@ -83,15 +83,17 @@ export class NavbarComponent implements OnInit {
               this.navItems = menuItems;
             }
           }
- })
+       })
   }
 
   serviceData: any;
   listSiteServices(): void {
+
+ 
     this.storageService.site_sub.subscribe({
       next: (res) => {
         if (!res) return;
-
+     
         this.storageService.storeEncrData('siteInfo', res.site);
         // this.siteSer.listSiteServices(res?.site).subscribe({
         //   next: (response) => {
@@ -101,6 +103,7 @@ export class NavbarComponent implements OnInit {
         //     }
         //   },
         // })
+   
       }
     })
   }
