@@ -108,8 +108,10 @@ export class DeviceHealthComponent {
       this.currentInfo = res;
       this.navActive = res?.index
       this.currentSite=res?.site;
+    
     })
     
+   
     this.getSitesListForUserName();
     this.getTags();
   }
@@ -159,14 +161,15 @@ export class DeviceHealthComponent {
         });
       }
 
-
-      
       if(!this.currentInfo) {
         this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
-        this.footageList(this.siteData[0], 0);
-      } else {
+        // this.footageList(this.siteData[0], 0);
+      } 
+    
+
         this.footageList(this.currentInfo?.site, this.currentInfo?.index);
-      };
+      
+      
       // this.eventSer.getHealth(this.currentInfo?.site).subscribe((res: any) => {
       //   this.showLoader = false;
   

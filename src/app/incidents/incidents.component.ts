@@ -36,10 +36,11 @@ export class IncidentsComponent implements OnInit {
     this.userData = this.storageService.getEncrData('user');
     // this.currentInfo = this.storageService.getEncrData('navItem');
     this.storageService.site_sub.subscribe((res) => {
+      console.log(res);
       this.currentInfo = res;
       this.navActive = res?.index
       this.currentSite=res?.site;
-      console.log(res)
+  
     })
     let d1 = new Date();
     let d2 = new Date(d1);
@@ -118,6 +119,7 @@ export class IncidentsComponent implements OnInit {
           }
         });
       }
+
       if(!this.currentInfo) {
         this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
       }
@@ -162,11 +164,12 @@ export class IncidentsComponent implements OnInit {
   }
 
   getDisplySite(site: any) {
-    console.log(site)
+    
     if(site) {
       this.camerasListForSites({siteId: site});
     }
     let x = this.siteData.filter((item: any) => site == item.siteId);
+  
     this.displaySite = x[0];
   }
 

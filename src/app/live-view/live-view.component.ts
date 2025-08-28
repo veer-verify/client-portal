@@ -53,15 +53,22 @@ export class LiveViewComponent implements OnInit {
   ngOnInit(): void {
     // this.userActivity();
     // this.myFun();
+
     document.body.style.backgroundImage = "linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url('../../assets/icons/background.jpg'))";
     this.user = this.storageService.getEncrData("user");
+
     this.storageService.site_sub.subscribe({
       next: (res) => {
+        console.log(res)
         this.currentInfo = res;
         this.viewPanelData=res?.site;
+    
       }
     })
     this.getSitename();
+      
+
+  
 
     // this.resizeObservable = fromEvent(window, 'resize');
     // this.resizeSubscription = this.resizeObservable.subscribe((evt: any) => {
@@ -125,6 +132,7 @@ export class LiveViewComponent implements OnInit {
   firstTimeout: any;
   errInfo: any = null;
   getSitename() {
+    
     this.loadingTxt = '';
     this.showLoader = true;
     this.siteSer.getSitesListForUserName(this.user).subscribe((res: any) => {
@@ -141,10 +149,14 @@ export class LiveViewComponent implements OnInit {
         // }
 
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-        this.getsiteservices(this.sites[0]);
+        // this.getsiteservices(this.sites[0]);
+      
+      
         if (!this.currentInfo) {
           this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
+          this.getsiteservices(this.sites[0]);
         }
+
         var user = this.storageService.getEncrData("user");
         if (user?.UserName == 'sales@ivisecurity.com') {
           this.sites.forEach((item: any) => {
@@ -176,6 +188,7 @@ export class LiveViewComponent implements OnInit {
         this.siteSer.onHTTPerror(error);
       }
     })
+
   }
 
   firstAPiHitforCamdata() {

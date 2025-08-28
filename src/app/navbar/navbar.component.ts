@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() serviceDataInput!: any;
   ngOnChanges() {
+    console.log(this.serviceDataInput)
     this.storageService.storeEncrData('siteInfo', this.serviceDataInput);
     if (!this.serviceDataInput) return;
     
