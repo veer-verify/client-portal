@@ -138,7 +138,7 @@ export class TimelapseComponent implements OnInit {
       this.camerasListForSites(this.siteData[0]);
 
       if(!this.currentInfo) {
-        this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
       }
       this.footageList(this.currentInfo?.site, this.currentInfo?.index);
     }, (err: any) => {
@@ -168,7 +168,7 @@ export class TimelapseComponent implements OnInit {
   footageList(data: any, index: any) {
     this.fromDate = ''
     this.storageService.storeEncrData('navItem', {site: data, index: index});
-    this.storageService.site_sub1.next({site: data, index: index});
+    this.storageService.site_sub.next({site: data, index: index});
     this.camerasListForSites(data);
     this.currentSite = data;
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;

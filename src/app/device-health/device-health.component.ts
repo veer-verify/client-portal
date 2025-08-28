@@ -1,4 +1,4 @@
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
@@ -101,14 +101,12 @@ export class DeviceHealthComponent {
   totalPages: number;
   userData: any;
   currentInfo: any;
-
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.navActive = res?.index
-      this.currentSite=res?.site;
-    
+      this.currentSite = res?.site;
     })
     
    
@@ -162,12 +160,10 @@ export class DeviceHealthComponent {
       }
 
       if(!this.currentInfo) {
-        this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
         // this.footageList(this.siteData[0], 0);
       } 
-    
-
-        this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
       
       
       // this.eventSer.getHealth(this.currentInfo?.site).subscribe((res: any) => {
@@ -230,7 +226,7 @@ export class DeviceHealthComponent {
   navActive!: number;
   footageList(data: any, index: any) {
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data) });
-    // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
+    this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
     if(data) {
       this.camerasListForSites(data);
     }

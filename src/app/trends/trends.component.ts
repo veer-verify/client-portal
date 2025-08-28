@@ -62,7 +62,7 @@ export class TrendsComponent implements OnInit {
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       if (res) {
-        this.storageService.storeEncrData('currentSite', res.site);
+        this.storageService.storeEncrData('siteInfo', res.site);
          this.newcurrentSite=res.site;
       }
     });
@@ -125,7 +125,7 @@ export class TrendsComponent implements OnInit {
   }
   graphsdata: any;
   getBiTrends() {
-    var p = this.storageService.getEncrData('currentSite');
+    var p = this.storageService.getEncrData('siteInfo');
 
     var date;
     var yesterday = this.pipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd');
@@ -223,7 +223,7 @@ export class TrendsComponent implements OnInit {
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         // this.getsiteservices1(this.currentInfo?.site);
         if (!this.currentInfo) {
-          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
         }
         var user = this.storageService.getEncrData("user");
         if (user.UserName == 'sales@ivisecurity.com') {
@@ -288,9 +288,9 @@ export class TrendsComponent implements OnInit {
     // this.showLoader = true;
     this.graphsdata = null;
     // this.storageService.storeEncrData('navItem', {site: site, index: e.target.index});
-    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
 
-    this.storageService.storeEncrData('currentSite', site);
+    this.storageService.storeEncrData('siteInfo', site);
     this.currentsite = site.siteName;
     this.newcurrentSite=site;
     this.currentsiteid = site.siteId;
@@ -387,7 +387,7 @@ export class TrendsComponent implements OnInit {
   disabledays: any;
   disabledDates: NgbDateStruct[] = [{ year: 2019, month: 2, day: 26 }]
   getsitenonworkingdays() {
-    var p = this.storageService.getEncrData('currentSite');
+    var p = this.storageService.getEncrData('siteInfo');
     var siteId = p?.siteId;
     this.currentsite = p.siteName;
     this.reportsite = this.currentsite;

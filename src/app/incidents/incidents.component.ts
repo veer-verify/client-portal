@@ -34,19 +34,15 @@ export class IncidentsComponent implements OnInit {
   currentInfo: any
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
-    // this.currentInfo = this.storageService.getEncrData('navItem');
     this.storageService.site_sub.subscribe((res) => {
-      console.log(res);
       this.currentInfo = res;
       this.navActive = res?.index
-      this.currentSite=res?.site;
-  
+      this.currentSite = res?.site;
     })
     let d1 = new Date();
     let d2 = new Date(d1);
     d2.setMinutes(d1.getMinutes() - 360);
     this.currentTime = formatDate(d2, 'yyyy-MM-ddThh:mm:ss', 'en-us');
-
     this.getSitesListForUserName();
     this.getTags();
   }
@@ -121,7 +117,7 @@ export class IncidentsComponent implements OnInit {
       }
 
       if(!this.currentInfo) {
-        this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
       }
       // this.getsiteservices1(this.currentInfo?.site);
 
@@ -186,7 +182,7 @@ export class IncidentsComponent implements OnInit {
       this.camerasListForSites(data);
     }
     // if(this.currentInfo.index != 0) {
-      this.storageService.site_sub1.next({site: data, index: this.siteData.indexOf(data)});
+      this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
     // }
     
     this.currentSite = data;

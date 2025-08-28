@@ -77,7 +77,7 @@ export class AdvertisementsComponent implements OnInit {
       if(res.Status == "Success") {
         this.siteData = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         if(!this.currentInfo) {
-          this.storageService.site_sub1.next({site: this.siteData[0], index: 0});
+          this.storageService.site_sub.next({site: this.siteData[0], index: 0});
         }
         var user = this.storageService.getEncrData("user");
         if (user.UserName == 'sales@ivisecurity.com') {
@@ -126,7 +126,7 @@ export class AdvertisementsComponent implements OnInit {
 
   listAdsBySite(data: any, index: any) {
     // this.storageService.storeEncrData('navItem', {site: data, index: this.siteData.indexOf(data)});
-    this.storageService.site_sub1.next({site: data, index: this.siteData.indexOf(data)});
+    this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
     this.currentSite = data;
     this.currentNav = index;
     this.showLoader = true;

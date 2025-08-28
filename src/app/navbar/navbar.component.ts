@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, first } from 'rxjs';
 import { AlertService } from '../services/alertservice/alert-service.service';
@@ -22,13 +22,12 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private authservice: AuthService,
-    private storageService: StorageService,
     private apiservice: ApiService,
     private alertservice: AlertService,
     private renderer1: Renderer2,
     private fb: FormBuilder,
     private siteSer: SiteService,
-    public storageSer: StorageService
+    public storage_service: StorageService
   ) { }
 
 
@@ -55,11 +54,10 @@ export class NavbarComponent implements OnInit {
   navItems: Array<any> = new Array();
 
   ngOnInit(): void {
-    this.userData = this.storageService.getEncrData('user');
+    this.userData = this.storage_service.getEncrData('user');
     this.listSiteServices();
-
     this.updateUserFormControl();
-    this.isAdmin = this.storageSer.isAdmin();
+    this.isAdmin = this.storage_service.isAdmin();
   }
 
   ngAfterViewInit() {
@@ -68,8 +66,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() serviceDataInput!: any;
   ngOnChanges() {
-    console.log(this.serviceDataInput)
-    this.storageService.storeEncrData('siteInfo', this.serviceDataInput);
+    this.storage_service.storeEncrData('siteInfo', this.serviceDataInput);
     if (!this.serviceDataInput) return;
     
     this.siteSer.listSiteServices(this.serviceDataInput).subscribe({
@@ -86,22 +83,7 @@ export class NavbarComponent implements OnInit {
   listSiteServices(): void {
 
 
-    this.storageService.site_sub.subscribe({
-      next: (res) => {
-        if (!res) return;
 
-        this.storageService.storeEncrData('siteInfo', res.site);
-        // this.siteSer.listSiteServices(res?.site).subscribe({
-        //   next: (response) => {
-        //     if (response.statusCode === 200) {
-        //       this.serviceData = response.siteServicesList;
-        //       this.navItems = menuItems;
-        //     }
-        //   },
-        // })
-
-      }
-    })
   }
 
   sitesList = [];
@@ -110,7 +92,7 @@ export class NavbarComponent implements OnInit {
       next: (res) => {
         if (res.Status === 'Success') {
           this.sitesList = res.sites;
-          this.storageService.storeEncrData('siteInfo', res.sites[0]);
+          this.storage_service.storeEncrData('siteInfo', res.sites[0]);
         }
       }
     })
@@ -187,11 +169,11 @@ export class NavbarComponent implements OnInit {
         this.showLoader = false;
         this.router.navigateByUrl('/error');
         localStorage.clear();
-        this.storageService.site_sub1.next(null);
+        this.storage_service.site_sub.next(null);
         this.authservice.isLoggedin.next(false);
       },
       complete: () => {
-        this.storageService.site_sub1.next(null);
+        this.storage_service.site_sub.next(null);
         this.authservice.isLoggedin.next(false);
       }
     })
@@ -394,9 +376,9 @@ export class NavbarComponent implements OnInit {
     }
     this.apiservice.updateProfilePic(this.pic).subscribe((res: any) => {
       if (res.Status == 'Success') {
-        var userUpdate = (this.storageService.getEncrData('user'));
+        var userUpdate = (this.storage_service.getEncrData('user'));
         userUpdate.image = res.image;
-        this.storageService.storeEncrData('user', userUpdate);
+        this.storage_service.storeEncrData('user', userUpdate);
         this.userData = (userUpdate);
         var x = <HTMLInputElement>document.getElementById('profileinput');
         x.value = "";
@@ -409,9 +391,9 @@ export class NavbarComponent implements OnInit {
 
       //this is temporary arrangement for delete profile pic, please change after api completion handle the case as delete carefully
       if (res.Status == 'Failed' && res.Message == "Insufficent Details") {
-        var userUpdate = (this.storageService.getEncrData('user'));
+        var userUpdate = (this.storage_service.getEncrData('user'));
         userUpdate.image = 'blah';
-        this.storageService.storeEncrData('user', userUpdate);
+        this.storage_service.storeEncrData('user', userUpdate);
         this.userData = (userUpdate);
         if (window.innerWidth >= 1307) {
           this.openprofile = true;
@@ -423,7 +405,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateProfilePicture() {
-    var userUpdate = (this.storageService.getEncrData('user'));
+    var userUpdate = (this.storage_service.getEncrData('user'));
     let obj = {
       file: this.pic,
       userId: userUpdate.UserId

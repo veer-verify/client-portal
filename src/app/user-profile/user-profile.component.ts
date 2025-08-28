@@ -110,7 +110,7 @@ export class UserProfileComponent {
             a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0
           );
           if (!this.currentInfo) {
-            this.storageService.site_sub1.next({
+            this.storageService.site_sub.next({
               site: this.siteData[0],
               index: 0,
             });

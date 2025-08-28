@@ -50,7 +50,7 @@ export class InsightComponent implements OnInit {
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       if (res) {
-        this.storageService.storeEncrData('currentSite', res.site);
+        this.storageService.storeEncrData('siteInfo', res.site);
         // this.listInsightImages(res?.site);
         this.currentSite=res?.site;
       }
@@ -97,7 +97,7 @@ export class InsightComponent implements OnInit {
         // this.getsiteservices1(this.currentInfo?.site);
 
         if (!this.currentInfo) {
-          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
         }
 
         // var sitelist = this.sites.sites
@@ -266,7 +266,7 @@ export class InsightComponent implements OnInit {
   }
 
   firstreport() {
-    var p = this.storageService.getEncrData('currentSite');
+    var p = this.storageService.getEncrData('siteInfo');
     this.currentsite = p.siteName;
     this.currentsiteid = p.siteId;
 
@@ -311,7 +311,7 @@ export class InsightComponent implements OnInit {
   }
 
   getsitenonworkingdays() {
-    var p = this.storageService.getEncrData('currentSite');
+    var p = this.storageService.getEncrData('siteInfo');
     var siteId = p.siteId;
     this.currentsite = p.siteName;
     this.currentsiteid = p.siteId;
@@ -369,8 +369,8 @@ export class InsightComponent implements OnInit {
   currentSite: any;
   siteClicked(site: any) {
     this.currentSite = site;
-    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
-    this.storageService.storeEncrData('currentSite', site);
+    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.storeEncrData('siteInfo', site);
     this.currentsite = site.siteName;
     this.currentsiteid = site.siteId;
     // this.getsiteservices1(site);

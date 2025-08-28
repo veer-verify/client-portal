@@ -42,8 +42,7 @@ export class StorageService {
 
   loading_text: string;
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
-  site_sub1: BehaviorSubject<any> = new BehaviorSubject(null);
-  site_sub = this.site_sub1.asObservable()
+  site_sub: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() { }
 

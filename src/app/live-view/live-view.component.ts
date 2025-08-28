@@ -59,12 +59,12 @@ export class LiveViewComponent implements OnInit {
 
     this.storageService.site_sub.subscribe({
       next: (res) => {
-        console.log(res)
         this.currentInfo = res;
-        this.viewPanelData=res?.site;
+        this.viewPanelData = res?.site;
     
       }
-    })
+    });
+
     this.getSitename();
       
 
@@ -153,7 +153,7 @@ export class LiveViewComponent implements OnInit {
       
       
         if (!this.currentInfo) {
-          this.storageService.site_sub1.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
           this.getsiteservices(this.sites[0]);
         }
 
@@ -193,22 +193,23 @@ export class LiveViewComponent implements OnInit {
 
   firstAPiHitforCamdata() {
     // this.currentInfo = this.storageService.getEncrData('navItem');
-    if (this.currentInfo) {
-      this.currentsite = this.currentInfo?.site.siteId;
-      this.viewPanelData = this.currentInfo?.site;
-    } else {
-      this.currentsite = this.sites[0]?.siteId;
-      this.viewPanelData = this.sites[0];
-    }
+    // if (this.currentInfo) {
+    //   this.currentsite = this.currentInfo?.site.siteId;
+    //   this.viewPanelData = this.currentInfo?.site;
+    // } else {
+    //   this.currentsite = this.sites[0]?.siteId;
+    //   this.viewPanelData = this.sites[0];
+    // }
     this.showLoader = true;
     this.siteSer.getCamerasForSiteId({ siteId: this.currentsite }).subscribe((res: any) => {
       this.showLoader = false;
       this.cameras = res;
-      if (!this.currentInfo) {
+
+      // if (!this.currentInfo) {
+        // this.storageService.site_sub.next({site: this.currentInfo.site, index: this.currentInfo.index});
         // this.storageService.storeEncrData('navItem', { site: this.currentInfo.site, index: this.currentInfo.index });
-        // this.storageService.site_sub.next({site: this.currentInfo.site, index: this.sites.indexOf(this.currentInfo.index)});
         // this.storageService.site_sub.next({site: this.sites[0], index: 0});
-      }
+      // }
 
       // this.fixForSales(this.currentsite);
       // this.apiService.getServices(this.currentsite);
@@ -246,8 +247,7 @@ export class LiveViewComponent implements OnInit {
   getCameras(event: any, site: any, index: any) {
     this.loadingTxt = '';
     this.camIndex = -1;
-    // this.storageService.storeEncrData('navItem', {site: site, index: this.sites.indexOf(site)});
-    this.storageService.site_sub1.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
 
     
 
