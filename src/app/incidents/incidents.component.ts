@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateFormatter } from '../services/customDateFormatter';
 import { DatePipe, formatDate } from '@angular/common';
@@ -26,7 +26,12 @@ export class IncidentsComponent implements OnInit {
     private eventSer: EventService,
     public storageSer: StorageService,
     private siteService: SiteService
-  ) { }
+  ) { 
+     this.storageService.site_sub.subscribe((res) => {
+      this.currentInfo = res;
+      this.currentSite = res?.site;
+       })
+  }
 
   environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=incidents&assetName=';
   userData: any;
@@ -34,16 +39,12 @@ export class IncidentsComponent implements OnInit {
   currentInfo: any
   ngOnInit(): void {
     this.userData = this.storageService.getEncrData('user');
-    this.storageService.site_sub.subscribe((res) => {
-      this.currentInfo = res;
-      this.navActive = res?.index
-      this.currentSite = res?.site;
-    })
+    this.getSitesListForUserName();
     let d1 = new Date();
     let d2 = new Date(d1);
     d2.setMinutes(d1.getMinutes() - 360);
     this.currentTime = formatDate(d2, 'yyyy-MM-ddThh:mm:ss', 'en-us');
-    this.getSitesListForUserName();
+    
     this.getTags();
   }
 
@@ -117,12 +118,12 @@ export class IncidentsComponent implements OnInit {
       }
 
       if(!this.currentInfo) {
-        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+        // this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+         this.storageService.site_sub.next({site: this.siteData[0]});
       }
       // this.getsiteservices1(this.currentInfo?.site);
 
-
-      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+      this.footageList(this.currentInfo?.site);
     }, (err: any) => {
     this.storageService.loading_text = 'NO DATA!';
     })
@@ -175,20 +176,39 @@ export class IncidentsComponent implements OnInit {
   currentSite: any;
   navActive!: number;
   todayDate: any;
-  footageList(data: any, index: any) {
+
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  setTimeout(() => {
+    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 1000);
+}
+
+
+  footageList(data: any) {
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
     
     if(data) {
       this.camerasListForSites(data);
+      this.scrollToSite(data?.siteId);
     }
     // if(this.currentInfo.index != 0) {
-      this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
+      // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
+      this.storageService.site_sub.next({site: data});
     // }
     
     this.currentSite = data;
     this.displaySite = data;
     // this.getsiteservices1(data);
-    this.navActive = index;
+      this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
+    
     
     let d = new Date().setMonth(new Date().getMonth() + 1);
     this.todayDate = {

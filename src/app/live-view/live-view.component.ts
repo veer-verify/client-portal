@@ -131,7 +131,11 @@ export class LiveViewComponent implements OnInit {
 
   firstTimeout: any;
   errInfo: any = null;
+
+
+
   getSitename() {
+   
     
     this.loadingTxt = '';
     this.showLoader = true;
@@ -153,7 +157,8 @@ export class LiveViewComponent implements OnInit {
       
       
         if (!this.currentInfo) {
-          this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
+          // this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
+          this.storageService.site_sub.next({ site: this.sites[0]});
           this.getsiteservices(this.sites[0]);
         }
 
@@ -247,8 +252,8 @@ export class LiveViewComponent implements OnInit {
   getCameras(event: any, site: any, index: any) {
     this.loadingTxt = '';
     this.camIndex = -1;
-    this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
-
+    // this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
+    this.storageService.site_sub.next({ site: site});
     
 
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }

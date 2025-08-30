@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
@@ -163,7 +163,8 @@ export class DeviceHealthComponent {
         this.storageService.site_sub.next({site: this.siteData[0], index: 0});
         // this.footageList(this.siteData[0], 0);
       } 
-      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+
+      this.footageList(this.currentInfo?.site);
       
       
       // this.eventSer.getHealth(this.currentInfo?.site).subscribe((res: any) => {
@@ -224,15 +225,32 @@ export class DeviceHealthComponent {
   newEventData: any = [];
   currentSite: any;
   navActive!: number;
-  footageList(data: any, index: any) {
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  setTimeout(() => {
+    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 1000);
+}
+
+  footageList(data: any) {
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data) });
     this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
     if(data) {
       this.camerasListForSites(data);
+      this.scrollToSite(data?.siteId);
     }
     this.currentSite = data;
     this.displaySite = data;
-    this.navActive = index;
+
+      this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
+    
 
     this.showLoader = true;
     this.eventSer.getHealth(data).subscribe((res: any) => {

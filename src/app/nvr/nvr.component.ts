@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AlertService } from '../services/alertservice/alert-service.service';
@@ -40,7 +40,7 @@ export class NvrComponent {
       // this.currentInfo = this.storageService.getEncrData('navItem');
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
-        console.log(this.currentInfo)
+       
       })
 
       let a: Array<any> = Array.from(this.userData.roleList, (item: any) => item.roleId);
@@ -119,7 +119,7 @@ export class NvrComponent {
         // this.getsiteservices1(this.currentInfo?.site);
   
   
-        this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+        this.footageList(this.currentInfo?.site);
       }, (err: any) => {
         this.showLoader = false;
       })
@@ -152,16 +152,33 @@ export class NvrComponent {
     newEventData: any = [];
     currentSite: any;
     navActive!: number;
-    footageList(data: any, index: any) {
+
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  setTimeout(() => {
+    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 1000);
+}
+
+    footageList(data: any) {
       // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
       this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
       if(data) {
         this.camerasListForSites(data);
+        this.scrollToSite(data?.siteId);
       }
       this.currentSite = data;
       this.displaySite = data;
       // this.getsiteservices1(data);
-      this.navActive = index;
+        this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
+    
   
       // let d = new Date().setHours(new Date().getHours() - 5);
       // data.fromDate = {
@@ -248,7 +265,7 @@ export class NvrComponent {
         this.showLoader = false;
         if(res.statusCode === 200) {
           this.alertService.success('success', res.message);
-          this.footageList(this.currentSite, this.navActive);
+          this.footageList(this.currentSite);
         } else {
           this.alertService.success('error', res.message);
         }
