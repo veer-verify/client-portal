@@ -94,9 +94,9 @@ export class IncidentsComponent implements OnInit {
   siteData: any = [];
   
   getSitesListForUserName() {
-    this.storageService.loading_text = 'loading...';
-    this.siteService.getSitesListForUserName(this.userData).subscribe((res: any) => {
     this.storageService.loading_text = '';
+    this.siteService.getSitesListForUserName(this.userData).subscribe((res: any) => {
+    this.storageService.loading_text = null;
     this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       // this.getsitesListByService(res.sites);
       var user = this.storageService.getEncrData("user");
@@ -218,13 +218,13 @@ scrollToSite(siteId: number) {
     }
     
     this.newEventData = [];
-    this.storageService.loading_text = 'loading...';
+    this.storageService.loading_text = '';
     this.eventSer.incidentList(data).subscribe((res: any) => {
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
       this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
       if (res.statusCode == 200) {
-        this.storageService.loading_text = '';
+        this.storageService.loading_text = null;
         this.eventData = res.IncidentList.sort((a: any, b: any) => a.createdTime > b.createdTime ? -1 : a.createdTime < b.createdTime ? 1 : 0);
         this.newEventData = this.eventData;
       } else {
@@ -255,7 +255,7 @@ scrollToSite(siteId: number) {
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
     this.newEventData = [];
-    this.storageService.loading_text = 'loading...';
+    this.storageService.loading_text = '';
     this.eventSer.incidentList({
       siteId: this.currentSite?.siteId,
       cameraId: this.cameraId,
@@ -264,7 +264,7 @@ scrollToSite(siteId: number) {
       toDate: this.toDate,
       page: pageNumber
     }).subscribe((res: any) => {
-    this.storageService.loading_text = '';
+    this.storageService.loading_text = null;
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
       this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);

@@ -113,9 +113,9 @@ export class TimelapseComponent implements OnInit {
 
 
   getSitesListForUserName() {
-        this.storageService.loading_text = 'loading...';
-    this.siteService.getSitesListForUserName(this.userData).subscribe((sites: any) => {
         this.storageService.loading_text = '';
+    this.siteService.getSitesListForUserName(this.userData).subscribe((sites: any) => {
+        this.storageService.loading_text = null;
       this.siteData = sites?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       var user = this.storageService.getEncrData("user");
       if (user.UserName == 'sales@ivisecurity.com') {
@@ -174,11 +174,11 @@ export class TimelapseComponent implements OnInit {
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
     // this.getsiteservices1(data)
     this.navActive = index;
-        this.storageService.loading_text = 'Loading...';
+        this.storageService.loading_text = '';
     this.eventSer.listTimeLapseVideos(data).subscribe((res: any) => {
       // console.log(res);
       if(res.statusCode == 200) {
-            this.storageService.loading_text = '';
+            this.storageService.loading_text = null;
         this.eventData = res.timeLapseList;
         this.newEventData = this.eventData;
       } else {
@@ -196,11 +196,11 @@ export class TimelapseComponent implements OnInit {
   fromDate: any = '';
   toDate: any = '';
   filter() {
-    this.storageService.loading_text = 'Loading...';
+    this.storageService.loading_text = '';
     this.eventSer.listTimeLapseVideos({ siteId: this.currentSite.siteId, cameraId: this.cameraId, fromDate: this.fromDate, toDate: this.toDate }).subscribe({
       next: (res: any) => {
       if (res.statusCode === 200) {
-        this.storageService.loading_text = '';
+        this.storageService.loading_text = null;
         this.newEventData = res.timeLapseList
       } else {
         this.storageService.loading_text = 'NO DATA!';

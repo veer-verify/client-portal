@@ -40,7 +40,7 @@ export class StorageService {
   private readonly key = "verifai";
 
 
-  loading_text: string;
+  loading_text: any;
   loader_sub: BehaviorSubject<any> = new BehaviorSubject(false);
   site_sub: BehaviorSubject<any> = new BehaviorSubject(null);
 
