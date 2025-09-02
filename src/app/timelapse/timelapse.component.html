@@ -37,7 +37,7 @@
           (click)="footageList(site)">
           <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
 
-                          <img [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
+                          <img class="me-2" [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
 
             <div class="label">{{ site?.siteName }} </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
