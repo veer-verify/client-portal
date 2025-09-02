@@ -34,8 +34,8 @@
     <div class="row">
       <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
         <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
-          (click)="footageList(site, i)">
-          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;">
+          (click)="footageList(site)">
+          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
 
                           <img [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
 

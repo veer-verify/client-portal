@@ -105,7 +105,7 @@ export class DeviceHealthComponent {
     this.userData = this.storageService.getEncrData('user');
     this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
-      this.navActive = res?.index
+      // this.navActive = res?.index
       this.currentSite = res?.site;
     })
     

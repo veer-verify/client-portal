@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
 import { DatePipe } from '@angular/common';
@@ -35,7 +35,6 @@ export class TimelapseComponent implements OnInit {
 
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
-        this.navActive = res?.index
         this.currentSite=res.site;
       });
 
@@ -138,9 +137,9 @@ export class TimelapseComponent implements OnInit {
       this.camerasListForSites(this.siteData[0]);
 
       if(!this.currentInfo) {
-        this.storageService.site_sub.next({site: this.siteData[0], index: 0});
+        this.storageService.site_sub.next({site: this.siteData[0]});
       }
-      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+      this.footageList(this.currentInfo?.site);
     }, (err: any) => {
         this.storageService.loading_text = 'NO DATA!';
 
@@ -165,15 +164,34 @@ export class TimelapseComponent implements OnInit {
   newEventData: any = [];
   currentSite: any;
   navActive!: number;
-  footageList(data: any, index: any) {
+  
+  @ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+  scrollToSite(siteId: number) {
+    setTimeout(() => {
+      const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+      const elements = this.siteselect.toArray();  // Convert to real array
+      const el = elements[index];
+      if (el) {
+        el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 1000);
+  }
+  
+  footageList(data: any) {
     this.fromDate = ''
-    this.storageService.storeEncrData('navItem', {site: data, index: index});
-    this.storageService.site_sub.next({site: data, index: index});
+    this.storageService.storeEncrData('navItem', {site: data});
+    this.storageService.site_sub.next({site: data});
     this.camerasListForSites(data);
     this.currentSite = data;
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
     // this.getsiteservices1(data)
-    this.navActive = index;
+       if(data) {
+   
+      this.scrollToSite(data?.siteId);
+    }
+     this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
         this.storageService.loading_text = '';
     this.eventSer.listTimeLapseVideos(data).subscribe((res: any) => {
       // console.log(res);
