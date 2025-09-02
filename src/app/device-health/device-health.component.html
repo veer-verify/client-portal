@@ -50,7 +50,7 @@
         <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
           (click)="footageList(site)">
           <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
-                          <img [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
+                          <img class="me-2" [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
 
             <div class="label">{{ site?.siteName }} </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
@@ -99,7 +99,7 @@
                       <img (click)="sort(header.id)" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px" alt="" *ngIf="header.sort">
                     </div>
                   </th>
-                  <th>Info</th>
+                  <th>CURRENT STATUS</th>
               </tr>
             </thead>
 
@@ -148,12 +148,16 @@
                           <p>{{ el.latestUpOrDowntime }}</p>
                         </td>
                         <td><p class="text-primary pointer" (click)="openPlayModel(el, i)">View</p></td>
-                        <td>
+                      <td>
                           <img src="assets/icons/info-outline.svg" class="pointer" [title]="
-                        'Latest re-connected time: ' + el.latestReconnectedTime + '\n' +
-                        'Latest up / down time: ' + el.latestUpOrDowntime"
-                        alt="">
-                      </td>
+                                                      'Last Re-connected Time: ' + (el.latestReconnectedTime | date:'medium') + '\n' +
+                                                      'Up / Down Time: ' + el.latestUpOrDowntime + '\n' +
+                                                        'OFFLINE - DOWN TIME' + '\n' +
+                                                                'ONLINE - UP TIME'
+                                                              "
+                                                                      alt="Info icon"
+                                                                    />
+                                    </td>
 
                         <!-- <td >
                           <p>{{ el.downTime }}</p>

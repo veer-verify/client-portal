@@ -13,7 +13,8 @@ export class StorageService {
   headerLogo = 'assets/themes/IVISsecurity_logo.png';
   accordianLogo = 'assets/icons/eye.svg';
   activeLogo = 'assets/icons/eye-blue.svg';
-  inActiveLogo = 'assets/icons/eye-red.svg';
+  // inActiveLogo = 'assets/icons/eye-red.svg';
+  inActiveLogo = 'assets/icons/visibility_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg';
 
   address = 'IVIS Security, Inc';
   city = '3945 W Cheyenne Ave #204';
