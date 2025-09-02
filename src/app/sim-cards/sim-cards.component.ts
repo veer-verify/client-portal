@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import html2canvas from 'html2canvas';
@@ -42,7 +42,7 @@ export class SimCardsComponent {
       this.userData = this.storageService.getEncrData('user');
       this.storageService.site_sub.subscribe((res) => {
         this.currentInfo = res;
-        this.navActive = res?.index
+    
       });
       let d1 = new Date();
       let d2 = new Date(d1);
@@ -85,7 +85,7 @@ export class SimCardsComponent {
       if(res.statusCode == 200) {
         this.closeModel('playModel1');
         this.alertService.success('success', res?.message);
-        this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+        this.footageList(this.currentInfo?.site);
       } else {
         this.alertService.error('error', res?.message)
       }
@@ -158,7 +158,7 @@ export class SimCardsComponent {
         this.storageService.site_sub.next({site: this.siteData[0], index: 0});
       }
       // this.getsiteservices1(this.currentInfo?.site);
-      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+      this.footageList(this.currentInfo?.site);
     }, (err: any) => {
       this.showLoader = false;
     })
@@ -182,14 +182,34 @@ export class SimCardsComponent {
   newEventData: any = [];
   currentSite: any;
   navActive!: number;
-  footageList(data: any, index: any) {
+
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  setTimeout(() => {
+    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 1000);
+}
+
+  footageList(data: any) {
     // this.storageService.storeEncrData('navItem', {site: data, index: index});
-    this.storageService.site_sub.next({site: data, index: index});
+    this.storageService.site_sub.next({site: data});
     this.camerasListForSites(data);
     this.currentSite = data;
     // this.siteId = this.currentSite?.siteId ? this.currentSite?.siteId : this.currentSite?.siteId;
     // this.getsiteservices1(data);
-    this.navActive = index;
+  if(data) {
+   
+      this.scrollToSite(data?.siteId);
+    }
+
+ this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
     this.showLoader = true;
     this.proxSer.getSimDetailsForSiteId(data).subscribe((res: any) => {
       // console.log(res);

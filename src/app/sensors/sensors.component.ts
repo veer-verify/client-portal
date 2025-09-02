@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from '../services/alertservice/alert-service.service';
@@ -116,7 +116,7 @@ export class SensorsComponent implements OnInit {
         this.storageService.site_sub.next({site: this.siteData[0], index: 0});
       }
       // this.getsiteservices1(this.currentInfo?.site);
-      this.footageList(this.currentInfo?.site, this.currentInfo?.index);
+      this.footageList(this.currentInfo?.site);
     }, (err: any) => {
       this.showLoader = false;
     })
@@ -154,16 +154,37 @@ export class SensorsComponent implements OnInit {
   newEventData: any = [];
   currentSite: any;
   navActive!: number;
-  footageList(data: any, index: any) {
+
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  setTimeout(() => {
+    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 1000);
+}
+
+  footageList(data: any) {
     // this.storageService.storeEncrData('navItem', {site: data, index: index});
-    this.storageService.site_sub.next({site: data, index: index});
+    this.storageService.site_sub.next({site: data});
     this.getMetadata()
     this.listZonesForSiteId(data);
     this.listSensorTypesForSiteId(data);
+       
+    if(data) {
+   
+      this.scrollToSite(data?.siteId);
+    }
     // this.camerasListForSites(data);
     // this.getsiteservices1(data);
     this.currentSite = data;
-    this.navActive = index;
+   this.navActive = this.siteData.findIndex(
+          (site: any) => site.siteId === data.siteId
+        );
+    
     this.showLoader = true;
     this.eventSer.listSensorData(data).subscribe((res: any) => {
       this.showLoader = false;
