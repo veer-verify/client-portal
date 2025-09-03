@@ -42,9 +42,9 @@
 }
 
 .config-title {
-    font-family: TP, sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+    font-family: PS, sans-serif;
+    font-size: 14px;
+    /* font-weight: 500; */
     text-transform: uppercase;
     margin: 10px;
 }
@@ -599,3 +599,5 @@ iframe {
     animation-duration: 500ms;
     animation-iteration-count: infinite;
   }
+
+

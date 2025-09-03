@@ -132,6 +132,19 @@ export class LiveViewComponent implements OnInit {
   firstTimeout: any;
   errInfo: any = null;
 
+@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+scrollToSite(siteId: number) {
+  console.log(siteId)
+  setTimeout(() => {
+    const index = this.sites.findIndex((site:any) => site.siteId === siteId);
+    const elements = this.siteselect.toArray();  // Convert to real array
+    const el = elements[index];
+    if (el) {
+      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // el.nativeElement.style.backgroundColor = '#bbc0c0ff';
+    }
+  }, 1000);
+}
 
 
   getSitename() {
@@ -154,13 +167,15 @@ export class LiveViewComponent implements OnInit {
 
         this.sites = res.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
         // this.getsiteservices(this.sites[0]);
-      
+     
       
         if (!this.currentInfo) {
           // this.storageService.site_sub.next({ site: this.sites[0], index: 0 });
           this.storageService.site_sub.next({ site: this.sites[0]});
           this.getsiteservices(this.sites[0]);
         }
+
+        this.scrollToSite(this.currentInfo?.site.siteId)
 
         var user = this.storageService.getEncrData("user");
         if (user?.UserName == 'sales@ivisecurity.com') {
@@ -205,6 +220,7 @@ export class LiveViewComponent implements OnInit {
     //   this.currentsite = this.sites[0]?.siteId;
     //   this.viewPanelData = this.sites[0];
     // }
+   
     this.showLoader = true;
     this.siteSer.getCamerasForSiteId({ siteId: this.currentsite }).subscribe((res: any) => {
       this.showLoader = false;
@@ -254,7 +270,7 @@ export class LiveViewComponent implements OnInit {
     this.camIndex = -1;
     // this.storageService.site_sub.next({ site: site, index: this.sites.indexOf(site) });
     this.storageService.site_sub.next({ site: site});
-    
+     this.scrollToSite(this.currentInfo?.site.siteId)
 
     if (this.firstTimeout) { clearTimeout(this.firstTimeout) }
     this.getsiteservices(site);

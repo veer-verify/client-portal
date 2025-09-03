@@ -83,7 +83,7 @@
           #optionlabelparent>
           <div [className]="site.siteId == currentsite  ? 'optionlabel active' : 'optionlabel'"
             [style.background]="site.siteId == currentsite ? '#fff': '#ffffff'" style="position:relative;"
-            #optionlabel (click)="getCameras($event, site, j)">
+            #optionlabel (click)="getCameras($event, site, j)" #siteselect>
             
             <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="site"> -->
             <img [src]="storageService.accordianLogo" style="width: 20px;" alt="site">
@@ -192,7 +192,7 @@
 
           <div class="config m-1" *ngIf="gridClicked == 1 && serviceData?.cameraConfig === 'T' && currentCam?.camera_config_url !== null">
             <!-- <img class="ptz-loader" src="assets/gif/loading-gif.gif" alt=""> -->
-            <p class="config-title">Configuration</p>
+            <p class="config-title">Camera Reposition</p>
 
             <!-- <div class="container"> -->
               <!-- <p cl>PTZ Camera Control</p> -->
@@ -240,8 +240,10 @@
                   </div>
                 </div>
 
-                <button class="home-button w-50 my-3 p-1" (click)="home()">SET AS HOME</button>
-
+             <div class="d-flex mt-3">
+            <button class="home-button" (click)="home()">SET AS HOME</button>
+            <button class="home-button" (click)="move('N', 'N')">BACK TO HOME</button>
+            </div>
                 <p class="update-msg" *ngIf="updateMsg">{{ updateMsg | titlecase }}</p>
               </div>
             <!-- </div> -->
