@@ -134,7 +134,7 @@ export class LiveViewComponent implements OnInit {
 
 @ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
 scrollToSite(siteId: number) {
-  console.log(siteId)
+ 
   setTimeout(() => {
     const index = this.sites.findIndex((site:any) => site.siteId === siteId);
     const elements = this.siteselect.toArray();  // Convert to real array
