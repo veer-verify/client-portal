@@ -59,6 +59,7 @@ import { ImagePipe } from './services/pipes/image.pipe';
 import { SanitizePipe } from './services/pipes/sanitize.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CreateUserComponent } from './user-profile/create-user/create-user.component';
+import { TextAndNumberOnlyDirective } from './services/pipes/text-and-number-only.directive';
 
 
 
@@ -112,6 +113,7 @@ import { CreateUserComponent } from './user-profile/create-user/create-user.comp
     ImagePipe,
     SanitizePipe,
     CreateUserComponent,
+    TextAndNumberOnlyDirective
   ],
   imports: [
     BrowserModule,

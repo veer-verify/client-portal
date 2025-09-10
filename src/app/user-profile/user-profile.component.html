@@ -56,16 +56,16 @@
 
                         <div class="my-5 row m-0 w-75">
                             <div class="col-lg-4 mb-3">
-                                <input placeholder="First Name" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="First Name" type="text" name="text" class="input"
                                     [(ngModel)]="user.firstName" [disabled]="editId!=0">
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <input placeholder="Last Name" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="Last Name" type="text" name="text" class="input"
                                     [(ngModel)]="user.lastName" [disabled]="editId!=0">
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <input placeholder="Mobile" type="text" name="text" class="input"
-                                    [(ngModel)]="user.contactNo1" [disabled]="editId!=0">
+                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="Mobile" type="text" name="text" class="input"
+                                    [(ngModel)]="user.contactNo1" [disabled]="editId!=0" appTextAndNumberOnly>
                             </div>
                             <!-- <div class="col-lg-5 mb-3">
                                             <input placeholder="Email ID" type="text" name="text" class="input"
@@ -84,31 +84,31 @@
 
                         <div class="my-5 row m-0 w-75">
                             <div *ngIf="editId == 1 || userinfo.address_line1" class="col-lg-4 mb-3">
-                                <input placeholder="address_line1" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="address_line1" type="text" name="text" class="input"
                                     [(ngModel)]="user.address_line1" [disabled]="editId != 1">
                             </div>
                             <div *ngIf="editId == 1 || userinfo.address_line2" class="col-lg-4 mb-3">
-                                <input placeholder="address_line2" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="address_line2" type="text" name="text" class="input"
                                     [(ngModel)]="user.address_line2" [disabled]="editId != 1">
                             </div>
                             <div *ngIf="editId == 1 || userinfo.city" class="col-lg-4 mb-3">
-                                <input placeholder="City" type="text" name="text" class="input" [(ngModel)]="user.city"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="City" type="text" name="text" class="input" [(ngModel)]="user.city"
                                     [disabled]="editId != 1">
                             </div>
                             <div *ngIf="userinfo.district" class="col-lg-4 mb-3">
-                                <input placeholder="District" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="District" type="text" name="text" class="input"
                                     [(ngModel)]="user.district" [disabled]="editId != 1">
                             </div>
                             <div *ngIf="editId == 1 || userinfo.state" class="col-lg-4 mb-3">
-                                <input placeholder="State" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="State" type="text" name="text" class="input"
                                     [(ngModel)]="user.state" [disabled]="editId != 1">
                             </div>
                             <div *ngIf="editId == 1 || userinfo.country" class="col-lg-4 mb-3">
-                                <input placeholder="Country" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="Country" type="text" name="text" class="input"
                                     [(ngModel)]="user.country" [disabled]="editId != 1">
                             </div>
                             <div *ngIf="editId == 1 || userinfo.pin" class="col-lg-4 mb-3">
-                                <input placeholder="Pincode" type="text" name="text" class="input"
+                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="Pincode" type="text" name="text" class="input"
                                     [(ngModel)]="user.pin" [disabled]="editId != 1">
                             </div>
                         </div>
