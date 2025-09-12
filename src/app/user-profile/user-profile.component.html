@@ -47,10 +47,10 @@
                     </div>
 
                     <div class="col-lg-9 user-form" *ngIf="user">
-                        <a class="d-flex align-items-center" (click)="editDetails(0)">
+                        <a class="d-flex align-items-center" >
                             <span class="sub-headings me-2">Account</span>
                             <img src="assets/icons/editicon2.svg" class="bg-light" style="border-radius: 50%;"
-                                width="24px" alt="">
+                                width="24px" alt="" (click)="editDetails(0)">
                         </a>
 
 
@@ -75,10 +75,10 @@
 
 
                         <div>
-                            <a class="d-flex align-items-center" (click)="editDetails(1)">
+                            <a class="d-flex align-items-center" >
                                 <span class="sub-headings me-2">Address</span>
                                 <img src="assets/icons/editicon2.svg" class="bg-light" style="border-radius: 50%;"
-                                    width="24px" alt="">
+                                    width="24px" alt="" (click)="editDetails(1)">
                             </a>
                         </div>
 
