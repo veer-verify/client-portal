@@ -195,7 +195,8 @@ scrollToSite(siteId: number) {
           });
         }
         if (this.sites.length > 0) {
-          if(this.storageService.isUser()) {            
+          if(this.storageService.isUser()) {
+            this.currentsite = this.currentInfo ? this.currentInfo?.site?.siteId : this.sites[0]?.siteId;
             this.firstAPiHitforCamdata();
           }
         } else {
