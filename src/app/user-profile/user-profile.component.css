@@ -321,10 +321,12 @@ p {
 }
 
 .map-site {
+
   position: absolute;
   right: 5px;
   top: 5px;
-  cursor: pointer;
+ 
+
 }
 
 .card {
@@ -455,3 +457,11 @@ p {
 
 
 }
+
+
+
+
+
+
+
+

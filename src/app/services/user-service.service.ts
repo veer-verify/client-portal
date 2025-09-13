@@ -78,5 +78,11 @@ export class UserServiceService {
     let params = new HttpParams().set('createdBy', user?.UserId).set('department', user?.roleList[0].department);
     return this.http.get(url, {params: params});
   }
+
+
+deactivateUser(payload:any){
+    let url = `${environment.authUrl}/deactivateUser_1_0/${payload?.userId}`;
+    return this.http.post(url,null);
+}
   
 }

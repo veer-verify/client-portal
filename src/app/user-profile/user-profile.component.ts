@@ -15,6 +15,7 @@ import { StorageService } from '../services/storage.service';
 import { SearchPipe } from '../services/pipes/search-pipe.pipe';
 import { SiteService } from '../services/site.service';
 import { createUserFields } from './create-user-fields';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
@@ -635,6 +636,27 @@ export class UserProfileComponent {
         this.alertservice.error('error', err);
       }
     );
+  }
+
+  deletecreatedUser(data:any){
+   this.alertservice.confirmDialog("Are you sure?").then((result:any) => {
+      if (result.isConfirmed) {
+        this.userSer.deactivateUser(data).subscribe({
+          next: (res: any) => {
+            if (res.statusCode === 200) {
+              this.getUserNamesByUserName();
+              this.alertservice.success('success', res.message);
+            } else {
+              this.alertservice.error('error',res.message);
+            }
+          },
+          error: (err: any) => {
+            this.alertservice.error('error',err);
+          }
+        })
+      }
+    });
+
   }
 
 }
