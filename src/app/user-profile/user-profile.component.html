@@ -191,7 +191,7 @@
 
                         <div class="users">
                             <div class="card" *ngFor="let item of result; let i = index"
-                                [style.background-color]="userIndex == i ? '#95bbe9' : ''" [style.background-color]="item.STATUS == ''?'#e7848e':''">
+                                 [style.background-color]="userIndex == i ? '#95bbe9' : ''"  [style.background-color]="item.STATUS == ''?'#e7848e':''">       <!-- -->
                                 <div class="map-site">
                                     <!-- <a class="me-1" (click)="openDialog('userSites', item)">
                                         <img src="assets/images/icons8-check-mark-48.png" alt="" width="16px">
@@ -201,7 +201,7 @@
 
                                     <a data-bs-toggle="popover" data-bs-title="Popover title"
                                         data-bs-content="And here's some amazing content. It's very engaging. Right?">
-                                        <img src="assets/images/icons8-info-128.png" alt="" width="16px" (click)="openSiteMapping(item)">
+                                        <img src="assets/images/icons8-info-128.png" alt="" width="16px" (click)="openSiteMapping(item)" *ngIf="item.STATUS !== ''">
                                     </a>
                                 </div>
 
