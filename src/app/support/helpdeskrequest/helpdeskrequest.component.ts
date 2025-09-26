@@ -924,7 +924,7 @@ export class HelpdeskrequestComponent implements OnInit {
   }
 
   getSubCat(data: any) {
-    this.showsubcats = this.showcategories.filter((item: any) => item.catId == data)[0]?.subCategoryList;
+    this.showsubcats = this.showcategories.filter((item: any) => item.catId == data).flatMap((item: any) => item.subCategoryList);
   }
 
   shifttofirst(arrayObj1: any, val: any) {
@@ -965,8 +965,10 @@ export class HelpdeskrequestComponent implements OnInit {
     // this.showcategories = this.catsforadd.filter((item: any) => item.catName !== this.currentaddcat.catName)
     // this.showsubcats = this.currentaddcat.subCategoryList.filter((item: any) => item.serviceSubcatName !== this.currentaddsubcat.serviceSubcatName)
     // console.log(data)
-    this.showsubcats = this.showcategories[Number(data) - 1]?.subCategoryList;
+    // this.showsubcats = this.showcategories[Number(data) - 1]?.subCategoryList;
+    // console.log(this.showsubcats)
 
+    this.showsubcats = this.showcategories.filter((item: any) => item.catId == data).flatMap((item: any) => item.subCategoryList);
   }
 
   subcatclicked(e: any, index: any) {
