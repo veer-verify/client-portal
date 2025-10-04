@@ -51,7 +51,7 @@ export class InsightComponent implements OnInit {
       this.currentInfo = res;
       if (res) {
         this.storageService.storeEncrData('siteInfo', res.site);
-        // this.listInsightImages(res?.site);
+        this.listInsightImages(res?.site);
         this.currentSite=res?.site;
       }
     })
@@ -452,7 +452,7 @@ export class InsightComponent implements OnInit {
   // }
 
   generateReport() {
-    // this.listInsightImages(this.currentSite);
+    this.listInsightImages(this.currentSite);
     var dateParts: any = this.startDate.split("-");
     var start = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
     var dateParts1: any = this.endDate.split("-");
