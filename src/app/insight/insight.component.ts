@@ -331,7 +331,7 @@ export class InsightComponent implements OnInit {
           this.displaYstartDate={year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
           this.displaYendDate = {year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
           // console.log(this.displaYstartDate)
-          this.selectedSpan = `${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
+          this.selectedSpan = `${this.displaYstartDate.day} ${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
 
           // this.displaYendDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
           // this.minenddate = { year: Number(this.displaYstartDate.split('-')[2]), month: Number(this.displaYstartDate.split('-')[0]), day: Number(this.displaYstartDate.split('-')[1]) };
