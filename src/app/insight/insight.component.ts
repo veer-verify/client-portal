@@ -328,7 +328,8 @@ export class InsightComponent implements OnInit {
           // this.displaYstartDate = this.pipe.transform(new Date(this.lastWorkingDay), 'MM-dd-yyyy');
 
           this.startDate = this.endDate = res.LastWorkingDay.split('-')[2] + '-' + res.LastWorkingDay.split('-')[1] + '-' + res.LastWorkingDay.split('-')[0];
-          this.displaYstartDate = {year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
+          this.displaYstartDate={year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
+          this.displaYendDate = {year: Number(res.LastWorkingDay.split('-')[0]), month: Number(res.LastWorkingDay.split('-')[1]), day: Number(res.LastWorkingDay.split('-')[2])};
           // console.log(this.displaYstartDate)
           this.selectedSpan = `${this.months[this.displaYstartDate.month - 1]}, ${this.displaYstartDate.year}`;
 
@@ -378,7 +379,10 @@ export class InsightComponent implements OnInit {
     // this.setweekenddisable();
     // this.showLoader = true;
     // this.apiservice.getServices(site.siteId);
+    this.displaYstartDate=null;
+    this.displaYendDate=null;
     this.getsitenonworkingdays();
+    
   }
 
   setweekenddisable() {

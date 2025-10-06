@@ -428,8 +428,8 @@ scrollToSite(siteId: number) {
     }
     var cameras = this.cameras;
     this.selector();
-    const sortAlphaNum = (a: any, b: any) => a.cameraId.localeCompare(b.cameraId, 'en', { numeric: true });
-    cameras = cameras?.sort(sortAlphaNum);
+    // const sortAlphaNum = (a: any, b: any) => a.cameraId.localeCompare(b.cameraId, 'en', { numeric: true });
+    // cameras = cameras?.sort(sortAlphaNum);
 
     var x;
     var y = Number(this.pagenumber)
