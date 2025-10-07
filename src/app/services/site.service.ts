@@ -121,4 +121,24 @@ export class SiteService {
     this.error$.next(e)
     this.router.navigateByUrl('/error');
   }
+
+  incidentsDataToExcel(payload:any){
+    console.log(payload)
+  
+  let url = `http://192.168.0.45:8006/incidentsDataToExcel`;
+
+    let params = new HttpParams();
+
+   if(payload?.siteId) {
+      params = params.set('siteId', payload?.siteId )
+    }
+    if(payload?.fromDate) {
+      params = params.set('fromDate', `${payload?.fromDate.year}-${payload?.fromDate.month}-${payload?.fromDate.day}`)
+    }
+    if(payload?.toDate) {
+      params = params.set('toDate',  `${payload?.toDate.year}-${payload?.toDate.month}-${payload?.toDate.day}`)
+    }
+
+    return this.http.get(url,{params:params});
+}
 }

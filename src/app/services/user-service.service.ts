@@ -84,5 +84,7 @@ deactivateUser(payload:any){
     let url = `${environment.authUrl}/deactivateUser_1_0/${payload?.userId}`;
     return this.http.post(url,null);
 }
+
+
   
 }

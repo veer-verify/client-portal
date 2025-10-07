@@ -416,4 +416,19 @@ scrollToSite(siteId: number) {
       }
     });
   }
+
+
+  incidentsDataToExcel(){
+  
+    let payload={
+      siteId:this.currentSite.siteId,
+      fromDate :this.fromDate,
+      toDate : this.toDate
+    }
+
+    this.siteService.incidentsDataToExcel(payload).subscribe((res:any)=>{
+      console.log(res)
+    })
+
+  }
 }
