@@ -132,17 +132,17 @@
                             <img *ngIf="el.latestUpOrDowntime" [src]="el.status === 'ONLINE' ? 'assets/icons/up-arrow.png' : 'assets/icons/down-arrow.png'" width="16" alt="">
                           </p>
                         </td> -->
-                        <td>
-                          <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
-                        </td>
                         <!-- <td>
                           <p [style.color]="el.status === 'ONLINE' ? 'green' : 'red'">{{ el.totalUptime }}</p>
                         </td>
                         <td>
                           <p>{{ el.totalDowntime }}</p>
                         </td> -->
-                         <td>
+                        <td>
                           <p>{{ el.latestReconnectedTime }}</p>
+                        </td>
+                        <td>
+                          <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
                         </td>
                         <td>
                           <p>{{ el.latestUpOrDowntime }}</p>
