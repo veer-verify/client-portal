@@ -203,7 +203,6 @@
 
 .pagetitlelogin {
     font-family: MS, sans-serif;
-    background: var(--cmn-background);
     background-clip: text;
     color: #fff;
     font-size: 30px;
@@ -230,7 +229,6 @@
 .forgotpass {
     text-align: right;
     color: #104b86;
-    /* background: var(--cmn-background); */
     /* background-clip: text; */
     /* color: transparent; */
     font-size: 12px;
