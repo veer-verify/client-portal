@@ -104,9 +104,9 @@
 
 .logout-btn {
   padding: 0 10px;
-  border: 10px solid #104B86;
+  border: 10px solid var(--cmn-background);
   border-radius: 30px;
-  background:#104B86;
+  background: var(--cmn-background);
   color: #fff;
   font-size: 14px;
   width: -webkit-fill-available;

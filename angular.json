@@ -44,7 +44,8 @@
                     },
                     "configurations": {
                         "production": {
-                            "budgets": [{
+                            "budgets": [
+                                {
                                     "type": "initial",
                                     "maximumWarning": "500kb",
                                     "maximumError": "4mb"
@@ -55,10 +56,12 @@
                                     "maximumError": "10kb"
                                 }
                             ],
-                            "fileReplacements": [{
-                                "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.prod.ts"
-                            }],
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
                             "outputHashing": "all"
                         },
                         "development": {
@@ -68,6 +71,34 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
+                        },
+                        "unv": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.unv.ts"
+                                }
+                            ]
+                        },
+                        "verifai": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.verifai.ts"
+                                }
+                            ]
                         }
                     },
                     "defaultConfiguration": "production"
@@ -80,6 +111,12 @@
                         },
                         "development": {
                             "browserTarget": "IVIS_security:build:development"
+                        },
+                        "unv": {
+                            "browserTarget": "IVIS_security:build:unv"
+                        },
+                        "verifai": {
+                            "browserTarget": "IVIS_security:build:verifai"
                         }
                     },
                     "defaultConfiguration": "development"

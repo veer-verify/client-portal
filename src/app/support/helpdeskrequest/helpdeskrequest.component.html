@@ -43,7 +43,7 @@
             [style.backgroundColor]="support==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="support==false ? '#fff' : '#000'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="support" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!support" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="support ? storageService.activeLogo : storageService.inActiveLogo" alt="">
+            <img [src]="support ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
             <div class="label">Support Requests</div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
@@ -55,7 +55,7 @@
           <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="faq==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="faq==false ? '#fff' : '#000'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="faq" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!faq" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="faq ? storageService.activeLogo : storageService.inActiveLogo" alt="">
+            <img [src]="faq ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
             <div class="label"> Frequently Asked Questions </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
@@ -72,7 +72,7 @@
           <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="contactUs==false ? '#fff' : '#000'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="contactUs" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!contactUs" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="contactUs ? storageService.activeLogo : storageService.inActiveLogo" alt="">
+            <img [src]="contactUs ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
             <div class="label"> Contact Us </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
@@ -82,7 +82,7 @@
         [style.border]="tnc == false? '1px solid #fff' : ''"
         [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
           <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="tnc==false ? '#fff' : '#000'">
-            <img [src]="tnc ? storageService.activeLogo : storageService.inActiveLogo" alt="">
+            <img [src]="tnc ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
             <div class="label"> Terms & Conditions </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div>
@@ -171,10 +171,10 @@
                     <span style="color: #acacac; font-weight:bold;">ADDRESS</span>
                   </div>
                   <div style="margin-top: 15px; font-size:14px;">
-                    <b>{{storageService.address}} &#169;</b><br>
-                      {{storageService.city}}<br>
-                      {{storageService.state}}<br>
-                      {{storageService.country}}<br>
+                    <b>{{storageService.environment.theme.detail.address}} &#169;</b><br>
+                      {{storageService.environment.theme.detail.city}}<br>
+                      {{storageService.environment.theme.detail.state}}<br>
+                      {{storageService.environment.theme.detail.country}}<br>
                   </div>
                 </div>
 
@@ -183,8 +183,8 @@
                     <img src="assets/icons/call.svg" style="height: 20px; margin-right:10px">
                     <span style="color: #acacac; font-weight:bold;">CALL</span>
                   </div>
-                  <div style="margin-top: 15px; font-size:14px;"><b>{{ storageService.phone }}</b><br></div>
-                  <div style="margin-top: 5px; font-size:14px;"><b>{{ storageService.email }}</b><br></div>
+                  <div style="margin-top: 15px; font-size:14px;"><b>{{ storageService.environment.theme.detail.phone }}</b><br></div>
+                  <div style="margin-top: 5px; font-size:14px;"><b>{{ storageService.environment.theme.detail.email }}</b><br></div>
                 </div>
               </div>
             </div>

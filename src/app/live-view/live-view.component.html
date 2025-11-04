@@ -86,7 +86,7 @@
             #optionlabel (click)="getCameras($event, site, j)" #siteselect>
             
             <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="site"> -->
-            <img [src]="storageService.accordianLogo" style="width: 20px;" alt="site">
+            <img [src]="storageService.environment.theme.accordianLogo" style="width: 20px;" alt="site">
             <div class="label">{{site.siteName}}</div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg"></div>
           </div>
@@ -96,7 +96,7 @@
               <div class="accordionElements camname" *ngFor="let item of cameras; let c = index" >
                 <!-- <span *ngIf="!camera?.videoUrl" [className]="camera?.videoUrl ? 'dot' : 'dot-red'"></span> -->
 
-                <img [src]="item?.camMonitor === 'T' ? storageService.activeLogo : storageService.inActiveLogo" alt="" width="15">
+                <img [src]="item?.camMonitor === 'T' ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="" width="15">
                 <!-- <img src="assets/themes/Uneeviu Logo Blue png.png" style="width: 20px;" alt="site"> -->
 
                 <p style="margin: 0 0 0 20px"></p>
