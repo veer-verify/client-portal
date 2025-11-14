@@ -28,16 +28,30 @@
         </div>
 
         <!-- pagination *ngIf="newEventData.length !== 0"-->
-        <div class="col-lg-2 d-flex mx-3" >
-          <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="16px" [className]="currentPage == 1 || currentPage === 0 ? 'fade': 'pointer'" (click)="filter('prev')" alt="prev">
+        <div class="col-lg-2 d-flex mx-3">
+          <div style=" margin: 10px !important; padding: 4px !important; height: 30px;" class="searchbox">
+
+            <select name="my-dropdown" class="dropdown" [(ngModel)]="pageSize" (ngModelChange)="filter($event)">
+
+              <option [value]="5">5</option>
+              <option [value]="10">10</option>
+              <option [value]="25">25</option>
+              <option [value]="50">50</option>
+
+            </select>
+          </div>
+          <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="16px"
+            [className]="currentPage == 1 || currentPage === 0 ? 'fade': 'pointer'" (click)="filter('prev')" alt="prev">
           <div class="searchbox" style=" margin: 10px !important; padding: 4px !important; height: 30px;">
             <select name="my-dropdown" class="dropdown" [(ngModel)]="currentPage" (ngModelChange)="filter($event)">
               <option *ngFor="let number of selectNumbers" [value]="number">
-                <div style="padding: 15px; margin:10px; margin-right:15px"><span class="page-link">{{ number }} of {{ totalPages }}</span></div>
+                <div style="padding: 15px; margin:10px; margin-right:15px"><span class="page-link">{{ number }} of {{
+                    totalPages }}</span></div>
               </option>
             </select>
           </div>
-          <img src="assets/icons/arrow.svg" width="16px" [className]="currentPage === totalPages ? 'fade': 'pointer'" (click)="filter('next')" alt="next">
+          <img src="assets/icons/arrow.svg" width="16px" [className]="currentPage === totalPages ? 'fade': 'pointer'"
+            (click)="filter('next')" alt="next">
         </div>
       </div>
     </div>
@@ -53,7 +67,7 @@
 
             <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA"
               *ngIf="navActive == i"> -->
-              <img [src]="storageSer.environment.theme.accordianLogo" style="width: 16px;" class="me-1" alt="">
+            <img [src]="storageSer.environment.theme.accordianLogo" style="width: 16px;" class="me-1" alt="">
             <div class="label">{{ site?.siteName }} </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
           </div>
@@ -62,7 +76,7 @@
       </div>
 
       <div class="col-lg-9 col-sm-12">
-        <ng-container >
+        <ng-container>
           <!-- <span class="text-white fw-bold" style="font-family: TP, sans-serif; letter-spacing: 3px;">{{ currentSite?.siteName }}</span>
             <hr class="mb-0" id="hr1"> -->
 
@@ -113,9 +127,10 @@
               </div>
 
               <div class="col-lg-2 ps-0">
-                <button class="btn btn-sm btn-outline-danger mt-3 me-1" (click)="fromDate = ''; toDate = ''; filter()"  *ngIf="fromDate != '' || toDate != ''">Clear</button>
+                <button class="btn btn-sm btn-outline-danger mt-3 me-1" (click)="fromDate = ''; toDate = ''; filter()"
+                  *ngIf="fromDate != '' || toDate != ''">Clear</button>
                 <!-- <button class="btn btn-sm btn-outline-success mt-4" (click)="download()"  *ngIf="fromDate != '' && toDate != ''">Download</button> -->
-                 <!-- <button  class="btn btn-sm mt-3" (click)="incidentsDataToExcel()"><img src="assets/icons/xls (1).png" width="35px"><img  class="spinner" *ngIf="spinexcel" src="assets/icons/cyclespinner.svg" width="20px"></button> -->
+                <!-- <button  class="btn btn-sm mt-3" (click)="incidentsDataToExcel()"><img src="assets/icons/xls (1).png" width="35px"><img  class="spinner" *ngIf="spinexcel" src="assets/icons/cyclespinner.svg" width="20px"></button> -->
 
               </div>
             </div>
@@ -184,8 +199,8 @@
                   <td>{{item?.eventFromTime }}</td>
                   <td>{{item?.eventToTime }}</td>
                   <!-- <td>{{ getTimeDifference(item?.eventFromTime, item?.eventToTime) }}</td> -->
-                   <td *ngIf="item?.duration!='F'">{{item?.duration}}</td>
-                   <td  *ngIf="item?.duration=='F'">Not Applicable</td>
+                  <td *ngIf="item?.duration!='F'">{{item?.duration}}</td>
+                  <td *ngIf="item?.duration=='F'">Not Applicable</td>
                   <td>{{item?.objectName | titlecase}}</td>
                   <td>
                     <ng-container *ngFor="let status of actionTags">
@@ -239,7 +254,8 @@
     </div>
   </div>
 
-  <div class="dialog-content" style="position: relative; width: 55vw; height: 55vh; border:2px solid #587164" #reportDialog *ngIf="currentVideoData">
+  <div class="dialog-content" style="position: relative; width: 55vw; height: 55vh; border:2px solid #587164"
+    #reportDialog *ngIf="currentVideoData">
     <div id="canvas">
       <!-- <div class="header d-flex">
         <div><img src="assets/icons/IVISsecurity_logo.png" width="150" alt="ivisSecurity"></div>
@@ -255,12 +271,12 @@
       <div>
         <div style="height: 35vh;">
           <!-- image -->
-          <img *ngIf="!isVideo(currentTileItem)"
-            [src]="environment + currentTileItem | image | async" width="100%" height="100%" alt="Loading...">
+          <img *ngIf="!isVideo(currentTileItem)" [src]="environment + currentTileItem | image | async" width="100%"
+            height="100%" alt="Loading...">
 
           <!-- video -->
-          <video *ngIf="isVideo(currentTileItem)"
-            [src]="environment + currentTileItem | image | async" class="bg-dark" controls autoplay width="100%" height="100%"></video>
+          <video *ngIf="isVideo(currentTileItem)" [src]="environment + currentTileItem | image | async" class="bg-dark"
+            controls autoplay width="100%" height="100%"></video>
         </div>
 
         <div class="tiles-parent">
@@ -272,8 +288,8 @@
           <div class="scroll-tiles" *ngFor="let data of currentTiles; let i = index"
             [ngStyle]="{'border': currentTileItem == data ? '3px solid red' : 'none'}" (click)="getCurrentTile(data)">
             <!-- image -->
-            <img *ngIf="!isVideo(currentTileItem)" [src]="environment + data | image | async" width="100%"
-              height="100%" alt="Loading...">
+            <img *ngIf="!isVideo(currentTileItem)" [src]="environment + data | image | async" width="100%" height="100%"
+              alt="Loading...">
 
             <!-- video -->
             <video *ngIf="isVideo(currentTileItem)" [src]="environment + data | image | async" class="bg-dark"

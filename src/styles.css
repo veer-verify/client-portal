@@ -29,9 +29,9 @@
 
 :root {
   /** ivis */
-  /* --background-img: linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("assets/icons/background.jpg");
+  --background-img: linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("assets/icons/background.jpg");
   --cmn-background: ##104b86;
-  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%); */
+  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%);
 
   /** unv */
   /* --background-img: linear-gradient(325deg, #1E3F73 100%, #ffffff 0%);
@@ -39,9 +39,9 @@
   --loader-background: linear-gradient(rgba(72, 128, 211, 0.8)); */
 
   /** verifai */
-    --background-img: linear-gradient(325deg, rgba(237, 50, 55, 1) 10%, rgba(255, 255, 255, 1) 90%);
+    /* --background-img: linear-gradient(325deg, rgba(237, 50, 55, 1) 10%, rgba(255, 255, 255, 1) 90%);
     --cmn-background: #ED3237;
-    --loader-background: linear-gradient(rgba(117, 102, 100, 0.8));
+    --loader-background: linear-gradient(rgba(117, 102, 100, 0.8)); */
 }
 
 

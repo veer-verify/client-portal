@@ -69,6 +69,12 @@ export class EventService {
       let x = payload?.toDate;
       params = params.set('toDate', `${x.year}-${x.month}-${x.day}`);
     }
+
+     if(payload?.pageSize) {
+      params = params.set('pageSize', payload.pageSize);
+    }else {
+      params = params.set('pageSize', 10);
+    }
     if(payload?.page) {
       params = params.set('page', payload.page);
     } else {

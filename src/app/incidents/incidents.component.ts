@@ -247,12 +247,16 @@ scrollToSite(siteId: number) {
 
     currentPage: number;
     totalPages: number;
+    pageSize:number=10;
+
     filter(type?: string | Event) {
     // this.currentSite.siteId = this.siteId;
 
     let pageNumber;
     type == 'next' ? pageNumber = this.currentPage + 1 : type == 'prev' ? pageNumber = this.currentPage - 1 : pageNumber = type;
     if(pageNumber == (this.totalPages + 1)) return;
+
+    console.log(pageNumber)
 
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
@@ -264,7 +268,8 @@ scrollToSite(siteId: number) {
       actionTag: this.actionTag,
       fromDate: this.fromDate,
       toDate: this.toDate,
-      page: pageNumber
+      page: pageNumber,
+      pageSize:this.pageSize
     }).subscribe((res: any) => {
     this.storageService.loading_text = null;
       this.currentPage = res.page;
