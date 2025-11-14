@@ -89,8 +89,7 @@
     cursor: pointer;
     font-family: TP, sans-serif;
     color: #fff;
-    background-color: #104b86;
-    /* background: linear-gradient(160deg, #D44124, #104b86); */
+    background-color: var(--cmn-background);
     font-size: 15px;
     padding: 10px;
     border-radius: 50px;
@@ -203,7 +202,6 @@
 
 .pagetitlelogin {
     font-family: MS, sans-serif;
-    background: var(--cmn-background);
     background-clip: text;
     color: #fff;
     font-size: 30px;
@@ -230,7 +228,6 @@
 .forgotpass {
     text-align: right;
     color: #104b86;
-    /* background: var(--cmn-background); */
     /* background-clip: text; */
     /* color: transparent; */
     font-size: 12px;

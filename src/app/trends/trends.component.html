@@ -38,7 +38,7 @@
         <!-- sites -->
         <div class="optionlabelparent" *ngIf="sites.length > 1">
           <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel>
-            <img [src]="storageService.activeLogo" alt="">
+            <img [src]="storageService.environment.theme.activeLogo" alt="">
             <div class="label"> {{currentsite}} </div>
             <div class="accordionArrow">
               <img src="assets/icons/forward_arrow.svg" alt="drop">
@@ -79,7 +79,7 @@
               [maxDate]="maxDate" [minDate]="{year: 2014, month: 1, day: 1}" [markDisabled]="disabledays">
           </form> -->
           <div class="d-flex w-100">
-            <img [src]="storageService.activeLogo" width="16px" alt="">
+            <img [src]="storageService.environment.theme.activeLogo" width="16px" alt="">
             <input class="form-control p-0" style="border: none;" placeholder="YYYY-MM-DD" [(ngModel)]="displayDate"
               ngbDatepicker #d1="ngbDatepicker" [minDate]="{year: 2014, month: 1, day: 1}" [maxDate]="maxDate"
               [markDisabled]="disabledays">
@@ -98,7 +98,7 @@
         <!-- fields / customer services -->
         <div class="optionlabelparent" *ngIf="rsdata">
           <div class="optionlabel" Style="position:relative;" (click)="toggleAccordian($event)" #optionlabel1>
-            <img [src]="storageService.activeLogo" alt="">
+            <img [src]="storageService.environment.theme.activeLogo" alt="">
             <div class="label"> {{currentfield ? currentfield : 'Select Field'}}</div>
             <div class="accordionArrow">
               <img src="assets/icons/forward_arrow.svg" alt="drop">

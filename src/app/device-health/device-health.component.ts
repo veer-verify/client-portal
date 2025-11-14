@@ -69,6 +69,11 @@ export class DeviceHealthComponent {
       label: 'Recently Connected Time',
       sort: true
     },
+    {
+      id: '',
+      label: 'device status',
+      sort: true
+    },
      {
       id: 'latestUpOrDowntime',
       label: 'latestUp Or Downtime',
@@ -84,11 +89,6 @@ export class DeviceHealthComponent {
     //   label: 'total down time',
     //   sort: true
     // },
-    {
-      id: '',
-      label: 'device status',
-      sort: true
-    },
     {
       id: '',
       label: 'device downtimes',

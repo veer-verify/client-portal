@@ -50,7 +50,7 @@
         <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
           (click)="footageList(site)">
           <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
-                          <img class="me-2" [src]="navActive != i ? storageService.activeLogo : storageService.inActiveLogo" width="20px" alt="">
+                          <img class="me-2" [src]="navActive != i ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" width="20px" alt="">
 
             <div class="label">{{ site?.siteName }} </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
@@ -132,17 +132,17 @@
                             <img *ngIf="el.latestUpOrDowntime" [src]="el.status === 'ONLINE' ? 'assets/icons/up-arrow.png' : 'assets/icons/down-arrow.png'" width="16" alt="">
                           </p>
                         </td> -->
-                        <td>
-                          <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
-                        </td>
                         <!-- <td>
                           <p [style.color]="el.status === 'ONLINE' ? 'green' : 'red'">{{ el.totalUptime }}</p>
                         </td>
                         <td>
                           <p>{{ el.totalDowntime }}</p>
                         </td> -->
-                         <td>
+                        <td>
                           <p>{{ el.latestReconnectedTime }}</p>
+                        </td>
+                        <td>
+                          <p [style.color]="el.deviceStatus === 'ONLINE' ? 'green' : 'red'">{{ el.deviceStatus }}</p>
                         </td>
                         <td>
                           <p>{{ el.latestUpOrDowntime }}</p>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, first, last, Observable, shareReplay, Subject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -8,36 +9,7 @@ import * as CryptoJS from 'crypto-js';
 })
 export class StorageService {
 
-  //ivis
-  logo = 'assets/icons/logo_white.png';
-  headerLogo = 'assets/themes/IVISsecurity_logo.png';
-  accordianLogo = 'assets/icons/eye.svg';
-  activeLogo = 'assets/icons/eye-blue.svg';
-  // inActiveLogo = 'assets/icons/eye-red.svg';
-  inActiveLogo = 'assets/icons/visibility_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg';
-
-  address = 'IVIS Security, Inc';
-  city = '3945 W Cheyenne Ave #204';
-  state = 'North Las Vegas, NV 89032';
-  country = 'United States';
-  phone = '+1 (844) 438-4847';
-  email = 'support@ivisecurity.com';
-
-  //unv
-  // logo = 'assets/themes/UneeviuLogowhite (1).png';
-  // headerLogo = 'assets/themes/Uneeviu Logo Blue png.png';
-  // accordianLogo = 'assets/themes/CameraLogowhite.png';
-  // activeLogo = 'assets/themes/Uneeviu Logo Blue png.png';
-  // inActiveLogo = 'assets/themes/Uneeviu Logo Blue png.png';
-
-  // address = 'SadguruVilla - 123/128';
-  // city = 'Gorai, Borivali west';
-  // state = 'Mumbai MH - 400091';
-  // country = 'INDIA';
-  // phone = '(+91)7490009174)';
-  // email = 'sales@uneeviu.com';
-
-  
+  environment = environment;
   private readonly key = "verifai";
 
 
