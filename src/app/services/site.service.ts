@@ -123,7 +123,7 @@ export class SiteService {
   }
 
   incidentsDataToExcel(payload:any){
-    console.log(payload)
+ 
   
   let url = `http://192.168.0.45:8006/incidentsDataToExcel`;
 
@@ -139,6 +139,9 @@ export class SiteService {
       params = params.set('toDate',  `${payload?.toDate.year}-${payload?.toDate.month}-${payload?.toDate.day}`)
     }
 
-    return this.http.get(url,{params:params});
+   return this.http.get<ArrayBuffer>(url, {
+      params,
+      responseType: 'arraybuffer' as 'json',
+    });
 }
 }

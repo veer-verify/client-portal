@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
 import { SiteService } from '../services/site.service';
+import { AlertService } from '../services/alertservice/alert-service.service';
 
 @Component({
   selector: 'app-incidents',
@@ -25,8 +26,9 @@ export class IncidentsComponent implements OnInit {
     private proxSer: ProximityService,
     private eventSer: EventService,
     public storageSer: StorageService,
-    private siteService: SiteService
-  ) { 
+    private siteService: SiteService,
+    private alert:AlertService
+  ) {
      this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.currentSite = res?.site;
@@ -44,7 +46,7 @@ export class IncidentsComponent implements OnInit {
     let d2 = new Date(d1);
     d2.setMinutes(d1.getMinutes() - 360);
     this.currentTime = formatDate(d2, 'yyyy-MM-ddThh:mm:ss', 'en-us');
-    
+
     this.getTags();
   }
 
@@ -92,7 +94,7 @@ export class IncidentsComponent implements OnInit {
   }
 
   siteData: any = [];
-  
+
   getSitesListForUserName() {
     this.storageService.loading_text = '';
     this.siteService.getSitesListForUserName(this.userData).subscribe((res: any) => {
@@ -137,7 +139,7 @@ export class IncidentsComponent implements OnInit {
   //      this.showLoader=false;
   //     if(res.statusCode==200){
   //        this.siteData=res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
-       
+
   //     }
   //     else{
   //       this.siteData=[]
@@ -161,12 +163,12 @@ export class IncidentsComponent implements OnInit {
   }
 
   getDisplySite(site: any) {
-    
+
     if(site) {
       this.camerasListForSites({siteId: site});
     }
     let x = this.siteData.filter((item: any) => site == item.siteId);
-  
+
     this.displaySite = x[0];
   }
 
@@ -192,7 +194,7 @@ scrollToSite(siteId: number) {
 
   footageList(data: any) {
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
-    
+
     if(data) {
       this.camerasListForSites(data);
       this.scrollToSite(data?.siteId);
@@ -201,22 +203,22 @@ scrollToSite(siteId: number) {
       // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
       this.storageService.site_sub.next({site: data});
     // }
-    
+
     this.currentSite = data;
     this.displaySite = data;
     // this.getsiteservices1(data);
       this.navActive = this.siteData.findIndex(
           (site: any) => site.siteId === data.siteId
         );
-    
-    
+
+
     let d = new Date().setMonth(new Date().getMonth() + 1);
     this.todayDate = {
       year: new Date(d).getFullYear(),
       month: new Date(d).getMonth(),
       day: new Date(d).getDate()
     }
-    
+
     this.newEventData = [];
     this.storageService.loading_text = '';
     this.eventSer.incidentList(data).subscribe((res: any) => {
@@ -234,7 +236,7 @@ scrollToSite(siteId: number) {
     this.storageService.loading_text = 'NO DATA!';
     })
   }
-    
+
     // siteId: any
     cameraId: any = '';
     objectName: any = '';
@@ -247,7 +249,7 @@ scrollToSite(siteId: number) {
     totalPages: number;
     filter(type?: string | Event) {
     // this.currentSite.siteId = this.siteId;
-    
+
     let pageNumber;
     type == 'next' ? pageNumber = this.currentPage + 1 : type == 'prev' ? pageNumber = this.currentPage - 1 : pageNumber = type;
     if(pageNumber == (this.totalPages + 1)) return;
@@ -376,7 +378,7 @@ scrollToSite(siteId: number) {
         urls.push(this.environment + item);
       }
     });
-    
+
     const doc = new jsPDF('p', 'px', [420, 420]);
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
@@ -388,10 +390,10 @@ scrollToSite(siteId: number) {
       }
       doc.addImage(imgData, 'PNG', 10, 10, 400, 400);
     }
-    
+
     doc.save(`${new Date()}.pdf`);
   }
-  
+
   private loadImage(url: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -417,18 +419,41 @@ scrollToSite(siteId: number) {
     });
   }
 
-
+spinexcel:boolean=false;
   incidentsDataToExcel(){
-  
-    let payload={
-      siteId:this.currentSite.siteId,
-      fromDate :this.fromDate,
-      toDate : this.toDate
+
+    if(this.fromDate && this.toDate){
+
+      this.spinexcel=true;
+
+      let payload={
+        siteId:this.currentSite.siteId,
+        fromDate :this.fromDate,
+        toDate : this.toDate
+      }
+
+      this.siteService.incidentsDataToExcel(payload).subscribe({
+      next: (res: ArrayBuffer) => {
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        });
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Alerts-report.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(url);
+         this.spinexcel=false;
+      },
+      error: (err) => {
+        this.alert.error('Download failed:', err);
+         this.spinexcel=false;
+      },
+    });
     }
-
-    this.siteService.incidentsDataToExcel(payload).subscribe((res:any)=>{
-      console.log(res)
-    })
-
+    else{
+      this.alert.error('error',"Please fill start Date and end Date")
+    }
   }
 }

@@ -13,7 +13,7 @@
       <!-- <div class="strip"></div> -->
       <div class="form">
         <form [formGroup]="loginForm">
-          <input type="text" placeholder="Username" formControlName="userName">
+          <input type="text" placeholder="Username" formControlName="userName"  lowercase>
           <div style="position: relative;">
             <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" id="pwd">
             <img [src]="!showPassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'" id="pwdimg" alt="" class="hidden-icon" (click)="togglePwd('password')">

@@ -60,6 +60,7 @@ import { SanitizePipe } from './services/pipes/sanitize.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CreateUserComponent } from './user-profile/create-user/create-user.component';
 import { TextAndNumberOnlyDirective } from './services/pipes/text-and-number-only.directive';
+import { LowercaseDirective } from './lowercase.directive';
 
 
 
@@ -113,7 +114,8 @@ import { TextAndNumberOnlyDirective } from './services/pipes/text-and-number-onl
     ImagePipe,
     SanitizePipe,
     CreateUserComponent,
-    TextAndNumberOnlyDirective
+    TextAndNumberOnlyDirective,
+    LowercaseDirective
   ],
   imports: [
     BrowserModule,
