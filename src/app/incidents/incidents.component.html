@@ -28,31 +28,40 @@
         </div>
 
         <!-- pagination *ngIf="newEventData.length !== 0"-->
-        <div class="col-lg-2 d-flex mx-3">
-          <div style=" margin: 10px !important; padding: 4px !important; height: 30px;" class="searchbox">
 
-            <select name="my-dropdown" class="dropdown" [(ngModel)]="pageSize" (ngModelChange)="filter($event)">
 
-              <option [value]="5">5</option>
-              <option [value]="10">10</option>
-              <option [value]="25">25</option>
-              <option [value]="50">50</option>
+        <div class="pagination-wrapper d-flex align-items-center gap-2 col-lg-2">
 
+          <!-- Page Size Selector -->
+          <div class="page-size">
+            <select class="form-select pagination-select" [(ngModel)]="pageSize" (ngModelChange)="filter()">
+              <option [value]="5">5 / page</option>
+              <option [value]="10">10 / page</option>
+              <option [value]="25">25 / page</option>
             </select>
           </div>
-          <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="16px"
-            [className]="currentPage == 1 || currentPage === 0 ? 'fade': 'pointer'" (click)="filter('prev')" alt="prev">
-          <div class="searchbox" style=" margin: 10px !important; padding: 4px !important; height: 30px;">
-            <select name="my-dropdown" class="dropdown" [(ngModel)]="currentPage" (ngModelChange)="filter($event)">
+
+          <!-- Prev Button -->
+          <button class="pagination-btn" [disabled]="currentPage === 1" (click)="filter('prev')">
+            <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="14" />
+          </button>
+
+          <!-- Page Dropdown -->
+          <div>
+            <select class="form-select pagination-select" [(ngModel)]="currentPage" (ngModelChange)="filter($event)">
               <option *ngFor="let number of selectNumbers" [value]="number">
-                <div style="padding: 15px; margin:10px; margin-right:15px"><span class="page-link">{{ number }} of {{
-                    totalPages }}</span></div>
+                {{ number }} of {{ totalPages }}
               </option>
             </select>
           </div>
-          <img src="assets/icons/arrow.svg" width="16px" [className]="currentPage === totalPages ? 'fade': 'pointer'"
-            (click)="filter('next')" alt="next">
+
+          <!-- Next Button -->
+          <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="filter('next')">
+            <img src="assets/icons/arrow.svg" width="14" />
+          </button>
+
         </div>
+
       </div>
     </div>
   </div>
