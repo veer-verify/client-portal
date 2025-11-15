@@ -208,8 +208,8 @@
                   <td>{{item?.eventFromTime }}</td>
                   <td>{{item?.eventToTime }}</td>
                   <!-- <td>{{ getTimeDifference(item?.eventFromTime, item?.eventToTime) }}</td> -->
-                  <td *ngIf="item?.duration!='F'">{{item?.duration}}</td>
-                  <td *ngIf="item?.duration=='F'">Not Applicable</td>
+                  <td>{{item?.duration}}</td>
+
                   <td>{{item?.objectName | titlecase}}</td>
                   <td>
                     <ng-container *ngFor="let status of actionTags">
