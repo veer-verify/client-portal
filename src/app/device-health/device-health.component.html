@@ -48,7 +48,7 @@
     <div class="row">
       <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
         <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
-          (click)="footageList(site)">
+          (click)="getHealth(site)">
           <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
                           <img class="me-2" [src]="navActive != i ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" width="20px" alt="">
 
@@ -188,7 +188,7 @@
           </table>
           
           <div class="d-flex align-items-center justify-content-center" style="height: 70%;"
-            *ngIf="newEventData.length == 0">
+            *ngIf="newEventData.length == 0 && !showLoader">
             <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
           </div>
         </div>
@@ -259,8 +259,11 @@
         </tbody>
       </table>
 
-      <ng-container *ngIf="downTimes.length === 0">
+      <ng-container *ngIf="downTimes.length === 0 && !tableLoader">
         <p class="text-center" style="height: 20vh;">No DATA!</p>
+      </ng-container>
+            <ng-container *ngIf="tableLoader">
+        <p class="text-center" style="height: 20vh;">Loading...</p>
       </ng-container>
     </div>
   </div>

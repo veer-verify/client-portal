@@ -340,7 +340,7 @@ p {
 .pagination-select {
   height: 34px;
   min-width: 80px;
-  padding: 4px 10px;
+  padding: 4px;
   border-radius: 8px;
   border: 1px solid #d3d3d3;
   background: #fff;

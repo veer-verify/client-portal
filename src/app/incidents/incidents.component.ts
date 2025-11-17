@@ -256,8 +256,6 @@ scrollToSite(siteId: number) {
     type == 'next' ? pageNumber = this.currentPage + 1 : type == 'prev' ? pageNumber = this.currentPage - 1 : pageNumber = type;
     if(pageNumber == (this.totalPages + 1)) return;
 
-    console.log(pageNumber,this.currentPage)
-
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
     this.newEventData = [];
