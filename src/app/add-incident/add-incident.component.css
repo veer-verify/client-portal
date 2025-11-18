@@ -17,7 +17,7 @@
 
 .req-btn {
   border: none;
-  background-color: #104B86;
+  background-color: var(--cmn-background);
   color: #ffffff;
   border-radius: 50px;
   padding: 8px;

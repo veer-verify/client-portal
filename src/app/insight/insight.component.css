@@ -25,7 +25,7 @@
 
 button {
   border-radius: 30px;
-  background: #104b86;
+  background: var(--cmn-background);
   color: #fff;
   font-size: 12px;
   width: -webkit-fill-available;

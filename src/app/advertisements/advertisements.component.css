@@ -3,7 +3,7 @@
 } */
 .optionlabel-active {
   cursor: pointer;
-  background: #084982;
+  background: var(--cmn-background);
   padding: 14px;
   border-radius: 5px;
   margin: 0;
