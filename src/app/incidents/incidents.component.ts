@@ -221,7 +221,8 @@ scrollToSite(siteId: number) {
 
     this.newEventData = [];
     this.storageService.loading_text = '';
-    this.eventSer.incidentList(data).subscribe((res: any) => {
+   
+    this.eventSer.incidentList({...data,pageSize:this.pageSize}).subscribe((res: any) => {
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
       this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
