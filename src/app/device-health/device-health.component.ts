@@ -164,7 +164,7 @@ export class DeviceHealthComponent {
         // this.footageList(this.siteData[0], 0);
       } 
 
-      this.footageList(this.currentInfo?.site);
+      this.getHealth(this.currentInfo?.site);
       
       
       // this.eventSer.getHealth(this.currentInfo?.site).subscribe((res: any) => {
@@ -237,7 +237,7 @@ scrollToSite(siteId: number) {
   }, 1000);
 }
 
-  footageList(data: any) {
+  getHealth(data: any) {
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data) });
     this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
     if(data) {
@@ -315,9 +315,13 @@ scrollToSite(siteId: number) {
     days: 'All',
   }
   downTimes: any = [];
+  tableLoader: boolean = false;
   downtimesForDeviceId() {
-    this.downParams.deviceId = this.currentItem.deviceId
+    this.downTimes= [];
+    this.downParams.deviceId = this.currentItem.deviceId;
+    this.tableLoader = true;
     this.eventSer.downtimesForDeviceId(this.downParams).subscribe((res: any) => {
+      this.tableLoader = false;
       if(res.statusCode === 200) {
         this.downTimes = res.DeviceHealthData;
       } else {

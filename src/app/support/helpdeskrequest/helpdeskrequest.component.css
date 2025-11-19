@@ -20,9 +20,9 @@
 font-family: PS,sans-serif;
 text-transform: uppercase;
 font-size: 12px;
-border: 1px solid #104B86 !important;
+border: 1px solid var(--cmn-background) !important;
 border-radius: 30px;
-background:#104B86;
+background:var(--cmn-background);
 color: #fff;
 padding: 7px 12px;
 }
@@ -460,7 +460,7 @@ select {
 
 .req-btn {
   border: none;
-  background-color: #104B86;
+  background-color: var(--cmn-background);
   color: #ffffff;
   border-radius: 50px;
   padding: 8px;

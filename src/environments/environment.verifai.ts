@@ -23,10 +23,10 @@ export const environment = {
 
   theme: {
     logo: 'assets/themes/verifai-logo.png',
-    headerLogo: 'assets/themes/unv_logo_blue.png',
+    headerLogo: 'assets/themes/verifai-logo.png',
     accordianLogo: 'assets/themes/unv_icon_white.png',
-    activeLogo: 'assets/themes/unv_logo_blue.png',
-    inActiveLogo: 'assets/themes/unv_logo_blue.png',
+    activeLogo: 'assets/themes/verifai-logo.png',
+    inActiveLogo: 'assets/themes/verifai-logo.png',
 
     detail: {
       address: 'SadguruVilla - 123/128',

@@ -61,6 +61,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CreateUserComponent } from './user-profile/create-user/create-user.component';
 import { TextAndNumberOnlyDirective } from './services/pipes/text-and-number-only.directive';
 import { LowercaseDirective } from './lowercase.directive';
+import { SigninComponent } from './signin/signin.component';
 
 
 
@@ -115,7 +116,8 @@ import { LowercaseDirective } from './lowercase.directive';
     SanitizePipe,
     CreateUserComponent,
     TextAndNumberOnlyDirective,
-    LowercaseDirective
+    LowercaseDirective,
+    SigninComponent
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,7 @@ export class HelpdeskrequestComponent implements OnInit {
   contactUs = false;
   support = true;
   tnc = false;
-  placeholder = "Data is not available";
+  placeholder = "";
   site: any;
   subscription: Subscription;
 

@@ -1,8 +1,8 @@
 button {
   /* width: 100%; */
-  border: 18px solid #104B86;
+  border: 18px solid var(--cmn-background);
   border-radius: 30px;
-  background: #104B86;
+  background: var(--cmn-background);
   color: #fff;
   font-size: 12px;
   width: -webkit-fill-available;

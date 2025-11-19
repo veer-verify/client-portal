@@ -22,10 +22,12 @@ import { DeviceHealthComponent } from './device-health/device-health.component';
 import { HelpdeskrequestComponent } from './support/helpdeskrequest/helpdeskrequest.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NvrComponent } from './nvr/nvr.component';
+import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', data: {routeName: "login"},  component: LoginComponent},
+  // { path: 'login', data: {routeName: "login"},  component: LoginComponent},
+    { path: 'login', data: {routeName: "login"},  component: SigninComponent},
   // { path: 'guard', data: {routeName: "Gaurd"}, component: GaurdComponent, canActivate:[AuthGuard] },
   { path: 'guard', data: {routeName: "live"}, component: LiveViewComponent, canActivate:[AuthGuard] },
   { path: 'insight', data: {routeName: "insights"}, component: InsightComponent, canActivate:[AuthGuard] },
