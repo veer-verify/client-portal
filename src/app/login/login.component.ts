@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
   errInfo: any = null;
   ngOnInit(): void {
     localStorage.clear();
-  
+
     this.alertService.getMessage().subscribe((res: any) => {
       this.errInfo = res;
     });
-  
+
     this.loginForm = this.fb.group({
       userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     })
     return result.filter((item) => item);
   }
-  
+
   ngAfterViewInit() {
     // if (this.apiService.sessionstatus() == false) {
     //   localStorage.clear();
@@ -114,8 +114,9 @@ export class LoginComponent implements OnInit {
   loginNew() {
     if(this.loginForm.valid) {
       this.showLoader = true;
-      let x: any = this.loginForm.value.userName;
-      let y: any = this.loginForm.value.password;
+      let x: any = this.loginForm.value.userName.trim();
+      let y: any = this.loginForm.value.password.trim();
+
       this.authservice.loginNew(x, y).subscribe((res: any) => {
         this.showLoader = false;
         this.userEmail.value = null;
