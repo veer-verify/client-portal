@@ -42,7 +42,8 @@
               <div class="searchbox" style=" margin: 0px 10px !important; padding: 4px !important;">
                 <select name="my-dropdown" (change)="pagination()" [(ngModel)]="pagenumber" class="dropdown">
                   <option *ngFor="let number of selectNumbers" [value]="number" style="border: none;outline:none">
-                    <div style="padding: 15px; margin:10px; margin-right:15px">&nbsp;{{number + ' of ' + (selectNumbers?.length)}}&nbsp;</div>
+                    <div style="padding: 15px; margin:10px; margin-right:15px">&nbsp;{{number + ' of ' +
+                      (selectNumbers?.length)}}&nbsp;</div>
                   </option>
                 </select>
                 <!-- <img src="assets/icons/forward_arrow.svg" style="margin-left: -30px; transform:rotate(90deg); pointer-events:none; width: 20px" alt="drop"> -->
@@ -82,40 +83,49 @@
         <div class="optionlabelparent" *ngFor="let site of sites  | SearchPipe: searchText ; let j = index"
           #optionlabelparent>
           <div [className]="site.siteId == currentsite  ? 'optionlabel active' : 'optionlabel'"
-            [style.background]="site.siteId == currentsite ? '#fff': '#ffffff'" style="position:relative;"
-            #optionlabel (click)="getCameras($event, site, j)" #siteselect>
-            
+            [style.background]="site.siteId == currentsite ? '#fff': '#ffffff'" style="position:relative;" #optionlabel
+            (click)="getCameras($event, site, j)" #siteselect>
+
             <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="site"> -->
             <img [src]="storageService.environment.theme.accordianLogo" style="width: 20px;" alt="site">
             <div class="label">{{site.siteName}}</div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg"></div>
           </div>
 
-          <div [className]="(site.siteId == currentsite && showcams)  ? 'panel-active' : 'panel-inactive'" *ngIf="site.siteId == currentsite" #panel>
+          <div [className]="(site.siteId == currentsite && showcams)  ? 'panel-active' : 'panel-inactive'"
+            *ngIf="site.siteId == currentsite" #panel>
             <span style="position: relative;">
-              <div class="accordionElements camname" *ngFor="let item of cameras; let c = index" >
+              <div class="accordionElements camname" *ngFor="let item of cameras; let c = index">
                 <!-- <span *ngIf="!camera?.videoUrl" [className]="camera?.videoUrl ? 'dot' : 'dot-red'"></span> -->
 
-                <img [src]="item?.camMonitor === 'T' ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="" width="15">
-                <!-- <img src="assets/themes/Uneeviu Logo Blue png.png" style="width: 20px;" alt="site"> -->
+                <div class="d-inline-flex">
+                  <img
+                    [src]="item?.camMonitor === 'T' ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo"
+                    alt="" width="15">
+                  <!-- <img src="assets/themes/Uneeviu Logo Blue png.png" style="width: 20px;" alt="site"> -->
 
-                <p style="margin: 0 0 0 20px"></p>
-                <!-- <span *ngIf="camIndex == c"><input type="text" [(ngModel)]="currentCam.name"></span> -->
-                <span class="wrap" (click)="cameraIdClicked(item)">{{ item?.name }}</span>
+                  <p style="margin: 0 0 0 10px"></p>
+                  <!-- <span *ngIf="camIndex == c"><input type="text" [(ngModel)]="currentCam.name"></span> -->
+                  <span class="wrap" (click)="cameraIdClicked(item)">{{ item?.name }}</span>
+                </div>
+
+                <div class="d-inline-flex">
+                  <a class="pointer" (click)="playSiren(item)" *ngIf="item.audioUrl != '' && item.audioUrl != null">
+                    <img [ngClass]="btnIndex == c ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18"
+                      title="siren" alt="">
+                  </a>
+                  <a *ngIf="item.audioUrl == '' || item.audioUrl == null">
+                    <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
+                  </a>
+                  <a (click)="cameraIdClicked(item)" *ngIf="serviceData?.cameraConfig === 'T' && camIndex != c">
+                    <img src="assets/icons/settings.svg" width="16" alt="">
+                  </a>
+                </div>
+
+
                 <!-- <span *ngIf="camIndex != c" style="position: absolute; right: 35px;" (click)="openRename(camera)"><img src="assets/icons/edit.svg" width="16" alt="" title="edit"></span> -->
                 <!-- <span *ngIf="camIndex == c" style="position: absolute; right: 25px;" (click)="updateCameraName()"><img src="assets/icons/save_icon.svg" width="16" alt="" title="save"></span> -->
                 <!-- <span *ngIf="camIndex == c" style="position: absolute; right: 5px;" (click)="camIndex = -1"><img src="assets/icons/close-black.svg" width="16" alt="" title="cancel"></span> -->
-
-                <span class="pointer" style="position: absolute; right: 25px;" (click)="playSiren(item)" *ngIf="item.audioUrl != '' && item.audioUrl != null">
-                  <img [ngClass]="btnIndex == c ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18" title="siren" alt="">
-                </span>
-                <span style="position: absolute; right: 25px;" *ngIf="item.audioUrl == '' || item.audioUrl == null">
-                  <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
-                </span>
-
-                <span (click)="cameraIdClicked(item)" style="position: absolute; right: 10px;" *ngIf="serviceData?.cameraConfig === 'T' && camIndex != c">
-                  <img src="assets/icons/settings.svg" width="16" alt="">
-                </span>
               </div>
             </span>
           </div>
@@ -124,16 +134,18 @@
 
       <!-- main cameras -->
       <div [ngClass]="closeSideNav ? 'main-container-active' : 'main-container'" *ngIf="sites?.length != 0">
-        <div class="grid-container" #grids [className]="showcams ? 'grid-container': 'grid-container hide' " style="position: relative;">
+        <div class="grid-container" #grids [className]="showcams ? 'grid-container': 'grid-container hide' "
+          style="position: relative;">
           <div class="camerabox" #camerabox *ngFor="let camera of paginatedCameraList; let j=index">
             <div class="tile-detail px-2">
               <div class="title" #title>
                 <!-- <img [src]="camera?.videoUrl ? 'assets/icons/green-dot.png' : 'assets/icons/red-dot.png'" width="16px" alt="" class="me-1"> -->
-                <span class="me-2"  *ngIf="camIndex != j">{{camera?.name}}</span>
-                
+                <span class="me-2" *ngIf="camIndex != j">{{camera?.name}}</span>
+
                 <!-- input -->
                 <span class="pointer me-2" *ngIf="camIndex == j">
-                  <input type="text" style="border: 1px solid #ababab;" class="w-100" [(ngModel)]="currentCam.name" (ngModelChange)="valueChange($event)">
+                  <input type="text" style="border: 1px solid #ababab;" class="w-100" [(ngModel)]="currentCam.name"
+                    (ngModelChange)="valueChange($event)">
                 </span>
                 <span class="pointer" *ngIf="camIndex != j" (click)="openRename(camera)">
                   <img src="assets/icons/icons-edit.png" width="18" alt="" title="edit">
@@ -158,8 +170,10 @@
                 </span>
 
                 <!-- siren -->
-                <span class="pointer" (click)="playSiren1(camera)" *ngIf="camera.audioUrl != '' && camera.audioUrl != null">
-                  <img [ngClass]="btnIndex == j ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18" title="siren" alt="">
+                <span class="pointer" (click)="playSiren1(camera)"
+                  *ngIf="camera.audioUrl != '' && camera.audioUrl != null">
+                  <img [ngClass]="btnIndex == j ? 'btn-item-active' : ''" src="assets/icons/new-siren.png" width="18"
+                    title="siren" alt="">
                 </span>
                 <span class="pointer" *ngIf="camera.audioUrl == '' || camera.audioUrl == null">
                   <img src="assets/icons/dummy-siren.png" width="18" title="siren" alt="">
@@ -170,7 +184,8 @@
 
             <div>
               <ng-container>
-                <app-video-player [site]="currentsite" [videoData]="camera?.httpUrl + '/'" [gridClicked]="gridClicked" #videos></app-video-player>
+                <app-video-player [site]="currentsite" [videoData]="camera?.httpUrl + '/'" [gridClicked]="gridClicked"
+                  #videos></app-video-player>
               </ng-container>
               <!-- <ng-container *ngIf="camera.indexNo != 1 && !camera.videoUrl">
                 <app-dummy-video [videoData]="camera?.videoUrl" [gridClicked]="gridClicked" #videos></app-dummy-video>
@@ -190,62 +205,67 @@
               </div> -->
           </div>
 
-          <div class="config m-1" *ngIf="gridClicked == 1 && serviceData?.cameraConfig === 'T' && currentCam?.camera_config_url !== null">
+          <div class="config m-1"
+            *ngIf="gridClicked == 1 && serviceData?.cameraConfig === 'T' && currentCam?.camera_config_url !== null">
             <!-- <img class="ptz-loader" src="assets/gif/loading-gif.gif" alt=""> -->
             <p class="config-title">Camera Reposition</p>
 
             <!-- <div class="container"> -->
-              <!-- <p cl>PTZ Camera Control</p> -->
-              <div class="controls mt-2">
-                <div class="ptz-control">
-                  <div class="bor"></div>
-                  <button class="reset-button" (click)="move('N' , 'N')">HOME</button>
+            <!-- <p cl>PTZ Camera Control</p> -->
+            <div class="controls mt-2">
+              <div class="ptz-control">
+                <div class="bor"></div>
+                <button class="reset-button" (click)="move('N' , 'N')">HOME</button>
 
-                  <a class="control-button" (click)="move('L' , 'N')" style="position: absolute; left: 0; top: 50%; transform: translate(0, -50%);">
-                    <img src="assets/icons/arrow_left.svg" style="rotate: 0deg;" width="30" alt="" title="Move Left">
-                  </a>
-                  <a class="control-button" (click)="move('N', 'U')" style="position: absolute; top: 0; transform: translate(-50%, 0);">
-                    <img src="assets/icons/arrow_left.svg" style="rotate: 90deg;" width="30" alt="" title="Move Up">
-                  </a>
-                  <a class="control-button" (click)="move('R', 'N')" style="position: absolute; right: 0; top: 50%; transform: translate(0, -50%);">
-                    <img src="assets/icons/arrow_left.svg" style="rotate: 180deg;" width="30" alt="" title="Move Right">
-                  </a>
-                  <a class="control-button" (click)="move('N', 'D')" style="position: absolute; bottom: 0; transform: translate(-50%, 0);">
-                    <img src="assets/icons/arrow_left.svg" style="rotate: 270deg;" width="30" alt="" title="Move Down">
-                  </a>
-                </div>
-
-                <div class="range-bar">
-                  <input type="range" [min]="0" [max]="20" [step]="2" [(ngModel)]="range" [title]="range">
-                </div>
-
-
-                <div class="d-flex flex-wrap justify-content-around mt-3">
-                  <div class="zoom-controls d-flex">
-                    <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="zoom('+')">
-                      <img src="assets/icons/zoom_in.svg" width="22" alt="" title="Zoom In">
-                    </a>
-                    <a class="zoom-button" (click)="zoom('-')">
-                      <img src="assets/icons/zoom_out.svg" width="22" alt="" title="Zoom Out">
-                    </a>
-                  </div>
-  
-                  <div class="zoom-controls d-flex">
-                    <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="focus('+')">
-                      <img src="assets/icons/center_focus_strong.svg" width="22" alt="" title="Focus In">
-                    </a>
-                    <a class="zoom-button" (click)="focus('-')">
-                      <img src="assets/icons/center_focus_weak.svg" width="22" alt="" title="Focus Out">
-                    </a>
-                  </div>
-                </div>
-
-             <div class="d-flex mt-3">
-            <button class="home-button" (click)="home()">SET AS HOME</button>
-            <button class="home-button" (click)="move('N', 'N')">BACK TO HOME</button>
-            </div>
-                <p class="update-msg" *ngIf="updateMsg">{{ updateMsg | titlecase }}</p>
+                <a class="control-button" (click)="move('L' , 'N')"
+                  style="position: absolute; left: 0; top: 50%; transform: translate(0, -50%);">
+                  <img src="assets/icons/arrow_left.svg" style="rotate: 0deg;" width="30" alt="" title="Move Left">
+                </a>
+                <a class="control-button" (click)="move('N', 'U')"
+                  style="position: absolute; top: 0; transform: translate(-50%, 0);">
+                  <img src="assets/icons/arrow_left.svg" style="rotate: 90deg;" width="30" alt="" title="Move Up">
+                </a>
+                <a class="control-button" (click)="move('R', 'N')"
+                  style="position: absolute; right: 0; top: 50%; transform: translate(0, -50%);">
+                  <img src="assets/icons/arrow_left.svg" style="rotate: 180deg;" width="30" alt="" title="Move Right">
+                </a>
+                <a class="control-button" (click)="move('N', 'D')"
+                  style="position: absolute; bottom: 0; transform: translate(-50%, 0);">
+                  <img src="assets/icons/arrow_left.svg" style="rotate: 270deg;" width="30" alt="" title="Move Down">
+                </a>
               </div>
+
+              <div class="range-bar">
+                <input type="range" [min]="0" [max]="20" [step]="2" [(ngModel)]="range" [title]="range">
+              </div>
+
+
+              <div class="d-flex flex-wrap justify-content-around mt-3">
+                <div class="zoom-controls d-flex">
+                  <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="zoom('+')">
+                    <img src="assets/icons/zoom_in.svg" width="22" alt="" title="Zoom In">
+                  </a>
+                  <a class="zoom-button" (click)="zoom('-')">
+                    <img src="assets/icons/zoom_out.svg" width="22" alt="" title="Zoom Out">
+                  </a>
+                </div>
+
+                <div class="zoom-controls d-flex">
+                  <a class="zoom-button" style="border-right: 1px solid #ababab;" (click)="focus('+')">
+                    <img src="assets/icons/center_focus_strong.svg" width="22" alt="" title="Focus In">
+                  </a>
+                  <a class="zoom-button" (click)="focus('-')">
+                    <img src="assets/icons/center_focus_weak.svg" width="22" alt="" title="Focus Out">
+                  </a>
+                </div>
+              </div>
+
+              <div class="d-flex mt-3">
+                <button class="home-button" (click)="home()">SET AS HOME</button>
+                <button class="home-button" (click)="move('N', 'N')">BACK TO HOME</button>
+              </div>
+              <p class="update-msg" *ngIf="updateMsg">{{ updateMsg | titlecase }}</p>
+            </div>
             <!-- </div> -->
 
             <!-- <div class="row mt-3 mx-2">
@@ -285,7 +305,8 @@
 <div class="new-dialog" id="editCamModel">
   <div class="dialog-header">
     <span class="new-dialog-title">Edit Camera Name</span>
-    <span><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel()" title="close" alt=""></span>
+    <span><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel()" title="close"
+        alt=""></span>
   </div>
 
   <div class="dialog-content" *ngIf="currentCam">
@@ -296,6 +317,7 @@
   </div>
 
   <div class="text-center">
-    <button class="w-50 my-2 py-2" style="font-size: 16px; text-transform: uppercase;" (click)="updateCameraName()">Submit</button>
+    <button class="w-50 my-2 py-2" style="font-size: 16px; text-transform: uppercase;"
+      (click)="updateCameraName()">Submit</button>
   </div>
 </div>
