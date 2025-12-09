@@ -35,7 +35,7 @@ export class IncidentsComponent implements OnInit {
        })
   }
 
-  environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=incidents&assetName=';
+  environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=prod-events&assetName=';
   userData: any;
   currentTime: any;
   currentInfo: any
@@ -221,7 +221,7 @@ scrollToSite(siteId: number) {
 
     this.newEventData = [];
     this.storageService.loading_text = '';
-   
+
     this.eventSer.incidentList({...data,pageSize:this.pageSize}).subscribe((res: any) => {
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
