@@ -112,7 +112,7 @@
                 <span class="filter-label ">Action Tag</span>
                 <select class="form-select mb-3" [(ngModel)]="actionTag" (change)="filter()">
                   <option value="">ALL</option>
-                  <option *ngFor="let item of actionTags" [value]="item?.value">{{ item?.value | titlecase }}</option>
+                  <option *ngFor="let item of actionTags" [value]="item?.keyId">{{ item?.value | titlecase }}</option>
                 </select>
               </div>
 
@@ -211,14 +211,20 @@
                   <td>{{item?.duration}}</td>
 
                   <td>{{item?.objectName | titlecase}}</td>
-                  <td>
+                  <!-- <td>
                     <ng-container *ngFor="let status of actionTags">
                       <select class="form-control custom-form-control fw-bold" [(ngModel)]="item.actionTag"
                         [style.color]="status.code" [hidden]="item.actionTag !== status.value">
                         <option [value]="status.value">{{status.value}}</option>
                       </select>
                     </ng-container>
-                  </td>
+                  </td> -->
+
+                     <td
+                        [style.color]="item?.actionTag == 'Suspicious' ? 'red' : item?.actionTag == 'Police Visit' ? 'blue' : item?.actionTag == 'Information'?'green': item?.actionTag =='Deterred'?'violet':''">
+                        {{ item?.actionTag }}
+                    </td>
+
                   <td class="text-center">
                     <p class="text-primary pointer" (click)="openPlayModel(item, i)">View</p>
                     <ng-template #infoDialog>
@@ -271,20 +277,20 @@
       </div> -->
 
       <div class="d-flex justify-content-between align-items-center my-1">
-        <div class="dialog-title">{{ currentVideoData?.eventFromTime | date: 'mediumDate' }}</div>
+        <div class="dialog-title">{{ currentVideoData?.eventFromTime  }}</div>
         <div class="dialog-title">{{currentVideoData?.actionTag | uppercase}}</div>
-        <div class="dialog-title">{{currentVideoData?.eventFromTime | date: 'shortTime'}} to
-          {{currentVideoData?.eventToTime | date: 'shortTime'}}</div>
+        <div class="dialog-title">{{currentVideoData?.eventFromTime }} to
+          {{currentVideoData?.eventToTime }}</div>
       </div>
 
       <div>
         <div style="height: 35vh;">
           <!-- image -->
-          <img *ngIf="!isVideo(currentTileItem)" [src]="environment + currentTileItem | image | async" width="100%"
+          <img *ngIf="!isVideo(currentTileItem)" [src]=" currentTileItem | image | async" width="100%"
             height="100%" alt="Loading...">
 
           <!-- video -->
-          <video *ngIf="isVideo(currentTileItem)" [src]="environment + currentTileItem | image | async" class="bg-dark"
+          <video *ngIf="isVideo(currentTileItem)" [src]=" currentTileItem | image | async" class="bg-dark"
             controls autoplay width="100%" height="100%"></video>
         </div>
 
@@ -297,11 +303,11 @@
           <div class="scroll-tiles" *ngFor="let data of currentTiles; let i = index"
             [ngStyle]="{'border': currentTileItem == data ? '3px solid red' : 'none'}" (click)="getCurrentTile(data)">
             <!-- image -->
-            <img *ngIf="!isVideo(currentTileItem)" [src]="environment + data | image | async" width="100%" height="100%"
+            <img *ngIf="!isVideo(currentTileItem)" [src]=" data | image | async" width="100%" height="100%"
               alt="Loading...">
 
             <!-- video -->
-            <video *ngIf="isVideo(currentTileItem)" [src]="environment + data | image | async" class="bg-dark"
+            <video *ngIf="isVideo(currentTileItem)" [src]=" data | image | async" class="bg-dark"
               width="100%" height="100%"></video>
           </div>
 

@@ -42,7 +42,12 @@ export class EventService {
   }
 
   incidentList(payload?: any) {
-    let url = `${environment.incidentsUrl}/incidentList_1_0`;
+    // let url = `${environment.incidentsUrl}/incidentList_1_0`;
+
+    let url = `${environment.event_tags_url}/getEventList_1_0`;
+
+    
+
     let params = new HttpParams();
 
     var user = this.storageService.getEncrData('user');
@@ -80,6 +85,9 @@ export class EventService {
     } else {
       params = params.set('page', 1);
     }
+
+    params = params.set('callingSystemDetail','portal');
+
     return this.http.get(url, {params: params});
   }
 

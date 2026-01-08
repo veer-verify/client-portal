@@ -159,6 +159,7 @@ export class IncidentsComponent implements OnInit {
   getTags() {
     this.proxSer.getMetadataByType(36).subscribe((res: any) => {
       this.actionTags = res[0].metadata;
+ 
     })
   }
 
@@ -241,7 +242,7 @@ scrollToSite(siteId: number) {
     // siteId: any
     cameraId: any = '';
     objectName: any = '';
-    actionTag: any = '';
+    actionTag: any ;
     fromDate: any = '';
     toDate: any = '';
     selectNumbers: any = [];
