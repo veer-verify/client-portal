@@ -42,7 +42,14 @@ export class EventService {
   }
 
   incidentList(payload?: any) {
-    let url = `${environment.incidentsUrl}/incidentList_1_0`;
+    // let url = `${environment.incidentsUrl}/incidentList_1_0`;
+
+    // let url = `${environment.event_tags_url}/getEventList_1_0`;
+
+    let url = `http://192.168.0.235:3009/getEventList_1_0`;
+
+
+
     let params = new HttpParams();
 
     var user = this.storageService.getEncrData('user');
@@ -58,8 +65,14 @@ export class EventService {
     if(payload?.cameraId) {
       params = params.set('cameraId', payload?.cameraId);
     }
-    if(payload?.actionTag) {
-      params = params.set('actionTag', payload?.actionTag);
+    // if(payload?.actionTag) {
+    //   params = params.set('actionTag', payload?.actionTag);
+    // }
+     if(payload?.alertTag){
+       params = params.set('alertTag', payload?.alertTag);
+    }
+    if(payload?.subAlertTag){
+       params = params.set('subAlertTag', payload?.subAlertTag);
     }
     if(payload?.fromDate) {
       let x = payload?.fromDate;
@@ -80,6 +93,9 @@ export class EventService {
     } else {
       params = params.set('page', 1);
     }
+
+    params = params.set('callingSystemDetail','portal');
+
     return this.http.get(url, {params: params});
   }
 
@@ -267,6 +283,19 @@ export class EventService {
   getImageToDrawPolygon_1_0(payload: any) {
     let url = environment.sitesUrl + `/getImageToDrawPolygon_1_0/${payload}`;
     return this.http.get(url);
+  }
+
+
+
+    getAlertCategoriesForSiteId(payload: any) {
+    let url = `${environment.incidentsUrl}/getAlertCategoriesForSiteId_1_0`;
+    let params = new HttpParams();
+
+    if (payload?.siteId) {
+      params = params.set('siteId', payload?.siteId);
+    }
+
+    return this.http.get(url, { params });
   }
 
 }

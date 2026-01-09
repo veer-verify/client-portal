@@ -34,6 +34,7 @@ export const environment = {
   inventoryUrl: `${dev_url}/inventory`,
   helpdeskUrl: `${dev_url}/supportRequests`,
   incidentsUrl: `${dev_url}/guard_monitoring`,
+  event_tags_url: `${dev_url}/events_data`,
 
   theme: {
     logo: 'assets/themes/ivis_logo_white.png',

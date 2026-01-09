@@ -29,10 +29,11 @@
 
 :root {
   /** ivis */
-  /* --background-img: linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("assets/icons/background.jpg");
+  --background-img: linear-gradient(325deg, rgba(20, 31, 77, 0.9) 18%, rgba(90, 13, 3, 0.9) 66%), url("assets/icons/background.jpg");
   --cmn-background: #104b86;
   --table-background: #104b86;
-  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%); */
+  --header: #104b86;
+  --loader-background: linear-gradient(90deg, rgba(28, 74, 130, 0.9) 0%, rgba(131, 96, 110, 0.9) 50%, rgba(208, 67, 41, 0.9) 100%);
 
   /** unv */
   /* --background-img: linear-gradient(325deg, #1E3F73 100%, #ffffff 0%);
@@ -40,10 +41,10 @@
   --loader-background: linear-gradient(rgba(72, 128, 211, 0.8)); */
 
   /** verifai */
-    --background-img: linear-gradient(325deg, rgb(179, 179, 179) 10%, rgb(170, 170, 170) 90%);
+    /* --background-img: linear-gradient(325deg, rgb(179, 179, 179) 10%, rgb(170, 170, 170) 90%);
     --cmn-background: #ED3237 ;
     --header: #5f5f5f;
-    --loader-background: linear-gradient(rgba(117, 102, 100, 0.8));
+    --loader-background: linear-gradient(rgba(117, 102, 100, 0.8)); */
 }
 
 
@@ -1010,7 +1011,8 @@ table thead tr th {
   font-family: TP, sans-serif;
   padding: 8px;
   background-color: var(--table-background) !important;
-  color: #000 !important;
+  /* color: #000 !important; */
+  color: #ffff !important;
   padding: 5px !important ;
       text-transform: uppercase !important;
       font-size: 12px;
