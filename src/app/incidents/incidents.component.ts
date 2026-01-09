@@ -49,6 +49,26 @@ export class IncidentsComponent implements OnInit {
 
     this.getTags();
   }
+alertType:any;
+alertSubType:any;
+alertTypes:any[]=[];
+alertSubTypes:any[]=[];
+
+    getCurrentSiteAlerts(data: any) {
+
+    this.eventSer.getAlertCategoriesForSiteId(data).subscribe((res: any) => {
+      this.alertTypes = res;
+    });
+  }
+
+   onAlertChange() {
+
+    const selectedAlert = this.alertTypes.find(
+      (a: any) => a.guardAlertTypeId == Number(this.alertType)
+    );
+
+    this.alertSubTypes = selectedAlert ? selectedAlert.subAlerts : [];
+  }
 
   isVideo(data: string) {
     if(!data) return;
@@ -122,8 +142,10 @@ export class IncidentsComponent implements OnInit {
       if(!this.currentInfo) {
         // this.storageService.site_sub.next({site: this.siteData[0], index: 0});
          this.storageService.site_sub.next({site: this.siteData[0]});
+         this.getCurrentSiteAlerts(this.siteData[0])
       }
       // this.getsiteservices1(this.currentInfo?.site);
+
 
       this.footageList(this.currentInfo?.site);
     }, (err: any) => {
@@ -159,7 +181,7 @@ export class IncidentsComponent implements OnInit {
   getTags() {
     this.proxSer.getMetadataByType(36).subscribe((res: any) => {
       this.actionTags = res[0].metadata;
- 
+
     })
   }
 
@@ -199,6 +221,7 @@ scrollToSite(siteId: number) {
     if(data) {
       this.camerasListForSites(data);
       this.scrollToSite(data?.siteId);
+      this.getCurrentSiteAlerts(data);
     }
     // if(this.currentInfo.index != 0) {
       // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
@@ -265,7 +288,9 @@ scrollToSite(siteId: number) {
     this.eventSer.incidentList({
       siteId: this.currentSite?.siteId,
       cameraId: this.cameraId,
-      actionTag: this.actionTag,
+      // actionTag: this.actionTag,
+      alertTag: this.alertType,
+      subAlertTag:this.alertSubType,
       fromDate: this.fromDate,
       toDate: this.toDate,
       page: pageNumber,
