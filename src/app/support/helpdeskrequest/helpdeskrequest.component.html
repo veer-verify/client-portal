@@ -40,7 +40,7 @@
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div> -->
           <div class="optionlabel" Style="position:relative;"
-            [style.backgroundColor]="support==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="support==false ? '#fff' : '#000'">
+            [style.backgroundColor]="support==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="support==false ? '#000' : '#fff'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="support" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!support" style="width: 20px;" alt="ivisUSA"> -->
             <img [src]="support ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
@@ -52,7 +52,7 @@
         <div class="optionlabelparent" (click)="openfaq()"
         [style.border]="faq == false? '1px solid #fff' : ''"
         [style.backgroundColor]="faq==false ? '#00000000' : '#fff'">
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="faq==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="faq==false ? '#fff' : '#000'">
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="faq==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="faq==false ? '#000' : '#fff'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="faq" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!faq" style="width: 20px;" alt="ivisUSA"> -->
             <img [src]="faq ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
@@ -69,7 +69,7 @@
             <div class="label"> Contact Us </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div> -->
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="contactUs==false ? '#fff' : '#000'">
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="contactUs==false ? '#000' : '#fff'">
             <!-- <img src="assets/icons/eye.svg" *ngIf="contactUs" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!contactUs" style="width: 20px;" alt="ivisUSA"> -->
             <img [src]="contactUs ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
@@ -81,7 +81,7 @@
         <div class="optionlabelparent" (click)="opentnc()"
         [style.border]="tnc == false? '1px solid #fff' : ''"
         [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#fff'" [style.color]="tnc==false ? '#fff' : '#000'">
+          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="tnc==false ? '#000' : '#fff'">
             <img [src]="tnc ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
             <div class="label"> Terms & Conditions </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
@@ -220,7 +220,7 @@
                 <button style="background-color: transparent; border: none;" (click)="filterHelpDeskRequests('prev')" [disabled]="pagenumber == 1">
                   <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" alt="prev" [className]="pagenumber == 1 ? 'fade': '' " >
                 </button>
-                <div  class="searchbox" style=" margin: -4px 10px !important; padding: 4px !important;">
+                <div  class="searchbox" style="padding: 4px !important;">
                   <select name="my-dropdown" (change)="filterHelpDeskRequests()" [(ngModel)]="pagenumber" class="dropdown">
                     <option *ngFor="let number of selectNumbers; let n=index" [value]="number"  style="border: none;outline:none">
                       <div style="padding: 15px; margin:15px; margin-right:15px">&nbsp;&nbsp;{{n+1 + ' of ' + pageSize}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>

@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-const base_url: string = 'https://usstaging.ivisecurity.com';
+// const base_url: string = 'https://usstaging.ivisecurity.com';
+const base_url: string = 'https://prod.ivisecurity.com';
 export const environment = {
 
   authUrl: `${base_url}/userDetails`,
