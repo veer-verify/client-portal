@@ -44,10 +44,7 @@ export class EventService {
   incidentList(payload?: any) {
     // let url = `${environment.incidentsUrl}/incidentList_1_0`;
 
-    // let url = `${environment.event_tags_url}/getEventList_1_0`;
-
-    let url = `http://192.168.0.235:3009/getEventList_1_0`;
-
+    let url = `${environment.event_tags_url}/getEventList_1_0`;
 
 
     let params = new HttpParams();

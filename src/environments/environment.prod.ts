@@ -28,8 +28,25 @@ export const environment = {
   // adsUrl: `https://prox-rsmgmt.ivisecurity.com/proximityAdsMain`,
   // timelapseUrl: `https://timelapse-rsmgmt.ivisecurity.com/timeLapse`,
 
-  authUrl: `${prod_url}/userDetails`,
-  sitesUrl: `${prod_url}/vipsites`,
+  // authUrl: `${prod_url}/userDetails`,
+  // sitesUrl: `${prod_url}/vipsites`,
+  // metadataUrl: `${prod_url}/metadata`,
+  // commonDownUrl: `${prod_url}/common`,
+  // adsUrl: `${prod_url}/proximityAdsMain`,
+  // rulesUrl: `${prod_url}/proximityAdsRules `,
+  // insightsUrl: `${prod_url}/insights`,
+  // timelapseUrl: `${prod_url}/timeLapse`,
+  // sensorUrl: `${prod_url}/sensors`,
+  // simsUrl: `${prod_url}/simDevices`,
+  // faqUrl: `${prod_url}/faq`,
+  // inventoryUrl: `${prod_url}/inventory`,
+  // helpdeskUrl: `${prod_url}/supportRequests`,
+  // incidentsUrl: `${prod_url}/guard_monitoring`,
+  // event_tags_url: `${prod_url}/events_data`,
+
+
+   authUrl: `${prod_url}/userDetails_test`,
+  sitesUrl: `${prod_url}/vipsites_test`,
   metadataUrl: `${prod_url}/metadata`,
   commonDownUrl: `${prod_url}/common`,
   adsUrl: `${prod_url}/proximityAdsMain`,
@@ -41,8 +58,8 @@ export const environment = {
   faqUrl: `${prod_url}/faq`,
   inventoryUrl: `${prod_url}/inventory`,
   helpdeskUrl: `${prod_url}/supportRequests`,
-  incidentsUrl: `${prod_url}/guard_monitoring`,
-  event_tags_url: `${prod_url}/events_data`,
+  incidentsUrl: `${prod_url}/guard_monitoring_test`,
+  event_tags_url: `${prod_url}/events_data_test`,
 
   theme: {
     logo: 'assets/themes/ivis_logo_white.png',
