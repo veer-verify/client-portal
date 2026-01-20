@@ -40,12 +40,13 @@ p {
 
 .list-group-item {
   font-family: TP, sans-serif;
-  color: #fff;
+  
+    color: #000;
   /* display: flex;
   align-items: center; */
   background-color: transparent !important;
   border-radius: 5px !important;
-  border: 1px solid #fff !important;
+  border: 1px solid var(--cmn-background) !important;
   padding: 12px;
   margin: 5px;
   text-align: left;
@@ -58,9 +59,9 @@ p {
   font-family: TP, sans-serif;
   border-radius: 5px !important;
   margin: 5px;
-  background-color: #fff !important;
+  background-color: var(--cmn-background) !important;
   padding: 12px;
-  color: #000;
+color: #fff;
   cursor: pointer;
   /* width: 100%; */
 }
@@ -232,7 +233,7 @@ p {
 }
 
 .save-btn {
-  background: #104B86;
+  background: var(--cmn-background);
   border-radius: 30px;
   opacity: 1;
   letter-spacing: 1.2px;

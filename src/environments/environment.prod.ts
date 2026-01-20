@@ -1,4 +1,6 @@
 const prod_url: string = 'https://prod.ivisecurity.com';
+const local_url: string = 'http://192.168.0.225:8234';
+
 
 export const environment = {
   production: true,
