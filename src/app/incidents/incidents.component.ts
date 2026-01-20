@@ -213,8 +213,11 @@ export class IncidentsComponent implements OnInit {
 
 
   footageList(data: any) {
+    this.cameraId = '';
     this.alertType = '';
     this.alertSubType = '';
+    this.fromDate = '';
+    this.toDate = '';
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
 
     if (data) {
