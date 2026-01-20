@@ -50,7 +50,6 @@
   font-size: 13px;
 }
 
-
 .add-form-button {
   border-radius: 50px;
   box-shadow: none;
@@ -85,7 +84,7 @@ input#session-date::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-input[type='date']:after {
+input[type="date"]:after {
   content: attr(placeholder);
 }
 
@@ -97,13 +96,10 @@ input[type='date']:after {
   padding: 0 5px;
 }
 
-
-
-
 .create-brn {
   width: 150px;
   border-radius: 30px;
-  background: #104B86;
+  background: #104b86;
   color: #fff;
   font-size: 14px;
   box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
@@ -113,7 +109,7 @@ input[type='date']:after {
   width: 100px;
   border-radius: 30px;
   border: none;
-  background: #D34124;
+  background: #d34124;
   color: #fff;
   font-size: 16px;
   box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.96);
@@ -172,31 +168,31 @@ p {
   cursor: pointer;
 }
 
-@media screen and (min-width:426px) {
+@media screen and (min-width: 426px) {
   .grid-container {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
-@media screen and (min-width:725px) {
+@media screen and (min-width: 725px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (min-width:1435px) {
+@media screen and (min-width: 1435px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (min-width:2000px) {
+@media screen and (min-width: 2000px) {
   .grid-container {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (min-width:2561px) {
+@media screen and (min-width: 2561px) {
   .grid-container {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -222,7 +218,6 @@ p {
   display: contents;
 }
 
-
 .advertisementBox {
   width: 330px;
   background: #fff;
@@ -247,7 +242,7 @@ p {
 }
 
 .adImg {
-  max-height: 45px
+  max-height: 45px;
 }
 
 .ad1 {
@@ -262,7 +257,7 @@ p {
   font-weight: 900;
   text-align: left;
   text-transform: uppercase;
-  color: #104B86
+  color: #104b86;
 }
 
 .ad3 {
@@ -295,7 +290,8 @@ p {
   cursor: pointer;
 }
 
-.scroll-tiles image, video {
+.scroll-tiles image,
+video {
   border-radius: 10px;
 }
 
@@ -324,9 +320,6 @@ p {
     transform: rotate(360deg);
   }
 }
-
-
-
 
 /* MAIN WRAPPER */
 .pagination-wrapper {
@@ -358,9 +351,9 @@ p {
 .pagination-btn {
   width: 34px;
   height: 34px;
-  border-radius: 8px;
-  border: 2px solid #dcdcdc;
-  background: var(--cmn-background);
+  border-radius: 4px;
+  background: transparent;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,7 +369,7 @@ p {
 .pagination-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: #0e0d0d;
+  background: transparent;
 }
 
 /* IMAGE INSIDE ARROW BUTTON */

@@ -161,8 +161,8 @@ export class UserProfileComponent {
     if (index == 2) {
       this.getUserNamesByUserName();
       this.userDetailslistRoles();
-    } else if(index == 0) {
-          this.getUser();
+    } else if (index == 0) {
+      this.getUser();
 
     }
   }
@@ -316,7 +316,7 @@ export class UserProfileComponent {
   }
 
   passwordPattern =
-    /^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))(?=(.*[\W_]))[A-Za-z\d\W_]{6,10}$/;
+    /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,}$/;
 
   oldpassword: any = null;
   newPassword: any = null;
@@ -485,7 +485,7 @@ export class UserProfileComponent {
     if (!data) {
       this.filter = -1;
     }
-    
+
     // this.userIndex = this.usersList.indexOf(data);
     // this.userSites = [];
     this.getSitesForGlobal({
@@ -638,8 +638,8 @@ export class UserProfileComponent {
     );
   }
 
-  deletecreatedUser(data:any){
-   this.alertservice.confirmDialog("Are you sure?").then((result:any) => {
+  deletecreatedUser(data: any) {
+    this.alertservice.confirmDialog("Are you sure?").then((result: any) => {
       if (result.isConfirmed) {
         this.userSer.deactivateUser(data).subscribe({
           next: (res: any) => {
@@ -647,11 +647,11 @@ export class UserProfileComponent {
               this.getUserNamesByUserName();
               this.alertservice.success('success', res.message);
             } else {
-              this.alertservice.error('error',res.message);
+              this.alertservice.error('error', res.message);
             }
           },
           error: (err: any) => {
-            this.alertservice.error('error',err);
+            this.alertservice.error('error', err);
           }
         })
       }

@@ -2,296 +2,551 @@
 <app-loader *ngIf="showLoader"></app-loader>
 
 <div class="parent-container">
-    <div class="row m-0 child-container">
-        <div class="col-lg-3 d-lg-block d-none side-panel mt-1">
-            <nav>
-                <ng-container *ngFor="let item of menuItems; let i = index">
-                    <a class="list-group-item" [ngClass]="{'act': activeIndex === i}" (click)="setActive(i)"
-                        *ngIf="item.call(userData?.roleList)">
-                        <p class="nav-name">
-                            {{ item.name }}
-                            <img [src]="storageService.environment.theme.activeLogo" width="16px" alt="" class="me-2">
-                        </p>
-                        <!-- <img src="assets/icons/forward_arrow.svg" alt=""> -->
-                    </a>
-                </ng-container>
+  <div class="row m-0 child-container">
+    <div class="col-lg-3 d-lg-block d-none side-panel mt-1">
+      <nav>
+        <ng-container *ngFor="let item of menuItems; let i = index">
+          <a
+            class="list-group-item"
+            [ngClass]="{ act: activeIndex === i }"
+            (click)="setActive(i)"
+            *ngIf="item.call(userData?.roleList)"
+          >
+            <p class="nav-name">
+              {{ item.name }}
+              <img
+                [src]="storageService.environment.theme.activeLogo"
+                width="16px"
+                alt=""
+                class="me-2"
+              />
+            </p>
+            <!-- <img src="assets/icons/forward_arrow.svg" alt=""> -->
+          </a>
+        </ng-container>
+      </nav>
+    </div>
 
-            </nav>
-        </div>
+    <div class="col-lg-9 p-2" style="position: relative">
+      <ng-container *ngIf="userinfo">
+        <div class="row" *ngIf="activeIndex == 0">
+          <div class="col-lg-3">
+            <div class="text-center">
+              <!-- <p class="heading1">PROFILE</p> -->
 
+              <div>
+                <a style="position: relative" (click)="update()">
+                  <img
+                    class="profileImage"
+                    [src]="userinfo.profileImage | image | async"
+                    alt=""
+                    onerror="this.src = 'assets/icons/dummy_300x300.png'"
+                  />
+                  <img
+                    src="assets/icons/editicon2.svg"
+                    class="editicon"
+                    width="16px"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </div>
 
-        <div class="col-lg-9 p-2" style="position: relative;">
-            <ng-container *ngIf="userinfo">
-                <div class="row" *ngIf="activeIndex == 0">
-                    <div class="col-lg-3">
-                        <div class="text-center">
-                            <!-- <p class="heading1">PROFILE</p> -->
+            <div class="mt-3 user-detail">
+              <a>
+                <p class="text-white">{{ userinfo.userName }}</p>
+              </a>
+              <a [href]="'mailto:' + userinfo.email">
+                <p>{{ userinfo.email }}</p>
+              </a>
+            </div>
+          </div>
 
-                            <div>
-                                <a style="position: relative;" (click)="update()">
-                                    <img class="profileImage" [src]="userinfo.profileImage | image | async" alt=""
-                                        onerror="this.src='assets/icons/dummy_300x300.png'">
-                                    <img src="assets/icons/editicon2.svg" class="editicon" width="16px" alt="">
-                                </a>
-                            </div>
-                        </div>
+          <div class="col-lg-9 user-form" *ngIf="user">
+            <a class="d-flex align-items-center">
+              <span class="sub-headings me-2">Account</span>
+              <img
+                src="assets/icons/editicon2.svg"
+                class="bg-light"
+                style="border-radius: 50%"
+                width="24px"
+                alt=""
+                (click)="editDetails(0)"
+              />
+            </a>
 
-                        <div class="mt-3 user-detail">
-                            <a>
-                                <p class="text-white">{{userinfo.userName}}</p>
-                            </a>
-                            <a [href]="'mailto:' + userinfo.email">
-                                <p>{{userinfo.email}}</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-9 user-form" *ngIf="user">
-                        <a class="d-flex align-items-center" >
-                            <span class="sub-headings me-2">Account</span>
-                            <img src="assets/icons/editicon2.svg" class="bg-light" style="border-radius: 50%;"
-                                width="24px" alt="" (click)="editDetails(0)">
-                        </a>
-
-
-                        <div class="my-5 row m-0 w-75">
-                            <div class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="First Name" type="text" name="text" class="input"
-                                    [(ngModel)]="user.firstName" [disabled]="editId!=0">
-                            </div>
-                            <div class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="Last Name" type="text" name="text" class="input"
-                                    [(ngModel)]="user.lastName" [disabled]="editId!=0">
-                            </div>
-                            <div class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 0 ? '#000' : '#fff'}" placeholder="Mobile" type="text" name="text" class="input"
-                                    [(ngModel)]="user.contactNo1" [disabled]="editId!=0" appTextAndNumberOnly>
-                            </div>
-                            <!-- <div class="col-lg-5 mb-3">
+            <div class="my-5 row m-0 w-75">
+              <div class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 0 ? '#000' : '#fff' }"
+                  placeholder="First Name"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.firstName"
+                  [disabled]="editId != 0"
+                />
+              </div>
+              <div class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 0 ? '#000' : '#fff' }"
+                  placeholder="Last Name"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.lastName"
+                  [disabled]="editId != 0"
+                />
+              </div>
+              <div class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 0 ? '#000' : '#fff' }"
+                  placeholder="Mobile"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.contactNo1"
+                  [disabled]="editId != 0"
+                  appTextAndNumberOnly
+                />
+              </div>
+              <!-- <div class="col-lg-5 mb-3">
                                             <input placeholder="Email ID" type="text" name="text" class="input"
                                                 [(ngModel)]="user.email" [disabled]="true">
                                         </div> -->
-                        </div>
+            </div>
 
+            <div>
+              <a class="d-flex align-items-center">
+                <span class="sub-headings me-2">Address</span>
+                <img
+                  src="assets/icons/editicon2.svg"
+                  class="bg-light"
+                  style="border-radius: 50%"
+                  width="24px"
+                  alt=""
+                  (click)="editDetails(1)"
+                />
+              </a>
+            </div>
 
-                        <div>
-                            <a class="d-flex align-items-center" >
-                                <span class="sub-headings me-2">Address</span>
-                                <img src="assets/icons/editicon2.svg" class="bg-light" style="border-radius: 50%;"
-                                    width="24px" alt="" (click)="editDetails(1)">
-                            </a>
-                        </div>
+            <div class="my-5 row m-0 w-75">
+              <div
+                *ngIf="editId == 1 || userinfo.address_line1"
+                class="col-lg-4 mb-3"
+              >
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="address_line1"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.address_line1"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div
+                *ngIf="editId == 1 || userinfo.address_line2"
+                class="col-lg-4 mb-3"
+              >
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="address_line2"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.address_line2"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div *ngIf="editId == 1 || userinfo.city" class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="City"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.city"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div *ngIf="userinfo.district" class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="District"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.district"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div *ngIf="editId == 1 || userinfo.state" class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="State"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.state"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div
+                *ngIf="editId == 1 || userinfo.country"
+                class="col-lg-4 mb-3"
+              >
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="Country"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.country"
+                  [disabled]="editId != 1"
+                />
+              </div>
+              <div *ngIf="editId == 1 || userinfo.pin" class="col-lg-4 mb-3">
+                <input
+                  [ngStyle]="{ color: editId === 1 ? '#000' : '#fff' }"
+                  placeholder="Pincode"
+                  type="text"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="user.pin"
+                  [disabled]="editId != 1"
+                />
+              </div>
+            </div>
 
-                        <div class="my-5 row m-0 w-75">
-                            <div *ngIf="editId == 1 || userinfo.address_line1" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="address_line1" type="text" name="text" class="input"
-                                    [(ngModel)]="user.address_line1" [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="editId == 1 || userinfo.address_line2" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="address_line2" type="text" name="text" class="input"
-                                    [(ngModel)]="user.address_line2" [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="editId == 1 || userinfo.city" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="City" type="text" name="text" class="input" [(ngModel)]="user.city"
-                                    [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="userinfo.district" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="District" type="text" name="text" class="input"
-                                    [(ngModel)]="user.district" [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="editId == 1 || userinfo.state" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="State" type="text" name="text" class="input"
-                                    [(ngModel)]="user.state" [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="editId == 1 || userinfo.country" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="Country" type="text" name="text" class="input"
-                                    [(ngModel)]="user.country" [disabled]="editId != 1">
-                            </div>
-                            <div *ngIf="editId == 1 || userinfo.pin" class="col-lg-4 mb-3">
-                                <input [ngStyle]="{'color': editId === 1 ? '#000' : '#fff'}" placeholder="Pincode" type="text" name="text" class="input"
-                                    [(ngModel)]="user.pin" [disabled]="editId != 1">
-                            </div>
-                        </div>
-
-                        <!-- <div class="d-flex sub-edit" style="height: 25vh;"> -->
-                        <!-- <p class="sub-headings">Subscription</p> -->
-                        <!-- <div class="editicon1" (click)="editDetails(1)">
+            <!-- <div class="d-flex sub-edit" style="height: 25vh;"> -->
+            <!-- <p class="sub-headings">Subscription</p> -->
+            <!-- <div class="editicon1" (click)="editDetails(1)">
                                             <img src="assets\icons\edit_24dp_104B86_FILL1_wght400_GRAD0_opsz24.svg" alt="" >
                                         </div> -->
-                        <!-- </div> -->
+            <!-- </div> -->
 
-                        <div *ngIf="editId>=0">
-                            <button class="save-btn" (click)="updateUser()">save</button>
-                            <button class="cancel-btn ms-2" (click)="editDetails(-1)">cancel</button>
-                        </div>
-                    </div>
+            <div *ngIf="editId >= 0">
+              <button class="save-btn" (click)="updateUser()">save</button>
+              <button class="cancel-btn ms-2" (click)="editDetails(-1)">
+                cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-form" *ngIf="activeIndex == 1">
+          <div>
+            <a class="d-flex align-items-center" (click)="updatePassword()">
+              <span class="sub-headings me-2">Update Password</span>
+              <img
+                src="assets/icons/editicon2.svg"
+                class="bg-light"
+                style="border-radius: 50%"
+                width="24px"
+                alt=""
+              />
+            </a>
+
+            <div class="my-3 row m-0 w-50">
+              <div class="col-lg-12 mb-3 password">
+                <input
+                  placeholder="Current Password"
+                  [type]="showoldpassword ? 'text' : 'password'"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="oldpassword"
+                  [disabled]="!editpassword"
+                />
+                <img
+                  *ngIf="editpassword"
+                  [src]="
+                    !showoldpassword
+                      ? 'assets/icons/eyedisabled.svg'
+                      : 'assets/icons/eye-blue.svg'
+                  "
+                  alt=""
+                  class="hidden-icon"
+                  (click)="togglePassword(1)"
+                />
+              </div>
+              <div class="col-lg-12 mb-3 password">
+                <input
+                  placeholder="New Password"
+                  [type]="shownewpassword ? 'text' : 'password'"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="newPassword"
+                  [disabled]="!editpassword"
+                />
+                <img
+                  *ngIf="editpassword"
+                  [src]="
+                    !shownewpassword
+                      ? 'assets/icons/eyedisabled.svg'
+                      : 'assets/icons/eye-blue.svg'
+                  "
+                  alt=""
+                  class="hidden-icon"
+                  (click)="togglePassword(2)"
+                />
+              </div>
+              <div class="col-lg-12 mb-3 password">
+                <input
+                  placeholder="Confirm Password"
+                  [type]="showconfirmpassword ? 'text' : 'password'"
+                  name="text"
+                  class="input"
+                  [(ngModel)]="confirmPassword"
+                  [disabled]="!editpassword"
+                />
+                <img
+                  *ngIf="editpassword"
+                  [src]="
+                    !showconfirmpassword
+                      ? 'assets/icons/eyedisabled.svg'
+                      : 'assets/icons/eye-blue.svg'
+                  "
+                  alt=""
+                  class="hidden-icon"
+                  (click)="togglePassword(3)"
+                />
+              </div>
+            </div>
+
+            <div *ngIf="editpassword">
+              <button class="save-btn" (click)="submitPassword()">save</button>
+              <button class="cancel-btn ms-2" (click)="closeUpdatepwd()">
+                cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeIndex == 2">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="user-info">
+              <p>{{ userData?.email }}</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 user-info">
+              <p class="mb-0">
+                {{ userData?.FirstName }}&nbsp;{{ userData?.LastName }}
+              </p>
+              <button (click)="openCreateUser()" class="req-btn">
+                Create User
+              </button>
+            </div>
+          </div>
+
+          <hr id="hr1" />
+
+          <ng-container *ngIf="usersList | SearchPipe: userSearch as result">
+            <div class="mb-2">
+              <div class="row">
+                <div class="col-lg-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search"
+                    [(ngModel)]="userSearch"
+                  />
                 </div>
+              </div>
+            </div>
 
-                <div class="user-form" *ngIf="activeIndex == 1">
-                    <div>
-                        <a class="d-flex align-items-center" (click)="updatePassword()">
-                            <span class="sub-headings me-2">Update Password</span>
-                            <img src="assets/icons/editicon2.svg" class="bg-light" style="border-radius: 50%;"
-                                width="24px" alt="">
-                        </a>
-
-                        <div class="my-3 row m-0 w-50">
-                            <div class="col-lg-12 mb-3 password">
-                                <input placeholder="Current Password" [type]="showoldpassword ? 'text' : 'password'"
-                                    name="text" class="input" [(ngModel)]="oldpassword" [disabled]="!editpassword">
-                                <img *ngIf="editpassword"
-                                    [src]="!showoldpassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'"
-                                    alt="" class="hidden-icon" (click)="togglePassword(1)">
-                            </div>
-                            <div class="col-lg-12 mb-3 password">
-                                <input placeholder="New Password" [type]="shownewpassword ? 'text' : 'password'"
-                                    name="text" class="input" [(ngModel)]="newPassword" [disabled]="!editpassword">
-                                <img *ngIf="editpassword"
-                                    [src]="!shownewpassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'"
-                                    alt="" class="hidden-icon" (click)="togglePassword(2)">
-                            </div>
-                            <div class="col-lg-12 mb-3 password">
-                                <input placeholder="Confirm Password" [type]="showconfirmpassword ? 'text' : 'password'"
-                                    name="text" class="input" [(ngModel)]="confirmPassword" [disabled]="!editpassword">
-                                <img *ngIf="editpassword"
-                                    [src]="!showconfirmpassword ? 'assets/icons/eyedisabled.svg' : 'assets/icons/eye-blue.svg'"
-                                    alt="" class="hidden-icon" (click)="togglePassword(3)">
-                            </div>
-                        </div>
-
-                        <div *ngIf="editpassword">
-                            <button class="save-btn" (click)="submitPassword()">save</button>
-                            <button class="cancel-btn ms-2" (click)="closeUpdatepwd()">cancel</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngIf="activeIndex == 2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="user-info">
-                            <p>{{userData?.email}}</p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 user-info">
-                            <p class="mb-0">{{ userData?.FirstName }}&nbsp;{{ userData?.LastName }}</p>
-                            <button (click)="openCreateUser()" class="req-btn">Create User</button>
-                        </div>
-                    </div>
-
-                    <hr id="hr1">
-
-                    <ng-container *ngIf="usersList | SearchPipe : userSearch as result">
-                        <div class="mb-2">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <input type="text" class="form-control" placeholder="Search"
-                                        [(ngModel)]="userSearch">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="users">
-                            <div class="card" *ngFor="let item of result; let i = index"
-                                 [style.background-color]="userIndex == i ? '#95bbe9' : ''"  [style.background-color]="item.STATUS == ''?'#e7848e':''">       <!-- -->
-                                <div class="map-site">
-                                    <!-- <a class="me-1" (click)="openDialog('userSites', item)">
+            <div class="users">
+              <div
+                class="card"
+                *ngFor="let item of result; let i = index"
+                [style.opacity]="item.STATUS == '' ? '0.5' : ''"
+              >
+                <div class="map-site">
+                  <!-- <a class="me-1" (click)="openDialog('userSites', item)">
                                         <img src="assets/images/icons8-check-mark-48.png" alt="" width="16px">
                                     </a> -->
-                                    <a [hidden]="item.STATUS == ''"><img src="assets/icons/delete_24dp_EA3323_FILL1_wght400_GRAD0_opsz24.svg" width="18px" (click)="deletecreatedUser(item)"> 
-                                    </a>
 
-                                    <a data-bs-toggle="popover" data-bs-title="Popover title"
-                                        data-bs-content="And here's some amazing content. It's very engaging. Right?">
-                                        <img src="assets/images/icons8-info-128.png" alt="" width="16px" (click)="openSiteMapping(item)" *ngIf="item.STATUS !== ''">
-                                    </a>
-                                </div>
+                  <a
+                    data-bs-toggle="popover"
+                    data-bs-title="Popover title"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                  >
+                    <img
+                      src="assets/images/icons8-info-128.png"
+                      alt=""
+                      width="16px"
+                      (click)="openSiteMapping(item)"
+                      *ngIf="item.STATUS !== ''"
+                    />
+                  </a>
+                  <a [hidden]="item.STATUS == ''"
+                    ><img
+                      src="assets/icons/delete_24dp_EA3323_FILL1_wght400_GRAD0_opsz24.svg"
+                      width="18px"
+                      (click)="deletecreatedUser(item)"
+                    />
+                  </a>
+                </div>
 
-                                <img [src]="item?.profileImageUrl" onerror="this.src='assets/images/icons8-user-50.png'"
-                                    alt="">
-                                <div class="text">
-                                    <p class="heading">{{item?.User_Name}}</p>
-                                    <p class="info">{{ item?.Email }}</p>
-                                </div>
-                            </div>
-                        </div>
+                <img
+                  [src]="item?.profileImageUrl"
+                  onerror="this.src = 'assets/images/icons8-user-50.png'"
+                  alt=""
+                />
+                <div class="text">
+                  <p class="heading">{{ item?.User_Name }}</p>
+                  <p class="info">{{ item?.Email }}</p>
+                  <p class="heading" *ngIf="item.STATUS == ''">De-activated</p>
+                </div>
+              </div>
+            </div>
 
-                        <!-- <ng-container *ngIf="storageService.loading_text">
+            <!-- <ng-container *ngIf="storageService.loading_text">
                             <app-err-info [text]="storageService.loading_text"></app-err-info>
                         </ng-container> -->
-                    </ng-container>
-                </div>
-            </ng-container>
-
-            <ng-container *ngIf="storageService.loading_text">
-                <app-err-info [text]="storageService.loading_text"></app-err-info>
-            </ng-container>
+          </ng-container>
         </div>
-    </div>
+      </ng-container>
 
-    <input type="file" name="myImage" accept="image/*" #profileinput
-        style="position: absolute; left: 0px; width: 1px; height:1px; opacity: 0; pointer-events: none;"
-        (change)="onFileChange($event)">
+      <ng-container *ngIf="storageService.loading_text">
+        <app-err-info [text]="storageService.loading_text"></app-err-info>
+      </ng-container>
+    </div>
+  </div>
+
+  <input
+    type="file"
+    name="myImage"
+    accept="image/*"
+    #profileinput
+    style="
+      position: absolute;
+      left: 0px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    "
+    (change)="onFileChange($event)"
+  />
 </div>
 
-
 <!-- user dialog -->
- <ng-container *ngIf="showCreateUser">
-     <div class="dialog">
-         <div class="dialog-header">
-             <p>Create User</p>
-             <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeCreateUser()"></p>
-         </div>
-     
-         <div class="dialog-content">
-             <app-add-incident [questions]="questionList" (newItemEvent)="getFormData($event)"></app-add-incident>
-         </div>
-     </div>
- </ng-container>
+<ng-container *ngIf="showCreateUser">
+  <div class="dialog">
+    <div class="dialog-header">
+      <p>Create User</p>
+      <p>
+        <img
+          src="assets/icons/close.svg"
+          class="pointer"
+          width="20"
+          alt=""
+          (click)="closeCreateUser()"
+        />
+      </p>
+    </div>
 
+    <div class="dialog-content">
+      <app-add-incident
+        [questions]="questionList"
+        (newItemEvent)="getFormData($event)"
+      ></app-add-incident>
+    </div>
+  </div>
+</ng-container>
 
 <!-- user site mapping dialog -->
- <ng-container *ngIf="showSiteMapping">
-     <div class="dialog">
-         <div class="dialog-header">
-             <p>Map Sites</p>
-             <p><img src="assets/icons/close.svg" class="pointer" width="20" alt="" (click)="closeSiteMapping()"></p>
-         </div>
-     
-         <div class="dialog-content" style="width: 500px;">
-             <input type="text" class="form-control" placeholder="Search" [(ngModel)]="siteSearch">
-     
-             <ng-container *ngIf="currentUser">
-                 <div class="btn-group my-2 me-1" role="group" *ngFor="let item of filters">
-                     <input type="radio" class="btn-check" [value]="item.id" [id]="item.id" (change)="filterSites(item)"
-                         [(ngModel)]="filter">
-                     <label class="btn btn-outline-dark" [for]="item.id">{{item.label}}</label>
-                 </div>
-             </ng-container>
-     
-             <ng-container *ngIf="userSites | SearchPipe: siteSearch as pipeSites">
-                 <div style="height: 40vh; overflow: auto;">
-                     <div class="form-check select-site" *ngIf="filter !== 1 && pipeSites.length !== 0">
-                         <input class="form-check-input" type="checkbox" id="all" [(ngModel)]="selectAllSites"
-                             (ngModelChange)="toggleSites()">
-                         <label class="form-check-label" for="all">Select All</label>
-                     </div>
-                     <div class="form-check select-site" *ngFor="let item of pipeSites">
-                         <input class="form-check-input" type="checkbox" [id]="item.siteName" [(ngModel)]="item.assigned"
-                             *ngIf="filter !== 1" (ngModelChange)="toggleAllIndividual()">
-                         <label class="form-check-label" [for]="item.siteName">{{item.siteName}}</label>
-                     </div>
-     
-                     <ng-container *ngIf="userSites.length === 0">
-                         <h5 class="text-center my-3">NO SITES ASSIGNED!</h5>
-                     </ng-container>
-                 </div>
-             </ng-container>
-         </div>
-     
-         <div class="d-flex justify-content-center my-2">
-             <button class="req-btn" (click)="applyMapping()" *ngIf="filter !== 1"
-                 [disabled]="currentUser?.roleName === 'Client-Member' || currentUser?.roleName === 'Site-Admin'">
-                 {{ filter == 2 ? 'Unassign' : 'Assign' }}
-             </button>
-         </div>
-     </div>
- </ng-container>
+<ng-container *ngIf="showSiteMapping">
+  <div class="dialog">
+    <div class="dialog-header">
+      <p>Map Sites</p>
+      <p>
+        <img
+          src="assets/icons/close.svg"
+          class="pointer"
+          width="20"
+          alt=""
+          (click)="closeSiteMapping()"
+        />
+      </p>
+    </div>
+
+    <div class="dialog-content" style="width: 500px">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        [(ngModel)]="siteSearch"
+      />
+
+      <ng-container *ngIf="currentUser">
+        <div
+          class="btn-group my-2 me-1"
+          role="group"
+          *ngFor="let item of filters"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            [value]="item.id"
+            [id]="item.id"
+            (change)="filterSites(item)"
+            [(ngModel)]="filter"
+          />
+          <label class="btn btn-outline-dark" [for]="item.id">{{
+            item.label
+          }}</label>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="userSites | SearchPipe: siteSearch as pipeSites">
+        <div style="height: 40vh; overflow: auto">
+          <div
+            class="form-check select-site"
+            *ngIf="filter !== 1 && pipeSites.length !== 0"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="all"
+              [(ngModel)]="selectAllSites"
+              (ngModelChange)="toggleSites()"
+            />
+            <label class="form-check-label" for="all">Select All</label>
+          </div>
+          <div class="form-check select-site" *ngFor="let item of pipeSites">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="item.siteName"
+              [(ngModel)]="item.assigned"
+              *ngIf="filter !== 1"
+              (ngModelChange)="toggleAllIndividual()"
+            />
+            <label class="form-check-label" [for]="item.siteName">{{
+              item.siteName
+            }}</label>
+          </div>
+
+          <ng-container *ngIf="userSites.length === 0">
+            <h5 class="text-center my-3">NO SITES ASSIGNED!</h5>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="d-flex justify-content-center my-2">
+      <button
+        class="req-btn"
+        (click)="applyMapping()"
+        *ngIf="filter !== 1"
+        [disabled]="
+          currentUser?.roleName === 'Client-Member' ||
+          currentUser?.roleName === 'Site-Admin'
+        "
+      >
+        {{ filter == 2 ? "Unassign" : "Assign" }}
+      </button>
+    </div>
+  </div>
+</ng-container>

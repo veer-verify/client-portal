@@ -15,12 +15,12 @@
 }
 
 /* .main-content { */
-  /* background-color: rgba(236, 234, 234, 0.25); */
-  /* height: 100%;
+/* background-color: rgba(236, 234, 234, 0.25); */
+/* height: 100%;
   padding: 0; */
-  /* display: flex;
+/* display: flex;
   padding: 15px; */
-  /* display: flex; */
+/* display: flex; */
 /* } */
 
 p {
@@ -35,33 +35,30 @@ p {
   color: #fff;
   font-family: TP, sans-serif;
   font-size: 24px;
-
 }
 
 .list-group-item {
   font-family: TP, sans-serif;
-  
-    color: #000;
+
+  color: #fff;
   /* display: flex;
   align-items: center; */
   background-color: transparent !important;
   border-radius: 5px !important;
-  border: 1px solid var(--cmn-background) !important;
+  border: 1px solid #fff !important;
   padding: 12px;
   margin: 5px;
   text-align: left;
   /* width: 100%; */
 }
 
-
-
 .list-group-item.act {
   font-family: TP, sans-serif;
   border-radius: 5px !important;
   margin: 5px;
-  background-color: var(--cmn-background) !important;
+  background-color: #fff !important;
   padding: 12px;
-color: #fff;
+  color: #000;
   cursor: pointer;
   /* width: 100%; */
 }
@@ -80,14 +77,12 @@ color: #fff;
   padding: 0;
   height: 100%;
   width: 20%;
-
 }
 
 .main-part2 {
   padding: 0;
   height: 100%;
   width: 80%;
-
 }
 
 .heading1 {
@@ -99,11 +94,10 @@ color: #fff;
 }
 
 .profileImage {
-
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 1px solid #E8E8E8;
+  border: 1px solid #e8e8e8;
 }
 
 .editicon {
@@ -114,12 +108,12 @@ color: #fff;
   background-color: #ffff;
   top: 40px;
   left: 115px;
-  box-shadow: -6px 6px 10px #104B8640;
+  box-shadow: -6px 6px 10px #104b8640;
   display: flex;
   justify-content: center;
   align-items: center;
   /* animation: rotateBorderColor 5s linear infinite; */
-  border: 2px solid #104B86;
+  border: 2px solid #104b86;
 }
 
 .content {
@@ -131,7 +125,7 @@ color: #fff;
 .user-info {
   color: #fff;
   /* border: 1px solid #fff; */
-  padding:3px;
+  padding: 3px;
   border-radius: 5px;
 }
 
@@ -180,21 +174,19 @@ color: #fff;
 }
 
 .editicon1 {
-
   position: absolute;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background-color: #ffff;
-  box-shadow: -6px 6px 10px #104B8640;
+  box-shadow: -6px 6px 10px #104b8640;
   display: flex;
   justify-content: center;
   align-items: center;
   left: 50%;
   top: -30%;
   /* animation: rotateBorderColor 5s linear infinite; */
-  border: 2px solid #104B86;
-
+  border: 2px solid #104b86;
 }
 
 /* From Uiverse.io by ErzenXz */
@@ -209,20 +201,17 @@ color: #fff;
   height: 45px;
   padding: 12px;
   border-radius: 5px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
   outline: none;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: 0px 0px 20px -18px;
   /* background: #fff; */
-
 }
 
 .input:hover {
   border: 2px solid lightgrey;
   box-shadow: 0px 0px 20px -17px;
 }
-
-
 
 /* input:active:not([readonly]):not([disabled]) {
   transform: scale(0.95);
@@ -237,7 +226,7 @@ color: #fff;
   border-radius: 30px;
   opacity: 1;
   letter-spacing: 1.2px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-transform: uppercase;
   width: 120px;
   height: 40px;
@@ -248,9 +237,8 @@ color: #fff;
 }
 
 .cancel-btn {
-
   letter-spacing: 1.2px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-transform: uppercase;
   opacity: 1;
   background: #525252;
@@ -262,7 +250,6 @@ color: #fff;
   font-size: 14px;
   font-family: TP, sans-serif;
   /* animation: rotateBorderColor1 5s linear infinite; */
-
 }
 
 .password {
@@ -294,7 +281,6 @@ color: #fff;
   padding: 5px 40px;
 }
 
-
 .select-site .form-check-label {
   cursor: pointer;
   font-size: 14px;
@@ -309,8 +295,6 @@ color: #fff;
   transform: scale(0.5);
 } */
 
-
-
 /* From Uiverse.io by bociKond */
 .users {
   display: grid;
@@ -322,12 +306,9 @@ color: #fff;
 }
 
 .map-site {
-
   position: absolute;
   right: 5px;
   top: 5px;
- 
-
 }
 
 .card {
@@ -397,12 +378,10 @@ color: #fff;
   text-align: center;
 }
 
-
 @keyframes rotateBorderColor {
   0% {
-    border-color: #104B86;
+    border-color: #104b86;
     transform: scale(1);
-
   }
 
   25% {
@@ -411,12 +390,12 @@ color: #fff;
   }
 
   50% {
-    border-color: #D44124;
+    border-color: #d44124;
     transform: scale(1);
   }
 
   75% {
-    border-color: #D44124;
+    border-color: #d44124;
     transform: scale(0.8);
   }
 
@@ -424,45 +403,26 @@ color: #fff;
     border-color: #ffff;
     transform: scale(1);
   }
-
 }
 
 @keyframes rotateBorderColor1 {
   0% {
-    border-color: #104B86;
-
+    border-color: #104b86;
   }
 
   25% {
     border-color: #ffff;
-
   }
 
   50% {
     border-color: #525252;
-
   }
 
   75% {
     border-color: #525252;
-
   }
 
   100% {
     border-color: #ffff;
-
   }
-
-
-
-
-
 }
-
-
-
-
-
-
-
-

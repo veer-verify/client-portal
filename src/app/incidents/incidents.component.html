@@ -4,19 +4,35 @@
 <app-navbar [serviceDataInput]="currentSite"></app-navbar>
 
 <div class="page">
-  <div style="width:100vw; overflow:hidden">
+  <div style="width: 100vw; overflow: hidden">
     <div class="searchbar">
       <div class="row">
-        <div class="col-lg-3 col-sm-12" style="text-align: center; align-self: center;">
+        <div
+          class="col-lg-3 col-sm-12"
+          style="text-align: center; align-self: center"
+        >
           <div class="searchbox">
-            <img *ngIf="searchText" src="assets/icons/x.svg" (click)="searchText = ''" style="position: absolute;">
-            <input type="text" placeholder="Search for sites" [(ngModel)]="searchText" #searchinput>
-            <img src="assets/icons/search.svg">
+            <img
+              *ngIf="searchText"
+              src="assets/icons/x.svg"
+              (click)="searchText = ''"
+              style="position: absolute"
+            />
+            <input
+              type="text"
+              placeholder="Search for sites"
+              [(ngModel)]="searchText"
+              #searchinput
+            />
+            <img src="assets/icons/search.svg" />
           </div>
         </div>
 
-        <div class="col-lg-7 col-sm-12" Style="border: none; align-self: center; opacity:1">
-          <div class="topTitle" style="margin:0 0 0 25px;">
+        <div
+          class="col-lg-7 col-sm-12"
+          Style="border: none; align-self: center; opacity:1"
+        >
+          <div class="topTitle" style="margin: 0 0 0 25px">
             <!-- <span>Support Helpdesk</span> -->
             <span class="title1">{{ displaySite?.siteName }} - Alerts</span>
             <!-- <div class=" action-icons">
@@ -29,26 +45,43 @@
 
         <!-- pagination *ngIf="newEventData.length !== 0"-->
 
-
-        <div class="pagination-wrapper d-flex align-items-center gap-2 col-lg-2">
-
+        <div
+          class="pagination-wrapper d-flex align-items-center gap-2 col-lg-2"
+          *ngIf="newEventData.length"
+        >
           <!-- Page Size Selector -->
           <div class="page-size">
-            <select class="form-select pagination-select" [(ngModel)]="pageSize" (ngModelChange)="filter()">
-              <option [value]="5">5 / page</option>
-              <option [value]="10">10 / page</option>
-              <option [value]="25">25 / page</option>
+            <select
+              class="pagination-select"
+              [(ngModel)]="pageSize"
+              (ngModelChange)="filter()"
+            >
+              <option [value]="5">5</option>
+              <option [value]="10">10</option>
+              <option [value]="25">25</option>
             </select>
           </div>
 
           <!-- Prev Button -->
-          <button class="pagination-btn" [disabled]="currentPage === 1" (click)="filter('prev')">
-            <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" width="14" />
+          <button
+            class="pagination-btn"
+            [disabled]="currentPage === 1"
+            (click)="filter('prev')"
+          >
+            <img
+              src="assets/icons/arrow.svg"
+              style="transform: rotate(180deg)"
+              width="14"
+            />
           </button>
 
           <!-- Page Dropdown -->
           <div>
-            <select class="form-select pagination-select" [(ngModel)]="currentPage" (ngModelChange)="filter($event)">
+            <select
+              class="form-select pagination-select"
+              [(ngModel)]="currentPage"
+              (ngModelChange)="filter($event)"
+            >
               <option *ngFor="let number of selectNumbers" [value]="number">
                 {{ number }} of {{ totalPages }}
               </option>
@@ -56,12 +89,14 @@
           </div>
 
           <!-- Next Button -->
-          <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="filter('next')">
+          <button
+            class="pagination-btn"
+            [disabled]="currentPage === totalPages"
+            (click)="filter('next')"
+          >
             <img src="assets/icons/arrow.svg" width="14" />
           </button>
-
         </div>
-
       </div>
     </div>
   </div>
@@ -69,19 +104,33 @@
   <div class="cont">
     <div class="row">
       <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
-        <div class="optionlabelparent" *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
-          (click)="footageList(site)">
-          <div [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'" style="position:relative;" #siteselect>
+        <div
+          class="optionlabelparent"
+          *ngFor="let site of siteData | SearchPipe: searchText; let i = index"
+          (click)="footageList(site)"
+        >
+          <div
+            [ngClass]="navActive == i ? 'optionlabel-active' : 'optionlabel'"
+            style="position: relative"
+            #siteselect
+          >
             <!-- <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA" *ngIf="navActive != i">
 
             <img src="assets/icons/eye-white.svg" style="width: 15px; margin-right: 10px;" alt="ivisUSA"
               *ngIf="navActive == i"> -->
-            <img [src]="storageSer.environment.theme.accordianLogo" style="width: 16px;" class="me-1" alt="">
-            <div class="label">{{ site?.siteName }} </div>
-            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" width="20" alt="drop"></div>
+            <img
+              [src]="storageSer.environment.theme.accordianLogo"
+              style="width: 16px"
+              class="me-1"
+              alt=""
+            />
+            <div class="label">{{ site?.siteName }}</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" width="20" alt="drop" />
+            </div>
           </div>
         </div>
-        <br>
+        <br />
       </div>
 
       <div class="col-lg-9 col-sm-12">
@@ -90,8 +139,13 @@
             <hr class="mb-0" id="hr1"> -->
 
           <div class="title">
-            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
-            <div class="row mx-0 mt-1 w-100">
+            <img
+              src="assets/icons/btnvisible.svg"
+              alt="V"
+              class="visibilitybtn"
+              (click)="showOptions1()"
+            />
+            <div class="row mx-0 mt-1 w-100 d-flex align-items-center mb-2">
               <!-- <div class="col-md-2 ps-0" *ngIf="currentSite">
                 <span class="filter-label ">Site</span>
                 <select class="form-select mb-3" [(ngModel)]="currentSite.siteId" #sitee
@@ -102,10 +156,16 @@
                 </select>
               </div> -->
               <div class="col-md-3 ps-0">
-                <span class="filter-label ">Camera</span>
-                <select class="form-select mb-3" [(ngModel)]="cameraId" (change)="filter()">
+                <span class="filter-label">Camera</span>
+                <select
+                  class="form-select"
+                  [(ngModel)]="cameraId"
+                  (change)="filter()"
+                >
                   <option value="">ALL</option>
-                  <option *ngFor="let item of camData" [value]="item?.cameraId">{{item?.name}}</option>
+                  <option *ngFor="let item of camData" [value]="item?.cameraId">
+                    {{ item?.name }}
+                  </option>
                 </select>
               </div>
               <!-- <div class="col-md-2 ps-0">
@@ -116,56 +176,95 @@
                 </select>
               </div> -->
 
+              <div class="col-md-2 ps-0">
+                <label class="filter-label">Alert Type</label>
+                <select
+                  class="form-select w-100"
+                  [(ngModel)]="alertType"
+                  (change)="onAlertChange(); filter()"
+                >
+                  <option value="">All</option>
 
-        <div class="col-md-2 ps-0">
-          <label class="filter-label">Alert Type</label>
-          <select class="form-select w-100" [(ngModel)]="alertType"
-           (change)="onAlertChange(); filter()">
-            <option value="" selected >Select Alert Type</option>
+                  <option
+                    *ngFor="let item of alertTypes"
+                    [value]="item.guardAlertTypeId"
+                  >
+                    {{ item.guardAlertType }}
+                  </option>
+                </select>
+              </div>
 
-            <option *ngFor="let item of alertTypes" [value]="item.guardAlertTypeId" >
-              {{ item.guardAlertType }}
-            </option>
-          </select>
-        </div>
+              <div class="col-md-2 ps-0">
+                <label class="filter-label">Alert Sub Type</label>
+                <select
+                  class="form-select w-100"
+                  [(ngModel)]="alertSubType"
+                  (change)="filter()"
+                >
+                  <option value="">All</option>
 
-
-        <div class="col-md-2 ps-0">
-          <label class="filter-label">Alert Sub Type</label>
-          <select class="form-select w-100" [(ngModel)]="alertSubType" (change)="filter()">
-            <option value=""  selected >Select Alert Sub Type</option>
-
-            <option *ngFor="let item of alertSubTypes" [value]="item.guardSubAlertTypeId">
-              {{ item.guardSubAlertType }}
-            </option>
-          </select>
-        </div>
+                  <option
+                    *ngFor="let item of alertSubTypes"
+                    [value]="item.guardSubAlertTypeId"
+                  >
+                    {{ item.guardSubAlertType }}
+                  </option>
+                </select>
+              </div>
 
               <div class="col-md-2 ps-0">
                 <span class="filter-label">Start Date</span>
                 <div class="input-group">
-                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="fromDate" ngbDatepicker
-                    #d1="ngbDatepicker" (ngModelChange)="filter()" [maxDate]="todayDate">
-                  <button class="btn btn-outline-light py-0" (click)="d1.toggle()" type="button"><img
-                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                  <input
+                    class="form-control"
+                    placeholder="MM-DD-YYYY"
+                    [(ngModel)]="fromDate"
+                    ngbDatepicker
+                    #d1="ngbDatepicker"
+                    (ngModelChange)="filter()"
+                    [maxDate]="todayDate"
+                  />
+                  <button
+                    class="btn btn-outline-light py-0"
+                    (click)="d1.toggle()"
+                    type="button"
+                  >
+                    <img src="assets/icons/calender.svg" alt="" width="12" />
+                  </button>
                 </div>
               </div>
               <div class="col-md-2 ps-0">
                 <span class="filter-label">End Date</span>
                 <div class="input-group">
-                  <input class="form-control" placeholder="MM-DD-YYYY" [(ngModel)]="toDate" ngbDatepicker
-                    #d2="ngbDatepicker" (ngModelChange)="filter()" [minDate]="fromDate">
-                  <button class="btn btn-outline-light py-0" (click)="d2.toggle()" type="button"><img
-                      src="assets/icons/calender.svg" alt="" width="12"></button>
+                  <input
+                    class="form-control"
+                    placeholder="MM-DD-YYYY"
+                    [(ngModel)]="toDate"
+                    ngbDatepicker
+                    #d2="ngbDatepicker"
+                    (ngModelChange)="filter()"
+                    [maxDate]="todayDate"
+                  />
+                  <button
+                    class="btn btn-outline-light py-0"
+                    (click)="d2.toggle()"
+                    type="button"
+                  >
+                    <img src="assets/icons/calender.svg" alt="" width="12" />
+                  </button>
                 </div>
               </div>
 
-              <div class="col-lg-2 ps-0">
-                <button class="btn btn-sm btn-outline-danger mt-3 me-1" (click)="fromDate = ''; toDate = ''; filter()"
-                  *ngIf="fromDate != '' || toDate != ''">Clear</button>
+              <div class="col-lg-1 ps-0" *ngIf="fromDate != '' || toDate != ''">
+                <span class="d-block" style="height: 20px"></span>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="fromDate = ''; toDate = ''; filter()"
+                >
+                  Clear
+                </button>
                 <!-- <button class="btn btn-sm btn-outline-success mt-4" (click)="download()"  *ngIf="fromDate != '' && toDate != ''">Download</button> -->
                 <!-- <button  class="btn btn-sm mt-3" (click)="incidentsDataToExcel()"><img src="assets/icons/xls (1).png" width="35px"><img  class="spinner" *ngIf="spinexcel" src="assets/icons/cyclespinner.svg" width="20px"></button> -->
-
               </div>
             </div>
 
@@ -176,7 +275,7 @@
 
           <div class="table-resp extra w-100">
             <table class="table table-hover" id="mytable">
-              <thead style="position: sticky; top: 0; z-index: 1;">
+              <thead style="position: sticky; top: 0; z-index: 1">
                 <tr class="form1">
                   <!-- <th scope="col">
                     <span>Site Name</span>
@@ -184,7 +283,12 @@
                   </th> -->
                   <th scope="col">
                     <span>Camera</span>
-                    <img (click)="sort('name')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                    <img
+                      (click)="sort('name')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <!-- <th scope="col">
                     <span>Event ID</span>
@@ -192,18 +296,30 @@
                   </th> -->
                   <th scope="col">
                     <span>Incident Date</span>
-                    <img (click)="sort('eventFromTime')" class="pointer ms-1" src="assets/icons/sorticon.svg"
-                      width="15px">
+                    <img
+                      (click)="sort('eventFromTime')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <th scope="col">
                     <span>Start Time</span>
-                    <img (click)="sort('eventFromTime')" class="pointer ms-1" src="assets/icons/sorticon.svg"
-                      width="15px">
+                    <img
+                      (click)="sort('eventFromTime')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <th scope="col">
                     <span>End Time</span>
-                    <img (click)="sort('eventToTime')" class="pointer ms-1" src="assets/icons/sorticon.svg"
-                      width="15px">
+                    <img
+                      (click)="sort('eventToTime')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <th scope="col">
                     <span>Duration</span>
@@ -211,19 +327,34 @@
                   </th>
                   <th scope="col">
                     <span>Object Identified</span>
-                    <img (click)="sort('objectName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                    <img
+                      (click)="sort('objectName')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <!-- <th scope="col">
                     <span>Action Tag</span>
                     <img (click)="sort('actionTag')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
                   </th> -->
-                    <th scope="col">
+                  <th scope="col">
                     <span>Alert</span>
-                    <img (click)="sort('alertTag')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                    <img
+                      (click)="sort('alertTag')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
-                    <th scope="col">
+                  <th scope="col">
                     <span>subAlert</span>
-                    <img (click)="sort('subAlertTag')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
+                    <img
+                      (click)="sort('subAlertTag')"
+                      class="pointer ms-1"
+                      src="assets/icons/sorticon.svg"
+                      width="15px"
+                    />
                   </th>
                   <th scope="col" class="text-center">
                     <span>Event Clip</span>
@@ -233,16 +364,19 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let item of newEventData; let i=index" [style.background-color]="tableIndex == i ? '#ababab': ''">
+                <tr
+                  *ngFor="let item of newEventData; let i = index"
+                  [style.background-color]="tableIndex == i ? '#ababab' : ''"
+                >
                   <!-- <td>{{item?.siteName}}</td> -->
-                  <td>{{item?.name}}</td>
-                  <td>{{item?.eventDate | date: 'mediumDate'}}</td>
-                  <td>{{item?.eventFromTime }}</td>
-                  <td>{{item?.eventToTime }}</td>
+                  <td>{{ item?.cameraId }}</td>
+                  <td>{{ item?.eventDate | date: "mediumDate" }}</td>
+                  <td>{{ item?.eventFromTime }}</td>
+                  <td>{{ item?.eventToTime }}</td>
                   <!-- <td>{{ getTimeDifference(item?.eventFromTime, item?.eventToTime) }}</td> -->
-                  <td>{{item?.duration}}</td>
+                  <td>{{ item?.duration }}</td>
 
-                  <td>{{item?.objectName | titlecase}}</td>
+                  <td>{{ item?.objectName | titlecase }}</td>
                   <!-- <td>
                                   <ng-container *ngFor="let status of actionTags">
                                     <select class="form-control custom-form-control fw-bold" [(ngModel)]="item.actionTag"
@@ -252,39 +386,55 @@
                                   </ng-container>
                                 </td> -->
 
-
                   <td>
                     {{ item?.alertTag | titlecase }}
                   </td>
 
                   <td
-                    [style.color]="item?.subAlertTag == 'Suspicious' ? 'red' : item?.subAlertTag == 'Police Visit' ? 'blue' : item?.subAlertTag == 'Information'?'green': item?.subAlertTag =='Deterred'?'violet':''">
+                    [style.color]="
+                      item?.subAlertTag == 'Suspicious'
+                        ? 'red'
+                        : item?.subAlertTag == 'Police Visit'
+                          ? 'blue'
+                          : item?.subAlertTag == 'Information'
+                            ? 'green'
+                            : item?.subAlertTag == 'Deterred'
+                              ? 'violet'
+                              : ''
+                    "
+                  >
                     {{ item?.subAlertTag }}
                   </td>
 
                   <td class="text-center">
-                    <p class="text-primary pointer" (click)="openPlayModel(item, i)">View</p>
+                    <p
+                      class="text-primary pointer"
+                      (click)="openPlayModel(item, i)"
+                    >
+                      View
+                    </p>
                     <ng-template #infoDialog>
-                      <div class="p-5">
-                        userName: {{userData?.UserName}}
-                      </div>
+                      <div class="p-5">userName: {{ userData?.UserName }}</div>
                     </ng-template>
                   </td>
                   <td>
-                    <p class="new-item" *ngIf="item?.createdTime > currentTime">NEW</p>
+                    <p class="new-item" *ngIf="item?.createdTime > currentTime">
+                      NEW
+                    </p>
                   </td>
                 </tr>
               </tbody>
 
               <!-- err-info -->
               <ng-container>
-                <app-err-info [text]="storageService.loading_text"></app-err-info>
+                <app-err-info
+                  [text]="storageService.loading_text"
+                ></app-err-info>
               </ng-container>
             </table>
           </div>
         </ng-container>
       </div>
-
     </div>
   </div>
 </div>
@@ -296,61 +446,124 @@
 
 <div class="new-dialog" id="playModel">
   <div class="dialog-header">
-    <p>{{currentVideoData?.siteName}} - {{currentVideoData?.name | uppercase}}</p>
+    <p>
+      {{ currentVideoData?.siteName }} -
+      {{ currentVideoData?.name | uppercase }}
+    </p>
 
     <div class="d-flex align-items-center">
       <!-- <p><img src="assets/icons/file_download_white.svg" class="pointer" (click)="generatePdf()" title="Download"
           alt=""></p> -->
-      <p><img src="assets/icons/close.svg" width="20" class="pointer ms-2" #close (click)="closeModel('playModel')"
-          title="close" alt=""></p>
+      <p>
+        <img
+          src="assets/icons/close.svg"
+          width="20"
+          class="pointer ms-2"
+          #close
+          (click)="closeModel('playModel')"
+          title="close"
+          alt=""
+        />
+      </p>
     </div>
   </div>
 
-  <div class="dialog-content" style="position: relative; width: 55vw; height: 55vh; border:2px solid #587164"
-    #reportDialog *ngIf="currentVideoData">
+  <div
+    class="dialog-content"
+    style="
+      position: relative;
+      width: 55vw;
+      height: 55vh;
+      border: 2px solid #587164;
+    "
+    #reportDialog
+    *ngIf="currentVideoData"
+  >
     <div id="canvas">
       <!-- <div class="header d-flex">
         <div><img src="assets/icons/IVISsecurity_logo.png" width="150" alt="ivisSecurity"></div>
       </div> -->
 
       <div class="d-flex justify-content-between align-items-center my-1">
-        <div class="dialog-title">{{ currentVideoData?.eventFromTime  }}</div>
-        <div class="dialog-title">{{currentVideoData?.actionTag | uppercase}}</div>
-        <div class="dialog-title">{{currentVideoData?.eventFromTime }} to
-          {{currentVideoData?.eventToTime }}</div>
+        <div class="dialog-title">{{ currentVideoData?.eventFromTime }}</div>
+        <div class="dialog-title">
+          {{ currentVideoData?.actionTag | uppercase }}
+        </div>
+        <div class="dialog-title">
+          {{ currentVideoData?.eventFromTime }} to
+          {{ currentVideoData?.eventToTime }}
+        </div>
       </div>
 
       <div>
-        <div style="height: 35vh;">
+        <div style="height: 35vh">
           <!-- image -->
-          <img *ngIf="!isVideo(currentTileItem)" [src]=" currentTileItem | image | async" width="100%"
-            height="100%" alt="Loading...">
+          <img
+            *ngIf="!isVideo(currentTileItem)"
+            [src]="currentTileItem | image | async"
+            width="100%"
+            height="100%"
+            alt="Loading..."
+          />
 
           <!-- video -->
-          <video *ngIf="isVideo(currentTileItem)" [src]=" currentTileItem | image | async" class="bg-dark"
-            controls autoplay width="100%" height="100%"></video>
+          <video
+            *ngIf="isVideo(currentTileItem)"
+            [src]="currentTileItem | image | async"
+            class="bg-dark"
+            controls
+            autoplay
+            width="100%"
+            height="100%"
+          ></video>
         </div>
 
         <div class="tiles-parent">
           <div class="nav-btns">
-            <button (click)="prev()" [disabled]="currentTilePage == 1"><img src="assets/icons/arrow_back.svg" width="20"
-                alt=""></button>
+            <button (click)="prev()" [disabled]="currentTilePage == 1">
+              <img src="assets/icons/arrow_back.svg" width="20" alt="" />
+            </button>
           </div>
 
-          <div class="scroll-tiles" *ngFor="let data of currentTiles; let i = index"
-            [ngStyle]="{'border': currentTileItem == data ? '3px solid red' : 'none'}" (click)="getCurrentTile(data)">
+          <div
+            class="scroll-tiles"
+            *ngFor="let data of currentTiles; let i = index"
+            [ngStyle]="{
+              border: currentTileItem == data ? '3px solid red' : 'none',
+            }"
+            (click)="getCurrentTile(data)"
+          >
             <!-- image -->
-            <img *ngIf="!isVideo(currentTileItem)" [src]=" data | image | async" width="100%" height="100%"
-              alt="Loading...">
+            <img
+              *ngIf="!isVideo(currentTileItem)"
+              [src]="data | image | async"
+              width="100%"
+              height="100%"
+              alt="Loading..."
+            />
 
             <!-- video -->
-            <video *ngIf="isVideo(currentTileItem)" [src]=" data | image | async" class="bg-dark"
-              width="100%" height="100%"></video>
+            <video
+              *ngIf="isVideo(currentTileItem)"
+              [src]="data | image | async"
+              class="bg-dark"
+              width="100%"
+              height="100%"
+            ></video>
           </div>
 
           <div class="nav-btns">
-            <button (click)="next()" [disabled]="currentTilePage == getTilePages"><img src="assets/icons/arrow_back.svg"
-                width="20" style="rotate: 180deg;" alt=""></button>
+            <button
+              (click)="next()"
+              [disabled]="currentTilePage == getTilePages"
+            >
+              <img
+                src="assets/icons/arrow_back.svg"
+                width="20"
+                style="rotate: 180deg"
+                alt=""
+              />
+            </button>
           </div>
         </div>
       </div>

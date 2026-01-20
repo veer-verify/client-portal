@@ -27,12 +27,12 @@ export class IncidentsComponent implements OnInit {
     private eventSer: EventService,
     public storageSer: StorageService,
     private siteService: SiteService,
-    private alert:AlertService
+    private alert: AlertService
   ) {
-     this.storageService.site_sub.subscribe((res) => {
+    this.storageService.site_sub.subscribe((res) => {
       this.currentInfo = res;
       this.currentSite = res?.site;
-       })
+    })
   }
 
   environment = environment.commonDownUrl + '/downloadFile_1_0?requestName=prod-events&assetName=';
@@ -49,29 +49,26 @@ export class IncidentsComponent implements OnInit {
 
     this.getTags();
   }
-alertType:any;
-alertSubType:any;
-alertTypes:any[]=[];
-alertSubTypes:any[]=[];
 
-    getCurrentSiteAlerts(data: any) {
-
+  alertType: any = '';
+  alertSubType: any = '';
+  alertTypes: any[] = [];
+  alertSubTypes: any[] = [];
+  getCurrentSiteAlerts(data: any) {
     this.eventSer.getAlertCategoriesForSiteId(data).subscribe((res: any) => {
       this.alertTypes = res;
     });
   }
 
-   onAlertChange() {
-
+  onAlertChange() {
     const selectedAlert = this.alertTypes.find(
       (a: any) => a.guardAlertTypeId == Number(this.alertType)
     );
-
     this.alertSubTypes = selectedAlert ? selectedAlert.subAlerts : [];
   }
 
   isVideo(data: string) {
-    if(!data) return;
+    if (!data) return;
     let arr = ['mp4', 'avi'];
     return arr.includes(data?.split('.')[data.split('.').length - 1])
   }
@@ -118,8 +115,8 @@ alertSubTypes:any[]=[];
   getSitesListForUserName() {
     this.storageService.loading_text = '';
     this.siteService.getSitesListForUserName(this.userData).subscribe((res: any) => {
-    this.storageService.loading_text = null;
-    this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
+      this.storageService.loading_text = null;
+      this.siteData = res?.sites.sort((a: any, b: any) => a.siteName > b.siteName ? 1 : a.siteName < b.siteName ? -1 : 0);
       // this.getsitesListByService(res.sites);
       var user = this.storageService.getEncrData("user");
       if (user.UserName == 'sales@ivisecurity.com') {
@@ -139,17 +136,17 @@ alertSubTypes:any[]=[];
         });
       }
 
-      if(!this.currentInfo) {
+      if (!this.currentInfo) {
         // this.storageService.site_sub.next({site: this.siteData[0], index: 0});
-         this.storageService.site_sub.next({site: this.siteData[0]});
-         this.getCurrentSiteAlerts(this.siteData[0])
+        this.storageService.site_sub.next({ site: this.siteData[0] });
+        this.getCurrentSiteAlerts(this.siteData[0])
       }
       // this.getsiteservices1(this.currentInfo?.site);
 
 
       this.footageList(this.currentInfo?.site);
     }, (err: any) => {
-    this.storageService.loading_text = 'NO DATA!';
+      this.storageService.loading_text = 'NO DATA!';
     })
   }
 
@@ -187,8 +184,8 @@ alertSubTypes:any[]=[];
 
   getDisplySite(site: any) {
 
-    if(site) {
-      this.camerasListForSites({siteId: site});
+    if (site) {
+      this.camerasListForSites({ siteId: site });
     }
     let x = this.siteData.filter((item: any) => site == item.siteId);
 
@@ -202,38 +199,41 @@ alertSubTypes:any[]=[];
   navActive!: number;
   todayDate: any;
 
-@ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
-scrollToSite(siteId: number) {
-  setTimeout(() => {
-    const index = this.siteData.findIndex((site:any) => site.siteId === siteId);
-    const elements = this.siteselect.toArray();  // Convert to real array
-    const el = elements[index];
-    if (el) {
-      el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, 1000);
-}
+  @ViewChildren('siteselect') siteselect!: QueryList<ElementRef>;
+  scrollToSite(siteId: number) {
+    setTimeout(() => {
+      const index = this.siteData.findIndex((site: any) => site.siteId === siteId);
+      const elements = this.siteselect.toArray();  // Convert to real array
+      const el = elements[index];
+      if (el) {
+        el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 1000);
+  }
 
 
   footageList(data: any) {
+    this.alertType = '';
+    this.alertSubType = '';
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
 
-    if(data) {
+    if (data) {
       this.camerasListForSites(data);
       this.scrollToSite(data?.siteId);
       this.getCurrentSiteAlerts(data);
     }
+
     // if(this.currentInfo.index != 0) {
-      // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
-      this.storageService.site_sub.next({site: data});
+    // this.storageService.site_sub.next({site: data, index: this.siteData.indexOf(data)});
+    this.storageService.site_sub.next({ site: data });
     // }
 
     this.currentSite = data;
     this.displaySite = data;
     // this.getsiteservices1(data);
-      this.navActive = this.siteData.findIndex(
-          (site: any) => site.siteId === data.siteId
-        );
+    this.navActive = this.siteData.findIndex(
+      (site: any) => site.siteId === data.siteId
+    );
 
 
     let d = new Date().setMonth(new Date().getMonth() + 1);
@@ -246,40 +246,43 @@ scrollToSite(siteId: number) {
     this.newEventData = [];
     this.storageService.loading_text = '';
 
-    this.eventSer.incidentList({...data,pageSize:this.pageSize}).subscribe((res: any) => {
+    this.eventSer.incidentList({ ...data, pageSize: this.pageSize }).subscribe((res: any) => {
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
-      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
+      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i + 1);
       if (res.statusCode == 200) {
         this.storageService.loading_text = null;
         this.eventData = res.IncidentList.sort((a: any, b: any) => a.createdTime > b.createdTime ? -1 : a.createdTime < b.createdTime ? 1 : 0);
         this.newEventData = this.eventData;
+
+        if (this.newEventData.length === 0) {
+          this.storageService.loading_text = 'NO DATA!';
+        }
       } else {
-                this.storageService.loading_text = 'No DATA!';
+        this.storageService.loading_text = 'NO DATA!';
       }
     }, (err: any) => {
-    this.storageService.loading_text = 'NO DATA!';
+      this.storageService.loading_text = 'NO DATA!';
     })
   }
 
-    // siteId: any
-    cameraId: any = '';
-    objectName: any = '';
-    actionTag: any ;
-    fromDate: any = '';
-    toDate: any = '';
-    selectNumbers: any = [];
+  // siteId: any
+  cameraId: any = '';
+  objectName: any = '';
+  actionTag: any;
+  fromDate: any = '';
+  toDate: any = '';
+  selectNumbers: any = [];
+  currentPage: number;
+  totalPages: number;
+  pageSize: number = 10;
 
-    currentPage: number;
-    totalPages: number;
-    pageSize:number=10;
-
-    filter(type?: string | Event) {
+  filter(type?: string | Event) {
     // this.currentSite.siteId = this.siteId;
 
     let pageNumber;
     type == 'next' ? pageNumber = this.currentPage + 1 : type == 'prev' ? pageNumber = this.currentPage - 1 : pageNumber = type;
-    if(pageNumber == (this.totalPages + 1)) return;
+    if (pageNumber == (this.totalPages + 1)) return;
 
     let x = this.siteData.map((item: any) => item.siteId).indexOf(Number(this.currentSite?.siteId));
     this.navActive = x;
@@ -290,21 +293,24 @@ scrollToSite(siteId: number) {
       cameraId: this.cameraId,
       // actionTag: this.actionTag,
       alertTag: this.alertType,
-      subAlertTag:this.alertSubType,
+      subAlertTag: this.alertSubType,
       fromDate: this.fromDate,
       toDate: this.toDate,
       page: pageNumber,
-      pageSize:this.pageSize
+      pageSize: this.pageSize
     }).subscribe((res: any) => {
-    this.storageService.loading_text = null;
+
+      this.storageService.loading_text = null;
       this.currentPage = res.page;
       this.totalPages = res.totalPages;
-      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i+1);
+      this.selectNumbers = new Array(this.totalPages).fill(0).map((d, i) => i + 1);
       if (res.statusCode === 200) {
         this.newEventData = res.IncidentList.sort((a: any, b: any) => a.createdTime > b.createdTime ? -1 : a.createdTime < b.createdTime ? 1 : 0);
+      } else {
+        this.storageService.loading_text = 'NO DATA!';
       }
     }, (err) => {
-    this.storageService.loading_text = 'NO DATA!';
+      this.storageService.loading_text = 'NO DATA!';
     })
   }
 
@@ -449,41 +455,41 @@ scrollToSite(siteId: number) {
     });
   }
 
-spinexcel:boolean=false;
-  incidentsDataToExcel(){
+  spinexcel: boolean = false;
+  incidentsDataToExcel() {
 
-    if(this.fromDate && this.toDate){
+    if (this.fromDate && this.toDate) {
 
-      this.spinexcel=true;
+      this.spinexcel = true;
 
-      let payload={
-        siteId:this.currentSite.siteId,
-        fromDate :this.fromDate,
-        toDate : this.toDate
+      let payload = {
+        siteId: this.currentSite.siteId,
+        fromDate: this.fromDate,
+        toDate: this.toDate
       }
 
       this.siteService.incidentsDataToExcel(payload).subscribe({
-      next: (res: ArrayBuffer) => {
-        const blob = new Blob([res], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        });
+        next: (res: ArrayBuffer) => {
+          const blob = new Blob([res], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          });
 
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'Alerts-report.xlsx';
-        link.click();
-        window.URL.revokeObjectURL(url);
-         this.spinexcel=false;
-      },
-      error: (err) => {
-        this.alert.error('Download failed:', err);
-         this.spinexcel=false;
-      },
-    });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Alerts-report.xlsx';
+          link.click();
+          window.URL.revokeObjectURL(url);
+          this.spinexcel = false;
+        },
+        error: (err) => {
+          this.alert.error('Download failed:', err);
+          this.spinexcel = false;
+        },
+      });
     }
-    else{
-      this.alert.error('error',"Please fill start Date and end Date")
+    else {
+      this.alert.error('error', "Please fill start Date and end Date")
     }
   }
 }

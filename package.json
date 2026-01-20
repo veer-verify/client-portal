@@ -7,7 +7,7 @@
     "unv": "ng serve --configuration unv",
     "verifai": "ng serve --configuration verifai",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --base-href /clientPortalUs/ --configuration development",
     "test": "ng test"
   },
   "private": true,

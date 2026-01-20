@@ -4,16 +4,22 @@
 <app-navbar [serviceDataInput]="currentInfo?.site"></app-navbar>
 
 <div class="page">
-  <div style="width:100vw; overflow:hidden">
+  <div style="width: 100vw; overflow: hidden">
     <div class="searchbar">
       <div class="row">
-        <div class="col-lg-3 col-sm-12" style="text-align:center; align-self: center;">
+        <div
+          class="col-lg-3 col-sm-12"
+          style="text-align: center; align-self: center"
+        >
           <!-- <div class="searchbox" style="opacity: 0.1; pointer-events:none">
             <input type="text" placeholder="Search"><img src="assets/icons/search.svg">
           </div> -->
         </div>
-        <div class="col-lg-9 col-sm-12" Style="border: none; align-self: center; opacity:1">
-          <div  class="title1 topTitle" style="margin:0 0 0 25px;">
+        <div
+          class="col-lg-9 col-sm-12"
+          Style="border: none; align-self: center; opacity:1"
+        >
+          <div class="title1 topTitle" style="margin: 0 0 0 25px">
             <!-- <span *ngIf="site">{{site.siteName}}</span> -->
             <!-- <span *ngIf="support" class="py-2">Support Helpdesk</span> -->
             <!-- <div class=" action-icons">
@@ -21,7 +27,6 @@
           </div> -->
             <!-- <img src="assets/icons/chaticon.png" class="qr" (click)="toQRmodal()" id="qrcode">
             <div class="tooltiptext">Do you need Safety Escort?</div> -->
-
           </div>
         </div>
       </div>
@@ -31,63 +36,126 @@
   <div class="cont">
     <div class="row">
       <div class="col-lg-3 col-sm-12 btnvisible" id="topple" #topple>
-        <div class="optionlabelparent" (click)="openServiceHelpdesk()"
-        [style.border]="support == false? '1px solid #fff' : ''"
-        [style.backgroundColor]="support==false ? '#00000000' : '#fff'">
+        <div
+          class="optionlabelparent"
+          (click)="openServiceHelpdesk()"
+          [style.backgroundColor]="support == false ? 'transparent' : '#fff'"
+          [style.border]="support == false ? '1px solid #fff' : ''"
+        >
           <!-- <div class="optionlabel" Style="position:relative;" [style.backgroundColor]="support==false ? '#e7e7e7' : '#fff'">
             <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
             <div class="label"> Support Helpdesk </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div> -->
-          <div class="optionlabel" Style="position:relative;"
-            [style.backgroundColor]="support==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="support==false ? '#000' : '#fff'">
+          <div
+            class="optionlabel"
+            Style="position:relative;"
+            [style.color]="support == false ? '#fff' : '#000'"
+          >
             <!-- <img src="assets/icons/eye.svg" *ngIf="support" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!support" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="support ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
+            <img
+              [src]="
+                support
+                  ? storageService.environment.theme.activeLogo
+                  : storageService.environment.theme.inActiveLogo
+              "
+              alt=""
+            />
             <div class="label">Support Requests</div>
-            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop" />
+            </div>
           </div>
         </div>
 
-        <div class="optionlabelparent" (click)="openfaq()"
-        [style.border]="faq == false? '1px solid #fff' : ''"
-        [style.backgroundColor]="faq==false ? '#00000000' : '#fff'">
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="faq==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="faq==false ? '#000' : '#fff'">
+        <div
+          class="optionlabelparent"
+          (click)="openfaq()"
+          [style.backgroundColor]="faq == false ? 'transparent' : '#fff'"
+          [style.border]="faq == false ? '1px solid #fff' : ''"
+        >
+          <div
+            class="optionlabel"
+            Style="position:relative;"
+            [style.color]="faq == false ? '#fff' : '#000'"
+          >
             <!-- <img src="assets/icons/eye.svg" *ngIf="faq" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!faq" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="faq ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
-            <div class="label"> Frequently Asked Questions </div>
-            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+            <img
+              [src]="
+                faq
+                  ? storageService.environment.theme.activeLogo
+                  : storageService.environment.theme.inActiveLogo
+              "
+              alt=""
+            />
+            <div class="label">Frequently Asked Questions</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop" />
+            </div>
           </div>
         </div>
 
-        <div class="optionlabelparent" (click)="openContactUs()"
-        [style.border]="contactUs == false? '1px solid #fff' : ''"
-        [style.backgroundColor]="contactUs==false ? '#00000000' : '#fff'">
+        <div
+          class="optionlabelparent"
+          (click)="openContactUs()"
+          [style.border]="contactUs == false ? '1px solid #fff' : ''"
+          [style.backgroundColor]="contactUs == false ? 'transparent' : '#fff'"
+        >
           <!-- <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? '#e7e7e7' : '#fff'">
             <img src="assets/icons/eye.svg" style="width: 20px;" alt="ivisUSA">
             <div class="label"> Contact Us </div>
             <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
           </div> -->
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="contactUs==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="contactUs==false ? '#000' : '#fff'">
+          <div
+            class="optionlabel"
+            Style="position:relative;"
+            [style.color]="contactUs == false ? '#fff' : '#000'"
+          >
             <!-- <img src="assets/icons/eye.svg" *ngIf="contactUs" style="width: 20px;" alt="ivisUSA">
             <img src="assets/icons/eye-white.svg" *ngIf="!contactUs" style="width: 20px;" alt="ivisUSA"> -->
-            <img [src]="contactUs ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
-            <div class="label"> Contact Us </div>
-            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+            <img
+              [src]="
+                contactUs
+                  ? storageService.environment.theme.activeLogo
+                  : storageService.environment.theme.inActiveLogo
+              "
+              alt=""
+            />
+            <div class="label">Contact Us</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop" />
+            </div>
           </div>
         </div>
 
-        <div class="optionlabelparent" (click)="opentnc()"
-        [style.border]="tnc == false? '1px solid #fff' : ''"
-        [style.backgroundColor]="tnc==false ? '#00000000' : '#fff'">
-          <div class="optionlabel" Style="position:relative;"  [style.backgroundColor]="tnc==false ? 'rgb(0 0 0 / 0%)' : '#ED3237'" [style.color]="tnc==false ? '#000' : '#fff'">
-            <img [src]="tnc ? storageService.environment.theme.activeLogo : storageService.environment.theme.inActiveLogo" alt="">
-            <div class="label"> Terms & Conditions </div>
-            <div class="accordionArrow"><img src="assets/icons/forward_arrow.svg" alt="drop"></div>
+        <div
+          class="optionlabelparent"
+          (click)="opentnc()"
+          [style.border]="tnc == false ? '1px solid #fff' : ''"
+          [style.backgroundColor]="tnc == false ? 'transparent' : '#fff'"
+        >
+          <div
+            class="optionlabel"
+            Style="position:relative;"
+            [style.color]="tnc == false ? '#fff' : '#000'"
+          >
+            <img
+              [src]="
+                tnc
+                  ? storageService.environment.theme.activeLogo
+                  : storageService.environment.theme.inActiveLogo
+              "
+              alt=""
+            />
+            <div class="label">Terms & Conditions</div>
+            <div class="accordionArrow">
+              <img src="assets/icons/forward_arrow.svg" alt="drop" />
+            </div>
           </div>
         </div>
-        <br>
+        <br />
       </div>
 
       <!-- Right Column Starts -->
@@ -95,9 +163,14 @@
         <div *ngIf="faq">
           <div class="title1">
             frequently asked questions
-            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <img
+              src="assets/icons/btnvisible.svg"
+              alt="V"
+              class="visibilitybtn"
+              (click)="showOptions1()"
+            />
           </div>
-          <hr id="hr1">
+          <hr id="hr1" />
 
           <div class="tables">
             <!-- <div class="optionlabel2" id="optionlabel2" Style="position:relative;" (click)="toggleAccordian($event)">
@@ -105,51 +178,87 @@
               <div class="accordionArrowBig"><img src="assets/icons/forward_arrow.svg" alt="expand"></div>
             </div>
             <div class="panel" hide="!item.isActive"> -->
-              <div class="childBox" style="text-align: center;">
-                <span style="font-size: 20px;font-weight:700;">Coming soon...</span>
-                <div class="optionlabel3" Style="position:relative; display: none;" (click)="toggleAccordian1($event)">
-                  <span>INSIGHT</span>
-                  <div class="accordionArrow1"><img src="assets/icons/forward_arrow.svg" alt="expand"></div>
+            <div class="childBox" style="text-align: center">
+              <span style="font-size: 20px; font-weight: 700"
+                >Coming soon...</span
+              >
+              <div
+                class="optionlabel3"
+                Style="position:relative; display: none;"
+                (click)="toggleAccordian1($event)"
+              >
+                <span>INSIGHT</span>
+                <div class="accordionArrow1">
+                  <img src="assets/icons/forward_arrow.svg" alt="expand" />
                 </div>
-                <div class="panel" hide="!item.isActive" style="display: none;">
-                  <div class="accordionElements1" (click)="toggleAccordian2($event)">
-                    <div style="display:block">
-                      <div style="display:flex; position:relative;">
-                        <span class="faqTitle">Lorem ipsum dolor sit amet?<img src="assets/icons/minus.svg" class="minus"
-                            alt="close"><img src="assets/icons/plus.svg" class="plus" alt="expand"></span>
-                      </div>
-                      <div class="panel2">
-                        <span class="faqContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                          laborum.
-                        </span>
-                      </div>
-                      <div style="height: 30px;">&nbsp;</div>
-                      <hr #hr2 style="margin:0">
+              </div>
+              <div class="panel" hide="!item.isActive" style="display: none">
+                <div
+                  class="accordionElements1"
+                  (click)="toggleAccordian2($event)"
+                >
+                  <div style="display: block">
+                    <div style="display: flex; position: relative">
+                      <span class="faqTitle"
+                        >Lorem ipsum dolor sit amet?<img
+                          src="assets/icons/minus.svg"
+                          class="minus"
+                          alt="close" /><img
+                          src="assets/icons/plus.svg"
+                          class="plus"
+                          alt="expand"
+                      /></span>
                     </div>
-                  </div>
-                  <div class="accordionElements1" (click)="toggleAccordian2($event)">
-                    <div style="display:block">
-                      <div style="display:flex; position:relative;">
-                        <span class="faqTitle">Lorem ipsum dolor sit amet?<img src="assets/icons/minus.svg" class="minus"><img
-                            src="assets/icons/plus.svg" class="plus" alt="expand"></span>
-                      </div>
-                      <div class="panel2">
-                        <span class="faqContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                          laborum.</span>
-                      </div>
-                      <div style="height: 30px;">&nbsp;</div>
-                      <hr #hr2 style="margin:0">
+                    <div class="panel2">
+                      <span class="faqContent"
+                        >Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex
+                        ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum.
+                      </span>
                     </div>
+                    <div style="height: 30px">&nbsp;</div>
+                    <hr #hr2 style="margin: 0" />
                   </div>
                 </div>
+                <div
+                  class="accordionElements1"
+                  (click)="toggleAccordian2($event)"
+                >
+                  <div style="display: block">
+                    <div style="display: flex; position: relative">
+                      <span class="faqTitle"
+                        >Lorem ipsum dolor sit amet?<img
+                          src="assets/icons/minus.svg"
+                          class="minus" /><img
+                          src="assets/icons/plus.svg"
+                          class="plus"
+                          alt="expand"
+                      /></span>
+                    </div>
+                    <div class="panel2">
+                      <span class="faqContent"
+                        >Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex
+                        ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum.</span
+                      >
+                    </div>
+                    <div style="height: 30px">&nbsp;</div>
+                    <hr #hr2 style="margin: 0" />
+                  </div>
+                </div>
+              </div>
               <!-- </div> -->
             </div>
           </div>
@@ -159,32 +268,59 @@
         <div *ngIf="contactUs">
           <div class="title1">
             Contact Us
-            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <img
+              src="assets/icons/btnvisible.svg"
+              alt="V"
+              class="visibilitybtn"
+              (click)="showOptions1()"
+            />
           </div>
-          <hr id="hr1">
+          <hr id="hr1" />
           <div class="tables">
-            <div class="childBox" style="padding: 5%; border-radius: 6px; margin-top: 0;">
-              <div style="justify-content: space-around; display: flex;">
-                <div style="text-align: left; width: 48%;">
-                  <div style="display: flex;align-items: center;">
-                    <img src="assets/icons/location.svg" style="height: 20px; margin-right:10px">
-                    <span style="color: #acacac; font-weight:bold;">ADDRESS</span>
+            <div
+              class="childBox"
+              style="padding: 5%; border-radius: 6px; margin-top: 0"
+            >
+              <div style="justify-content: space-around; display: flex">
+                <div style="text-align: left; width: 48%">
+                  <div style="display: flex; align-items: center">
+                    <img
+                      src="assets/icons/location.svg"
+                      style="height: 20px; margin-right: 10px"
+                    />
+                    <span style="color: #acacac; font-weight: bold"
+                      >ADDRESS</span
+                    >
                   </div>
-                  <div style="margin-top: 15px; font-size:14px;">
-                    <b>{{storageService.environment.theme.detail.address}} &#169;</b><br>
-                      {{storageService.environment.theme.detail.city}}<br>
-                      {{storageService.environment.theme.detail.state}}<br>
-                      {{storageService.environment.theme.detail.country}}<br>
+                  <div style="margin-top: 15px; font-size: 14px">
+                    <b
+                      >{{
+                        storageService.environment.theme.detail.address
+                      }}
+                      &#169;</b
+                    ><br />
+                    {{ storageService.environment.theme.detail.city }}<br />
+                    {{ storageService.environment.theme.detail.state }}<br />
+                    {{ storageService.environment.theme.detail.country }}<br />
                   </div>
                 </div>
 
-                <div style="text-align: left; width: 48%;">
-                  <div style="display: flex;align-items: center;">
-                    <img src="assets/icons/call.svg" style="height: 20px; margin-right:10px">
-                    <span style="color: #acacac; font-weight:bold;">CALL</span>
+                <div style="text-align: left; width: 48%">
+                  <div style="display: flex; align-items: center">
+                    <img
+                      src="assets/icons/call.svg"
+                      style="height: 20px; margin-right: 10px"
+                    />
+                    <span style="color: #acacac; font-weight: bold">CALL</span>
                   </div>
-                  <div style="margin-top: 15px; font-size:14px;"><b>{{ storageService.environment.theme.detail.phone }}</b><br></div>
-                  <div style="margin-top: 5px; font-size:14px;"><b>{{ storageService.environment.theme.detail.email }}</b><br></div>
+                  <div style="margin-top: 15px; font-size: 14px">
+                    <b>{{ storageService.environment.theme.detail.phone }}</b
+                    ><br />
+                  </div>
+                  <div style="margin-top: 5px; font-size: 14px">
+                    <b>{{ storageService.environment.theme.detail.email }}</b
+                    ><br />
+                  </div>
                 </div>
               </div>
             </div>
@@ -194,65 +330,130 @@
         <div *ngIf="tnc">
           <div class="title1">
             Terms and Conditions
-            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <img
+              src="assets/icons/btnvisible.svg"
+              alt="V"
+              class="visibilitybtn"
+              (click)="showOptions1()"
+            />
           </div>
-          <hr id="hr1">
+          <hr id="hr1" />
           <div class="tables">
             <div>
-              <pdf-viewer [src]="pdfSrc"
+              <pdf-viewer
+                [src]="pdfSrc"
                 [render-text]="true"
                 [original-size]="false"
                 class="tncblock"
-                ></pdf-viewer>
+              ></pdf-viewer>
             </div>
           </div>
         </div>
 
         <div *ngIf="support">
-          <div class="title1 d-flex align-items-center" style="position: relative;">
-            Requests&nbsp; 
+          <div
+            class="title1 d-flex align-items-center"
+            style="position: relative"
+          >
+            Requests&nbsp;
             <div class="title" *ngIf="this.currentInfo?.site">
-                - {{searched ? this.selectedsite?.siteName : 'All Sites'}}
+              - {{ searched ? this.selectedsite?.siteName : "All Sites" }}
             </div>
             <!-- <span *ngIf="filtereddata.length > 0"> - {{filtereddata.length}}</span> -->
             <div class="cluster">
-              <div style="display: flex; margin-left: 40px" class="paginate" *ngIf="newHelpdeskRequests.length != 0">
-                <button style="background-color: transparent; border: none;" (click)="filterHelpDeskRequests('prev')" [disabled]="pagenumber == 1">
-                  <img src="assets/icons/arrow.svg" style="transform: rotate(180deg);" alt="prev" [className]="pagenumber == 1 ? 'fade': '' " >
+              <div
+                style="display: flex; margin-left: 40px"
+                class="paginate"
+                *ngIf="newHelpdeskRequests.length != 0"
+              >
+                <button
+                  style="background-color: transparent; border: none"
+                  (click)="filterHelpDeskRequests('prev')"
+                  [disabled]="pagenumber == 1"
+                >
+                  <img
+                    src="assets/icons/arrow.svg"
+                    style="transform: rotate(180deg)"
+                    alt="prev"
+                    [className]="pagenumber == 1 ? 'fade' : ''"
+                  />
                 </button>
-                <div  class="searchbox" style="padding: 4px !important;">
-                  <select name="my-dropdown" (change)="filterHelpDeskRequests()" [(ngModel)]="pagenumber" class="dropdown">
-                    <option *ngFor="let number of selectNumbers; let n=index" [value]="number"  style="border: none;outline:none">
-                      <div style="padding: 15px; margin:15px; margin-right:15px">&nbsp;&nbsp;{{n+1 + ' of ' + pageSize}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="searchbox" style="padding: 4px !important">
+                  <select
+                    name="my-dropdown"
+                    (change)="filterHelpDeskRequests()"
+                    [(ngModel)]="pagenumber"
+                    class="dropdown"
+                  >
+                    <option
+                      *ngFor="let number of selectNumbers; let n = index"
+                      [value]="number"
+                      style="border: none; outline: none"
+                    >
+                      <div
+                        style="padding: 15px; margin: 15px; margin-right: 15px"
+                      >
+                        &nbsp;&nbsp;{{
+                          n + 1 + " of " + pageSize
+                        }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </div>
                     </option>
                   </select>
                   <!-- <img src="assets/icons/forward_arrow.svg" style="margin-left: -30px; transform:rotate(90deg); pointer-events:none; width: 20px" alt="drop"> -->
                 </div>
-                <button style="background-color: transparent; border: none;" (click)="filterHelpDeskRequests('next')" [disabled]="pagenumber == pageSize">
-                  <img src="assets/icons/arrow.svg" alt="next" [className]="pagenumber == pageSize ? 'fade': '' ">
+                <button
+                  style="background-color: transparent; border: none"
+                  (click)="filterHelpDeskRequests('next')"
+                  [disabled]="pagenumber == pageSize"
+                >
+                  <img
+                    src="assets/icons/arrow.svg"
+                    alt="next"
+                    [className]="pagenumber == pageSize ? 'fade' : ''"
+                  />
                 </button>
               </div>
 
-              <button class="req-btn me-1" (click)="filters()"><img src="assets/icons/filter-white.svg" width="18" alt="" title="Filter"></button>
-              <button class="req-btn" (click)="openaddmodal()">Add Request</button>
+              <button class="req-btn me-1" (click)="filters()">
+                <img
+                  src="assets/icons/filter-white.svg"
+                  width="18"
+                  alt=""
+                  title="Filter"
+                />
+              </button>
+              <button class="req-btn" (click)="openaddmodal()">
+                Add Request
+              </button>
               <!-- <a href="http://192.168.0.158:3000/?orgId=1&from=now-6h&to=now&timezone=browser" target="_blank">View</a> -->
               <!-- <img src="assets/icons/filter.svg" *ngIf="!show && (totalsites.length>1  || categories.length >1 || subcategories.length >1 || status.length > 1)" style="padding:5px;" class="titleimages" (click)="filters()" style="margin: auto;margin-right: 25px;margin-top: -15px; margin-bottom: -15px;">
               <img src="assets/icons/filter_selected.svg" *ngIf="show && (totalsites.length>1  || categories.length >1 || subcategories.length >1 || status.length > 1)" style="padding:5px;" class="titleimages" (click)="filters()" style="margin: auto;margin-right: 25px;margin-top: -15px; margin-bottom: -15px;">
               <img src="assets/icons/addnewreq.svg" *ngIf="!addopen" (click)="openaddmodal()" style="padding:5px;" class="titleimages" style="margin-right: 35px;margin-top: -15px; margin-bottom: -15px;" >
               <img src="assets/icons/addnewreq_selected.svg" *ngIf="addopen" (click)="openaddmodal()" style="padding:5px;" class="titleimages" style="margin-right: 35px;margin-top: -15px; margin-bottom: -15px;" > -->
-
             </div>
-            <img src="assets/icons/btnvisible.svg" alt="V" class="visibilitybtn" (click)="showOptions1()">
+            <img
+              src="assets/icons/btnvisible.svg"
+              alt="V"
+              class="visibilitybtn"
+              (click)="showOptions1()"
+            />
             <!-- <button (click)="showOptions()" class="visibilitybtn"></button> -->
           </div>
 
-
-
           <div *ngIf="show" #filter>
-            <div class="filtertypes" >
+            <div class="filtertypes">
               <span></span>
-              <span style="font-family: PS,sans-serif;text-transform: uppercase;color: #104B86;letter-spacing: 0; padding:0; padding-left: 10px;">Filter Requests</span>
-
+              <span
+                style="
+                  font-family: PS, sans-serif;
+                  text-transform: uppercase;
+                  color: #104b86;
+                  letter-spacing: 0;
+                  padding: 0;
+                  padding-left: 10px;
+                "
+                >Filter Requests</span
+              >
 
               <!-- <div class="optionlabelparent"   style="z-index: 5; border: 1px solid #e8e6e6;">
                 <div class="optionlabel" style="position: relative; background: #f8f8f8" (click)="togglePanel($event)" #sitelabel>
@@ -325,60 +526,107 @@
                 </div>
                 </div> -->
 
-                <div>
-                  <span class="filter-label ">Site</span>
-                  <select class="form-select" [(ngModel)]="selectedsite" #sitee>
-                    <option value="" disabled>Select Site</option>
-                    <option *ngFor="let item of totalsites; let s = index" [value]="item?.siteId">{{item?.siteName}}</option>
-                  </select>
-                </div>
-                <div>
-                  <span class="filter-label ">Category</span>
-                  <select class="form-select" [(ngModel)]="selectedCategory" (click)="getSubCat(selectedCategory)">
-                    <option value="" disabled>Select Category</option>
-                       <option *ngFor="let item of showcategories; let s = index" [value]="item?.catId">{{item?.catName}}</option>
-                  </select>
-                </div>
-                <div *ngIf="selectedCategory">
-                  <span class="filter-label ">Sub-Category</span>
-                  <select class="form-select" [(ngModel)]="selectedSubcategory">
-                    <option value="" disabled>Select Sub-Category</option>
-                    <option *ngFor="let item of showsubcats; let s = index" [value]="item?.serviceSubcatId">{{item?.serviceSubcatName}}</option>
-                  </select>
-                </div>
-                <div>
-                  <span class="filter-label ">Status</span>
-                  <select class="form-select" [(ngModel)]="selectedStatus">
-                    <option value="" disabled>Select Status</option>
-                    <option *ngFor="let item of serviceStatus; let s = index" [value]="item.keyId">{{item.value}}</option>
-                  </select>
-                </div>
-                <div>
-                  <span class="filter-label ">Created by</span>
-                  <select class="form-select" [(ngModel)]="selectedCreatedBy">
-                    <option value="" disabled>Select Createdby</option>
-                    <option *ngFor="let item of assignUsers; let s = index" [value]="item.userId">{{item.userName}}</option>
-                  </select>
-                </div>
-                <div>
-                  <span class="filter-label ">From date</span><br>
-                  <input type="date" class="form-control" [(ngModel)]="displaYstartDate" [max]="today" (ngModelChange)="fixEnd()">
-                </div>
-                <div *ngIf="displaYstartDate">
-                  <span class="filter-label ">To date</span><br>
-                  <input type="date" class="form-control" [(ngModel)]="displaYendDate" [min]="fixToDate">
-                </div>
+              <div>
+                <span class="filter-label">Site</span>
+                <select class="form-select" [(ngModel)]="selectedsite" #sitee>
+                  <option value="" disabled>Select Site</option>
+                  <option
+                    *ngFor="let item of totalsites; let s = index"
+                    [value]="item?.siteId"
+                  >
+                    {{ item?.siteName }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <span class="filter-label">Category</span>
+                <select
+                  class="form-select"
+                  [(ngModel)]="selectedCategory"
+                  (click)="getSubCat(selectedCategory)"
+                >
+                  <option value="" disabled>Select Category</option>
+                  <option
+                    *ngFor="let item of showcategories; let s = index"
+                    [value]="item?.catId"
+                  >
+                    {{ item?.catName }}
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="selectedCategory">
+                <span class="filter-label">Sub-Category</span>
+                <select class="form-select" [(ngModel)]="selectedSubcategory">
+                  <option value="" disabled>Select Sub-Category</option>
+                  <option
+                    *ngFor="let item of showsubcats; let s = index"
+                    [value]="item?.serviceSubcatId"
+                  >
+                    {{ item?.serviceSubcatName }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <span class="filter-label">Status</span>
+                <select class="form-select" [(ngModel)]="selectedStatus">
+                  <option value="" disabled>Select Status</option>
+                  <option
+                    *ngFor="let item of serviceStatus; let s = index"
+                    [value]="item.keyId"
+                  >
+                    {{ item.value }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <span class="filter-label">Created by</span>
+                <select class="form-select" [(ngModel)]="selectedCreatedBy">
+                  <option value="" disabled>Select Createdby</option>
+                  <option
+                    *ngFor="let item of assignUsers; let s = index"
+                    [value]="item.userId"
+                  >
+                    {{ item.userName }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <span class="filter-label">From date</span><br />
+                <input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="displaYstartDate"
+                  [max]="today"
+                  (ngModelChange)="fixEnd()"
+                />
+              </div>
+              <div *ngIf="displaYstartDate">
+                <span class="filter-label">To date</span><br />
+                <input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="displaYendDate"
+                  [min]="fixToDate"
+                />
+              </div>
 
               <div>
-                <button class="generateBtn" (click)="filterHelpDeskRequests('submit')">Search</button>
-                <button class="cancel-btn" (click)="clearsearchfilters()">Clear</button>
+                <button
+                  class="generateBtn"
+                  (click)="filterHelpDeskRequests('submit')"
+                >
+                  Search
+                </button>
+                <button class="cancel-btn" (click)="clearsearchfilters()">
+                  Clear
+                </button>
               </div>
             </div>
           </div>
 
-          <hr id="hr1">
+          <hr id="hr1" />
 
-        <div class="" >
+          <div class="">
             <!-- <div class="childBox shadow" style="padding: 0px; overflow: hidden;  font-family: TP,sans-serif; border-radius: 8px;" *ngFor="let item of newHelpdeskRequests" >
               <div class="optionlabel3 font" Style="position:relative; margin-bottom: 0; ">
                   <div class="helpid">{{item.serviceId ? item.serviceId : ''}}</div>
@@ -401,25 +649,57 @@
               </div>
           </div> -->
 
-          <ng-container *ngIf="newHelpdeskRequests.length !== 0">
-            <!-- list -->
-            <ng-container *ngIf="storageService.isUser()">
-              <div class="parentbox" *ngFor="let item of newHelpdeskRequests" style="justify-content: space-between;">
-                <div class="childBox shadow" style="padding: 0px; overflow: hidden;  font-family: TP,sans-serif; border-radius: 8px; width: 100%;">
-                  <div class="optionlabel3 font" Style="position:relative; margin-bottom: 0; ">
-                      <div class="helpid">{{item.serviceReqId}}</div>
+            <ng-container *ngIf="newHelpdeskRequests.length !== 0">
+              <!-- list -->
+              <ng-container *ngIf="storageService.isUser()">
+                <div
+                  class="parentbox"
+                  *ngFor="let item of newHelpdeskRequests"
+                  style="justify-content: space-between"
+                >
+                  <div
+                    class="childBox shadow"
+                    style="
+                      padding: 0px;
+                      overflow: hidden;
+                      font-family: TP, sans-serif;
+                      border-radius: 8px;
+                      width: 100%;
+                    "
+                  >
+                    <div
+                      class="optionlabel3 font"
+                      Style="position:relative; margin-bottom: 0; "
+                    >
+                      <div class="helpid">{{ item.serviceReqId }}</div>
                       <span>
-                      <span style="color: #104b86; margin:0;" *ngIf="item.siteName && !searched">{{item.siteName}}</span>
-                      <span>{{item.service_cat_name}} - {{item.service_subcat_name}}</span>
+                        <span
+                          style="color: #104b86; margin: 0"
+                          *ngIf="item.siteName && !searched"
+                          >{{ item.siteName }}</span
+                        >
+                        <span
+                          >{{ item.service_cat_name }} -
+                          {{ item.service_subcat_name }}</span
+                        >
                       </span>
 
                       <div class="actions max-center">
                         <div class="">
-                          <button class="outline" style="cursor: default;">{{ item.status ? getMetaDataValue('ServiceRequestStatus', item.status) : ''}}</button>
+                          <button class="outline" style="cursor: default">
+                            {{
+                              item.status
+                                ? getMetaDataValue(
+                                    "ServiceRequestStatus",
+                                    item.status
+                                  )
+                                : ""
+                            }}
+                          </button>
                         </div>
                       </div>
 
-                    <!-- <div class="actions max-center">
+                      <!-- <div class="actions max-center">
                       <div class="">
                         <a class="pointer mx-1" (click)="openassignmodal($event, item)" *ngIf="isAdmin && !item.assignedTo && item.status == 'New'">Assign</a>
                         <p class="pointer mx-1" *ngIf="isAdmin && item.assignedTo" [title]="item.assignedTo">
@@ -428,153 +708,301 @@
                         </p>
                       </div>
                     </div> -->
-                  </div>
-                  <div class="shadowbox">
-                      <div class="dateinbar">{{item.createdTime | date: 'dd MMM, yyyy'}}</div>
-                      <div class="reqdescr wrap" style="width: 100%; text-align:left;" *ngIf="item.description">{{item.description}}</div>
+                    </div>
+                    <div class="shadowbox">
+                      <div class="dateinbar">
+                        {{ item.createdTime | date: "dd MMM, yyyy" }}
+                      </div>
+                      <div
+                        class="reqdescr wrap"
+                        style="width: 100%; text-align: left"
+                        *ngIf="item.description"
+                      >
+                        {{ item.description }}
+                      </div>
                       <!-- <p class="pointer mx-1">{{item.assignedTo}}</p> -->
+                    </div>
                   </div>
-                </div>
 
-            <div style="display: flex; justify-content: space-evenly; align-items: center;">
-                <!-- <img src="assets/icons/comments.png" style="padding: 2px;" alt="comments" title="comments" (click)="opencmtmodal($event,item)"> -->
-                <button class="simple-btn" (click)="openviewmodal($event, item)">
-                  <img src="assets/icons/viewWhite.svg" style="padding: 2px;" alt="view">
-                </button>
-                <button class="simple-btn" (click)="openeditmodal($event, item)" [disabled]="item.status == 5">
-                  <img src="assets/icons/editicon2White.svg" style="padding: 2px;" alt="edit">
-                </button>
-                <button class="simple-btn" (click)="opendeletemodal($event, item)" [disabled]="item.status == 5">
-                  <img src="assets/icons/deleteWhite.svg" style="padding: 2px;" alt="delete">
-                </button>
-                <!-- <img src="assets/icons/viewWhite.svg" style="padding: 2px;" alt="view" (click)="openviewmodal($event,item)">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-evenly;
+                      align-items: center;
+                    "
+                  >
+                    <!-- <img src="assets/icons/comments.png" style="padding: 2px;" alt="comments" title="comments" (click)="opencmtmodal($event,item)"> -->
+                    <button
+                      class="simple-btn"
+                      (click)="openviewmodal($event, item)"
+                    >
+                      <img
+                        src="assets/icons/viewWhite.svg"
+                        style="padding: 2px"
+                        alt="view"
+                      />
+                    </button>
+                    <button
+                      class="simple-btn"
+                      (click)="openeditmodal($event, item)"
+                      [disabled]="item.status == 5"
+                    >
+                      <img
+                        src="assets/icons/editicon2White.svg"
+                        style="padding: 2px"
+                        alt="edit"
+                      />
+                    </button>
+                    <button
+                      class="simple-btn"
+                      (click)="opendeletemodal($event, item)"
+                      [disabled]="item.status == 5"
+                    >
+                      <img
+                        src="assets/icons/deleteWhite.svg"
+                        style="padding: 2px"
+                        alt="delete"
+                      />
+                    </button>
+                    <!-- <img src="assets/icons/viewWhite.svg" style="padding: 2px;" alt="view" (click)="openviewmodal($event,item)">
                 <img src="assets/icons/editicon2White.svg" style="padding: 2px;" alt="edit" (click)="openeditmodal($event,item)">
                 <img src="assets/icons/deleteWhite.svg" style="padding: 2px;" alt="delete" (click)="opendeletemodal($event,item)" > -->
-            </div>
-          </div>
-            </ng-container>
+                  </div>
+                </div>
+              </ng-container>
 
-            <!-- table -->
-            <ng-container *ngIf="!storageService.isUser()">
-              <div class="table-resp extra w-100">
-                <table class="table table-hover" id="mytable">
-                  <thead style="position: sticky; top: 0; z-index: 1;">
-                    <tr class="form1">
-                      <!-- <th>
+              <!-- table -->
+              <ng-container *ngIf="!storageService.isUser()">
+                <div class="table-resp extra w-100">
+                  <table class="table table-hover" id="mytable">
+                    <thead style="position: sticky; top: 0; z-index: 1">
+                      <tr class="form1">
+                        <!-- <th>
                         <p class="d-inline-flex">
                           <span>Id</span>
                         <img (click)="sort('serviceReqId')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
                         </p>
                       </th> -->
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Site</span>
-                          <img (click)="sort('siteName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Category</span>
-                          <img (click)="sort('service_cat_name')" class="pointer ms-1" src="assets/icons/sorticon.svg"
-                            width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Sub Category</span>
-                          <img (click)="sort('service_subcat_name')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Description</span>
-                          <img (click)="sort('description')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <!-- <th>Comments</th> -->
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Created Time</span>
-                          <img (click)="sort('createdTime')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Created By</span>
-                          <img (click)="sort('createdByName')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Status</span>
-                          <img (click)="sort('status')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>
-                        <p class="d-inline-flex">
-                          <span>Assign To</span>
-                          <img (click)="sort('assignedTo')" class="pointer ms-1" src="assets/icons/sorticon.svg" width="15px">
-                        </p>
-                      </th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-      
-                  <tbody>
-                    <ng-container *ngFor="let item of newHelpdeskRequests; let i=index">
-                      <tr >
-                        <!-- <td>{{item?.serviceReqId}}</td> -->
-                        <td>{{item?.siteName}}</td>
-                        <td>{{item?.service_cat_name}}</td>
-                        <td>{{item?.service_subcat_name}}</td>
-                        <td><p style="max-width: 150px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{item?.description}}</p></td>
-                        <!-- <td><p (click)="opencmtmodal($event, item)" class="text-primary pointer">View</p></td> -->
-                        <!-- <td>{{item?.assignedTo}}</td> -->
-                        <td>{{ item?.createdTime ? (item?.createdTime | date:'short') : 'N/A'}}</td>
-                        <td>{{item?.createdByName}}</td>
-                        <td>{{item?.status ? getMetaDataValue('ServiceRequestStatus', item?.status) : ''}}</td>
-                        <td>
-                          <a class="pointer mx-1" (click)="openassignmodal($event, item)" *ngIf="!item.assignedTo && item.status == 1">Assign</a>
-                          <p class="d-inline-flex pointer mx-1" *ngIf="item.assignedToName && item.status != 5">
-                            {{item?.assignedToName ? item?.assignedToName : 'N/A'}}
-                            <img src="assets/icons/edit.svg" width="14px" style="width: 16px;" (click)="openassignmodal($event, item)" alt="">
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Site</span>
+                            <img
+                              (click)="sort('siteName')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
                           </p>
-                          <p *ngIf="item.status == 5">&nbsp; N/A</p>
-                        </td>
-                        <!-- <td>{{item?.status}}</td> -->
-                        <td>
-                          
-                          <div class="d-inline-flex">
-                            <button class="simple-btn" (click)="openviewmodal($event, item)">
-                              <img src="assets/icons/view.svg" style="padding: 2px; width: 24px;" alt="view">
-                            </button>
-                            <button class="simple-btn" (click)="openeditmodal($event, item)" [disabled]="item.status == 5">
-                              <img src="assets/icons/editicon.svg" style="padding: 2px; width: 28px; margin-left: 5px; margin-top: 3px;" alt="edit">
-                            </button>
-                            <button class="simple-btn" (click)="opendeletemodal($event, item)" [disabled]="item.status == 5">
-                              <img src="assets/icons/delete.svg" style="padding: 2px; width: 24px;" alt="delete">
-                            </button>
-                          </div>
-                        </td>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Category</span>
+                            <img
+                              (click)="sort('service_cat_name')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Sub Category</span>
+                            <img
+                              (click)="sort('service_subcat_name')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Description</span>
+                            <img
+                              (click)="sort('description')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <!-- <th>Comments</th> -->
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Created Time</span>
+                            <img
+                              (click)="sort('createdTime')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Created By</span>
+                            <img
+                              (click)="sort('createdByName')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Status</span>
+                            <img
+                              (click)="sort('status')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>
+                          <p class="d-inline-flex">
+                            <span>Assign To</span>
+                            <img
+                              (click)="sort('assignedTo')"
+                              class="pointer ms-1"
+                              src="assets/icons/sorticon.svg"
+                              width="15px"
+                            />
+                          </p>
+                        </th>
+                        <th>Actions</th>
                       </tr>
-                    </ng-container>
-                  </tbody>
-                </table>
-                <!-- <div class="d-flex align-items-center justify-content-center" style="height: 70%;"*ngIf="newHelpdeskRequests.length == 0">
+                    </thead>
+
+                    <tbody>
+                      <ng-container
+                        *ngFor="let item of newHelpdeskRequests; let i = index"
+                      >
+                        <tr>
+                          <!-- <td>{{item?.serviceReqId}}</td> -->
+                          <td>{{ item?.siteName }}</td>
+                          <td>{{ item?.service_cat_name }}</td>
+                          <td>{{ item?.service_subcat_name }}</td>
+                          <td>
+                            <p
+                              style="
+                                max-width: 150px;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                              "
+                            >
+                              {{ item?.description }}
+                            </p>
+                          </td>
+                          <!-- <td><p (click)="opencmtmodal($event, item)" class="text-primary pointer">View</p></td> -->
+                          <!-- <td>{{item?.assignedTo}}</td> -->
+                          <td>
+                            {{
+                              item?.createdTime
+                                ? (item?.createdTime | date: "short")
+                                : "N/A"
+                            }}
+                          </td>
+                          <td>{{ item?.createdByName }}</td>
+                          <td>
+                            {{
+                              item?.status
+                                ? getMetaDataValue(
+                                    "ServiceRequestStatus",
+                                    item?.status
+                                  )
+                                : ""
+                            }}
+                          </td>
+                          <td>
+                            <a
+                              class="pointer mx-1"
+                              (click)="openassignmodal($event, item)"
+                              *ngIf="!item.assignedTo && item.status == 1"
+                              >Assign</a
+                            >
+                            <p
+                              class="d-inline-flex pointer mx-1"
+                              *ngIf="item.assignedToName && item.status != 5"
+                            >
+                              {{
+                                item?.assignedToName
+                                  ? item?.assignedToName
+                                  : "N/A"
+                              }}
+                              <img
+                                src="assets/icons/edit.svg"
+                                width="14px"
+                                style="width: 16px"
+                                (click)="openassignmodal($event, item)"
+                                alt=""
+                              />
+                            </p>
+                            <p *ngIf="item.status == 5">&nbsp; N/A</p>
+                          </td>
+                          <!-- <td>{{item?.status}}</td> -->
+                          <td>
+                            <div class="d-inline-flex">
+                              <button
+                                class="simple-btn"
+                                (click)="openviewmodal($event, item)"
+                              >
+                                <img
+                                  src="assets/icons/view.svg"
+                                  style="padding: 2px; width: 24px"
+                                  alt="view"
+                                />
+                              </button>
+                              <button
+                                class="simple-btn"
+                                (click)="openeditmodal($event, item)"
+                                [disabled]="item.status == 5"
+                              >
+                                <img
+                                  src="assets/icons/editicon.svg"
+                                  style="
+                                    padding: 2px;
+                                    width: 28px;
+                                    margin-left: 5px;
+                                    margin-top: 3px;
+                                  "
+                                  alt="edit"
+                                />
+                              </button>
+                              <button
+                                class="simple-btn"
+                                (click)="opendeletemodal($event, item)"
+                                [disabled]="item.status == 5"
+                              >
+                                <img
+                                  src="assets/icons/delete.svg"
+                                  style="padding: 2px; width: 24px"
+                                  alt="delete"
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                  <!-- <div class="d-flex align-items-center justify-content-center" style="height: 70%;"*ngIf="newHelpdeskRequests.length == 0">
                   <h2 class="text-secondary" style="font-family: PS, sans-serif;">NO DATA</h2>
                 </div> -->
-              </div>
+                </div>
+              </ng-container>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
-      </div>
 
-      <ng-container *ngIf="support && newHelpdeskRequests.length === 0">
-        <div class="placeholderForReports">
-          {{placeholder}}
-        </div>
-      </ng-container>
-
+        <ng-container *ngIf="support && newHelpdeskRequests.length === 0">
+          <div class="placeholderForReports">
+            {{ placeholder }}
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -588,16 +1016,27 @@
 <div class="modal max-center" id="editmodal">
   <div class="formcont max-center" *ngIf="currentItem">
     <div class="modalform">
-      <div class="formtitle">Edit Request - #{{currentItem.serviceReqId}}
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeEditModal()">
+      <div class="formtitle">
+        Edit Request - #{{ currentItem.serviceReqId }}
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closeEditModal()"
+        />
       </div>
-      <div class="" style="padding:15px 30px 0 30px;">
-        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
-        <div style="display: flex;">
-          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
-          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+      <div class="" style="padding: 15px 30px 0 30px">
+        <div class="servicetitle mb-1">{{ currentItem.siteName }}</div>
+        <div style="display: flex">
+          <div class="servicesubtitle">{{ currentItem.service_cat_name }}</div>
+          <div
+            class="servicestatus"
+            style="text-align: right; margin: auto; margin-right: 0"
+          >
+            {{ currentItem.createdTime | date: "dd MMM, yyyy" }}
+          </div>
         </div>
-        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+        <div class="servicesubtitle">{{ currentItem.service_subcat_name }}</div>
         <!-- <div class="servicesubtitle" [style.color]="
         currentItem.status == 'New' ? '#104B86':
         currentItem.status == 'In Progress' ? '#FFA500':
@@ -605,41 +1044,74 @@
         currentItem.status == 'Deleted' ? '#CC4E57':
         '#00A44C' ">{{currentItem.status}}</div> -->
 
-<div class="d-flex justify-content-between align-items-center" style="font-size: 12px;">
-  <!-- <p class="m-0">Priority</p> -->
-          <div style="display: flex;" class="radiobox" >
-            <div class="servicestatus" style="align-self: center; width:85px;">Priority  &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp; </div>
+        <div
+          class="d-flex justify-content-between align-items-center"
+          style="font-size: 12px"
+        >
+          <!-- <p class="m-0">Priority</p> -->
+          <div style="display: flex" class="radiobox">
+            <div class="servicestatus" style="align-self: center; width: 85px">
+              Priority &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
           </div>
           <div *ngFor="let fruit of fruits" class="d-flex align-items-center">
-            <input type="radio" class="me-1" [value]="fruit" name="addpriorityy" [(ngModel)]="currentItem.priority">
-            <label class="me-2">{{fruit}}</label>
+            <input
+              type="radio"
+              class="me-1"
+              [value]="fruit"
+              name="addpriorityy"
+              [(ngModel)]="currentItem.priority"
+            />
+            <label class="me-2">{{ fruit }}</label>
           </div>
         </div>
-        <div  style="display: flex;" class="radiobox">
-          <div class="servicestatus" style="width:112px;">Status   &nbsp;  &nbsp;  &nbsp;    </div>
+        <div style="display: flex" class="radiobox">
+          <div class="servicestatus" style="width: 112px">
+            Status &nbsp; &nbsp; &nbsp;
+          </div>
           <select class="form-select" [(ngModel)]="currentItem.status">
-            <option *ngFor="let item of serviceStatus" [value]="item.keyId">{{item.value}}</option>
+            <option *ngFor="let item of serviceStatus" [value]="item.keyId">
+              {{ item.value }}
+            </option>
           </select>
         </div>
 
-      <div  style="display: flex;" class="radiobox">
-        <div class="servicestatus" style="width:112px;">Description  </div>
-        <textarea type="text" placeholder="Description*" [value]="currentItem.description" [(ngModel)]="currentItem.description" style="width: -webkit-fill-available;height: 50px;"
-        [className]="[error && (currentItem.description =='' || currentItem.description == null) ? 'errorshadow':'']"
-        ></textarea>
-      </div>
-      <div  style="display: flex;" class="radiobox">
-        <div class="servicestatus" style="width:112px;">Remarks   &nbsp;  &nbsp;  &nbsp;    </div>
-        <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea>
-      </div>
-      <div>
-        <!-- <div class="max-center" style="font-size: 12px; text-align: left; margin-bottom: 5px; margin-left: 16px; justify-content: left;">
+        <div style="display: flex" class="radiobox">
+          <div class="servicestatus" style="width: 112px">Description</div>
+          <textarea
+            type="text"
+            placeholder="Description*"
+            [value]="currentItem.description"
+            [(ngModel)]="currentItem.description"
+            style="width: -webkit-fill-available; height: 50px"
+            [className]="[
+              error &&
+              (currentItem.description == '' || currentItem.description == null)
+                ? 'errorshadow'
+                : '',
+            ]"
+          ></textarea>
+        </div>
+        <div style="display: flex" class="radiobox">
+          <div class="servicestatus" style="width: 112px">
+            Remarks &nbsp; &nbsp; &nbsp;
+          </div>
+          <textarea
+            type="text"
+            placeholder="Remarks"
+            [value]="currentItem.remarks"
+            [(ngModel)]="currentItem.remarks"
+            style="width: -webkit-fill-available; height: 50px"
+          ></textarea>
+        </div>
+        <div>
+          <!-- <div class="max-center" style="font-size: 12px; text-align: left; margin-bottom: 5px; margin-left: 16px; justify-content: left;">
           <input type="checkbox" id="call" #call  (click)="checkbox($event)" style="height: auto;">
           <label for="vehicle1" style="color:#767676;">&nbsp; Preferred time to call
             <span *ngIf="currentItem.PrefTimeToCall" style="color: #767676; font-size:10px;">({{currentItem.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a' }})</span>
           </label><br>
         </div> -->
-        <!-- <div>
+          <!-- <div>
           <div style="display: flex;" class="radiobox" >
             <div class="servicestatus" style="align-self: center; ">Prefer to call back? </div>
             <fieldset id="group4" class="priorityradios max-center">
@@ -661,30 +1133,40 @@
           </div>
           <input type="datetime-local" [min]="mindate()" [(ngModel)]="requestbean.PrefTimeToCall" id="date" #date placeholder="Select Preferred Time" data-date-format="YYYY-MM-DD HH:mm:ss" style="border: none !important; margin-top: -27px;">
       </div> -->
-     </div>
-    </div>
+        </div>
+      </div>
       <button class="generateBtn" (click)="submitedit()">Submit</button>
     </div>
   </div>
 </div>
 
-
-<div class="modal max-center" id="viewmodal" style="padding-top: 100px;">
+<div class="modal max-center" id="viewmodal" style="padding-top: 100px">
   <div class="formcont max-center" *ngIf="currentItem">
     <div class="modalform">
-      <div class="formtitle">View Request - #{{currentItem.serviceReqId}}
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeviewModal()">
+      <div class="formtitle">
+        View Request - #{{ currentItem.serviceReqId }}
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closeviewModal()"
+        />
       </div>
-      <div class="" style="padding:15px 30px 0 30px;">
-        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
+      <div class="" style="padding: 15px 30px 0 30px">
+        <div class="servicetitle mb-1">{{ currentItem.siteName }}</div>
 
-        <div style="display: flex;">
-          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
-          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        <div style="display: flex">
+          <div class="servicesubtitle">{{ currentItem.service_cat_name }}</div>
+          <div
+            class="servicestatus"
+            style="text-align: right; margin: auto; margin-right: 0"
+          >
+            {{ currentItem.createdTime | date: "dd MMM, yyyy" }}
+          </div>
         </div>
-        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+        <div class="servicesubtitle">{{ currentItem.service_subcat_name }}</div>
         <!-- <div style="display: flex;"> -->
-          <!-- <div class="servicesubtitle" [style.color]="
+        <!-- <div class="servicesubtitle" [style.color]="
           currentItem.status == 'New' ? '#104B86':
           currentItem.status == 'In Progress' ? '#FFA500':
           currentItem.status == 'Completed' ? '#00A44C':
@@ -696,25 +1178,47 @@
           <div class="servicestatus" style="text-align: right;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
         </div> -->
         <div>
-          <div style="display: flex;" class="" >
-            <div class="servicestatus" style="align-self: center; width:85px;">Priority   &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;:</div>
-            <div class="servicestatus">{{currentItem.priority}}</div>
+          <div style="display: flex" class="">
+            <div class="servicestatus" style="align-self: center; width: 85px">
+              Priority &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
+            </div>
+            <div class="servicestatus">{{ currentItem.priority }}</div>
           </div>
         </div>
-      <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
-      <div>
-        <div style="display: flex;" class="" >
-          <div class="servicestatus" style="align-self: flex-start; width:85px;">Description :</div>
-          <div class="servicestatus" style="width: 70%; word-wrap:break-word">{{currentItem.description ? currentItem.description : 'N/A'}}</div>
+        <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
+        <div>
+          <div style="display: flex" class="">
+            <div
+              class="servicestatus"
+              style="align-self: flex-start; width: 85px"
+            >
+              Description :
+            </div>
+            <div
+              class="servicestatus"
+              style="width: 70%; word-wrap: break-word"
+            >
+              {{ currentItem.description ? currentItem.description : "N/A" }}
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div style="display: flex;" class="" >
-          <div class="servicestatus" style="align-self: flex-start; width:85px;">Remarks &nbsp; &nbsp;  &nbsp; : </div>
-          <div class="servicestatus" style="width: 70%; word-wrap:break-word">{{currentItem.remarks ? currentItem.remarks : 'N/A'}}</div>
+        <div>
+          <div style="display: flex" class="">
+            <div
+              class="servicestatus"
+              style="align-self: flex-start; width: 85px"
+            >
+              Remarks &nbsp; &nbsp; &nbsp; :
+            </div>
+            <div
+              class="servicestatus"
+              style="width: 70%; word-wrap: break-word"
+            >
+              {{ currentItem.remarks ? currentItem.remarks : "N/A" }}
+            </div>
+          </div>
         </div>
-      </div>
-      <!-- <div>
+        <!-- <div>
         <div style="display: flex;" class="" >
           <div class="servicestatus" >Preferred time to call : </div>
           <div class="servicestatus">
@@ -724,7 +1228,7 @@
         </div>
       </div> -->
 
-      <!-- <div>
+        <!-- <div>
         <div style="display: flex;" class="" >
           <div class="servicestatus" style="align-self: flex-start; width:85px;">Comments :</div>
           <div class="servicestatus" style="width: 70%; word-wrap:break-word" *ngFor="let cmt of currentItem.comments">
@@ -732,70 +1236,90 @@
           </div>
         </div>
       </div> -->
-     <!-- <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea> -->
-    </div>
+        <!-- <textarea type="text" placeholder="Remarks" [value]="currentItem.remarks" [(ngModel)]="currentItem.remarks" style="width: -webkit-fill-available;height: 50px;"></textarea> -->
+      </div>
 
-    <div class="assign-table extra w-100 m-1" style="max-height: 20vh; overflow-y: auto;">
-      <table class="table table-hover" id="mytable">
-        <thead style="position: sticky; top: 0; z-index: 1;">
-          <tr class="form1">
-            <th>
-              <span>Assigned By</span>
-            </th>
-            <th>
-              <span>Assigned To</span>
-            </th>
-            <!-- <th>
+      <div
+        class="assign-table extra w-100 m-1"
+        style="max-height: 20vh; overflow-y: auto"
+      >
+        <table class="table table-hover" id="mytable">
+          <thead style="position: sticky; top: 0; z-index: 1">
+            <tr class="form1">
+              <th>
+                <span>Assigned By</span>
+              </th>
+              <th>
+                <span>Assigned To</span>
+              </th>
+              <!-- <th>
               <span>Created Time</span>
             </th> -->
-            <th>
-              <span>Modified Time</span>
-            </th>
-            <th>
-              <span>Status</span>
-            </th>
-            <th>
-              <span>Priority</span>
-            </th>
-          </tr>
-        </thead>
+              <th>
+                <span>Modified Time</span>
+              </th>
+              <th>
+                <span>Status</span>
+              </th>
+              <th>
+                <span>Priority</span>
+              </th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr *ngFor="let cmt of currentRequests; let i=index">
-            <td>
-              <p>{{cmt?.assignedByName ? cmt?.assignedByName : 'N/A'}} </p>
-            </td>
-            <td>
-              <p>{{cmt?.assignedToName ? cmt?.assignedToName : 'N/A'}} </p>
-            </td>
-            <!-- <td>
+          <tbody>
+            <tr *ngFor="let cmt of currentRequests; let i = index">
+              <td>
+                <p>{{ cmt?.assignedByName ? cmt?.assignedByName : "N/A" }}</p>
+              </td>
+              <td>
+                <p>{{ cmt?.assignedToName ? cmt?.assignedToName : "N/A" }}</p>
+              </td>
+              <!-- <td>
               <p>{{cmt?.createdTime  | date:'short' }} </p>
             </td> -->
-            <td>
-              <p>{{ cmt?.modifiedTime ?  (cmt?.modifiedTime  | date:'short') : 'N/A' }} </p>
-            </td>
-            <td>
-              <p>{{cmt.status ? getMetaDataValue('ServiceRequestStatus', cmt.status) : ''}} </p>
-            </td>
-            <td>
-              <p>{{cmt?.priority}}</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <td>
+                <p>
+                  {{
+                    cmt?.modifiedTime
+                      ? (cmt?.modifiedTime | date: "short")
+                      : "N/A"
+                  }}
+                </p>
+              </td>
+              <td>
+                <p>
+                  {{
+                    cmt.status
+                      ? getMetaDataValue("ServiceRequestStatus", cmt.status)
+                      : ""
+                  }}
+                </p>
+              </td>
+              <td>
+                <p>{{ cmt?.priority }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-
-    <div class="servicestatus" >&nbsp;</div>
+      <div class="servicestatus">&nbsp;</div>
       <!-- <button class="generateBtn" (click)="closeviewModal()">Close</button> -->
       <!-- <button class="generateBtn" (click)="closeModal()">cancel</button> -->
-       <a class="d-flex justify-content-end pointer" (click)="showComments = !showComments">{{showComments ? 'Collapse' : 'View Comments'}}</a>
-       
+      <a
+        class="d-flex justify-content-end pointer"
+        (click)="showComments = !showComments"
+        >{{ showComments ? "Collapse" : "View Comments" }}</a
+      >
 
-       <ng-container *ngIf="showComments">
-        <div class="assign-table extra w-100 m-1" style="max-height: 20vh; overflow-y: auto;">
+      <ng-container *ngIf="showComments">
+        <div
+          class="assign-table extra w-100 m-1"
+          style="max-height: 20vh; overflow-y: auto"
+        >
           <table class="table table-hover" id="mytable">
-            <thead style="position: sticky; top: 0; z-index: 1;">
+            <thead style="position: sticky; top: 0; z-index: 1">
               <tr class="form1">
                 <th>
                   <span>Assigned By</span>
@@ -811,67 +1335,130 @@
                 </th>
               </tr>
             </thead>
-  
+
             <tbody>
-              <tr *ngFor="let cmt of currentComments; let i=index">
+              <tr *ngFor="let cmt of currentComments; let i = index">
                 <td>
-                  <p>{{cmt?.commentByName}} </p>
+                  <p>{{ cmt?.commentByName }}</p>
                 </td>
                 <td>
-                  <p>{{cmt?.commentsInfo}} </p>
+                  <p>{{ cmt?.commentsInfo }}</p>
                 </td>
                 <td>
-                  <p>{{cmt?.commentSentToName}} </p>
+                  <p>{{ cmt?.commentSentToName }}</p>
                 </td>
                 <td>
-                  <p>{{cmt?.commentTime ? (cmt?.commentTime  | date:'short') : 'N/A' }} </p>
+                  <p>
+                    {{
+                      cmt?.commentTime
+                        ? (cmt?.commentTime | date: "short")
+                        : "N/A"
+                    }}
+                  </p>
                 </td>
               </tr>
             </tbody>
           </table>
-  
-          
-          <div class="d-flex align-items-center justify-content-center" style="height: 70%;" *ngIf="currentItem.comments?.length == 0 || currentItem.comments == undefined">
+
+          <div
+            class="d-flex align-items-center justify-content-center"
+            style="height: 70%"
+            *ngIf="
+              currentItem.comments?.length == 0 ||
+              currentItem.comments == undefined
+            "
+          >
             <p class="text-secondary">No Data</p>
           </div>
         </div>
-       </ng-container>
+      </ng-container>
     </div>
   </div>
 </div>
 
 <ng-template></ng-template>
 
-
 <div class="modal max-center" id="addmodal">
   <div class="formcont max-center">
     <div class="modalform">
-      <div class="formtitle">Add Request
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closeAddModal()">
+      <div class="formtitle">
+        Add Request
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closeAddModal()"
+        />
       </div>
-      <div class="" style="padding:15px 30px 0 30px; font-size: 12px;">
+      <div class="" style="padding: 15px 30px 0 30px; font-size: 12px">
         <div class="mb-3">
           <select class="form-select" [(ngModel)]="currentsite">
             <!-- <option [value]="null" disabled>Site</option> -->
-            <option *ngFor="let site of siteData; let c = index" [value]="site.siteId" >{{site?.siteName}}</option>
+            <option
+              *ngFor="let site of siteData; let c = index"
+              [value]="site.siteId"
+            >
+              {{ site?.siteName }}
+            </option>
           </select>
-          <p class="text-start text-danger" *ngIf="error && (currentsite =='' || currentsite == null) ? 'errorshadow' : ''">*required</p>
+          <p
+            class="text-start text-danger"
+            *ngIf="
+              error && (currentsite == '' || currentsite == null)
+                ? 'errorshadow'
+                : ''
+            "
+          >
+            *required
+          </p>
         </div>
 
         <div class="mb-3">
-          <select class="form-select" [(ngModel)]="currentaddcat" (change)="issueclicked(currentaddcat)">
+          <select
+            class="form-select"
+            [(ngModel)]="currentaddcat"
+            (change)="issueclicked(currentaddcat)"
+          >
             <option [value]="null" disabled>Category</option>
-            <option *ngFor="let category of showcategories; let c = index" [value]="category?.catId" >{{category?.catName}}</option>
+            <option
+              *ngFor="let category of showcategories; let c = index"
+              [value]="category?.catId"
+            >
+              {{ category?.catName }}
+            </option>
           </select>
-          <p class="text-start text-danger" *ngIf="error && (currentaddcat =='' || currentaddcat == null) ? 'errorshadow' : ''">*required</p>
+          <p
+            class="text-start text-danger"
+            *ngIf="
+              error && (currentaddcat == '' || currentaddcat == null)
+                ? 'errorshadow'
+                : ''
+            "
+          >
+            *required
+          </p>
         </div>
 
         <div class="mb-3">
           <select class="form-select" [(ngModel)]="currentaddsubcat">
             <option [value]="null" disabled>Sub Category</option>
-            <option *ngFor="let item of showsubcats" [value]="item?.serviceSubcatId">{{item?.serviceSubcatName}}</option>
+            <option
+              *ngFor="let item of showsubcats"
+              [value]="item?.serviceSubcatId"
+            >
+              {{ item?.serviceSubcatName }}
+            </option>
           </select>
-          <p class="text-start text-danger" *ngIf="error && (currentaddsubcat =='' || currentaddsubcat == null) ? 'errorshadow' : ''">*required</p>
+          <p
+            class="text-start text-danger"
+            *ngIf="
+              error && (currentaddsubcat == '' || currentaddsubcat == null)
+                ? 'errorshadow'
+                : ''
+            "
+          >
+            *required
+          </p>
         </div>
 
         <!-- <div>
@@ -881,24 +1468,51 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div class="text-start">Priority</div>
-          <div class=" d-flex">
+          <div class="d-flex">
             <div *ngFor="let fruit of fruits" class="d-flex align-items-center">
-              <input type="radio" class="me-1" [value]="fruit" name="addpriority" [(ngModel)]="currentaddpriority">
-              <label class="me-2">{{fruit}}</label>
+              <input
+                type="radio"
+                class="me-1"
+                [value]="fruit"
+                name="addpriority"
+                [(ngModel)]="currentaddpriority"
+              />
+              <label class="me-2">{{ fruit }}</label>
             </div>
           </div>
         </div>
 
-      <div class="radiobox mb-3">
-        <textarea type="text" placeholder="Description*" [(ngModel)]="adddescription" id="textareadescr" style="width: -webkit-fill-available; height: 50px;"></textarea>
-        <p class="text-start text-danger" *ngIf="error && (adddescription == '' || adddescription == null) ? 'errorshadow' : ''">*required</p>
-      </div>
+        <div class="radiobox mb-3">
+          <textarea
+            type="text"
+            placeholder="Description*"
+            [(ngModel)]="adddescription"
+            id="textareadescr"
+            style="width: -webkit-fill-available; height: 50px"
+          ></textarea>
+          <p
+            class="text-start text-danger"
+            *ngIf="
+              error && (adddescription == '' || adddescription == null)
+                ? 'errorshadow'
+                : ''
+            "
+          >
+            *required
+          </p>
+        </div>
 
-      <div style="display: flex;" class="radiobox">
-        <textarea type="text" placeholder="Remarks" [(ngModel)]="addremark" style="width: -webkit-fill-available;height: 50px;" id="textareareq"></textarea>
-      </div>
+        <div style="display: flex" class="radiobox">
+          <textarea
+            type="text"
+            placeholder="Remarks"
+            [(ngModel)]="addremark"
+            style="width: -webkit-fill-available; height: 50px"
+            id="textareareq"
+          ></textarea>
+        </div>
 
-      <!-- <div>
+        <!-- <div>
           <div style="display: flex;" class="radiobox" >
             <div class="servicestatus" style="align-self: center; ">Prefer to call back? </div>
             <fieldset id="group6" class="priorityradios max-center">
@@ -921,31 +1535,40 @@
           <input type="datetime-local" [min]="mindate()" [(ngModel)]="addtime" id="date" #date placeholder="Select Preferred Time" data-date-format="YYYY-MM-DD HH:mm:ss" style="border: none !important; margin-top: -27px;">
       </div>
      </div> -->
-     
-    </div>
+      </div>
       <button class="generateBtn" (click)="addreq()">Submit</button>
     </div>
   </div>
 </div>
 
-
 <div class="modal max-center" id="deletemodal">
   <div class="formcont max-center" *ngIf="currentItem">
     <div class="modalform">
-      <div class="formtitle">Delete Request - #{{currentItem.serviceReqId}}
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closedeleteModal()">
+      <div class="formtitle">
+        Delete Request - #{{ currentItem.serviceReqId }}
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closedeleteModal()"
+        />
       </div>
-      <div class="" style="padding:15px 30px 0 30px;">
-        <div class="servicetitle mb-1">{{currentItem.siteName}}</div>
+      <div class="" style="padding: 15px 30px 0 30px">
+        <div class="servicetitle mb-1">{{ currentItem.siteName }}</div>
 
-        <div style="display: flex;">
-          <div class="servicesubtitle">{{currentItem.service_cat_name}}</div>
-          <div class="servicestatus" style="text-align: right; margin: auto;margin-right: 0;"> {{currentItem.createdTime  | date: 'dd MMM, yyyy'}}</div>
+        <div style="display: flex">
+          <div class="servicesubtitle">{{ currentItem.service_cat_name }}</div>
+          <div
+            class="servicestatus"
+            style="text-align: right; margin: auto; margin-right: 0"
+          >
+            {{ currentItem.createdTime | date: "dd MMM, yyyy" }}
+          </div>
         </div>
-        <div class="servicesubtitle">{{currentItem.service_subcat_name}}</div>
+        <div class="servicesubtitle">{{ currentItem.service_subcat_name }}</div>
 
         <!-- <div style="display: flex;"> -->
-          <!-- <div class="servicesubtitle" [style.color]="
+        <!-- <div class="servicesubtitle" [style.color]="
           currentItem.status == 'New' ? '#104b86':
           currentItem.status == 'In Progress' ? '#FFA500':
           currentItem.status == 'Completed' ? '#00A44C':
@@ -958,72 +1581,114 @@
         </div> -->
 
         <div>
-          <div style="display: flex;" class="" >
-            <div class="servicestatus" style="align-self: center; width:85px;">Priority   &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;:</div>
-            <div class="servicestatus">{{currentItem.priority}}</div>
+          <div style="display: flex" class="">
+            <div class="servicestatus" style="align-self: center; width: 85px">
+              Priority &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
+            </div>
+            <div class="servicestatus">{{ currentItem.priority }}</div>
           </div>
         </div>
-      <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
-      <div>
-        <div style="display: flex;" class="" >
-          <div class="servicestatus" style="align-self: center; width:85px;">Description :</div>
-          <div class="servicestatus">{{currentItem.description ? currentItem.description : 'N/A'}}</div>
+        <!-- <input type="text" placeholder="Description" [value]="currentItem.description" [(ngModel)]="currentItem.description"> -->
+        <div>
+          <div style="display: flex" class="">
+            <div class="servicestatus" style="align-self: center; width: 85px">
+              Description :
+            </div>
+            <div class="servicestatus">
+              {{ currentItem.description ? currentItem.description : "N/A" }}
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div style="display: flex;" class="" >
-          <div class="servicestatus" style="width:85px;">Remarks &nbsp; &nbsp;  &nbsp; : </div>
-          <div class="servicestatus">{{currentItem.remarks ? currentItem.remarks : 'N/A'}}</div>
+        <div>
+          <div style="display: flex" class="">
+            <div class="servicestatus" style="width: 85px">
+              Remarks &nbsp; &nbsp; &nbsp; :
+            </div>
+            <div class="servicestatus">
+              {{ currentItem.remarks ? currentItem.remarks : "N/A" }}
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div style="display: flex;" class="" >
-          <div class="servicestatus" >Preferred time to call : </div>
-          <div class="servicestatus">
-            <span *ngIf="currentItem.PrefTimeToCall">{{currentItem.PrefTimeToCall | date: 'dd MMM, yyyy - HH:mm a'}}</span>
-            <span *ngIf="!currentItem.PrefTimeToCall">N/A</span>
+        <div>
+          <div style="display: flex" class="">
+            <div class="servicestatus">Preferred time to call :</div>
+            <div class="servicestatus">
+              <span *ngIf="currentItem.PrefTimeToCall">{{
+                currentItem.PrefTimeToCall | date: "dd MMM, yyyy - HH:mm a"
+              }}</span>
+              <span *ngIf="!currentItem.PrefTimeToCall">N/A</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div class="error">Are you sure you wish to delete this record?</div>
-      <button class="generateBtn" (click)="deleteRequest(currentItem)">Confirm</button>
+      <button class="generateBtn" (click)="deleteRequest(currentItem)">
+        Confirm
+      </button>
       <button class="cancel-btn" (click)="closedeleteModal()">Cancel</button>
-      <div class="servicestatus" style="height: 5px;">&nbsp;</div>
+      <div class="servicestatus" style="height: 5px">&nbsp;</div>
     </div>
   </div>
 </div>
 
 <div class="modal max-center" id="assignmodal">
-  <div class="formcont " *ngIf="currentItem">
+  <div class="formcont" *ngIf="currentItem">
     <div class="modalform">
-      <div class="formtitle">Assign Request - #{{currentItem.serviceReqId}}
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closedassignModal()">
+      <div class="formtitle">
+        Assign Request - #{{ currentItem.serviceReqId }}
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closedassignModal()"
+        />
       </div>
 
-      <div class="" style="padding:15px 30px 0 30px;">
+      <div class="" style="padding: 15px 30px 0 30px">
         <!-- <div class="servicetitle mb-1">{{currentItem.siteName}}</div> -->
 
-      <div class="mb-3">
-        <small class="d-flex justify-content-start">Assign</small>
-        <select class="form-select" [(ngModel)]="currentItem.assignedTo">
-          <!-- <option [value]="null" disabled>Assign</option> -->
-          <!-- <option [value]="userData?.UserId">{{ userData?.UserName }}</option> -->
-          <option *ngFor="let user of assignUsers; let c = index" [value]="user?.userId">{{user?.userName}}</option>
-        </select>
-        <!-- <p class="text-start text-danger" style="font-size: 12px;" *ngIf="error1 && (assignedTo =='' || assignedTo == null) ? 'errorshadow' : ''">*required</p> -->
+        <div class="mb-3">
+          <small class="d-flex justify-content-start">Assign</small>
+          <select class="form-select" [(ngModel)]="currentItem.assignedTo">
+            <!-- <option [value]="null" disabled>Assign</option> -->
+            <!-- <option [value]="userData?.UserId">{{ userData?.UserName }}</option> -->
+            <option
+              *ngFor="let user of assignUsers; let c = index"
+              [value]="user?.userId"
+            >
+              {{ user?.userName }}
+            </option>
+          </select>
+          <!-- <p class="text-start text-danger" style="font-size: 12px;" *ngIf="error1 && (assignedTo =='' || assignedTo == null) ? 'errorshadow' : ''">*required</p> -->
+        </div>
+        <div class="mb-3">
+          <small class="d-flex justify-content-start">Comments</small>
+          <input
+            type="text"
+            placeholder="Enter"
+            class="w-100"
+            [(ngModel)]="comments"
+          />
+          <p
+            class="text-start text-danger"
+            style="font-size: 12px"
+            *ngIf="
+              error1 && (comments == '' || comments == null)
+                ? 'errorshadow'
+                : ''
+            "
+          >
+            *required
+          </p>
+        </div>
       </div>
-      <div class="mb-3">
-        <small class="d-flex justify-content-start">Comments</small>
-          <input type="text" placeholder="Enter" class="w-100" [(ngModel)]="comments">
-          <p class="text-start text-danger" style="font-size: 12px;" *ngIf="error1 && (comments =='' || comments == null) ? 'errorshadow' : ''">*required</p>
-      </div>
-    </div>
 
-    <!-- <button class="cancel-btn" (click)="closedassignModal()">Cancel</button> -->
+      <!-- <button class="cancel-btn" (click)="closedassignModal()">Cancel</button> -->
       <!-- <button class="generateBtn" (click)="assignServiceRequest()"> {{currentItem.assignedTo ? 'Transfer' : 'Assign'}}</button> -->
-      <button class="generateBtn" (click)="assignServiceRequest()">Submit</button>
-      <div class="servicestatus" style="height: 5px;">&nbsp;</div>
+      <button class="generateBtn" (click)="assignServiceRequest()">
+        Submit
+      </button>
+      <div class="servicestatus" style="height: 5px">&nbsp;</div>
     </div>
   </div>
 </div>
@@ -1031,8 +1696,14 @@
 <div class="modal max-center" id="commentsmodel">
   <div class="formcont max-center" *ngIf="currentItem">
     <div class="modalform">
-      <div class="formtitle">Comments - {{currentItem.siteName}}
-        <img src="assets/icons/close.svg" alt="edit" #close (click)="closecmtModal()">
+      <div class="formtitle">
+        Comments - {{ currentItem.siteName }}
+        <img
+          src="assets/icons/close.svg"
+          alt="edit"
+          #close
+          (click)="closecmtModal()"
+        />
       </div>
       <!-- <div class="" style="padding:15px 30px 0 30px;">
       <div>
@@ -1042,11 +1713,11 @@
           </div>
       </div>
     </div> -->
-    <!-- <div class="servicestatus" >&nbsp;</div> -->
+      <!-- <div class="servicestatus" >&nbsp;</div> -->
 
       <div class="assign-table extra w-100 m-1">
         <table class="table table-hover" id="mytable">
-          <thead style="position: sticky; top: 0; z-index: 1;">
+          <thead style="position: sticky; top: 0; z-index: 1">
             <tr class="form1">
               <th>
                 <span>Assigned By</span>
@@ -1064,25 +1735,31 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let cmt of currentItem.comments; let i=index">
+            <tr *ngFor="let cmt of currentItem.comments; let i = index">
               <td>
-                <p>{{cmt?.commentByName}} </p>
+                <p>{{ cmt?.commentByName }}</p>
               </td>
               <td>
-                <p>{{cmt?.commentsInfo}} </p>
+                <p>{{ cmt?.commentsInfo }}</p>
               </td>
               <td>
-                <p>{{cmt?.commentSentToName}} </p>
+                <p>{{ cmt?.commentSentToName }}</p>
               </td>
               <td>
-                <p>{{cmt?.commentTime  | date:'short' }} </p>
+                <p>{{ cmt?.commentTime | date: "short" }}</p>
               </td>
             </tr>
           </tbody>
         </table>
 
-        
-        <div class="d-flex align-items-center justify-content-center" style="height: 70%;" *ngIf="currentItem.comments?.length == 0 || currentItem.comments == undefined">
+        <div
+          class="d-flex align-items-center justify-content-center"
+          style="height: 70%"
+          *ngIf="
+            currentItem.comments?.length == 0 ||
+            currentItem.comments == undefined
+          "
+        >
           <p class="text-secondary">No Data</p>
         </div>
       </div>
