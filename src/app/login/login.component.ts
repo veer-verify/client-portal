@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alertservice/alert-service.service';
 import { ApiService } from '../services/api.service';
@@ -12,7 +12,7 @@ import { StorageService } from '../services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -62,10 +62,10 @@ export class LoginComponent implements OnInit {
   }
 
   get() {
-    let arr= [3, 5, 2, 1];
+    let arr = [3, 5, 2, 1];
     let max = Math.max(...arr);
     const result = [...new Array(max).keys()].map((item) => {
-      return !arr.includes(item+1) ? (item+1) : null;
+      return !arr.includes(item + 1) ? (item + 1) : null;
     })
     return result.filter((item) => item);
   }
@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
   /* new api */
   verifiedUserdetail: any;
   loginNew() {
-    if(this.loginForm.valid) {
+    if (this.loginForm.valid) {
       this.showLoader = true;
       let x: any = this.loginForm.value.userName.trim();
       let y: any = this.loginForm.value.password.trim();
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
         this.showLoader = false;
         this.userEmail.value = null;
         this.verifiedUserdetail = res;
-        if(res.Status == 'Success') {
+        if (res.Status == 'Success') {
           this.storageService.storeEncrData('user', res);
           localStorage.setItem('acTok', JSON.stringify(res.AccessToken || ''));
           this.authservice.isLoggedin.next(true);
@@ -130,9 +130,9 @@ export class LoginComponent implements OnInit {
           this.getMetadata();
 
 
-          if(res.Status == 'Success' && res.firstTime == 'F') {
+          if (res.Status == 'Success' && res.firstTime == 'F') {
             this.router.navigateByUrl('/guard');
-          } else if(res.Status == 'Success' && res.firstTime == 'T') {
+          } else if (res.Status == 'Success' && res.firstTime == 'T') {
             this.dialogType = 'firstTime';
           }
         } else {
@@ -148,17 +148,17 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
-    if(this.signupForm.valid) {
+    if (this.signupForm.valid) {
       this.authservice.signup(this.signupForm.value).subscribe({
         next: (res) => {
-          if(res.Status === "Success") {
+          if (res.Status === "Success") {
             this.storageService.storeEncrData('user', res);
             this.authservice.isLoggedin.next(true);
             this.authservice.getAuthStatus();
             this.manageUserSession();
             this.router.navigateByUrl('/support');
             this.alertService.sweetConfirm('Are you looking for video monitoring or assistance with upgrading your system').then((res) => {
-              if(res.isConfirmed) {
+              if (res.isConfirmed) {
                 this.router.navigateByUrl('/user-profile');
               }
             })
@@ -185,13 +185,13 @@ export class LoginComponent implements OnInit {
   showNewPassword: boolean = false;
   showConfirmNewPassword: boolean = false;
   togglePwd(type: any) {
-    if(type == 'password') {
+    if (type == 'password') {
       this.showPassword = !this.showPassword;
-    } else if(type == 'oldPassword') {
+    } else if (type == 'oldPassword') {
       this.showOldPassword = !this.showOldPassword;
-    } else if(type == 'newPassword') {
+    } else if (type == 'newPassword') {
       this.showNewPassword = !this.showNewPassword;
-    } else if(type == 'confirmNewPassword') {
+    } else if (type == 'confirmNewPassword') {
       this.showConfirmNewPassword = !this.showConfirmNewPassword;
     }
   }
@@ -205,18 +205,18 @@ export class LoginComponent implements OnInit {
 
   userEmail: any = new FormControl('', Validators.required);
   forgotPass() {
-    if(this.userEmail.valid) {
+    if (this.userEmail.valid) {
       this.showLoader = true;
       this.apiService.sendResetLink(this.userEmail.value).subscribe((res: any) => {
         // console.log(res);
         this.showLoader = false;
-        if(res.Status == 'Success') {
+        if (res.Status == 'Success') {
           this.alertService.success("success", res.message);
           this.closeConfirmPassword();
-        } else if(res.Status == 'Failed') {
+        } else if (res.Status == 'Failed') {
           this.alertService.error('error', res.message);
         }
-      },(err: any) => {
+      }, (err: any) => {
         this.showLoader = false;
         this.alertService.error("error", err?.statusText);
       })
@@ -232,7 +232,7 @@ export class LoginComponent implements OnInit {
     let y: any = this.loginForm.value.password;
     this.authservice.loginNew(x, y).subscribe((res: any) => {
       this.showLoader = false;
-      if(res?.Status == 'Success') {
+      if (res?.Status == 'Success') {
         this.storageService.storeEncrData('user', res);
         this.authservice.isLoggedin.next(true);
         this.authservice.getAuthStatus();
@@ -249,15 +249,15 @@ export class LoginComponent implements OnInit {
     this.updatePasswordForm.get('oldPassword')?.setValue(null);
     this.updatePasswordForm.get('newPassword')?.setValue(null);
     this.updatePasswordForm.get('confirmNewPassword')?.setValue(null);
-    if(this.userEmail.valid) {
+    if (this.userEmail.valid) {
       this.showLoader = true;
       this.authservice.verifyEmail(this.userEmail.value, x?.UidToken).subscribe((res: any) => {
         // console.log(res);
         this.showLoader = false;
-        if(res?.Status == 'Success') {
+        if (res?.Status == 'Success') {
           this.updatePasswordForm.reset();
           this.dialogType = 'passwordRecovery';
-        } else if(res?.Status == 'Failed') {
+        } else if (res?.Status == 'Failed') {
           this.alertService.error("error", res?.message);
         }
       }, (err: any) => {
@@ -274,16 +274,16 @@ export class LoginComponent implements OnInit {
     let oldPwd = this.updatePasswordForm.value.oldPassword;
     let newPwd = this.updatePasswordForm.value.newPassword;
     let cnfmNewPwd = this.updatePasswordForm.value.confirmNewPassword;
-    if(this.updatePasswordForm.valid) {
-      if(newPwd === cnfmNewPwd) {
+    if (this.updatePasswordForm.valid) {
+      if (newPwd === cnfmNewPwd) {
         this.showLoader = true;
-        this.authservice.updatePassword({userName: this.verifiedUserdetail?.UserName, oldPassword: oldPwd, newPassword: newPwd}).subscribe((res: any) => {
+        this.authservice.updatePassword({ userName: this.verifiedUserdetail?.UserName, oldPassword: oldPwd, newPassword: newPwd }).subscribe((res: any) => {
           // console.log(res);
           this.showLoader = false;
-          if(res?.Status == 'Success') {
+          if (res?.Status == 'Success') {
             this.closeConfirmPassword();
             this.alertService.success("Success", res?.message);
-            setTimeout(() => {this.reset()}, 3000);
+            setTimeout(() => { this.reset() }, 3000);
           } else {
             this.alertService.error("error", res?.message);
           }
@@ -291,7 +291,7 @@ export class LoginComponent implements OnInit {
           this.showLoader = false;
           this.alertService.error("error", err?.statusText);
         })
-      } else if(newPwd !== oldPwd) {
+      } else if (newPwd !== oldPwd) {
         this.alertService.error("error", "New password and Confirm password are not matched!");
       }
     } else {
@@ -313,7 +313,7 @@ export class LoginComponent implements OnInit {
 
   showSkip: boolean = false;
   toggleSkip(type: string) {
-    if(type == 'signin') {
+    if (type == 'signin') {
       this.showSkip = true;
     } else {
       this.showSkip = false;

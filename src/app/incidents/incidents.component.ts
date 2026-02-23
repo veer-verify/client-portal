@@ -61,6 +61,7 @@ export class IncidentsComponent implements OnInit {
   }
 
   onAlertChange() {
+    this.alertSubType = '';
     const selectedAlert = this.alertTypes.find(
       (a: any) => a.guardAlertTypeId == Number(this.alertType)
     );
@@ -213,6 +214,10 @@ export class IncidentsComponent implements OnInit {
 
 
   footageList(data: any) {
+
+     var x = <HTMLElement>document.getElementById('playModel');
+    x.style.display = "none";
+
     this.cameraId = '';
     this.alertType = '';
     this.alertSubType = '';
@@ -220,6 +225,7 @@ export class IncidentsComponent implements OnInit {
     this.toDate = '';
     // this.storageService.storeEncrData('navItem', { site: data, index: this.siteData.indexOf(data ) });
 
+   
     if (data) {
       this.camerasListForSites(data);
       this.scrollToSite(data?.siteId);

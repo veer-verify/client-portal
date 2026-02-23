@@ -13,30 +13,28 @@ export class AppComponent {
   title = 'IVIS_security';
 
   showHead: boolean = false;
-  currentpage:any;
+  currentpage: any;
   constructor(
     private router: Router,
     private authSer: AuthService,
-
-    ) {
-    router.events.subscribe((event)=>{
-      if ( event instanceof RoutesRecognized ) {
+  ) {
+    router.events.subscribe((event) => {
+      if (event instanceof RoutesRecognized) {
         this.currentpage = (event.state.root.firstChild?.data['routeName']);
       }
     });
   }
 
   ngOnInit() {
-    this.login1();
+    this.check();
   }
 
-  login1(){
+  check() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/login' || event['url'] == '/error') {
           this.showHead = false;
         } else {
-          // console.log("NU")
           this.showHead = true;
         }
       }
