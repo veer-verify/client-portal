@@ -411,7 +411,8 @@ export class UserProfileComponent {
 
           this.alertservice
             .sweetConfirm(
-              res.message + '\n Do you want to assign sites for this user!'
+              // res.message + '\n Do you want to assign sites for this user?'
+              'New User Created: ' + data.userName +'\n Do you want to assign sites for this user?',
             )
             .then((response) => {
               if (response.isConfirmed) {
