@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-const base_url: string = 'https://usstaging.ivisecurity.com';
+// const base_url: string = 'https://usstaging.ivisecurity.com';
+const base_url: string = 'https://live.uneeviu.com';
+
 export const environment = {
 
   authUrl: `${base_url}/userDetails`,
@@ -20,13 +22,15 @@ export const environment = {
   inventoryUrl: `${base_url}/inventory`,
   helpdeskUrl: `${base_url}/supportRequests`,
   incidentsUrl: `${base_url}/guard_monitoring`,
+  event_tags_url: `${base_url}/events_data`,
 
 
 
   theme: {
     logo: 'assets/themes/unv_logo_white.png',
     headerLogo: 'assets/themes/unv_logo_blue.png',
-    accordianLogo: 'assets/themes/unv_icon_white.png',
+    // accordianLogo: 'assets/themes/unv_icon_white.png',
+    accordianLogo: 'assets/themes/unv_logo_blue.png',
     activeLogo: 'assets/themes/unv_logo_blue.png',
     inActiveLogo: 'assets/themes/unv_logo_blue.png',
 
