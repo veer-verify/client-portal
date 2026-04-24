@@ -514,6 +514,7 @@
             />
             <label class="form-check-label" for="all">Select All</label>
           </div>
+
           <div class="form-check select-site" *ngFor="let item of pipeSites">
             <input
               class="form-check-input"
@@ -529,7 +530,13 @@
           </div>
 
           <ng-container *ngIf="userSites.length === 0">
-            <h5 class="text-center my-3">All SITES ARE ASSIGNED</h5>
+            <h5 class="text-center" style="margin-top: 24%">
+              {{
+                filter === 3
+                  ? "ALL SITES ARE ASSIGNED"
+                  : "NO SITES ARE ASSIGNED"
+              }}
+            </h5>
           </ng-container>
         </div>
       </ng-container>
