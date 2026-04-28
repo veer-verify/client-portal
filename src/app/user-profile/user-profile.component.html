@@ -531,11 +531,7 @@
 
           <ng-container *ngIf="userSites.length === 0">
             <h5 class="text-center" style="margin-top: 24%">
-              {{
-                filter === 3
-                  ? "ALL SITES ARE ASSIGNED"
-                  : "NO SITES ARE ASSIGNED"
-              }}
+              {{ filter === 3 ? "ALL SITES ASSIGNED" : "NO SITES ASSIGNED" }}
             </h5>
           </ng-container>
         </div>
